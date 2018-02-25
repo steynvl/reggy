@@ -1,21 +1,33 @@
+<div class="content">
 
-<div class="row">
+  <div class="btn-toolbar">
 
-  <div class="col-md-12"></div>
+    <button type="button" class="btn btn-success" (click)="mark()">Mark</button>
+    <a class="fa-vertical-bar-medium:after"></a>
+    <span class="btn-separator"></span>
 
-</div>
+    <div *ngFor="let markedElement of markedElements; let idx = index">
 
-<div class="row">
-  <div class="col-md-12">
-    <textarea [(ngModel)]="textArea" class="form-control" rows="8" placeholder="Sample text..."></textarea>
+      <button type="button" class="btn" [ngStyle]="setButtonColor(idx)">{{markedElement}}</button>
+
+    </div>
+
   </div>
 
-</div>
+  <div class="row text-area">
+    <div class="col-md-12" (mouseup)="showSelectedText()">
+      <textarea [(ngModel)]="textArea" id="text-area" class="form-control" rows="8" placeholder="Sample text..."></textarea>
+    </div>
 
-<div class="row">
+  </div>
 
-  <div class="col">
-    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".txt">
+  <div class="row">
+    <div class="col">
+      <label class="btn btn-outline-primary" for="my-file-selector">
+        <input  id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
+        Upload file
+      </label>
+    </div>
   </div>
 
 </div>
