@@ -8,7 +8,7 @@
 
     <div *ngFor="let markedElement of markedElements; let idx = index">
 
-      <button type="button" class="btn" [ngStyle]="setButtonColor(idx)">{{markedElement}}</button>
+      <button type="button" class="btn" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
     </div>
 

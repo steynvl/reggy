@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Marker } from '../shared/models/marker';
 
 @Component({
   selector: 'app-generate',
@@ -9,7 +10,7 @@ export class GenerateComponent {
 
   textArea: string;
   selectedText = '';
-  markedElements: Array<string> = ['asass'];
+  markedElements: Array<Marker> = [];
 
   constructor() {
   }
@@ -24,7 +25,6 @@ export class GenerateComponent {
       reader.onload = () => {
         this.textArea = reader.result;
       };
-
     }
 
   }
@@ -42,15 +42,18 @@ export class GenerateComponent {
   mark() {
     if (this.selectedText !== '') {
 
-
+      this.markedElements.push({
+        id: this.markedElements.length + 1,
+        color: 'red'
+      });
 
       this.selectedText = '';
     }
   }
 
   setButtonColor(index) {
-    let style = {
-      'background-color': 'red'
+    const style = {
+      'background-color': this.markedElements[index].color
     };
     return style;
   }
