@@ -1,0 +1,21 @@
+
+<div class="row">
+
+  <div class="col-md-12"></div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <textarea [(ngModel)]="textArea" class="form-control" rows="8" placeholder="Sample text..."></textarea>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col">
+    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".txt">
+  </div>
+
+</div>
