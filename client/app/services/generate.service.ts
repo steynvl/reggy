@@ -7,8 +7,8 @@ export class GenerateService {
 
   constructor(private http: HttpClient) { }
 
-  generateRegex(sampleStrings: any): Observable<Array<string>> {
-    return this.http.get<Array<string>>('api/generate', {params: sampleStrings});
+  generateRegex(sampleStrings: any): Observable<string> {
+    return this.http.get<string>('api/generate', {params: sampleStrings});
   }
 
 }

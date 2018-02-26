@@ -20,7 +20,7 @@ def get_common_suffix(list_of_strings):
 
 
 def main():
-    sample_strings = sys.argv[1:]
+    sample_strings = list(map(str.strip, sys.argv[1:]))
 
     prefix = get_common_prefix(sample_strings)
 

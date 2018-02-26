@@ -10,9 +10,10 @@ import { GenerateService } from '../services/generate.service';
 })
 export class GenerateComponent {
 
-  textArea: string;
+  textArea = '';
   selectedText = '';
   markedElements: Array<Marker> = [];
+  generatedRegex: string;
 
   constructor(private generateService: GenerateService) {
   }
@@ -48,9 +49,10 @@ export class GenerateComponent {
 
   generateRegex() {
     const sampleStrings = this.buildSampleStrings();
+    this.generatedRegex = undefined;
 
     this.generateService.generateRegex(sampleStrings).subscribe(
-      data => console.log(data),
+      data => this.generatedRegex = data,
       error => console.log(error)
     );
   }

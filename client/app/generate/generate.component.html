@@ -32,7 +32,13 @@
 
   <div class="row">
     <div class="col">
-      <button class="btn" (click)="generateRegex()">Generate</button>
+      <button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>
     </div>
   </div>
 
