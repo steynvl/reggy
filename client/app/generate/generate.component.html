@@ -4,7 +4,7 @@
 
     <button type="button" class="btn btn-success" (click)="mark()">Mark</button>
     <a class="fa-vertical-bar-medium:after"></a>
-    <span class="btn-separator"></span>
+    <span *ngIf="markedElements.length > 0" class="btn-separator"></span>
 
     <div *ngFor="let markedElement of markedElements; let idx = index">
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Marker } from '../shared/models/marker';
+import { colours } from '../shared/colours/colours';
 
 @Component({
   selector: 'app-generate',
@@ -44,7 +45,7 @@ export class GenerateComponent {
 
       this.markedElements.push({
         id: this.markedElements.length + 1,
-        color: 'red'
+        colour: colours[this.markedElements.length]
       });
 
       this.selectedText = '';
@@ -53,7 +54,7 @@ export class GenerateComponent {
 
   setButtonColor(index) {
     const style = {
-      'background-color': this.markedElements[index].color
+      'background-color': this.markedElements[index].colour
     };
     return style;
   }
