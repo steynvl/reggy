@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { GenerateComponent } from './generate/generate.component';
+import { GenerateService } from './services/generate.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -27,7 +28,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [],
+  providers: [GenerateService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

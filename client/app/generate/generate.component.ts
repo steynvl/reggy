@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Marker } from '../shared/models/marker';
 import { colours } from '../shared/colours/colours';
+import { GenerateService } from '../services/generate.service';
 
 @Component({
   selector: 'app-generate',
@@ -13,7 +14,7 @@ export class GenerateComponent {
   selectedText = '';
   markedElements: Array<Marker> = [];
 
-  constructor() {
+  constructor(private generateService: GenerateService) {
   }
 
   fileChange(event) {
@@ -38,6 +39,20 @@ export class GenerateComponent {
     const finish = (txtArea as any).selectionEnd;
 
     this.selectedText = (txtArea as any).value.substring(start, finish);
+  }
+
+  buildSampleStrings(): Array<string> {
+    return this.textArea.split(/\s+/g)
+      .filter(word => word.trim().length > 0);
+  }
+
+  generateRegex() {
+    const sampleStrings = this.buildSampleStrings();
+
+    this.generateService.generateRegex(sampleStrings).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
   }
 
   mark() {
