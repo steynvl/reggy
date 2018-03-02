@@ -19,6 +19,10 @@ def get_common_suffix(list_of_strings):
     return get_common_prefix(reverse)[::-1]
 
 
+def slice_str(string, prefix_length, suffix_length):
+    return string[prefix_length:len(string) - suffix_length]
+
+
 def main():
     sample_strings = list(map(str.strip, sys.argv[1:]))
 
@@ -28,11 +32,19 @@ def main():
     suffix = get_common_suffix(suffix_sample_strings)
 
     if prefix != '' or suffix != '':
+        p_length = len(prefix)
+        s_length = len(suffix)
+
         original_size = len(sample_strings)
         sample_strings = list(filter(lambda s: len(s) > len(prefix) and len(s) > len(suffix), sample_strings))
-        body = [i[len(prefix):len(i)-len(suffix)] for i in sample_strings]
-        optional = '?' if original_size > len(sample_strings) else ''
-        regex = '{0}({1}){2}{3}'.format(prefix, '|'.join(body), optional, suffix).replace('()?', '')
+
+        body = [slice_str(i, p_length, s_length) for i in sample_strings if slice_str(i, p_length, s_length) != '']
+        optional_item = original_size > len(sample_strings) or original_size > len(body)
+
+        if optional_item:
+            regex = '{0}({1})?{2}'.format(prefix, '|'.join(body), suffix).replace('()?', '')
+        else:
+            regex = '{0}({1}){2}'.format(prefix, '|'.join(body), suffix)
     else:
         regex = alternation_regex(sample_strings)
 

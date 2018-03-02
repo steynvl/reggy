@@ -8,7 +8,7 @@
 
     <div *ngFor="let markedElement of markedElements; let idx = index">
 
-      <button type="button" class="btn" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+      <button type="button" class="btn" (click)="clickMarkButton(idx)" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
     </div>
 
@@ -30,16 +30,100 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate</button>
+  <hr />
+
+  <div *ngFor="let markedElement of markedElements; let idx = index">
+
+    <div class="row">
+
+      <div class="col-md-2">
+        <button type="button" class="btn btn-md" (click)="clickMarkButton(idx)"
+                [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+      </div>
+
+      <div class="col-md-5">
+        <label>Field info:</label>
+        <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged()">
+
+          <option>Marked text</option>
+          <option>Basic characters</option>
+          <option>Numbers</option>
+        </select>
+      </div>
+
+      <div class="col-md-5">
+        <label>Repeat:</label>
+        <select class="form-control" (ngModelChange)="repeatInfoChanged()">
+
+          <option>0 or more</option>
+          <option>1</option>
+          <option>2</option>
+          <option>Unlimited</option>
+        </select>
+      </div>
+
     </div>
+
+    <div *ngIf="selectedMarkerIdx == idx">
+
+      <div *ngIf="markedElement.fieldType == 'Marked text'">
+
+        <div class="row">
+          <div class="col" align="center">
+            <h3>{{markedElement.fieldType}}</h3>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     [checked]="markedText.caseInsensitive"
+                     (change)="markedText.caseInsensitive = !markedText.caseInsensitive">
+              <label class="form-check-label">
+                Case insensitive
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     [checked]="markedText.matchAllExceptSpecified"
+                     (change)="markedText.matchAllExceptSpecified = !markedText.matchAllExceptSpecified">
+              <label class="form-check-label">
+                Match everything except specified text
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr />
+
   </div>
 
   <div class="row">
-    <div class="col text-center">
-      <h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>
+    <div class="col">
+      <button class="btn btn-primary" (click)="printStuff()">Generate Regex</button>
     </div>
   </div>
+
+  <!--<div class="row">-->
+  <!--<div class="col">-->
+  <!--<button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="row">-->
+  <!--<div class="col text-center">-->
+  <!--<h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>-->
+  <!--</div>-->
+  <!--</div>-->
 
 </div>

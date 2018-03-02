@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Marker } from '../shared/models/marker';
 import { colours } from '../shared/colours/colours';
 import { GenerateService } from '../services/generate.service';
+import { MarkedText } from '../shared/models/marker-info/marked-text';
 
 @Component({
   selector: 'app-generate',
@@ -14,6 +15,8 @@ export class GenerateComponent {
   selectedText = '';
   markedElements: Array<Marker> = [];
   generatedRegex: string;
+  selectedMarkerIdx = -1;
+  markedText: MarkedText;
 
   constructor(private generateService: GenerateService) {
   }
@@ -61,11 +64,19 @@ export class GenerateComponent {
     if (this.selectedText !== '') {
 
       this.markedElements.push({
-        id: this.markedElements.length + 1,
-        colour: colours[this.markedElements.length]
-      });
+          id: this.markedElements.length + 1,
+          colour: colours[this.markedElements.length],
+          fieldType: 'Marked text',
+          markerInfo: {
+            caseInsensitive: false,
+            matchAllExceptSpecified: false
+          }
+        }
+      );
 
       this.selectedText = '';
+      this.selectedMarkerIdx = this.markedElements.length - 1;
+      this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     }
   }
 
@@ -76,6 +87,47 @@ export class GenerateComponent {
     return style;
   }
 
+
+  markerInfoChanged() {
+
+    switch (this.markedElements[this.selectedMarkerIdx].fieldType) {
+
+      case 'Marked text':
+        this.markedText = {
+          caseInsensitive: false,
+          matchAllExceptSpecified: false
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.markedText;
+        break;
+
+      case 'Basic characters':
+        this.markedElements[this.selectedMarkerIdx].markerInfo = {};
+        break;
+
+      case 'Numbers':
+        this.markedElements[this.selectedMarkerIdx].markerInfo = {};
+        break;
+
+      default:
+        break;
+    }
+
+  }
+
+  repeatInfoChanged() {
+
+  }
+
+  clickMarkButton(idx) {
+    this.selectedMarkerIdx = idx;
+    this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+  }
+
+
+  printStuff() {
+    console.log(this.markedText.caseInsensitive);
+    console.log(this.markedText.matchAllExceptSpecified);
+  }
 
 
 }
