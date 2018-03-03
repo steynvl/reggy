@@ -1,7 +1,3 @@
 
 
-export class Numbers {
-
-
-
-}
+export class Numbers { }

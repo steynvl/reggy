@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Marker } from '../shared/models/marker';
 import { colours } from '../shared/colours/colours';
 import { GenerateService } from '../services/generate.service';
 import { MarkedText } from '../shared/models/marker-info/marked-text';
+import { BasicCharacters } from '../shared/models/marker-info/basic-characters';
 
 @Component({
   selector: 'app-generate',
@@ -17,6 +18,7 @@ export class GenerateComponent {
   generatedRegex: string;
   selectedMarkerIdx = -1;
   markedText: MarkedText;
+  basicCharacters: BasicCharacters;
 
   constructor(private generateService: GenerateService) {
   }
@@ -101,7 +103,13 @@ export class GenerateComponent {
         break;
 
       case 'Basic characters':
-        this.markedElements[this.selectedMarkerIdx].markerInfo = {};
+        this.basicCharacters = {
+          lowerCaseLetters: false,
+          upperCaseLetters: false,
+          containsDigits: false,
+          matchAllExceptSpecified: false
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.basicCharacters;
         break;
 
       case 'Numbers':
@@ -128,6 +136,5 @@ export class GenerateComponent {
     console.log(this.markedText.caseInsensitive);
     console.log(this.markedText.matchAllExceptSpecified);
   }
-
 
 }
