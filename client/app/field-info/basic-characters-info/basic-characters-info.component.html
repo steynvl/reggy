@@ -1,0 +1,51 @@
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.lowerCaseLetters"
+             (change)="basicCharacters.lowerCaseLetters = !basicCharacters.lowerCaseLetters">
+      <label class="form-check-label">
+        Lowercase letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.upperCaseLetters"
+             (change)="basicCharacters.upperCaseLetters = !basicCharacters.upperCaseLetters">
+      <label class="form-check-label">
+        Uppercase letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.containsDigits"
+             (change)="basicCharacters.containsDigits = !basicCharacters.containsDigits">
+      <label class="form-check-label">
+        Digits
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.matchAllExceptSpecified"
+             (change)="basicCharacters.matchAllExceptSpecified = !basicCharacters.matchAllExceptSpecified">
+      <label class="form-check-label">
+        Match everything except specified text
+      </label>
+    </div>
+  </div>
+
+</div>

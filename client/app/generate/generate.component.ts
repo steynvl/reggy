@@ -139,6 +139,7 @@ export class GenerateComponent {
   clickMarkButton(idx) {
     this.selectedMarkerIdx = idx;
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+    this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
     this.highlightTextArea();
   }
 
@@ -156,5 +157,7 @@ export class GenerateComponent {
       ranges: options
     });
   }
+
+  printStuff() { }
 
 }

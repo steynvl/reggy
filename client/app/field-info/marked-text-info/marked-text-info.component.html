@@ -1,0 +1,25 @@
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="markedText.caseInsensitive"
+             (change)="markedText.caseInsensitive = !markedText.caseInsensitive">
+      <label class="form-check-label">
+        Case insensitive
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="markedText.matchAllExceptSpecified"
+             (change)="markedText.matchAllExceptSpecified = !markedText.matchAllExceptSpecified">
+      <label class="form-check-label">
+        Match everything except specified text
+      </label>
+    </div>
+  </div>
+
+</div>

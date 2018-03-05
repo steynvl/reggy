@@ -8,6 +8,9 @@ import { AboutComponent } from './about/about.component';
 import { GenerateComponent } from './generate/generate.component';
 import { GenerateService } from './services/generate.service';
 
+import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
+import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -16,7 +19,9 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     AboutComponent,
-    GenerateComponent
+    GenerateComponent,
+    MarkedTextInfoComponent,
+    BasicCharacterInfoComponent
   ],
   imports: [
     RoutingModule,
