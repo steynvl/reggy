@@ -58,7 +58,7 @@
 
       <div class="col-md-5">
         <label>Repeat:</label>
-        <select class="form-control" (ngModelChange)="repeatInfoChanged()">
+        <select class="form-control">
 
           <option>0 or more</option>
           <option>1</option>
@@ -169,22 +169,22 @@
 
   </div>
 
+  <!--<div class="row">-->
+    <!--<div class="col">-->
+      <!--<button class="btn btn-primary" (click)="printStuff()">Generate Regex</button>-->
+    <!--</div>-->
+  <!--</div>-->
+
   <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" (click)="printStuff()">Generate Regex</button>
-    </div>
+  <div class="col">
+  <button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>
+  </div>
   </div>
 
-  <!--<div class="row">-->
-  <!--<div class="col">-->
-  <!--<button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>-->
-  <!--</div>-->
-  <!--</div>-->
-
-  <!--<div class="row">-->
-  <!--<div class="col text-center">-->
-  <!--<h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+  <div class="col text-center">
+  <h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>
+  </div>
+  </div>
 
 </div>

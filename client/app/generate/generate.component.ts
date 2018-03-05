@@ -1,9 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Marker } from '../shared/models/marker';
 import { colours } from '../shared/colours/colours';
 import { GenerateService } from '../services/generate.service';
 import { MarkedText } from '../shared/models/marker-info/marked-text';
 import { BasicCharacters } from '../shared/models/marker-info/basic-characters';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-generate',
@@ -20,8 +22,7 @@ export class GenerateComponent {
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
 
-  constructor(private generateService: GenerateService) {
-  }
+  constructor(private generateService: GenerateService) { }
 
   fileChange(event) {
     const fileList: FileList = event.target.files;
@@ -63,7 +64,10 @@ export class GenerateComponent {
   }
 
   mark() {
-    if (this.selectedText !== '') {
+    if (this.selectedText  !== '') {
+
+      const s = this.textArea.indexOf(this.selectedText);
+      const e = s + this.selectedText.length;
 
       this.markedElements.push({
           id: this.markedElements.length + 1,
@@ -72,13 +76,22 @@ export class GenerateComponent {
           markerInfo: {
             caseInsensitive: false,
             matchAllExceptSpecified: false
-          }
+          },
+          markedTextInfo: [
+            {
+              start: s,
+              end: e,
+              text: this.selectedText
+            }
+          ]
         }
       );
 
       this.selectedText = '';
       this.selectedMarkerIdx = this.markedElements.length - 1;
       this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+
+      this.highlightTextArea();
     }
   }
 
@@ -122,19 +135,26 @@ export class GenerateComponent {
 
   }
 
-  repeatInfoChanged() {
-
-  }
 
   clickMarkButton(idx) {
     this.selectedMarkerIdx = idx;
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+    this.highlightTextArea();
   }
 
+  highlightTextArea() {
+    const options = [];
+    this.markedElements[this.selectedMarkerIdx].markedTextInfo.forEach(markerTextInfo => {
+      options.push({
+        color: this.markedElements[this.selectedMarkerIdx].colour,
+        start: markerTextInfo.start,
+        end: markerTextInfo.end
+      });
+    });
 
-  printStuff() {
-    console.log(this.markedText.caseInsensitive);
-    console.log(this.markedText.matchAllExceptSpecified);
+    jQuery('textarea').highlightTextarea('destroy').highlightTextarea({
+      ranges: options
+    });
   }
 
 }

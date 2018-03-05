@@ -21,12 +21,15 @@
       "styles": [
         "../node_modules/bootswatch/dist/flatly/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
-        "styles.css"
+        "styles.css",
+        "../node_modules/jquery-highlighttextarea/jquery.highlighttextarea.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/js/tether.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/jquery-highlighttextarea/jquery.highlighttextarea.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
