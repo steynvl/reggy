@@ -22,7 +22,8 @@ export class GenerateComponent {
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
 
-  constructor(private generateService: GenerateService) { }
+  constructor(private generateService: GenerateService) {
+  }
 
   fileChange(event) {
     const fileList: FileList = event.target.files;
