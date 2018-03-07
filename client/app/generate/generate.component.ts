@@ -4,6 +4,7 @@ import { colours } from '../shared/colours/colours';
 import { GenerateService } from '../services/generate.service';
 import { MarkedText } from '../shared/models/marker-info/marked-text';
 import { BasicCharacters } from '../shared/models/marker-info/basic-characters';
+import { ToastComponent } from '../shared/toast/toast.component';
 
 declare var jQuery: any;
 
@@ -22,7 +23,8 @@ export class GenerateComponent {
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
 
-  constructor(private generateService: GenerateService) {
+  constructor(private generateService: GenerateService,
+              public toast: ToastComponent) {
   }
 
   fileChange(event) {
@@ -93,10 +95,12 @@ export class GenerateComponent {
       this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
 
       this.highlightTextArea();
+    } else {
+      this.toast.setMessage('No text selected!', 'warning');
     }
   }
 
-  setButtonColor(index) {
+  setButtonColor(index: number) {
     const style = {
       'background-color': this.markedElements[index].colour
     };
@@ -137,7 +141,7 @@ export class GenerateComponent {
   }
 
 
-  clickMarkButton(idx) {
+  clickMarkButton(idx: number) {
     this.selectedMarkerIdx = idx;
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
@@ -157,6 +161,18 @@ export class GenerateComponent {
     jQuery('textarea').highlightTextarea('destroy').highlightTextarea({
       ranges: options
     });
+  }
+
+  changeMarkerOrder(direction: string, idx: number) {
+    const el = this.markedElements[idx];
+
+    if (direction === 'up') {
+      this.markedElements[idx] = this.markedElements[idx - 1];
+      this.markedElements[idx - 1] = el;
+    } else {
+      this.markedElements[idx] = this.markedElements[idx + 1];
+      this.markedElements[idx + 1] = el;
+    }
   }
 
   printStuff() { }
