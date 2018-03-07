@@ -11,6 +11,8 @@ import { GenerateService } from './services/generate.service';
 import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
 
+import { MarkedTextToView } from './pipes/marked-text-to-view';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -21,7 +23,8 @@ export function tokenGetter() {
     AboutComponent,
     GenerateComponent,
     MarkedTextInfoComponent,
-    BasicCharacterInfoComponent
+    BasicCharacterInfoComponent,
+    MarkedTextToView
   ],
   imports: [
     RoutingModule,

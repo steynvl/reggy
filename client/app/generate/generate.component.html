@@ -10,7 +10,7 @@
 
     <div *ngFor="let markedElement of markedElements; let idx = index">
 
-      <button type="button" class="btn" (click)="clickMarkButton(idx)" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+      <button type="button" class="btn" (click)="clickMarkButton(idx, true)" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
     </div>
 
@@ -52,7 +52,7 @@
     <div class="row">
 
       <div class="col-md-2">
-        <button type="button" class="btn btn-md" (click)="clickMarkButton(idx)"
+        <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
                 [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
         <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
@@ -90,7 +90,8 @@
 
       <app-marked-text-info
         *ngIf="markedElement.fieldType === 'Marked text'"
-        [markedText]="markedText">
+        [markedText]="markedText"
+        [possibleMatches]="markedElement.markedTextInfo" >
       </app-marked-text-info>
 
 

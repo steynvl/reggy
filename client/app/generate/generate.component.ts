@@ -66,37 +66,52 @@ export class GenerateComponent {
     );
   }
 
-  mark() {
-    if (this.selectedText  !== '') {
+  mark(addInfoToMarker = false) {
+    const s = this.textArea.indexOf(this.selectedText);
+    const e = s + this.selectedText.length;
 
-      const s = this.textArea.indexOf(this.selectedText);
-      const e = s + this.selectedText.length;
-
-      this.markedElements.push({
-          id: this.markedElements.length + 1,
-          colour: colours[this.markedElements.length],
-          fieldType: 'Marked text',
-          markerInfo: {
-            caseInsensitive: false,
-            matchAllExceptSpecified: false
-          },
-          markedTextInfo: [
-            {
-              start: s,
-              end: e,
-              text: this.selectedText
-            }
-          ]
-        }
-      );
+    if (addInfoToMarker && this.selectedText !== '') {
+      this.markedElements[this.selectedMarkerIdx].markedTextInfo.push({
+        start: s,
+        end: e,
+        text: this.selectedText
+      });
 
       this.selectedText = '';
-      this.selectedMarkerIdx = this.markedElements.length - 1;
       this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+      this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
 
-      this.highlightTextArea();
     } else {
-      this.toast.setMessage('No text selected!', 'warning');
+
+      if (this.selectedText !== '') {
+
+        this.markedElements.push({
+            id: this.markedElements.length + 1,
+            colour: colours[this.markedElements.length],
+            fieldType: 'Marked text',
+            markerInfo: {
+              caseInsensitive: false,
+              matchAllExceptSpecified: false
+            },
+            markedTextInfo: [
+              {
+                start: s,
+                end: e,
+                text: this.selectedText
+              }
+            ]
+          }
+        );
+
+        this.selectedText = '';
+        this.selectedMarkerIdx = this.markedElements.length - 1;
+        this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+
+        this.highlightTextArea();
+      } else {
+        this.toast.setMessage('No text selected!', 'warning');
+      }
+
     }
   }
 
@@ -141,8 +156,13 @@ export class GenerateComponent {
   }
 
 
-  clickMarkButton(idx: number) {
+  clickMarkButton(idx: number, addInfoToMarker: boolean) {
     this.selectedMarkerIdx = idx;
+
+    if (addInfoToMarker) {
+      this.mark(true);
+    }
+
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
     this.highlightTextArea();
