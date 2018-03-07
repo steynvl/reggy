@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BasicCharacters } from '../../shared/models/marker-info/basic-characters';
+import { BasicCharacters } from '../../models/marker-info/basic-characters';
 
 @Component({
   selector: 'app-basic-characters-info',

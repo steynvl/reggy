@@ -75,13 +75,19 @@
 
       <div class="col-md-5">
         <label>Repeat:</label>
-        <select class="form-control">
 
-          <option>0 or more</option>
-          <option>1</option>
-          <option>2</option>
-          <option>Unlimited</option>
+        <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo">
+
+          <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
+
         </select>
+
+        <div *ngIf="markedElement.isRange" class="input-group">
+          <input type="text" class="form-control" placeholder="Start (inclusive)"/>
+          <input type="text" class="form-control" placeholder="End (inclusive)"/>
+        </div>
+
       </div>
 
     </div>
@@ -119,10 +125,10 @@
   <!--</div>-->
   <!--</div>-->
 
-  <!--<div class="row">-->
-  <!--<div class="col">-->
-  <!--<button class="btn btn-primary" (click)="printStuff()">Log Info</button>-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="printStuff()">Log Info</button>
+    </div>
+  </div>
 
 </div>

@@ -10,5 +10,9 @@ export class Marker {
   fieldType: string;
   markedTextInfo: Array<MarkedTextInfo>;
   markerInfo: BasicCharacters | MarkedText | Numbers;
+  repeatInfo: string;
+  isRange: boolean;
+
+  repeatInfoView: Array<string>;
 
 }

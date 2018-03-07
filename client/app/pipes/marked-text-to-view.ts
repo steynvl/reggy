@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MarkedTextInfo } from '../shared/models/marked-text-info';
+import { MarkedTextInfo } from '../models/marked-text-info';
 
 @Pipe({
   name: 'markedTextToView',
@@ -8,9 +8,7 @@ import { MarkedTextInfo } from '../shared/models/marked-text-info';
 export class MarkedTextToView implements PipeTransform {
 
   transform(value: Array<MarkedTextInfo>): string {
-    const markedText: Array<string> = [];
-    value.forEach(u => markedText.push(u.text));
-    return markedText.join(' | ');
+    return value.map(u => u.text).join(' | ');
   }
 
 }

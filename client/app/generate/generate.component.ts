@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Marker } from '../shared/models/marker';
-import { colours } from '../shared/colours/colours';
+import { Marker } from '../models/marker';
+import { colours } from '../colours/colours';
 import { GenerateService } from '../services/generate.service';
-import { MarkedText } from '../shared/models/marker-info/marked-text';
-import { BasicCharacters } from '../shared/models/marker-info/basic-characters';
+import { MarkedText } from '../models/marker-info/marked-text';
+import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 declare var jQuery: any;
@@ -22,6 +22,7 @@ export class GenerateComponent {
   selectedMarkerIdx = -1;
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
+
 
   constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
@@ -70,12 +71,15 @@ export class GenerateComponent {
     const s = this.textArea.indexOf(this.selectedText);
     const e = s + this.selectedText.length;
 
-    if (addInfoToMarker && this.selectedText !== '') {
+    if (addInfoToMarker) {
+
       this.markedElements[this.selectedMarkerIdx].markedTextInfo.push({
         start: s,
         end: e,
         text: this.selectedText
       });
+
+      // TODO check overlap of marker range
 
       this.selectedText = '';
       this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
@@ -99,7 +103,11 @@ export class GenerateComponent {
                 end: e,
                 text: this.selectedText
               }
-            ]
+            ],
+            repeatInfo: '1',
+            repeatInfoView: ['Custom range', '0 or more', '1 or more',
+              '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            isRange: false
           }
         );
 
@@ -159,7 +167,7 @@ export class GenerateComponent {
   clickMarkButton(idx: number, addInfoToMarker: boolean) {
     this.selectedMarkerIdx = idx;
 
-    if (addInfoToMarker) {
+    if (addInfoToMarker && this.selectedText !== '') {
       this.mark(true);
     }
 
@@ -195,6 +203,15 @@ export class GenerateComponent {
     }
   }
 
-  printStuff() { }
+  repeatInfoChanged(idx) {
+    this.selectedMarkerIdx = idx;
+    const el = this.markedElements[this.selectedMarkerIdx];
+
+    el.isRange = el.repeatInfo === 'Custom range';
+  }
+
+  printStuff() {
+    console.log(this.markedElements[this.selectedMarkerIdx].repeatInfo);
+  }
 
 }

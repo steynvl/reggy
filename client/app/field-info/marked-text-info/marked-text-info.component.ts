@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MarkedText } from '../../shared/models/marker-info/marked-text';
-import { MarkedTextInfo } from '../../shared/models/marked-text-info';
+import { MarkedText } from '../../models/marker-info/marked-text';
+import { MarkedTextInfo } from '../../models/marked-text-info';
 
 @Component({
   selector: 'app-marked-text-info',
