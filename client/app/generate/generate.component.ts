@@ -6,7 +6,6 @@ import { MarkedText } from '../models/marker-info/marked-text';
 import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Numbers } from '../models/marker-info/numbers';
-import { Minus } from '../models/marker-info/minus';
 
 declare var jQuery: any;
 
@@ -87,6 +86,7 @@ export class GenerateComponent {
       this.selectedText = '';
       this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
       this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
+      this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
 
     } else {
 
@@ -157,7 +157,7 @@ export class GenerateComponent {
         break;
 
       case 'Numbers':
-        this.markedElements[this.selectedMarkerIdx].markerInfo = {
+        this.numbers = {
           zero:  true,
           one:   true,
           two:   true,
@@ -173,6 +173,7 @@ export class GenerateComponent {
             optional: false
           }
         };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.numbers;
         break;
 
       default:

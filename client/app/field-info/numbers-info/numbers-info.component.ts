@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Numbers } from '../../models/marker-info/numbers';
 
 @Component({
@@ -9,5 +9,13 @@ import { Numbers } from '../../models/marker-info/numbers';
 export class NumbersInfoComponent {
 
   @Input() numbers: Numbers;
+
+  ticked(type: string) {
+    if (type === 'minus' && this.numbers.minus.optional) {
+      this.numbers.minus.optional = false;
+    } else if (type === 'optionalMinus' && this.numbers.minus.minus) {
+      this.numbers.minus.minus = false;
+    }
+  }
 
 }
