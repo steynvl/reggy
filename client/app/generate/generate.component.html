@@ -123,14 +123,26 @@
   <!--</div>-->
 
   <!--<div class="row">-->
-  <!--<div class="col text-center">-->
-  <!--<h1 *ngIf="generatedRegex">{{generatedRegex}}</h1>-->
+  <!--<div class="col">-->
+  <!--<button class="btn btn-primary" (click)="printStuff()">Log Info</button>-->
   <!--</div>-->
   <!--</div>-->
 
   <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" (click)="printStuff()">Log Info</button>
+    <div class="col-md-12">
+
+      <label for="regex">Your Regular expression:</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="regex">
+        <span class="input-group-btn">
+        <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                type="button"><i class="fa fa-clipboard"></i>
+        </button>
+        </span>
+
+      </div>
+
     </div>
   </div>
 
