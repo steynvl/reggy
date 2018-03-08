@@ -6,6 +6,7 @@ import { MarkedText } from '../models/marker-info/marked-text';
 import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Numbers } from '../models/marker-info/numbers';
+import { Payload } from '../models/payload';
 
 declare var jQuery: any;
 
@@ -54,7 +55,15 @@ export class GenerateComponent {
     this.selectedText = (txtArea as any).value.substring(start, finish);
   }
 
-  buildSampleStrings(): Array<string> {
+  private constructPayload(): Payload {
+
+    // TODO generate payload, see payload.ts and sample-strings-info.ts
+
+    return null;
+  }
+
+
+  private buildSampleStrings(): Array<string> {
     return this.textArea.split(/\s+/g)
       .filter(word => word.trim().length > 0);
   }
@@ -62,6 +71,8 @@ export class GenerateComponent {
   generateRegex() {
     const sampleStrings = this.buildSampleStrings();
     this.generatedRegex = undefined;
+
+    const payload = this.constructPayload();
 
     this.generateService.generateRegex(sampleStrings).subscribe(
       data => this.generatedRegex = data,

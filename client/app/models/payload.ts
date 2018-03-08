@@ -1,6 +1,7 @@
+import {SampleStringsInfo} from './sample-strings-info';
 
 export class Payload {
 
-  payload: Array<>
+  payload: Array<SampleStringsInfo>;
 
 }
