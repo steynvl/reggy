@@ -1,15 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { MarkedText } from '../../models/marker-info/marked-text';
-import { MarkedTextInfo } from '../../models/marked-text-info';
+import { Component, Input, OnInit } from '@angular/core';
+import { Numbers } from '../../models/marker-info/numbers';
 
 @Component({
-  selector: 'app-marked-text-info',
-  templateUrl: './marked-text-info.component.html',
-  styleUrls: ['./marked-text-info.component.css']
+  selector: 'app-numbers-info',
+  templateUrl: './numbers-info.component.html',
+  styleUrls: ['./numbers-info.component.css']
 })
-export class MarkedTextInfoComponent {
+export class NumbersInfoComponent {
 
-  @Input() markedText: MarkedText;
-  @Input() possibleMatches: Array<MarkedTextInfo>;
+  @Input() numbers: Numbers;
 
 }

@@ -10,6 +10,7 @@ import { GenerateService } from './services/generate.service';
 
 import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
+import { NumbersInfoComponent } from './field-info/numbers-info/numbers-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -24,6 +25,7 @@ export function tokenGetter() {
     GenerateComponent,
     MarkedTextInfoComponent,
     BasicCharacterInfoComponent,
+    NumbersInfoComponent,
     MarkedTextToView
   ],
   imports: [

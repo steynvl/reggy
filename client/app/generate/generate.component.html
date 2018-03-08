@@ -100,12 +100,15 @@
         [possibleMatches]="markedElement.markedTextInfo" >
       </app-marked-text-info>
 
-
       <app-basic-characters-info
         *ngIf="markedElement.fieldType === 'Basic characters'"
         [basicCharacters]="basicCharacters">
-
       </app-basic-characters-info>
+
+      <app-numbers-info
+        *ngIf="markedElement.fieldType === 'Numbers'"
+        [numbers]="numbers">
+      </app-numbers-info>
 
     </div>
 

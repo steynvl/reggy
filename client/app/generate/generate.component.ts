@@ -5,6 +5,8 @@ import { GenerateService } from '../services/generate.service';
 import { MarkedText } from '../models/marker-info/marked-text';
 import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
+import { Numbers } from '../models/marker-info/numbers';
+import { Minus } from '../models/marker-info/minus';
 
 declare var jQuery: any;
 
@@ -22,6 +24,7 @@ export class GenerateComponent {
   selectedMarkerIdx = -1;
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
+  numbers: Numbers;
 
 
   constructor(private generateService: GenerateService,
@@ -94,7 +97,7 @@ export class GenerateComponent {
             colour: colours[this.markedElements.length],
             fieldType: 'Marked text',
             markerInfo: {
-              caseInsensitive: false,
+              caseInsensitive:         false,
               matchAllExceptSpecified: false
             },
             markedTextInfo: [
@@ -137,7 +140,7 @@ export class GenerateComponent {
 
       case 'Marked text':
         this.markedText = {
-          caseInsensitive: false,
+          caseInsensitive:         false,
           matchAllExceptSpecified: false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.markedText;
@@ -145,16 +148,31 @@ export class GenerateComponent {
 
       case 'Basic characters':
         this.basicCharacters = {
-          lowerCaseLetters: false,
-          upperCaseLetters: false,
-          containsDigits: false,
+          lowerCaseLetters:        false,
+          upperCaseLetters:        false,
+          containsDigits:          false,
           matchAllExceptSpecified: false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.basicCharacters;
         break;
 
       case 'Numbers':
-        this.markedElements[this.selectedMarkerIdx].markerInfo = {};
+        this.markedElements[this.selectedMarkerIdx].markerInfo = {
+          zero:  true,
+          one:   true,
+          two:   true,
+          three: true,
+          four:  true,
+          five:  true,
+          six:   true,
+          seven: true,
+          eight: true,
+          nine:  true,
+          minus: {
+            minus:    false,
+            optional: false
+          }
+        };
         break;
 
       default:
@@ -173,6 +191,7 @@ export class GenerateComponent {
 
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
+    this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
     this.highlightTextArea();
   }
 
