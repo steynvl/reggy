@@ -116,11 +116,11 @@
 
   </div>
 
-  <!--<div class="row">-->
-  <!--<div class="col">-->
-  <!--<button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>-->
-  <!--</div>-->
-  <!--</div>-->
+  <div class="row">
+    <div class="col">
+      <button class="btn" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>
+    </div>
+  </div>
 
   <!--<div class="row">-->
   <!--<div class="col">-->
@@ -128,7 +128,7 @@
   <!--</div>-->
   <!--</div>-->
 
-  <div class="row">
+  <div *ngIf="generatedRegex !== undefined" class="row">
     <div class="col-md-12">
 
       <label for="regex">Your Regular expression:</label>
