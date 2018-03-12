@@ -271,4 +271,8 @@ export class GenerateComponent {
     console.log(this.markedElements[this.selectedMarkerIdx].repeatInfo);
   }
 
+  clickCopyToClipboard() {
+    this.toast.setMessage('Regex copied to clipboard ', 'success');
+  }
+
 }

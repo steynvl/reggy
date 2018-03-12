@@ -14,6 +14,8 @@ import { NumbersInfoComponent } from './field-info/numbers-info/numbers-info.com
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
+import { ClipboardModule } from 'ngx-clipboard';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -31,6 +33,7 @@ export function tokenGetter() {
   imports: [
     RoutingModule,
     SharedModule,
+    ClipboardModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

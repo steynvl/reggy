@@ -132,11 +132,11 @@
   <div *ngIf="generatedRegex !== undefined" class="row">
     <div class="col-md-12">
 
-      <label for="regex">Your Regular expression:</label>
+      <label for="regex"><strong>Your Regular expression:</strong></label>
       <div class="input-group">
         <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
         <span class="input-group-btn">
-        <button class="btn btn-default"
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
                 type="button"><i class="fa fa-clipboard"></i>
         </button>
@@ -145,6 +145,11 @@
       </div>
 
     </div>
+  </div>
+
+  <div *ngIf="markedElements.length > 0">
+    <br />
+    <br />
   </div>
 
 </div>
