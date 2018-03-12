@@ -14,7 +14,11 @@ class MapMarkedText:
 
     def _map_info(self):
         marked_strings = self._info['strings']
-        alternation = '({})'.format('|'.join(marked_strings))
+        if len(marked_strings) == 1:
+            alternation = marked_strings[0]
+        else:
+            alternation = '({})'.format('|'.join(marked_strings))
+
         if self._info['repeatInfo'] == RepeatInfo.CUSTOM_RANGE:
             repeat_range = self._info['repeatRange']
             s = repeat_range['start']

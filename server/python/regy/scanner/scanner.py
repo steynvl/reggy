@@ -69,7 +69,7 @@ class Scan:
         marker_info = sample['markerInfo']
         info['numbers'] = []
         for i in marker_info:
-            if i != 'minus':
+            if i != 'minus' and marker_info[i]:
                 info['numbers'].append(number_to_enum_dict[i])
             else:
                 info['minus'] = {
