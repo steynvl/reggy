@@ -7,6 +7,7 @@ import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Numbers } from '../models/marker-info/numbers';
 import { Payload } from '../models/payload';
+import { SampleStringsInfo } from '../models/sample-strings-info';
 
 declare var jQuery: any;
 
@@ -56,10 +57,22 @@ export class GenerateComponent {
   }
 
   private constructPayload(): Payload {
+    const sampleStringsInfo: Array<SampleStringsInfo> = [];
 
-    // TODO generate payload, see payload.ts and sample-strings-info.ts
+    this.markedElements.forEach(markedElement => {
 
-    return null;
+      sampleStringsInfo.push({
+        markerType: markedElement.fieldType,
+        markedStrings: markedElement.markedTextInfo.map(u => u.text),
+        markerInfo: markedElement.markerInfo,
+        repeatInfo: markedElement.repeatInfo
+      });
+
+    });
+
+    return {
+      payload: sampleStringsInfo
+    };
   }
 
 
@@ -73,6 +86,7 @@ export class GenerateComponent {
     this.generatedRegex = undefined;
 
     const payload = this.constructPayload();
+    console.log(payload);
 
     this.generateService.generateRegex(sampleStrings).subscribe(
       data => this.generatedRegex = data,
@@ -145,7 +159,8 @@ export class GenerateComponent {
   }
 
 
-  markerInfoChanged() {
+  markerInfoChanged(idx) {
+    this.clickMarkButton(idx, false);
 
     switch (this.markedElements[this.selectedMarkerIdx].fieldType) {
 

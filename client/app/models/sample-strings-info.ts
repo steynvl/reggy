@@ -4,14 +4,11 @@ import { Numbers } from './marker-info/numbers';
 
 export class SampleStringsInfo {
 
-  /* field type of the specific marker */
-  fieldType: string;
+  /* type of the specific marker */
+  markerType: string;
 
   /* array containing actual values highlighted by user for this marker */
   markedStrings: Array<string>;
-
-  /* type of the marker */
-  markerType: MarkerType;
 
   /* semantical information about the marker  */
   markerInfo: MarkedText | BasicCharacters | Numbers;
