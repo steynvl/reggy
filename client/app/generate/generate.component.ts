@@ -29,7 +29,6 @@ export class GenerateComponent {
   userHighlightStart: string;
   userHighlightEnd: string;
 
-
   constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
   }
