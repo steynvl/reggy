@@ -26,6 +26,9 @@ export class GenerateComponent {
   basicCharacters: BasicCharacters;
   numbers: Numbers;
 
+  userHighlightStart: string;
+  userHighlightEnd: string;
+
 
   constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
@@ -53,6 +56,9 @@ export class GenerateComponent {
     const finish = (txtArea as any).selectionEnd;
 
     this.selectedText = (txtArea as any).value.substring(start, finish);
+
+    this.userHighlightStart = start;
+    this.userHighlightEnd = finish;
   }
 
   private constructPayload(): Array<SampleStringsInfo> {
@@ -96,8 +102,8 @@ export class GenerateComponent {
   }
 
   mark(addInfoToMarker = false) {
-    const s = this.textArea.indexOf(this.selectedText);
-    const e = s + this.selectedText.length;
+    const s = Number.parseInt(this.userHighlightStart);
+    const e = Number.parseInt(this.userHighlightEnd);
 
     if (addInfoToMarker) {
 
