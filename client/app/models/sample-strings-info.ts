@@ -1,6 +1,7 @@
 import { BasicCharacters } from './marker-info/basic-characters';
 import { MarkedText } from './marker-info/marked-text';
 import { Numbers } from './marker-info/numbers';
+import { RepeatInfo } from './marker-info/repeat-info';
 
 export class SampleStringsInfo {
 
@@ -14,6 +15,6 @@ export class SampleStringsInfo {
   markerInfo: MarkedText | BasicCharacters | Numbers;
 
   /* tells us how many times the marker needs to be repeated */
-  repeatInfo: string;
+  repeatInfo: RepeatInfo;
 
 }

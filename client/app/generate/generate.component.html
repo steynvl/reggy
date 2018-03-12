@@ -77,15 +77,15 @@
         <label>Repeat:</label>
 
         <select class="form-control" style="font-family: 'FontAwesome', Arial;"
-                (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo">
+                (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
 
           <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
 
         </select>
 
         <div *ngIf="markedElement.isRange" class="input-group">
-          <input type="text" class="form-control" placeholder="Start (inclusive)"/>
-          <input type="text" class="form-control" placeholder="End (inclusive)"/>
+          <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
+          <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
         </div>
 
       </div>

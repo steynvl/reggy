@@ -133,7 +133,11 @@ export class GenerateComponent {
                 text: this.selectedText
               }
             ],
-            repeatInfo: '1',
+            repeatInfo: {
+              repeat: '1',
+              start: undefined,
+              end: undefined
+            },
             repeatInfoView: ['Custom range', '0 or 1', '0 or more', '1 or more',
               '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
             isRange: false
@@ -254,7 +258,7 @@ export class GenerateComponent {
     this.selectedMarkerIdx = idx;
     const el = this.markedElements[this.selectedMarkerIdx];
 
-    el.isRange = el.repeatInfo === 'Custom range';
+    el.isRange = el.repeatInfo.repeat === 'Custom range';
   }
 
   printStuff() {
