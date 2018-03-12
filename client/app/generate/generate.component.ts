@@ -6,7 +6,6 @@ import { MarkedText } from '../models/marker-info/marked-text';
 import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Numbers } from '../models/marker-info/numbers';
-import { Payload } from '../models/payload';
 import { SampleStringsInfo } from '../models/sample-strings-info';
 
 declare var jQuery: any;
@@ -56,7 +55,7 @@ export class GenerateComponent {
     this.selectedText = (txtArea as any).value.substring(start, finish);
   }
 
-  private constructPayload(): Payload {
+  private constructPayload(): Array<SampleStringsInfo> {
     const sampleStringsInfo: Array<SampleStringsInfo> = [];
 
     this.markedElements.forEach(markedElement => {
@@ -70,9 +69,7 @@ export class GenerateComponent {
 
     });
 
-    return {
-      payload: sampleStringsInfo
-    };
+    return sampleStringsInfo;
   }
 
 
@@ -82,13 +79,17 @@ export class GenerateComponent {
   }
 
   generateRegex() {
-    const sampleStrings = this.buildSampleStrings();
+    // const sampleStrings = this.buildSampleStrings();
+
     this.generatedRegex = undefined;
 
-    const payload = this.constructPayload();
-    console.log(payload);
+    const payload = JSON.stringify(this.constructPayload());
 
-    this.generateService.generateRegex(sampleStrings).subscribe(
+    // this.generateService.generateRegex(sampleStrings).subscribe(
+    //   data => this.generatedRegex = data,
+    //   error => console.log(error)
+    // );
+    this.generateService.generateRegex(payload).subscribe(
       data => this.generatedRegex = data,
       error => console.log(error)
     );
@@ -133,7 +134,7 @@ export class GenerateComponent {
               }
             ],
             repeatInfo: '1',
-            repeatInfoView: ['Custom range', '0 or more', '1 or more',
+            repeatInfoView: ['Custom range', '0 or 1', '0 or more', '1 or more',
               '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
             isRange: false
           }

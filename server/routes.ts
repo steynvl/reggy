@@ -7,7 +7,7 @@ export default function setRoutes(app) {
 
   const generateCtrl = new GenerateCtrl();
 
-  router.route('/generate').get(generateCtrl.generate);
+  router.route('/generate').post(generateCtrl.generate);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

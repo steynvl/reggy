@@ -24,6 +24,9 @@ def slice_str(string, prefix_length, suffix_length):
 
 
 def main():
+    with open('awe.txt', 'w') as f:
+        f.write(sys.argv[1])
+
     sample_strings = list(map(str.strip, sys.argv[1:]))
 
     prefix = get_common_prefix(sample_strings)
