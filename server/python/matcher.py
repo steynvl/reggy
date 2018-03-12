@@ -52,7 +52,7 @@ def main():
         regex = alternation_regex(sample_strings)
 
     print(json.dumps(regex))
-    sys.stderr.flush()
+    sys.stdout.flush()
 
 
 if __name__ == '__main__':

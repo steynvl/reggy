@@ -17,9 +17,11 @@ export default class GenerateCtrl extends BaseCtrl {
     });
 
     py.stdout.on('end', () => {
+      console.log('-----');
       console.log(`Regex = ${regex.trim()}`);
+      console.log('-----');
       res.setHeader('Content-Type', 'application/json');
-      res.send(regex);
+      res.send(JSON.stringify(regex));
     });
 
     py.on('close', (code) => {

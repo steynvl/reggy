@@ -134,7 +134,7 @@
 
       <label for="regex">Your Regular expression:</label>
       <div class="input-group">
-        <input type="text" class="form-control" id="regex">
+        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
         <span class="input-group-btn">
         <button class="btn btn-default"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"

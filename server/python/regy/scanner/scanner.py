@@ -1,5 +1,5 @@
 import json
-from regy.tokens import MarkerType, MarkerTextInfo
+from regy.tokens import MarkerType, MarkerTextInfo, RepeatInfo
 from regy.utils import repeat_info_to_enum, number_to_enum_dict
 
 
@@ -12,6 +12,18 @@ class Scan:
 
     def get_scanned_samples(self):
         return self._scanned_samples
+
+    @staticmethod
+    def _insert_repeat_info(sample, info):
+        repeat_info = sample['repeatInfo']['repeat']
+        if repeat_info != 'Custom range':
+            info['repeatInfo'] = repeat_info_to_enum[repeat_info]
+        else:
+            info['repeatInfo'] = RepeatInfo.CUSTOM_RANGE
+            info['repeatRange'] = {
+                'start': int(sample['repeatInfo']['start']),
+                'end': int(sample['repeatInfo']['end'])
+            }
 
     def _deserialize_samples(self):
         return json.loads(self.samples)
@@ -66,15 +78,3 @@ class Scan:
                 }
 
         self._insert_repeat_info(sample, info)
-
-    @staticmethod
-    def _insert_repeat_info(sample, info):
-        repeat_info = sample['repeatInfo']['repeat']
-        if repeat_info != 'Custom range':
-            info['repeatInfo'] = repeat_info_to_enum[repeat_info]
-        else:
-            info['repeatInfo'] = repeat_info
-            info['repeatRange'] = {
-                'start': int(sample['repeatInfo']['start']),
-                'end': int(sample['repeatInfo']['end'])
-            }

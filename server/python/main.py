@@ -2,6 +2,8 @@
 
 import sys
 import regy
+import regy.mapper as mapper
+from regy.tokens import MarkerType
 
 
 def main():
@@ -11,10 +13,23 @@ def main():
     scanner = regy.Scan(samples)
     scanned_samples = scanner.get_scanned_samples()
 
-    for i in scanned_samples:
-        print(i)
-        print('')
+    # for i in scanned_samples:
+    #     print(i)
+    #     print('')
 
+    re_list = []
+    for scanned_sample in scanned_samples:
+
+        marker_type = scanned_sample['markerType']
+        if marker_type == MarkerType.MARKED_TEXT:
+            re_list.append(mapper.MapMarkedText(scanned_sample).get_re())
+        elif marker_type == MarkerType.NUMBERS:
+            re_list.append(mapper.MapNumbers(scanned_sample).get_re())
+
+    re = ''.join(re_list)
+
+    print(re)
+    sys.stdout.flush()
 
 
 if __name__ == '__main__':
