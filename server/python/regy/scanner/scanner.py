@@ -3,7 +3,7 @@ from regy.tokens import MarkerType, MarkerTextInfo, RepeatInfo
 from regy.utils import repeat_info_to_enum, number_to_enum_dict
 
 
-class Scan:
+class Scanner:
 
     def __init__(self, samples):
         self.samples = samples

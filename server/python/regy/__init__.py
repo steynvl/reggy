@@ -1,1 +1,1 @@
-from regy.scanner.scanner import Scan
+from regy.scanner.scanner import Scanner
