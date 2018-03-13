@@ -274,4 +274,8 @@ export class GenerateComponent {
     this.toast.setMessage('Regex copied to clipboard ', 'success');
   }
 
+  removeMarker(idx: number) {
+    this.markedElements.splice(idx, 1);
+  }
+
 }
