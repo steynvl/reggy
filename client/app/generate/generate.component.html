@@ -119,6 +119,38 @@
 
   </div>
 
+  <div *ngIf="markedElements.length > 0" class="row">
+
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <label for="begin-regex-at">Start regex match at:</label>
+        <select id="begin-regex-at" class="form-control">
+          <option>Anywhere</option>
+          <option>Start of text</option>
+          <option>Start of line</option>
+          <option>Start of word</option>
+          <option>Start of attempt</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <label for="end-regex-at">End regex match at:</label>
+        <select id="end-regex-at" class="form-control">
+          <option>Anywhere</option>
+          <option>End of text</option>
+          <option>End of line</option>
+          <option>End of word</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
   <div class="row">
     <div class="col">
       <button class="btn btn-outline-primary" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>
