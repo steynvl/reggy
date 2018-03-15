@@ -47,7 +47,7 @@
     "mongoose": "^5.0.3",
     "morgan": "^1.9.0",
     "ngx-clipboard": "^10.0.0",
-    "ngx-highlight-js": "^1.0.3",
+    "ngx-highlightjs": "^1.4.1",
     "rxjs": "^5.5.6",
     "tether": "1.4.0",
     "zone.js": "^0.8.19"

@@ -15,7 +15,10 @@ import { NumbersInfoComponent } from './field-info/numbers-info/numbers-info.com
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
 import { ClipboardModule } from 'ngx-clipboard';
-import { HighlightJsModule } from 'ngx-highlight-js';
+import { HighlightModule } from 'ngx-highlightjs';
+
+import { JavaComponent } from './language-examples/java/java.component';
+import { PerlComponent } from './language-examples/perl/perl.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,13 +32,17 @@ export function tokenGetter() {
     MarkedTextInfoComponent,
     BasicCharacterInfoComponent,
     NumbersInfoComponent,
-    MarkedTextToView
+    MarkedTextToView,
+    JavaComponent,
+    PerlComponent
   ],
   imports: [
     RoutingModule,
     SharedModule,
     ClipboardModule,
-    HighlightJsModule,
+    HighlightModule.forRoot({
+      path: 'assets/lib/highlight'
+    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
