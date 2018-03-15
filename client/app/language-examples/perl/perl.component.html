@@ -1,0 +1,41 @@
+<div class="row">
+
+  <div class="col" align="center">
+
+    <h4>Examples of using the Regex in Perl</h4>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col">
+
+    <div class="form-group">
+      <label for="perl-language-examples">Start regex match at:</label>
+      <select id="perl-language-examples" class="form-control" [(ngModel)]="selectedExample" (ngModelChange)="changed()">
+        <option>if/else branch whether the regex matches (part of) a string</option>
+        <option>if/else branch whether the regex matches a string entirely</option>
+        <option>Get the part of a string matched by the regex</option>
+        <option>Get the part of a string matched by a numbered group</option>
+        <option>Get an array of all regex matches in a string</option>
+        <option>Iterate over all matches in a string</option>
+      </select>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col">
+
+    <div *ngIf="selectedExample !== undefined">
+      <pre><code highlight [code]="this.examples[this.selectedExample]"></code></pre>
+    </div>
+
+  </div>
+
+</div>
