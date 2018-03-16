@@ -27,6 +27,7 @@ class MapNumbers:
         else:
             self.re = nums + repeat_info_map[self._info['repeatInfo']]
 
+
     @staticmethod
     def _calculate_character_class(marker_info):
         nums = sorted([i.value for i in marker_info])
