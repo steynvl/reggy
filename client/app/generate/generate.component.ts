@@ -100,24 +100,33 @@ export class GenerateComponent {
     );
   }
 
+  private markerOverlap(start: number, end: number): boolean {
+    const markerTextInfo = this.markedElements[this.selectedMarkerIdx].markedTextInfo;
+
+    return markerTextInfo.some(m => (start >= m.start && start <= m.end)
+      || (end >= m.start && end <= m.end));
+  }
+
   mark(addInfoToMarker = false) {
     const s = Number.parseInt(this.userHighlightStart);
     const e = Number.parseInt(this.userHighlightEnd);
 
     if (addInfoToMarker) {
 
-      this.markedElements[this.selectedMarkerIdx].markedTextInfo.push({
-        start: s,
-        end: e,
-        text: this.selectedText
-      });
+      if (this.markerOverlap(s, e)) {
+        this.toast.setMessage('Selected area overlaps with selections for same marker!', 'warning');
+      } else {
+        this.markedElements[this.selectedMarkerIdx].markedTextInfo.push({
+          start: s,
+          end: e,
+          text: this.selectedText
+        });
 
-      // TODO check overlap of marker range
-
-      this.selectedText = '';
-      this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
-      this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
-      this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+        this.selectedText = '';
+        this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+        this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
+        this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+      }
 
     } else {
 
@@ -167,7 +176,6 @@ export class GenerateComponent {
     };
     return style;
   }
-
 
   markerInfoChanged(idx) {
     this.clickMarkButton(idx, false);
@@ -271,7 +279,7 @@ export class GenerateComponent {
   }
 
   clickCopyToClipboard() {
-    this.toast.setMessage('Regex copied to clipboard ', 'success');
+    this.toast.setMessage('Regex copied to clipboard! ', 'success');
   }
 
   removeMarker(idx: number) {
