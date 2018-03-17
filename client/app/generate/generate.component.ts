@@ -79,23 +79,11 @@ export class GenerateComponent {
     return sampleStringsInfo;
   }
 
-
-  private buildSampleStrings(): Array<string> {
-    return this.textArea.split(/\s+/g)
-      .filter(word => word.trim().length > 0);
-  }
-
   generateRegex() {
-    // const sampleStrings = this.buildSampleStrings();
-
     this.generatedRegex = undefined;
 
     const payload = JSON.stringify(this.constructPayload());
 
-    // this.generateService.generateRegex(sampleStrings).subscribe(
-    //   data => this.generatedRegex = data,
-    //   error => console.log(error)
-    // );
     this.generateService.generateRegex(payload).subscribe(
       data => this.generatedRegex = data,
       error => console.log(error)
@@ -172,11 +160,10 @@ export class GenerateComponent {
     }
   }
 
-  setButtonColor(index: number) {
-    const style = {
+  setButtonColor(index: number): any {
+    return {
       'background-color': this.markedElements[index].colour
     };
-    return style;
   }
 
   markerInfoChanged(idx) {
@@ -244,13 +231,16 @@ export class GenerateComponent {
 
   highlightTextArea() {
     const options = [];
-    this.markedElements[this.selectedMarkerIdx].markedTextInfo.forEach(markerTextInfo => {
-      options.push({
-        color: this.markedElements[this.selectedMarkerIdx].colour,
-        start: markerTextInfo.start,
-        end: markerTextInfo.end
+
+    if (this.selectedMarkerIdx != -1) {
+      this.markedElements[this.selectedMarkerIdx].markedTextInfo.forEach(markerTextInfo => {
+        options.push({
+          color: this.markedElements[this.selectedMarkerIdx].colour,
+          start: markerTextInfo.start,
+          end: markerTextInfo.end
+        });
       });
-    });
+    }
 
     jQuery('textarea').highlightTextarea('destroy').highlightTextarea({
       ranges: options
@@ -259,14 +249,38 @@ export class GenerateComponent {
 
   changeMarkerOrder(direction: string, idx: number) {
     const el = this.markedElements[idx];
+    const newId1 = direction === 'up' ? idx - 1 : idx + 1;
+    const newId2 = direction === 'up' ? idx + 1 : idx - 1;
 
     if (direction === 'up') {
       this.markedElements[idx] = this.markedElements[idx - 1];
       this.markedElements[idx - 1] = el;
+      this.markedElements[idx].colour = colours[idx];
+      this.markedElements[idx - 1].colour = colours[idx - 1];
+
+      this.markedElements[idx - 1].id--;
+      this.markedElements[idx].id++;
     } else {
       this.markedElements[idx] = this.markedElements[idx + 1];
       this.markedElements[idx + 1] = el;
+      this.markedElements[idx].colour = colours[idx];
+      this.markedElements[idx + 1].colour = colours[idx + 1];
+
+      this.markedElements[idx + 1].id++;
+      this.markedElements[idx].id--;
     }
+  }
+
+  removeMarker(idx: number) {
+    this.markedElements.splice(idx, 1);
+
+    for (let i = idx; i < this.markedElements.length; i++) {
+      this.markedElements[i].id--;
+      this.markedElements[i].colour = colours[i];
+    }
+
+    this.selectedMarkerIdx = idx === 0 ? -1 : idx - 1;
+    this.highlightTextArea();
   }
 
   repeatInfoChanged(idx) {
@@ -276,16 +290,8 @@ export class GenerateComponent {
     el.isRange = el.repeatInfo.repeat === 'Custom range';
   }
 
-  printStuff() {
-    console.log(this.markedElements[this.selectedMarkerIdx].repeatInfo);
-  }
-
   clickCopyToClipboard() {
     this.toast.setMessage('Regex copied to clipboard! ', 'success');
-  }
-
-  removeMarker(idx: number) {
-    this.markedElements.splice(idx, 1);
   }
 
 }

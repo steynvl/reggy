@@ -19,7 +19,6 @@ export class JavaComponent implements OnInit {
   }
 
   changed() {
-    this.regex = '^[2-9]version\\d*$';
     this.examples[this.selectedExample] = this.examples[this.selectedExample].replace('__regex__', this.regex);
   }
 
