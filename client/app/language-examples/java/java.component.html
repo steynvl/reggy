@@ -15,24 +15,7 @@
     <div class="form-group">
       <label for="java-language-examples">Start regex match at:</label>
       <select id="java-language-examples" class="form-control" [(ngModel)]="selectedExample" (ngModelChange)="changed()">
-        <option>Import regex library</option>
-        <option>Test if the regex matches a string entirely</option>
-        <option>if/else branch whether the regex matches a string entirely</option>
-        <option>Create an object to use the same regex for many operations</option>
-        <option>Create an object to apply a regex repeatedly to a given string</option>
-        <option>Apply the same regex to more than one string</option>
-        <option>Use regex object to test if (part of) a string can be matched</option>
-        <option>Use regex object to test if a string can be matched entirely</option>
-        <option>Use regex object for if/else branch whether (part of) a string can be matched</option>
-        <option>Use regex object for if/else branch whether a string can be matched entirely</option>
-        <option>Use regex object to get the part of a string matched by the regex</option>
-        <option>Use regex object to get the part of a string matched by a numbered group</option>
-        <option>Use regex object to get the part of a string matched by a named group</option>
-        <option>Use regex object to get a list of all regex matches in a string</option>
-        <option>Use regex match to get a list of all text matched by a numbered group</option>
-        <option>Use regex object to get a list of all text matched by a named group</option>
-        <option>Iterate over all matched in a string</option>
-        <option>Iterate over all matches and capturing groups in a string</option>
+        <option *ngFor="let option of options">{{option}}</option>
       </select>
     </div>
   </div>

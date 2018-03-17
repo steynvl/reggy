@@ -29,6 +29,8 @@ export class GenerateComponent {
   userHighlightStart: string;
   userHighlightEnd: string;
 
+  regexTarget = 'Java';
+
   constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
   }

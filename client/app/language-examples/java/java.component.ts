@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { examples } from './java-examples';
 
 @Component({
@@ -6,15 +6,21 @@ import { examples } from './java-examples';
   templateUrl: './java.component.html',
   styleUrls: ['./java.component.css']
 })
-export class JavaComponent {
+export class JavaComponent implements OnInit {
+
+  @Input() regex: string;
 
   selectedExample: string;
   examples = examples;
-  regex: string;
+  options: Array<string> = [];
+
+  ngOnInit() {
+    this.options = Object.keys(this.examples);
+  }
 
   changed() {
     this.regex = '^[2-9]version\\d*$';
-    examples[this.selectedExample] = examples[this.selectedExample].replace('__regex__', this.regex);
+    this.examples[this.selectedExample] = this.examples[this.selectedExample].replace('__regex__', this.regex);
   }
 
 }
