@@ -1,6 +1,6 @@
 import regy
-from regy import mapper
-from regy.tokens import MarkerType
+from regy.samples_and_semantics import mapper
+from regy.samples_and_semantics.tokens.marker_type import MarkerType
 
 
 class Regy:
