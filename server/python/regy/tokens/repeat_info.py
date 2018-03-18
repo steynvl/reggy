@@ -16,3 +16,4 @@ class RepeatInfo(Enum):
     EIGHT        = 12
     NINE         = 13
     TEN          = 14
+    MIN_TO_INF   = 15

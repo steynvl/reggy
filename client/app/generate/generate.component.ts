@@ -249,8 +249,6 @@ export class GenerateComponent {
 
   changeMarkerOrder(direction: string, idx: number) {
     const el = this.markedElements[idx];
-    const newId1 = direction === 'up' ? idx - 1 : idx + 1;
-    const newId2 = direction === 'up' ? idx + 1 : idx - 1;
 
     if (direction === 'up') {
       this.markedElements[idx] = this.markedElements[idx - 1];

@@ -1,34 +1,30 @@
-from regy.mapper.map_repeat_info import repeat_info_map
 from regy.mapper.meta_characters import meta_characters
-from regy.tokens import RepeatInfo
-
+from regy.mapper.repeat_helper import repeat_info_to_regex
 
 class MapMarkedText:
 
     def __init__(self, info):
         self._info = info
-        self.re = None
+        self._re_list = []
         self._map_info()
 
-    def get_re(self):
-        return self.re
+    def get_re_list(self):
+        return self._re_list
 
     def _map_info(self):
         marked_strings = self._info['strings']
         escaped_strings = self._escape_special_characters(marked_strings)
+        self._info['escapedStrings'] = escaped_strings
 
         if len(escaped_strings) == 1:
-            alternation = escaped_strings[0]
+            esc_string = escaped_strings[0]
+            re = ['(', esc_string, ')'] if len(esc_string) > 1 and esc_string[0] != '\\' else [esc_string]
+            self._re_list.extend(re)
         else:
-            alternation = '({})'.format('|'.join(escaped_strings))
+            self._re_list.append('({})'.format('|'.join(escaped_strings)))
 
-        if self._info['repeatInfo'] == RepeatInfo.CUSTOM_RANGE:
-            repeat_range = self._info['repeatRange']
-            s = repeat_range['start']
-            e = repeat_range['end']
-            self.re = alternation + repeat_info_map[RepeatInfo.CUSTOM_RANGE].format(s, e)
-        else:
-            self.re = alternation + repeat_info_map[self._info['repeatInfo']]
+        repeat_info = repeat_info_to_regex(self._info)
+        self._re_list.append(repeat_info)
 
     @staticmethod
     def _escape_special_characters(marked_strings, target='java'):

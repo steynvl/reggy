@@ -31,3 +31,7 @@
 .right-allign {
   float: right;
 }
+
+.pad-down {
+  padding-top: 20px;
+}

@@ -4,7 +4,7 @@
 
   <div class="btn-toolbar">
 
-    <button type="button" class="btn btn-success" (click)="mark()">Mark</button>
+    <button type="button" class="btn btn-primary" (click)="mark()">Mark</button>
     <a class="fa-vertical-bar-medium:after"></a>
     <span *ngIf="markedElements.length > 0" class="btn-separator"></span>
 
@@ -125,7 +125,7 @@
       <h3><strong>General regular expression information</strong></h3>
     </div>
 
-    <div class="row">
+    <div class="row pad-down">
 
       <div class="col-sm-4">
 
@@ -170,39 +170,53 @@
 
   </div>
 
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-outline-primary" [disabled]="textArea.trim() === ''" (click)="generateRegex()">Generate Regex</button>
-    </div>
-  </div>
+  <div *ngIf="markedElements.length > 0">
+    <br />
 
-  <div *ngIf="generatedRegex !== undefined" class="row">
-    <div class="col-md-12">
-
-      <label for="regex"><strong>Your Regular expression:</strong></label>
-      <div class="input-group">
-        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
-        <span class="input-group-btn">
-        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
-                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
-                type="button"><i class="fa fa-clipboard"></i>
-        </button>
-        </span>
-
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
       </div>
-
     </div>
-  </div>
 
-  <br />
-  <br />
+  </div>
 
   <div *ngIf="markedElements.length > 0">
     <br />
     <br />
   </div>
 
-  <div *ngIf="generatedRegex">
+  <div *ngIf="generatedRegex !== undefined">
+
+    <div class="row text-center">
+      <div class="col">
+        <label for="regex"><strong>Your {{regexTarget}} regular expression</strong></label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+
+        <div class="input-group">
+          <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+          <span class="input-group-btn">
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                type="button"><i class="fa fa-clipboard"></i>
+        </button>
+        </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div *ngIf="generatedRegex" class="pad-down">
 
     <div *ngIf="regexTarget === 'Java'">
       <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>

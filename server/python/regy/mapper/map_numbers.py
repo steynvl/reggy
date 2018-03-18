@@ -1,32 +1,25 @@
-from regy.mapper.map_repeat_info import repeat_info_map
-from regy.tokens import RepeatInfo
+from regy.mapper.repeat_helper import repeat_info_to_regex
 
 
 class MapNumbers:
 
     def __init__(self, info):
         self._info = info
-        self.re = None
+        self._re_list = []
         self._map_info()
 
-    def get_re(self):
-        return self.re
+    def get_re_list(self):
+        return self._re_list
 
     def _map_info(self):
         marker_info = self._info['numbers']
         if len(marker_info) == 10:
-            nums = '\\d'
+            self._re_list.append('\\d')
         else:
-            nums = self._calculate_character_class(marker_info)
+            self._re_list.append(self._calculate_character_class(marker_info))
 
-        if self._info['repeatInfo'] == RepeatInfo.CUSTOM_RANGE:
-            repeat_range = self._info['repeatRange']
-            s = repeat_range['start']
-            e = repeat_range['end']
-            self.re = nums + repeat_info_map[RepeatInfo.CUSTOM_RANGE].format(s, e)
-        else:
-            self.re = nums + repeat_info_map[self._info['repeatInfo']]
-
+        repeat_info = repeat_info_to_regex(self._info)
+        self._re_list.append(repeat_info)
 
     @staticmethod
     def _calculate_character_class(marker_info):
