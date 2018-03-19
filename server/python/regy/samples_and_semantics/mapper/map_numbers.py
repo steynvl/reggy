@@ -1,4 +1,5 @@
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
+from regy.samples_and_semantics.tokens import Token
 
 
 class MapNumbers:
@@ -12,7 +13,7 @@ class MapNumbers:
         return self._re_list
 
     def _map_info(self):
-        marker_info = self._info['numbers']
+        marker_info = self._info[Token.NUMBERS]
         if len(marker_info) == 10:
             self._re_list.append('\\d')
         else:

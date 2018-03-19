@@ -85,9 +85,13 @@
 
         </select>
 
-        <div *ngIf="markedElement.isRange" class="input-group">
+        <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
           <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
           <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
+        </div>
+
+        <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
+          <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
         </div>
 
       </div>
@@ -131,7 +135,7 @@
 
         <div class="form-group">
           <label for="begin-regex-at">Start regex match at:</label>
-          <select id="begin-regex-at" class="form-control">
+          <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
             <option>Anywhere</option>
             <option>Start of text</option>
             <option>Start of line</option>
@@ -145,7 +149,7 @@
 
         <div class="form-group">
           <label for="end-regex-at">End regex match at:</label>
-          <select id="end-regex-at" class="form-control">
+          <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
             <option>Anywhere</option>
             <option>End of text</option>
             <option>End of line</option>
@@ -158,7 +162,7 @@
 
         <div class="form-group">
           <label for="what-standard">Target language:</label>
-          <select id="what-standard" class="form-control" [(ngModel)]="regexTarget">
+          <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
             <option>Java</option>
             <option>Perl</option>
             <option>POSIX</option>
@@ -188,9 +192,9 @@
 
   <div *ngIf="generatedRegex !== undefined">
 
-    <div class="row text-center">
+    <div class="row">
       <div class="col">
-        <label for="regex"><strong>Your {{regexTarget}} regular expression</strong></label>
+        <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
       </div>
     </div>
 
@@ -218,10 +222,10 @@
 
   <div *ngIf="generatedRegex" class="pad-down">
 
-    <div *ngIf="regexTarget === 'Java'">
+    <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
       <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
     </div>
-    <div *ngIf="regexTarget === 'Perl'">
+    <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
       <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
     </div>
 

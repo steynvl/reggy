@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Marker } from '../models/marker';
 import { colours } from '../colours/colours';
 import { GenerateService } from '../services/generate.service';
@@ -7,6 +7,8 @@ import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Numbers } from '../models/marker-info/numbers';
 import { SampleStringsInfo } from '../models/sample-strings-info';
+import { GeneralRegexInfo } from '../models/general-regex-info';
+import { Payload } from '../models/payload';
 
 declare var jQuery: any;
 
@@ -15,7 +17,7 @@ declare var jQuery: any;
   templateUrl: './generate.component.html',
   styleUrls: ['./generate.component.css']
 })
-export class GenerateComponent {
+export class GenerateComponent implements OnInit {
 
   textArea = '';
   selectedText = '';
@@ -29,10 +31,18 @@ export class GenerateComponent {
   userHighlightStart: string;
   userHighlightEnd: string;
 
-  regexTarget = 'Java';
+  generalRegexInfo: GeneralRegexInfo;
 
   constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
+  }
+
+  ngOnInit() {
+    this.generalRegexInfo = {
+      startRegexMatchAt: 'Anywhere',
+      endRegexMatchAt  : 'Anywhere',
+      regexTarget      : 'Java'
+    };
   }
 
   fileChange(event) {
@@ -62,7 +72,7 @@ export class GenerateComponent {
     this.userHighlightEnd = finish;
   }
 
-  private constructPayload(): Array<SampleStringsInfo> {
+  private constructPayload(): Payload {
     const sampleStringsInfo: Array<SampleStringsInfo> = [];
 
     this.markedElements.forEach(markedElement => {
@@ -76,7 +86,10 @@ export class GenerateComponent {
 
     });
 
-    return sampleStringsInfo;
+    return {
+      sampleStringsInfo: sampleStringsInfo,
+      generalRegexInfo : this.generalRegexInfo
+    };
   }
 
   generateRegex() {
@@ -142,9 +155,8 @@ export class GenerateComponent {
               start: undefined,
               end: undefined
             },
-            repeatInfoView: ['Custom range', '0 or 1', '0 or more', '1 or more',
-              '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            isRange: false
+            repeatInfoView: ['Custom range', 'n or more times', '0 or 1', '0 or more',
+              '1 or more', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
           }
         );
 
@@ -215,7 +227,6 @@ export class GenerateComponent {
 
   }
 
-
   clickMarkButton(idx: number, addInfoToMarker: boolean) {
     this.selectedMarkerIdx = idx;
 
@@ -232,7 +243,7 @@ export class GenerateComponent {
   highlightTextArea() {
     const options = [];
 
-    if (this.selectedMarkerIdx != -1) {
+    if (this.selectedMarkerIdx !== -1) {
       this.markedElements[this.selectedMarkerIdx].markedTextInfo.forEach(markerTextInfo => {
         options.push({
           color: this.markedElements[this.selectedMarkerIdx].colour,
@@ -283,9 +294,6 @@ export class GenerateComponent {
 
   repeatInfoChanged(idx) {
     this.selectedMarkerIdx = idx;
-    const el = this.markedElements[this.selectedMarkerIdx];
-
-    el.isRange = el.repeatInfo.repeat === 'Custom range';
   }
 
   clickCopyToClipboard() {

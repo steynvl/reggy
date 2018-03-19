@@ -2,3 +2,7 @@ from regy.samples_and_semantics.tokens.numbers_info import NumbersInfo
 from regy.samples_and_semantics.tokens.marker_type import MarkerType
 from regy.samples_and_semantics.tokens.marked_text_info import MarkerTextInfo
 from regy.samples_and_semantics.tokens.repeat_info import RepeatInfo
+from regy.samples_and_semantics.tokens.target_language import TargetLanguage
+from regy.samples_and_semantics.tokens.regex_start_info import RegexStartInfo
+from regy.samples_and_semantics.tokens.regex_end_info import RegexEndInfo
+from regy.samples_and_semantics.tokens.token import Token

@@ -1,6 +1,7 @@
 import regy
 from regy.samples_and_semantics import mapper
-from regy.samples_and_semantics.tokens.marker_type import MarkerType
+from regy.samples_and_semantics.tokens import Token, MarkerType
+# import pprint
 
 
 class Regy:
@@ -17,9 +18,11 @@ class Regy:
         scanner = regy.Scanner(self._samples)
         scanned_samples = scanner.get_scanned_samples()
 
-        for scanned_sample in scanned_samples:
+        # pprint.pprint(scanned_samples)
 
-            marker_type = scanned_sample['markerType']
+        for scanned_sample in scanned_samples[Token.SAMPLE_STRINGS_INFO]:
+
+            marker_type = scanned_sample[Token.MARKER_TYPE]
             if marker_type == MarkerType.MARKED_TEXT:
                 self._re_list.append(''.join(mapper.MapMarkedText(scanned_sample).get_re_list()))
             elif marker_type == MarkerType.NUMBERS:

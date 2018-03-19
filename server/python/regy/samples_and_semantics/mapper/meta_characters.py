@@ -1,7 +1,8 @@
+from regy.samples_and_semantics.tokens import TargetLanguage
 
 meta_characters = {
 
-    'java': {
+    TargetLanguage.JAVA: {
         '{': '\{',
         '}': '\}',
         '[': '\[',
@@ -18,11 +19,11 @@ meta_characters = {
         '\\': '\\\\'
     },
 
-    'perl': {
+    TargetLanguage.PERL: {
 
     },
 
-    'posix': {
+    TargetLanguage.POSIX: {
 
     }
 

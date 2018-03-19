@@ -12,7 +12,6 @@ export class Marker {
   markedTextInfo: Array<MarkedTextInfo>;
   markerInfo: BasicCharacters | MarkedText | Numbers;
   repeatInfo: RepeatInfo;
-  isRange: boolean;
 
   repeatInfoView: Array<string>;
 

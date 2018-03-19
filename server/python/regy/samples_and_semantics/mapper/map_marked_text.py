@@ -1,6 +1,6 @@
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples_and_semantics.tokens import RepeatInfo
+from regy.samples_and_semantics.tokens import RepeatInfo, Token, TargetLanguage
 
 
 class MapMarkedText:
@@ -14,13 +14,13 @@ class MapMarkedText:
         return self._re_list
 
     def _map_info(self):
-        marked_strings = self._info['strings']
+        marked_strings = self._info[Token.MARKED_TEXT_STRINGS]
         escaped_strings = self._escape_special_characters(marked_strings)
-        self._info['escapedStrings'] = escaped_strings
+        self._info[Token.ESCAPED_STRINGS] = escaped_strings
 
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
-            if len(esc_string) > 1 and esc_string[0] != '\\' and self._info['repeatInfo'] != RepeatInfo.ONE:
+            if len(esc_string) > 1 and esc_string[0] != '\\' and self._info[Token.REPEAT_INFO] != RepeatInfo.ONE:
                 self._re_list.extend(['(', esc_string, ')'])
             else:
                 self._re_list.append(esc_string)
@@ -31,7 +31,7 @@ class MapMarkedText:
         self._re_list.append(repeat_info)
 
     @staticmethod
-    def _escape_special_characters(marked_strings, target='java'):
+    def _escape_special_characters(marked_strings, target=TargetLanguage.JAVA):
         meta_chars = meta_characters[target]
 
         return [''.join([meta_chars[c] if c in meta_chars else c for c in string]) for string in marked_strings]
