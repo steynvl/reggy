@@ -1,3 +1,4 @@
+from collections import deque
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import Token
 
@@ -6,21 +7,21 @@ class MapNumbers:
 
     def __init__(self, info):
         self._info = info
-        self._re_list = []
+        self._re = deque()
         self._map_info()
 
-    def get_re_list(self):
-        return self._re_list
+    def get_re(self):
+        return self._re
 
     def _map_info(self):
         marker_info = self._info[Token.NUMBERS]
         if len(marker_info) == 10:
-            self._re_list.append('\\d')
+            self._re.append('\\d')
         else:
-            self._re_list.append(self._calculate_character_class(marker_info))
+            self._re.append(self._calculate_character_class(marker_info))
 
         repeat_info = repeat_info_to_regex(self._info)
-        self._re_list.append(repeat_info)
+        self._re.append(repeat_info)
 
     @staticmethod
     def _calculate_character_class(marker_info):

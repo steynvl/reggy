@@ -1,3 +1,4 @@
+from collections import deque
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import RepeatInfo, Token, TargetLanguage
@@ -7,11 +8,11 @@ class MapMarkedText:
 
     def __init__(self, info):
         self._info = info
-        self._re_list = []
+        self._re = deque()
         self._map_info()
 
-    def get_re_list(self):
-        return self._re_list
+    def get_re(self):
+        return self._re
 
     def _map_info(self):
         marked_strings = self._info[Token.MARKED_TEXT_STRINGS]
@@ -21,14 +22,14 @@ class MapMarkedText:
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
             if len(esc_string) > 1 and esc_string[0] != '\\' and self._info[Token.REPEAT_INFO] != RepeatInfo.ONE:
-                self._re_list.extend(['(', esc_string, ')'])
+                self._re.extend(['(', esc_string, ')'])
             else:
-                self._re_list.append(esc_string)
+                self._re.append(esc_string)
         else:
-            self._re_list.append('({})'.format('|'.join(escaped_strings)))
+            self._re.append('({})'.format('|'.join(escaped_strings)))
 
         repeat_info = repeat_info_to_regex(self._info)
-        self._re_list.append(repeat_info)
+        self._re.append(repeat_info)
 
     @staticmethod
     def _escape_special_characters(marked_strings, target=TargetLanguage.JAVA):
