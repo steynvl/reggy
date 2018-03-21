@@ -1,4 +1,8 @@
 import json
+import re
+from collections import OrderedDict
+
+from regy.samples_and_semantics.tokens.basic_characters_info import BasicCharactersInfo
 from regy.samples_and_semantics.tokens.token import Token
 from regy.samples_and_semantics.tokens import MarkerType, MarkerTextInfo, RepeatInfo
 from regy.samples_and_semantics.utils.repeat_info_to_enum import repeat_info_to_enum
@@ -39,14 +43,6 @@ class Scanner:
     def _deserialize_samples(self):
         return json.loads(self.samples)
 
-    def _parse_general_regex_info(self, regex_info):
-
-        self._scanned_samples[Token.GENERAL_REGEX_INFO] = {
-            Token.TARGET_LANGUAGE : language_to_tok[regex_info['regexTarget']],
-            Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
-            Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]
-        }
-
     def _parse_samples(self):
         samples_info = self._deserialize_samples()
         self._parse_general_regex_info(samples_info['generalRegexInfo'])
@@ -80,10 +76,20 @@ class Scanner:
         self._insert_repeat_info(sample, info)
 
     def _parse_basic_characters(self, sample, info):
-        info[Token.LOWERCASE_LETTERS]          = sample['lowerCaseLetters']
-        info[Token.UPPERCASE_LETTERS]          = sample['upperCaseLetters']
-        info[Token.CONTAINS_DIGIT]             = sample['containsDigits']
-        info[Token.MATCH_ALL_EXCEPT_SPECIFIED] = sample['matchAllExceptSpecified']
+        marker_info = sample['markerInfo']
+
+        info[BasicCharactersInfo.CASE_INSENSITIVE]           = marker_info['caseInsensitive']
+        info[BasicCharactersInfo.LOWER_CASE_LETTERS]         = marker_info['lowerCaseLetters']
+        info[BasicCharactersInfo.UPPER_CASE_LETTERS]         = marker_info['upperCaseLetters']
+        info[BasicCharactersInfo.DIGITS]                     = marker_info['digits']
+        info[BasicCharactersInfo.PUNCTUATION_AND_SYMBOLS]    = marker_info['punctuationAndSymbols']
+        info[BasicCharactersInfo.MATCH_ALL_EXCEPT_SPECIFIED] = marker_info['matchAllExceptSpecified']
+        info[BasicCharactersInfo.WHITE_SPACE]                = marker_info['whiteSpace']
+        info[BasicCharactersInfo.LINE_BREAKS]                = marker_info['lineBreaks']
+
+        individual_chars = marker_info['individualCharacters']
+        distinct_chars = ''.join(OrderedDict.fromkeys(re.sub(r'\s', '', individual_chars)))
+        info[BasicCharactersInfo.INDIVIDUAL_CHARACTERS] = distinct_chars
 
         self._insert_repeat_info(sample, info)
 
@@ -100,3 +106,10 @@ class Scanner:
                 }
 
         self._insert_repeat_info(sample, info)
+
+    def _parse_general_regex_info(self, regex_info):
+        self._scanned_samples[Token.GENERAL_REGEX_INFO] = {
+            Token.TARGET_LANGUAGE : language_to_tok[regex_info['regexTarget']],
+            Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
+            Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]
+        }

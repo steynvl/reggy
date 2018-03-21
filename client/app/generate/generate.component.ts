@@ -200,7 +200,8 @@ export class GenerateComponent implements OnInit {
           punctuationAndSymbols  : false,
           matchAllExceptSpecified: false,
           whiteSpace             : false,
-          lineBreaks             : false
+          lineBreaks             : false,
+          individualCharacters   : ''
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.basicCharacters;
         break;

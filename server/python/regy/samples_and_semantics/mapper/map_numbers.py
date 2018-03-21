@@ -5,8 +5,9 @@ from regy.samples_and_semantics.tokens import Token
 
 class MapNumbers:
 
-    def __init__(self, info):
+    def __init__(self, info, target_lang):
         self._info = info
+        self_target_lang = target_lang
         self._re = deque()
         self._map_info()
 

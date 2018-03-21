@@ -1,13 +1,14 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples_and_semantics.tokens import RepeatInfo, Token, TargetLanguage
+from regy.samples_and_semantics.tokens import RepeatInfo, Token
 
 
 class MapMarkedText:
 
-    def __init__(self, info):
+    def __init__(self, info, target_lang):
         self._info = info
+        self._target_lang = target_lang
         self._re = deque()
         self._map_info()
 
@@ -31,8 +32,7 @@ class MapMarkedText:
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
 
-    @staticmethod
-    def _escape_special_characters(marked_strings, target=TargetLanguage.JAVA):
-        meta_chars = meta_characters[target]
+    def _escape_special_characters(self, marked_strings):
+        meta_chars = meta_characters[self._target_lang]
 
         return [''.join([meta_chars[c] if c in meta_chars else c for c in string]) for string in marked_strings]

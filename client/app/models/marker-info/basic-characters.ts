@@ -8,4 +8,5 @@ export class BasicCharacters {
   matchAllExceptSpecified: boolean;
   whiteSpace: boolean;
   lineBreaks: boolean;
+  individualCharacters: string;
 }
