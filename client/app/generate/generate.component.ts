@@ -193,10 +193,14 @@ export class GenerateComponent implements OnInit {
 
       case 'Basic characters':
         this.basicCharacters = {
-          lowerCaseLetters:        false,
-          upperCaseLetters:        false,
-          containsDigits:          false,
-          matchAllExceptSpecified: false
+          caseInsensitive        : false,
+          lowerCaseLetters       : false,
+          upperCaseLetters       : false,
+          digits                 : false,
+          punctuationAndSymbols  : false,
+          matchAllExceptSpecified: false,
+          whiteSpace             : false,
+          lineBreaks             : false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.basicCharacters;
         break;

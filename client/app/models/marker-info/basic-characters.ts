@@ -1,7 +1,11 @@
 
 export class BasicCharacters {
+  caseInsensitive: boolean;
   lowerCaseLetters: boolean;
   upperCaseLetters: boolean;
-  containsDigits: boolean;
+  digits: boolean;
+  punctuationAndSymbols: boolean;
   matchAllExceptSpecified: boolean;
+  whiteSpace: boolean;
+  lineBreaks: boolean;
 }

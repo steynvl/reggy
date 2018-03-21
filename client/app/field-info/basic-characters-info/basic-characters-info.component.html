@@ -1,5 +1,30 @@
 <div class="row">
 
+  <div class="col">
+
+    <div class="form-group">
+      <label for="individual-characters">Individual characters (optional):</label>
+      <input type="text" class="form-control"
+             id="individual-characters" placeholder="Add characters that should also be matched...">
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.caseInsensitive"
+             (change)="basicCharacters.caseInsensitive = !basicCharacters.caseInsensitive">
+      <label class="form-check-label">
+        Case insensitive
+      </label>
+    </div>
+  </div>
+
   <div class="col-md-4">
     <div class="form-check">
       <input class="form-check-input" type="checkbox"
@@ -22,13 +47,39 @@
     </div>
   </div>
 
+</div>
+
+<div class="row">
+
   <div class="col-md-4">
     <div class="form-check">
       <input class="form-check-input" type="checkbox"
-             [checked]="basicCharacters.containsDigits"
-             (change)="basicCharacters.containsDigits = !basicCharacters.containsDigits">
+             [checked]="basicCharacters.digits"
+             (change)="basicCharacters.digits = !basicCharacters.digits">
       <label class="form-check-label">
         Digits
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.punctuationAndSymbols"
+             (change)="basicCharacters.punctuationAndSymbols = !basicCharacters.punctuationAndSymbols">
+      <label class="form-check-label">
+        Punctuation and symbols
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.matchAllExceptSpecified"
+             (change)="basicCharacters.matchAllExceptSpecified = !basicCharacters.matchAllExceptSpecified">
+      <label class="form-check-label">
+        Match everything except specified text
       </label>
     </div>
   </div>
@@ -37,13 +88,24 @@
 
 <div class="row">
 
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-check">
       <input class="form-check-input" type="checkbox"
-             [checked]="basicCharacters.matchAllExceptSpecified"
-             (change)="basicCharacters.matchAllExceptSpecified = !basicCharacters.matchAllExceptSpecified">
+             [checked]="basicCharacters.whiteSpace"
+             (change)="basicCharacters.whiteSpace = !basicCharacters.whiteSpace">
       <label class="form-check-label">
-        Match everything except specified text
+        Whitespace
+      </label>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="basicCharacters.lineBreaks"
+             (change)="basicCharacters.lineBreaks = !basicCharacters.lineBreaks">
+      <label class="form-check-label">
+        Line breaks
       </label>
     </div>
   </div>
