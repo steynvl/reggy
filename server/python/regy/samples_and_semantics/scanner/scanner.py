@@ -100,9 +100,10 @@ class Scanner:
             if i != 'minus' and marker_info[i]:
                 info[Token.NUMBERS].append(number_to_enum_dict[i])
             else:
+                minus_info = marker_info['minus']
                 info[Token.MINUS_INFO] = {
-                    Token.INCLUDE_MINUS         : marker_info['minus']['minus'],
-                    Token.INCLUDE_OPTIONAL_MINUS: marker_info['minus']['optional']
+                    Token.INCLUDE_MINUS         : minus_info['minus'],
+                    Token.INCLUDE_OPTIONAL_MINUS: minus_info['optional']
                 }
 
         self._insert_repeat_info(sample, info)

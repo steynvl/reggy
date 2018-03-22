@@ -1,13 +1,13 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples_and_semantics.tokens import Token
+from regy.samples_and_semantics.tokens import Token, TargetLanguage
 
 
 class MapNumbers:
 
     def __init__(self, info, target_lang):
         self._info = info
-        self_target_lang = target_lang
+        self._target_lang = target_lang
         self._re = deque()
         self._map_info()
 
@@ -17,9 +17,20 @@ class MapNumbers:
     def _map_info(self):
         marker_info = self._info[Token.NUMBERS]
         if len(marker_info) == 10:
-            self._re.append('\\d')
+            if self._target_lang == TargetLanguage.JAVA:
+                self._re.append('\\\\d')
+            elif self._target_lang == TargetLanguage.PERL:
+                self._re.append('\\d')
+            elif self._target_lang == TargetLanguage.POSIX:
+                self._re.append('\\d')
         else:
             self._re.append(self._calculate_character_class(marker_info))
+
+        minus_info = self._info[Token.MINUS_INFO]
+        if minus_info[Token.INCLUDE_MINUS]:
+            self._re.appendleft('-')
+        elif minus_info[Token.INCLUDE_OPTIONAL_MINUS]:
+            self._re.appendleft('-?')
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
