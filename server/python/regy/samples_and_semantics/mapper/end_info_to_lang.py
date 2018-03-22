@@ -4,17 +4,23 @@ end_info_to_lang = {
 
     TargetLanguage.JAVA: {
         RegexEndInfo.ANYWHERE   : '',
+        RegexEndInfo.END_OF_TEXT: '\\\\z',
+        RegexEndInfo.END_OF_LINE: '$',
+        RegexEndInfo.END_OF_WORD: '\\\\b'
+    },
+
+    TargetLanguage.PERL: {
+        RegexEndInfo.ANYWHERE   : '',
         RegexEndInfo.END_OF_TEXT: '\\z',
         RegexEndInfo.END_OF_LINE: '$',
         RegexEndInfo.END_OF_WORD: '\\b'
     },
 
-    TargetLanguage.PERL: {
-
-    },
-
     TargetLanguage.POSIX: {
-
+        RegexEndInfo.ANYWHERE   : '',
+        RegexEndInfo.END_OF_TEXT: '\\z',
+        RegexEndInfo.END_OF_LINE: '$',
+        RegexEndInfo.END_OF_WORD: '\\b'
     }
 
 }
