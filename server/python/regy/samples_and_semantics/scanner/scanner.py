@@ -40,16 +40,12 @@ class Scanner:
             info[Token.REPEAT_INFO] = repeat_info_to_enum[repeat_info]
 
 
-    def _deserialize_samples(self):
-        return json.loads(self.samples)
-
     def _parse_samples(self):
-        samples_info = self._deserialize_samples()
-        self._parse_general_regex_info(samples_info['generalRegexInfo'])
+        self._parse_general_regex_info(self.samples['generalRegexInfo'])
 
         self._scanned_samples[Token.SAMPLE_STRINGS_INFO] = []
 
-        for sample in samples_info['sampleStringsInfo']:
+        for sample in self.samples['sampleStringsInfo']:
             info = {}
             if sample['markerType'] == 'Marked text':
                 info[Token.MARKER_TYPE] = MarkerType.MARKED_TEXT

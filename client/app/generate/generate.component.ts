@@ -88,7 +88,8 @@ export class GenerateComponent implements OnInit {
 
     return {
       sampleStringsInfo: sampleStringsInfo,
-      generalRegexInfo : this.generalRegexInfo
+      generalRegexInfo : this.generalRegexInfo,
+      generateMethod   : 'samplesAndSemantics'
     };
   }
 
