@@ -16,7 +16,6 @@ export class JavaComponent implements OnInit {
 
   ngOnInit() {
     this.options = Object.keys(this.examples);
-    this.regex = this.regex.trim();
   }
 
   changed() {

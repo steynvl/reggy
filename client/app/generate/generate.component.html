@@ -76,6 +76,7 @@
               <option>Marked text</option>
               <option>Basic characters</option>
               <option>Numbers</option>
+              <option>Control characters</option>
             </select>
           </div>
 
@@ -119,6 +120,11 @@
             *ngIf="markedElement.fieldType === 'Numbers'"
             [numbers]="numbers">
           </app-numbers-info>
+
+          <app-control-characters-info
+            *ngIf="markedElement.fieldType === 'Control characters'"
+            [controlCharacters]="controlCharacters">
+          </app-control-characters-info>
 
         </div>
 

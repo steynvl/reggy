@@ -9,6 +9,7 @@ import { Numbers } from '../models/marker-info/numbers';
 import { SampleStringsInfo } from '../models/sample-strings-info';
 import { GeneralRegexInfo } from '../models/general-regex-info';
 import { Payload } from '../models/payload';
+import { ControlCharacters } from '../models/marker-info/control-characters';
 
 declare var jQuery: any;
 
@@ -27,6 +28,7 @@ export class GenerateComponent implements OnInit {
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
   numbers: Numbers;
+  controlCharacters: ControlCharacters;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -99,7 +101,7 @@ export class GenerateComponent implements OnInit {
     const payload = JSON.stringify(this.constructPayload());
 
     this.generateService.generateRegex(payload).subscribe(
-      data => this.generatedRegex = data,
+      data => this.generatedRegex = data.trim(),
       error => console.log(error)
     );
   }
@@ -130,6 +132,7 @@ export class GenerateComponent implements OnInit {
         this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
         this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
         this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+        this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
       }
 
     } else {
@@ -225,6 +228,11 @@ export class GenerateComponent implements OnInit {
           }
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.numbers;
+        break;
+
+      case 'Control characters':
+        this.controlCharacters = new ControlCharacters();
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.controlCharacters;
         break;
 
       default:

@@ -1,0 +1,399 @@
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.nul"
+             (change)="controlCharacters.nul = !controlCharacters.nul">
+      <label class="form-check-label">
+        00 Null
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.backspace"
+             (change)="controlCharacters.backspace = !controlCharacters.backspace">
+      <label class="form-check-label">
+        08 Backspace
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.dataLinkEscape"
+             (change)="controlCharacters.dataLinkEscape = !controlCharacters.dataLinkEscape">
+      <label class="form-check-label">
+        10 Data link escape
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.cancel"
+             (change)="controlCharacters.cancel = !controlCharacters.cancel">
+      <label class="form-check-label">
+        18 Cancel
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.startOfHeading"
+             (change)="controlCharacters.startOfHeading = !controlCharacters.startOfHeading">
+      <label class="form-check-label">
+        01 Start of heading
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.horizontalTab"
+             (change)="controlCharacters.horizontalTab = !controlCharacters.horizontalTab">
+      <label class="form-check-label">
+        09 Horizontal tab
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.deviceControlOne"
+             (change)="controlCharacters.deviceControlOne = !controlCharacters.deviceControlOne">
+      <label class="form-check-label">
+        11 Device control one
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.endOfMedium"
+             (change)="controlCharacters.endOfMedium = !controlCharacters.endOfMedium">
+      <label class="form-check-label">
+        19 End of medium
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.startOfText"
+             (change)="controlCharacters.startOfText = !controlCharacters.startOfText">
+      <label class="form-check-label">
+        02 Start of text
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.newLine"
+             (change)="controlCharacters.newLine = !controlCharacters.newLine">
+      <label class="form-check-label">
+        0A New line feed
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.deviceControlTwo"
+             (change)="controlCharacters.deviceControlTwo = !controlCharacters.deviceControlTwo">
+      <label class="form-check-label">
+        12 Device control two
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.substitute"
+             (change)="controlCharacters.substitute = !controlCharacters.substitute">
+      <label class="form-check-label">
+        1A Substitute
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.endOfText"
+             (change)="controlCharacters.endOfText = !controlCharacters.endOfText">
+      <label class="form-check-label">
+        03 End of text
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.verticalTab"
+             (change)="controlCharacters.verticalTab = !controlCharacters.verticalTab">
+      <label class="form-check-label">
+        0B Vertical tab
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.deviceControlThree"
+             (change)="controlCharacters.deviceControlThree = !controlCharacters.deviceControlThree">
+      <label class="form-check-label">
+        13 Device control three
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.escape"
+             (change)="controlCharacters.escape = !controlCharacters.escape">
+      <label class="form-check-label">
+        1B Escape
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.endOfTransmission"
+             (change)="controlCharacters.endOfTransmission = !controlCharacters.endOfTransmission">
+      <label class="form-check-label">
+        04 End of transmission
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.formFeed"
+             (change)="controlCharacters.formFeed = !controlCharacters.formFeed">
+      <label class="form-check-label">
+        0C Form feed (FF)
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.deviceControlFour"
+             (change)="controlCharacters.deviceControlFour = !controlCharacters.deviceControlFour">
+      <label class="form-check-label">
+        14 Device control four
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.fileSeparator"
+             (change)="controlCharacters.fileSeparator = !controlCharacters.fileSeparator">
+      <label class="form-check-label">
+        1C File separator
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.enquiry"
+             (change)="controlCharacters.enquiry = !controlCharacters.enquiry">
+      <label class="form-check-label">
+        05 Enquiry
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.carriageReturn"
+             (change)="controlCharacters.carriageReturn = !controlCharacters.carriageReturn">
+      <label class="form-check-label">
+        0D Carriage return (CR)
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.negativeAcknowledge"
+             (change)="controlCharacters.negativeAcknowledge = !controlCharacters.negativeAcknowledge">
+      <label class="form-check-label">
+        15 Negative acknowledge
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.groupSeparator"
+             (change)="controlCharacters.groupSeparator = !controlCharacters.groupSeparator">
+      <label class="form-check-label">
+        1D Group Separator
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.acknowledge"
+             (change)="controlCharacters.acknowledge = !controlCharacters.acknowledge">
+      <label class="form-check-label">
+        06 Acknowledge
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.shiftOut"
+             (change)="controlCharacters.shiftOut = !controlCharacters.shiftOut">
+      <label class="form-check-label">
+        0E Shift out
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.synchronousIdle"
+             (change)="controlCharacters.synchronousIdle = !controlCharacters.synchronousIdle">
+      <label class="form-check-label">
+        16 Synchronous idle
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.recordSeparator"
+             (change)="controlCharacters.recordSeparator = !controlCharacters.recordSeparator">
+      <label class="form-check-label">
+        1E Record separator
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.bell"
+             (change)="controlCharacters.bell = !controlCharacters.bell">
+      <label class="form-check-label">
+        07 Bell
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.shiftIn"
+             (change)="controlCharacters.shiftIn = !controlCharacters.shiftIn">
+      <label class="form-check-label">
+        0F Shift in
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.endOfTransBlock"
+             (change)="controlCharacters.endOfTransBlock = !controlCharacters.endOfTransBlock">
+      <label class="form-check-label">
+        17 End of trans block
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.unitSeparator"
+             (change)="controlCharacters.unitSeparator = !controlCharacters.unitSeparator">
+      <label class="form-check-label">
+        1F Unit separator
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="controlCharacters.matchAllExceptSelectedOnes"
+             (change)="markedText.matchAllExceptSpecified = !markedText.matchAllExceptSpecified">
+      <label class="form-check-label">
+        Match all characters except the selected ones
+      </label>
+    </div>
+  </div>
+
+</div>
