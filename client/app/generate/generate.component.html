@@ -39,137 +39,146 @@
     </div>
   </div>
 
-  <hr *ngIf="markedElements.length > 0" />
-
   <div *ngFor="let markedElement of markedElements; let idx = index">
 
-    <div class="row">
-      <div class="col field-specific" align="center">
-        <h3><strong>{{markedElement.fieldType}}</strong></h3>
-        <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
-      </div>
-    </div>
+    <div class="card">
 
-
-    <div class="row">
-
-      <div class="col-md-2">
-        <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
-                [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
-
-        <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
-          <i class="fa fa-arrow-up"></i>
-        </button>
-        <button *ngIf="idx !== markedElements.length - 1" type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
-          <i class="fa fa-arrow-down"></i>
-        </button>
-      </div>
-
-      <div class="col-md-5">
-        <label>Field info:</label>
-        <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
-
-          <option>Marked text</option>
-          <option>Basic characters</option>
-          <option>Numbers</option>
-        </select>
-      </div>
-
-      <div class="col-md-5">
-        <label>Repeat:</label>
-
-        <select class="form-control" style="font-family: 'FontAwesome', Arial;"
-                (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
-
-          <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
-
-        </select>
-
-        <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
-          <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
-          <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
-        </div>
-
-        <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
-          <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-11">
+            <h4 class="text-center"><strong>{{markedElement.fieldType}}</strong></h4>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
+          </div>
         </div>
 
       </div>
+      <div class="card-body">
+        <div class="row">
 
+          <div class="col-md-2">
+            <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
+                    [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+
+            <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
+              <i class="fa fa-arrow-up"></i>
+            </button>
+            <button *ngIf="idx !== markedElements.length - 1" type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
+              <i class="fa fa-arrow-down"></i>
+            </button>
+          </div>
+
+          <div class="col-md-5">
+            <label>Field info:</label>
+            <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
+
+              <option>Marked text</option>
+              <option>Basic characters</option>
+              <option>Numbers</option>
+            </select>
+          </div>
+
+          <div class="col-md-5">
+            <label>Repeat:</label>
+
+            <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                    (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
+
+              <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
+
+            </select>
+
+            <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
+              <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
+              <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
+            </div>
+
+            <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
+              <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="info-pad" *ngIf="selectedMarkerIdx == idx">
+
+          <app-marked-text-info
+            *ngIf="markedElement.fieldType === 'Marked text'"
+            [markedText]="markedText"
+            [possibleMatches]="markedElement.markedTextInfo" >
+          </app-marked-text-info>
+
+          <app-basic-characters-info
+            *ngIf="markedElement.fieldType === 'Basic characters'"
+            [basicCharacters]="basicCharacters">
+          </app-basic-characters-info>
+
+          <app-numbers-info
+            *ngIf="markedElement.fieldType === 'Numbers'"
+            [numbers]="numbers">
+          </app-numbers-info>
+
+        </div>
+
+      </div>
     </div>
 
-    <div class="info-pad" *ngIf="selectedMarkerIdx == idx">
-
-      <app-marked-text-info
-        *ngIf="markedElement.fieldType === 'Marked text'"
-        [markedText]="markedText"
-        [possibleMatches]="markedElement.markedTextInfo" >
-      </app-marked-text-info>
-
-      <app-basic-characters-info
-        *ngIf="markedElement.fieldType === 'Basic characters'"
-        [basicCharacters]="basicCharacters">
-      </app-basic-characters-info>
-
-      <app-numbers-info
-        *ngIf="markedElement.fieldType === 'Numbers'"
-        [numbers]="numbers">
-      </app-numbers-info>
-
-
-    </div>
-
-    <hr />
+    <br />
 
   </div>
 
   <div *ngIf="markedElements.length > 0">
 
-    <div class="col field-specific" align="center">
-      <h3><strong>General regular expression information</strong></h3>
-    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="text-center"><strong>General regular expression information</strong></h4>
+      </div>
+      <div class="card-body">
+        <div class="row pad-down">
 
-    <div class="row pad-down">
+          <div class="col-sm-4">
 
-      <div class="col-sm-4">
+            <div class="form-group">
+              <label for="begin-regex-at">Start regex match at:</label>
+              <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+                <option>Anywhere</option>
+                <option>Start of text</option>
+                <option>Start of line</option>
+                <option>Start of word</option>
+                <option>Start of attempt</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label for="begin-regex-at">Start regex match at:</label>
-          <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
-            <option>Anywhere</option>
-            <option>Start of text</option>
-            <option>Start of line</option>
-            <option>Start of word</option>
-            <option>Start of attempt</option>
-          </select>
+          <div class="col-sm-4">
+
+            <div class="form-group">
+              <label for="end-regex-at">End regex match at:</label>
+              <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+                <option>Anywhere</option>
+                <option>End of text</option>
+                <option>End of line</option>
+                <option>End of word</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+
+            <div class="form-group">
+              <label for="what-standard">Target language:</label>
+              <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+                <option>Java</option>
+                <option>Perl</option>
+                <option>POSIX</option>
+              </select>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <div class="col-sm-4">
-
-        <div class="form-group">
-          <label for="end-regex-at">End regex match at:</label>
-          <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
-            <option>Anywhere</option>
-            <option>End of text</option>
-            <option>End of line</option>
-            <option>End of word</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-
-        <div class="form-group">
-          <label for="what-standard">Target language:</label>
-          <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
-            <option>Java</option>
-            <option>Perl</option>
-            <option>POSIX</option>
-          </select>
-        </div>
-      </div>
-
     </div>
 
   </div>
