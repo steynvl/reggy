@@ -2,10 +2,10 @@ import json
 import re
 from collections import OrderedDict
 
-from regy.samples_and_semantics.tokens.basic_characters_info import BasicCharactersInfo
-from regy.samples_and_semantics.tokens.control_characters_info import control_char_to_token, control_chars
+from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters
+from regy.samples_and_semantics.tokens.control_characters import control_char_to_token, control_chars
 from regy.samples_and_semantics.tokens.token import Token
-from regy.samples_and_semantics.tokens import MarkerType, MarkerTextInfo, RepeatInfo
+from regy.samples_and_semantics.tokens import MarkerType, MarkedText, RepeatInfo
 from regy.samples_and_semantics.utils.repeat_info_to_enum import repeat_info_to_enum
 from regy.samples_and_semantics.utils.number_to_enum import number_to_enum_dict
 from regy.samples_and_semantics.utils.language_to_tok import language_to_tok
@@ -52,27 +52,27 @@ class Scanner:
 
         marker_info = sample['markerInfo']
         if marker_info['caseInsensitive']:
-            info[Token.MARKER_INFO].append(MarkerTextInfo.CASE_INSENSITIVE)
+            info[Token.MARKER_INFO].append(MarkedText.CASE_INSENSITIVE)
         else:
-            info[Token.MARKER_INFO].append(MarkerTextInfo.CASE_SENSITIVE)
+            info[Token.MARKER_INFO].append(MarkedText.CASE_SENSITIVE)
 
         self._insert_repeat_info(sample, info)
 
     def _parse_basic_characters(self, sample, info):
         marker_info = sample['markerInfo']
 
-        info[BasicCharactersInfo.CASE_INSENSITIVE]           = marker_info['caseInsensitive']
-        info[BasicCharactersInfo.LOWER_CASE_LETTERS]         = marker_info['lowerCaseLetters']
-        info[BasicCharactersInfo.UPPER_CASE_LETTERS]         = marker_info['upperCaseLetters']
-        info[BasicCharactersInfo.DIGITS]                     = marker_info['digits']
-        info[BasicCharactersInfo.PUNCTUATION_AND_SYMBOLS]    = marker_info['punctuationAndSymbols']
-        info[BasicCharactersInfo.MATCH_ALL_EXCEPT_SPECIFIED] = marker_info['matchAllExceptSpecified']
-        info[BasicCharactersInfo.WHITE_SPACE]                = marker_info['whiteSpace']
-        info[BasicCharactersInfo.LINE_BREAKS]                = marker_info['lineBreaks']
+        info[BasicCharacters.CASE_INSENSITIVE]           = marker_info['caseInsensitive']
+        info[BasicCharacters.LOWER_CASE_LETTERS]         = marker_info['lowerCaseLetters']
+        info[BasicCharacters.UPPER_CASE_LETTERS]         = marker_info['upperCaseLetters']
+        info[BasicCharacters.DIGITS]                     = marker_info['digits']
+        info[BasicCharacters.PUNCTUATION_AND_SYMBOLS]    = marker_info['punctuationAndSymbols']
+        info[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED] = marker_info['matchAllExceptSpecified']
+        info[BasicCharacters.WHITE_SPACE]                = marker_info['whiteSpace']
+        info[BasicCharacters.LINE_BREAKS]                = marker_info['lineBreaks']
 
         individual_chars = marker_info['individualCharacters']
         distinct_chars = ''.join(OrderedDict.fromkeys(re.sub(r'\s', '', individual_chars)))
-        info[BasicCharactersInfo.INDIVIDUAL_CHARACTERS] = distinct_chars
+        info[BasicCharacters.INDIVIDUAL_CHARACTERS] = distinct_chars
 
         self._insert_repeat_info(sample, info)
 

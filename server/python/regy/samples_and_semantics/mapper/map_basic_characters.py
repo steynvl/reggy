@@ -1,13 +1,6 @@
 from collections import deque
-from regy.samples_and_semantics.mapper.basic_characters_to_re import basic_characters_to_re
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
-from regy.samples_and_semantics.tokens.basic_characters_info import BasicCharactersInfo
-
-char_keys = [
-    BasicCharactersInfo.LOWER_CASE_LETTERS, BasicCharactersInfo.UPPER_CASE_LETTERS,
-    BasicCharactersInfo.DIGITS, BasicCharactersInfo.PUNCTUATION_AND_SYMBOLS,
-    BasicCharactersInfo.WHITE_SPACE, BasicCharactersInfo.LINE_BREAKS
-]
+from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters, char_keys, basic_characters_to_re
 
 
 class MapBasicCharacters:
@@ -22,7 +15,6 @@ class MapBasicCharacters:
         return ''.join(self._re)
 
     def _map_info(self):
-        global char_keys
         found = 0
 
         basic_char_to_re = basic_characters_to_re[self._target_lang]
@@ -31,15 +23,15 @@ class MapBasicCharacters:
                 found += 1
                 self._re.append(basic_char_to_re[char_key])
 
-        individual_chars = self._info[BasicCharactersInfo.INDIVIDUAL_CHARACTERS]
+        individual_chars = self._info[BasicCharacters.INDIVIDUAL_CHARACTERS]
         self._re.append(self._escape_special_characters(individual_chars))
 
         enclose = False
-        if self._info[BasicCharactersInfo.MATCH_ALL_EXCEPT_SPECIFIED] and found > 0:
-            self._re.appendleft(basic_char_to_re[BasicCharactersInfo.MATCH_ALL_EXCEPT_SPECIFIED])
+        if self._info[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED] and found > 0:
+            self._re.appendleft(basic_char_to_re[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED])
             enclose = True
-        elif found == 1 and (self._info[BasicCharactersInfo.UPPER_CASE_LETTERS]
-                                or self._info[BasicCharactersInfo.LOWER_CASE_LETTERS]):
+        elif found == 1 and (self._info[BasicCharacters.UPPER_CASE_LETTERS]
+                                or self._info[BasicCharacters.LOWER_CASE_LETTERS]):
             enclose = True
         elif found > 1:
             enclose = True

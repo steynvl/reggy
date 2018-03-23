@@ -1,7 +1,7 @@
 from collections import deque
 
 from regy.samples_and_semantics.tokens import Token
-from regy.samples_and_semantics.tokens.control_characters_info import control_char_to_re
+from regy.samples_and_semantics.tokens.control_characters import control_char_to_re
 
 
 class MapControlCharacters:
