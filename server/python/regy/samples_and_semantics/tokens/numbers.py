@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class NumbersInfo(Enum):
+class Numbers(Enum):
     ZERO  = 0
     ONE   = 1
     TWO   = 2

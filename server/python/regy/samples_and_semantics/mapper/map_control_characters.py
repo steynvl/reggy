@@ -1,5 +1,6 @@
 from collections import deque
 
+from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import Token
 from regy.samples_and_semantics.tokens.control_characters import control_char_to_re
 
@@ -24,7 +25,32 @@ class MapControlCharacters:
         elif len(control_chars) == 1:
             self._re.append(char_to_re[control_chars[0]])
         else:
-            # TODO find ranges (i.e \x09-\x1c)
-            self._re.extend([char_to_re[i] for i in control_chars])
+            ranges = []
+
+            for i in range(len(control_chars)):
+                if i == 0:
+                    ranges.append([control_chars[0], None])
+                else:
+                    index = 0 if ranges[-1][1] is None else 1
+                    if control_chars[i].value - ranges[-1][index].value == 1:
+                        ranges[-1][1] = control_chars[i]
+                    else:
+                        ranges.append([control_chars[i], None])
+
+            for r in ranges:
+
+                if r[1] is None:
+                    self._re.append(char_to_re[r[0]])
+                elif r[1].value - r[0].value == 1:
+                    self._re.append(char_to_re[r[0]])
+                    self._re.append(char_to_re[r[1]])
+                else:
+                    self._re.append(char_to_re[r[0]])
+                    self._re.append('-')
+                    self._re.append(char_to_re[r[1]])
+
             self._re.append(']')
             self._re.appendleft('[')
+
+        repeat_info = repeat_info_to_regex(self._info)
+        self._re.append(repeat_info)

@@ -1,14 +1,14 @@
-from regy.samples_and_semantics.tokens import NumbersInfo
+from regy.samples_and_semantics.tokens import Numbers
 
 number_to_enum_dict = {
-    "zero" : NumbersInfo.ZERO,
-    "one"  : NumbersInfo.ONE,
-    "two"  : NumbersInfo.TWO,
-    "three": NumbersInfo.THREE,
-    "four" : NumbersInfo.FOUR,
-    "five" : NumbersInfo.FIVE,
-    "six"  : NumbersInfo.SIX,
-    "seven": NumbersInfo.SEVEN,
-    "eight": NumbersInfo.EIGHT,
-    "nine" : NumbersInfo.NINE,
+    "zero" : Numbers.ZERO,
+    "one"  : Numbers.ONE,
+    "two"  : Numbers.TWO,
+    "three": Numbers.THREE,
+    "four" : Numbers.FOUR,
+    "five" : Numbers.FIVE,
+    "six"  : Numbers.SIX,
+    "seven": Numbers.SEVEN,
+    "eight": Numbers.EIGHT,
+    "nine" : Numbers.NINE,
 }

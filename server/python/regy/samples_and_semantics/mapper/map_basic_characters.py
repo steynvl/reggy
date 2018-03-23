@@ -1,5 +1,6 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
+from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters, char_keys, basic_characters_to_re
 
 
@@ -39,6 +40,9 @@ class MapBasicCharacters:
         if enclose:
             self._re.appendleft('[')
             self._re.append(']')
+
+        repeat_info = repeat_info_to_regex(self._info)
+        self._re.append(repeat_info)
 
     def _escape_special_characters(self, individual_chars):
         meta_chars = meta_characters[self._target_lang]
