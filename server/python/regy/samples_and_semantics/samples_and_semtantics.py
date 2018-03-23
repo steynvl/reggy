@@ -25,8 +25,8 @@ class SamplesAndSemantics:
             marker_type = scanned_sample[Token.MARKER_TYPE]
             if marker_type == MarkerType.MARKED_TEXT:
                 self._re.extend(mapper.MapMarkedText(scanned_sample, target_lang).get_re())
-            elif marker_type == MarkerType.NUMBERS:
-                self._re.extend(mapper.MapNumbers(scanned_sample, target_lang).get_re())
+            elif marker_type == MarkerType.DIGITS:
+                self._re.extend(mapper.MapDigits(scanned_sample, target_lang).get_re())
             elif marker_type == MarkerType.BASIC_CHARACTERS:
                 self._re.extend(mapper.MapBasicCharacters(scanned_sample, target_lang).get_re())
             elif marker_type == MarkerType.CONTROL_CHARACTERS:

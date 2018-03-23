@@ -37,9 +37,9 @@ class Scanner:
             elif marker_type == 'Basic characters':
                 info[Token.MARKER_TYPE] = MarkerType.BASIC_CHARACTERS
                 self._parse_basic_characters(sample, info)
-            elif marker_type == 'Numbers':
-                info[Token.MARKER_TYPE] = MarkerType.NUMBERS
-                self._parse_numbers(sample, info)
+            elif marker_type == 'Digits':
+                info[Token.MARKER_TYPE] = MarkerType.DIGITS
+                self._parse_digits(sample, info)
             elif marker_type == 'Control characters':
                 info[Token.MARKER_TYPE] = MarkerType.CONTROL_CHARACTERS
                 self._parse_control_characters(sample, info)
@@ -76,12 +76,12 @@ class Scanner:
 
         self._insert_repeat_info(sample, info)
 
-    def _parse_numbers(self, sample, info):
+    def _parse_digits(self, sample, info):
         marker_info = sample['markerInfo']
-        info[Token.NUMBERS] = []
+        info[Token.DIGITS] = []
         for i in marker_info:
             if i != 'minus' and marker_info[i]:
-                info[Token.NUMBERS].append(number_to_enum_dict[i])
+                info[Token.DIGITS].append(number_to_enum_dict[i])
             else:
                 minus_info = marker_info['minus']
                 info[Token.MINUS_INFO] = {

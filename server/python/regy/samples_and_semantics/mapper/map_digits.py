@@ -3,7 +3,7 @@ from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import Token, TargetLanguage
 
 
-class MapNumbers:
+class MapDigits:
 
     def __init__(self, info, target_lang):
         self._info = info
@@ -15,7 +15,7 @@ class MapNumbers:
         return self._re
 
     def _map_info(self):
-        marker_info = self._info[Token.NUMBERS]
+        marker_info = self._info[Token.DIGITS]
         if len(marker_info) == 10:
             if self._target_lang == TargetLanguage.JAVA:
                 self._re.append('\\\\d')

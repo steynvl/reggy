@@ -5,7 +5,7 @@ import { GenerateService } from '../services/generate.service';
 import { MarkedText } from '../models/marker-info/marked-text';
 import { BasicCharacters } from '../models/marker-info/basic-characters';
 import { ToastComponent } from '../shared/toast/toast.component';
-import { Numbers } from '../models/marker-info/numbers';
+import { Digits } from '../models/marker-info/digits';
 import { SampleStringsInfo } from '../models/sample-strings-info';
 import { GeneralRegexInfo } from '../models/general-regex-info';
 import { Payload } from '../models/payload';
@@ -27,7 +27,7 @@ export class GenerateComponent implements OnInit {
   selectedMarkerIdx = -1;
   markedText: MarkedText;
   basicCharacters: BasicCharacters;
-  numbers: Numbers;
+  digits: Digits;
   controlCharacters: ControlCharacters;
 
   userHighlightStart: string;
@@ -131,7 +131,7 @@ export class GenerateComponent implements OnInit {
         this.selectedText = '';
         this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
         this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
-        this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+        this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
         this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
       }
 
@@ -210,8 +210,8 @@ export class GenerateComponent implements OnInit {
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.basicCharacters;
         break;
 
-      case 'Numbers':
-        this.numbers = {
+      case 'Digits':
+        this.digits = {
           zero:  true,
           one:   true,
           two:   true,
@@ -227,7 +227,7 @@ export class GenerateComponent implements OnInit {
             optional: false
           }
         };
-        this.markedElements[this.selectedMarkerIdx].markerInfo = this.numbers;
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.digits;
         break;
 
       case 'Control characters':
@@ -250,7 +250,7 @@ export class GenerateComponent implements OnInit {
 
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
-    this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+    this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
     this.highlightTextArea();
   }
 

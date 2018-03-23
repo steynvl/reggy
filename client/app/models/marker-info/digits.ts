@@ -1,6 +1,6 @@
 import { Minus } from './minus';
 
-export class Numbers {
+export class Digits {
   zero: boolean;
   one: boolean;
   two: boolean;
