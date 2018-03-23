@@ -1,7 +1,7 @@
 import BaseCtrl from './base';
 import * as child_process from 'child_process';
 
-export default class GenerateCtrl extends BaseCtrl {
+export default class GenerateSamplesCtrl extends BaseCtrl {
 
   model = null;
 

@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from '../models/marker';
-import { colours } from '../colours/colours';
-import { GenerateService } from '../services/generate.service';
-import { MarkedText } from '../models/marker-info/marked-text';
-import { BasicCharacters } from '../models/marker-info/basic-characters';
-import { ToastComponent } from '../shared/toast/toast.component';
-import { Digits } from '../models/marker-info/digits';
-import { SampleStringsInfo } from '../models/sample-strings-info';
-import { GeneralRegexInfo } from '../models/general-regex-info';
-import { Payload } from '../models/payload';
-import { ControlCharacters } from '../models/marker-info/control-characters';
-import { UnicodeCharacters } from '../models/marker-info/unicode-characters';
+import { Marker } from '../../models/marker';
+import { colours } from '../../colours/colours';
+import { GenerateSamplesService } from '../../services/generate.samples.service';
+import { MarkedText } from '../../models/marker-info/marked-text';
+import { BasicCharacters } from '../../models/marker-info/basic-characters';
+import { ToastComponent } from '../../shared/toast/toast.component';
+import { Digits } from '../../models/marker-info/digits';
+import { SampleStringsInfo } from '../../models/sample-strings-info';
+import { GeneralRegexInfo } from '../../models/general-regex-info';
+import { Payload } from '../../models/payload';
+import { ControlCharacters } from '../../models/marker-info/control-characters';
+import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-generate',
-  templateUrl: './generate.component.html',
-  styleUrls: ['./generate.component.css']
+  selector: 'app-generate-samples',
+  templateUrl: './generate.samples.component.html',
+  styleUrls: ['./generate.samples.component.css']
 })
-export class GenerateComponent implements OnInit {
+export class GenerateSamplesComponent implements OnInit {
 
   textArea = '';
   selectedText = '';
@@ -37,7 +37,7 @@ export class GenerateComponent implements OnInit {
 
   generalRegexInfo: GeneralRegexInfo;
 
-  constructor(private generateService: GenerateService,
+  constructor(private generateService: GenerateSamplesService,
               public toast: ToastComponent) {
   }
 

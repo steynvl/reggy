@@ -5,8 +5,8 @@ import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
-import { GenerateComponent } from './generate/generate.component';
-import { GenerateService } from './services/generate.service';
+import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
+import { GenerateSamplesService } from './services/generate.samples.service';
 
 import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
@@ -30,7 +30,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     AboutComponent,
-    GenerateComponent,
+    GenerateSamplesComponent,
     MarkedTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
@@ -54,7 +54,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [GenerateService],
+  providers: [GenerateSamplesService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

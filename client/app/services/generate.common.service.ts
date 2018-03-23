@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class GenerateService {
+export class GenerateCommonService {
 
   constructor(private http: HttpClient) { }
 
@@ -12,7 +12,7 @@ export class GenerateService {
     const httpHeaders = new HttpHeaders()
       .set('Content-Type', 'application/json');
 
-    return this.http.post<string>('api/generate', {
+    return this.http.post<string>('api/generate/common', {
       headers: httpHeaders,
       params: sampleStrings
     });
