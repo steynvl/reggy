@@ -389,7 +389,7 @@
     <div class="form-check">
       <input class="form-check-input" type="checkbox"
              [checked]="controlCharacters.matchAllExceptSelectedOnes"
-             (change)="markedText.matchAllExceptSpecified = !markedText.matchAllExceptSpecified">
+             (change)="controlCharacters.matchAllExceptSelectedOnes = !controlCharacters.matchAllExceptSelectedOnes">
       <label class="form-check-label">
         Match all characters except the selected ones
       </label>
