@@ -3,7 +3,7 @@ from enum import Enum
 
 class Token(Enum):
     GENERAL_REGEX_INFO         = 1
-    TARGET_LANGUAGE            = 2
+    TARGET                     = 2
     REGEX_START_INFO           = 3
     REGEX_END_INFO             = 4
 
@@ -32,3 +32,5 @@ class Token(Enum):
     ESCAPED_STRINGS            = 21
 
     CONTROL_CHARACTERS         = 22
+
+    UNICODE_CHARACTERS         = 23

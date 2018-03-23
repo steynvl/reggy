@@ -3,6 +3,7 @@ import { MarkedText } from './marker-info/marked-text';
 import { Digits } from './marker-info/digits';
 import { RepeatInfo } from './marker-info/repeat-info';
 import { ControlCharacters } from './marker-info/control-characters';
+import { UnicodeCharacters } from './marker-info/unicode-characters';
 
 export class SampleStringsInfo {
 
@@ -13,7 +14,7 @@ export class SampleStringsInfo {
   markedStrings: Array<string>;
 
   /* semantical information about the marker  */
-  markerInfo: MarkedText | BasicCharacters | Digits | ControlCharacters;
+  markerInfo: MarkedText | BasicCharacters | Digits | ControlCharacters | UnicodeCharacters;
 
   /* tells us how many times the marker needs to be repeated */
   repeatInfo: RepeatInfo;

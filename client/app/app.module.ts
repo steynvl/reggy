@@ -12,6 +12,7 @@ import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-te
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
 import { DigitsInfoComponent } from './field-info/digits-info/digits-info.component';
 import { ControlCharactersInfoComponent } from './field-info/control-characters-info/control-characters-info.component';
+import { UnicodeCharactersInfoComponent } from './field-info/unicode-characters-info/unicode-characters-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -34,6 +35,7 @@ export function tokenGetter() {
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
     ControlCharactersInfoComponent,
+    UnicodeCharactersInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

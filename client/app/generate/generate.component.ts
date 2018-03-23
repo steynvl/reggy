@@ -10,6 +10,7 @@ import { SampleStringsInfo } from '../models/sample-strings-info';
 import { GeneralRegexInfo } from '../models/general-regex-info';
 import { Payload } from '../models/payload';
 import { ControlCharacters } from '../models/marker-info/control-characters';
+import { UnicodeCharacters } from '../models/marker-info/unicode-characters';
 
 declare var jQuery: any;
 
@@ -29,6 +30,7 @@ export class GenerateComponent implements OnInit {
   basicCharacters: BasicCharacters;
   digits: Digits;
   controlCharacters: ControlCharacters;
+  unicodeCharacters: UnicodeCharacters;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -133,6 +135,7 @@ export class GenerateComponent implements OnInit {
         this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
         this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
         this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
+        this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
       }
 
     } else {
@@ -235,6 +238,11 @@ export class GenerateComponent implements OnInit {
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.controlCharacters;
         break;
 
+      case 'Unicode characters':
+        this.unicodeCharacters = new UnicodeCharacters();
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.unicodeCharacters;
+        break;
+
       default:
         break;
     }
@@ -251,6 +259,8 @@ export class GenerateComponent implements OnInit {
     this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
     this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
+    this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
+    this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
     this.highlightTextArea();
   }
 

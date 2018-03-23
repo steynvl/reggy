@@ -1,4 +1,3 @@
-import json
 import re
 from collections import OrderedDict
 
@@ -6,6 +5,7 @@ from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters
 from regy.samples_and_semantics.tokens.control_characters import control_char_to_token, control_chars
 from regy.samples_and_semantics.tokens.token import Token
 from regy.samples_and_semantics.tokens import MarkerType, MarkedText, RepeatInfo
+from regy.samples_and_semantics.tokens.unicode_characters import unicode_chars, unicode_char_to_token
 from regy.samples_and_semantics.utils.repeat_info_to_enum import repeat_info_to_enum
 from regy.samples_and_semantics.utils.number_to_enum import number_to_enum_dict
 from regy.samples_and_semantics.utils.language_to_tok import language_to_tok
@@ -15,7 +15,7 @@ from regy.samples_and_semantics.utils.regex_end_info_to_tok import regex_end_inf
 class Scanner:
 
     def __init__(self, samples):
-        self.samples = samples
+        self._samples = samples
         self._scanned_samples = {}
         self._parse_samples()
 
@@ -23,11 +23,11 @@ class Scanner:
         return self._scanned_samples
 
     def _parse_samples(self):
-        self._parse_general_regex_info(self.samples['generalRegexInfo'])
+        self._parse_general_regex_info(self._samples['generalRegexInfo'])
 
         self._scanned_samples[Token.SAMPLE_STRINGS_INFO] = []
 
-        for sample in self.samples['sampleStringsInfo']:
+        for sample in self._samples['sampleStringsInfo']:
             info = {}
             marker_type = sample['markerType']
 
@@ -43,6 +43,9 @@ class Scanner:
             elif marker_type == 'Control characters':
                 info[Token.MARKER_TYPE] = MarkerType.CONTROL_CHARACTERS
                 self._parse_control_characters(sample, info)
+            elif marker_type == 'Unicode characters':
+                info[Token.MARKER_TYPE] = MarkerType.UNICODE_CHARACTERS
+                self._parse_unicode_characters(sample, info)
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
@@ -96,7 +99,6 @@ class Scanner:
         match_all_except_spec = marker_info['matchAllExceptSelectedOnes']
 
         wanted_control_chars = []
-
         for control_char in control_chars:
             if not match_all_except_spec and marker_info[control_char]:
                 wanted_control_chars.append(control_char_to_token[control_char])
@@ -107,9 +109,24 @@ class Scanner:
 
         self._insert_repeat_info(sample, info)
 
+    def _parse_unicode_characters(self, sample, info):
+        marker_info = sample['markerInfo']
+        match_all_except_spec = marker_info['matchAllExceptSelectedOnes']
+
+        wanted_unicode_chars = []
+        for unicode_char in unicode_chars:
+            if not match_all_except_spec and marker_info[unicode_char]:
+                wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
+            elif match_all_except_spec and not marker_info[unicode_char]:
+                wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
+
+        info[Token.UNICODE_CHARACTERS] = wanted_unicode_chars
+
+        self._insert_repeat_info(sample, info)
+
     def _parse_general_regex_info(self, regex_info):
         self._scanned_samples[Token.GENERAL_REGEX_INFO] = {
-            Token.TARGET_LANGUAGE : language_to_tok[regex_info['regexTarget']],
+            Token.TARGET : language_to_tok[regex_info['regexTarget']],
             Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
             Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]
         }

@@ -1,0 +1,411 @@
+<div class="row">
+
+  <div class="col">
+
+    <div class="form-group">
+      <label for="individual-characters">Individual characters (optional):</label>
+      <input type="text" class="form-control" [(ngModel)]="unicodeCharacters.individualCharacters"
+             data-toggle="tooltip" title="Here you can provide a list specific unicode characters, i.e:
+              &#013;Single unicode character:         U+0482
+              &#013;Range of unicode characters: U+0041-U+005A
+              &#013;This field is optional, the unicode characters should adhere to the format in the examples above and be separated by spaces."
+             id="individual-characters" placeholder="List of unicode characters (hover over me for more information)">
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.lowercaseLetters"
+             (change)="unicodeCharacters.lowercaseLetter = !unicodeCharacters.lowercaseLetters">
+      <label class="form-check-label">
+        Lowercase letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.enclosingMarks"
+             (change)="unicodeCharacters.enclosingMarks = !unicodeCharacters.enclosingMarks">
+      <label class="form-check-label">
+        Enclosing marks
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.decimalDigitNumbers"
+             (change)="unicodeCharacters.decimalDigitNumbers = !unicodeCharacters.decimalDigitNumbers">
+      <label class="form-check-label">
+        Decimal digit numbers
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.connectorPunctuation"
+             (change)="unicodeCharacters.connectorPunctuation = !unicodeCharacters.connectorPunctuation">
+      <label class="form-check-label">
+        Connector punctuation
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.uppercaseLetters"
+             (change)="unicodeCharacters.uppercaseLetters= !unicodeCharacters.uppercaseLetters">
+      <label class="form-check-label">
+        Uppercase letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.spaceSeparators"
+             (change)="unicodeCharacters.spaceSeparators = !unicodeCharacters.spaceSeparators">
+      <label class="form-check-label">
+        Space separators
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.letterNumbers"
+             (change)="unicodeCharacters.letterNumbers = !unicodeCharacters.letterNumbers">
+      <label class="form-check-label">
+        Letter numbers
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.otherPunctuation"
+             (change)="unicodeCharacters.otherPunctuation = !unicodeCharacters.otherPunctuation">
+      <label class="form-check-label">
+        Other punctuation
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.titleCaseLetters"
+             (change)="unicodeCharacters.titleCaseLetters = !unicodeCharacters.titleCaseLetters">
+      <label class="form-check-label">
+        Title case letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.lineSeparators"
+             (change)="unicodeCharacters.lineSeparators = !unicodeCharacters.lineSeparators">
+      <label class="form-check-label">
+        Line separators
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.otherNumbers"
+             (change)="unicodeCharacters.otherNumbers = !unicodeCharacters.otherNumbers">
+      <label class="form-check-label">
+        Other numbers
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.controlCharacters"
+             (change)="unicodeCharacters.controlCharacters = !unicodeCharacters.controlCharacters">
+      <label class="form-check-label">
+        Control characters
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.casedLetters"
+             (change)="unicodeCharacters.casedLetters = !unicodeCharacters.casedLetters">
+      <label class="form-check-label">
+        Cased letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.paragraphSeparators"
+             (change)="unicodeCharacters.paragraphSeparators = !unicodeCharacters.paragraphSeparators">
+      <label class="form-check-label">
+        Paragraph separators
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.dashPunctuation"
+             (change)="unicodeCharacters.dashPunctuation = !unicodeCharacters.dashPunctuation">
+      <label class="form-check-label">
+        Dash punctuation
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.formatCharacters"
+             (change)="unicodeCharacters.formatCharacters = !unicodeCharacters.formatCharacters">
+      <label class="form-check-label">
+        Format characters
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.modifierLetters"
+             (change)="unicodeCharacters.modifierLetters = !unicodeCharacters.modifierLetters">
+      <label class="form-check-label">
+        Modifier letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.mathSymbols"
+             (change)="unicodeCharacters.mathSymbols = !unicodeCharacters.mathSymbols">
+      <label class="form-check-label">
+        Math symbols
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.openPunctuation"
+             (change)="unicodeCharacters.openPunctuation = !unicodeCharacters.openPunctuation">
+      <label class="form-check-label">
+        Open punctuation
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.privateUseCharacters"
+             (change)="unicodeCharacters.privateUseCharacters = !unicodeCharacters.privateUseCharacters">
+      <label class="form-check-label">
+        Private use characters
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.otherLetters"
+             (change)="unicodeCharacters.otherLetters = !unicodeCharacters.otherLetters">
+      <label class="form-check-label">
+        Other letters
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.currencySymbols"
+             (change)="unicodeCharacters.currencySymbols = !unicodeCharacters.currencySymbols">
+      <label class="form-check-label">
+        Currency symbols
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.closePunctuation"
+             (change)="unicodeCharacters.closePunctuation = !unicodeCharacters.closePunctuation">
+      <label class="form-check-label">
+        Close punctuation
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.surrogateCharacters"
+             (change)="unicodeCharacters.surrogateCharacters = !unicodeCharacters.surrogateCharacters">
+      <label class="form-check-label">
+        Surrogate characters
+      </label>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.nonSpacingMarks"
+             (change)="unicodeCharacters.nonSpacingMarks = !unicodeCharacters.nonSpacingMarks">
+      <label class="form-check-label">
+        Non-spacing marks
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.modifierSymbols"
+             (change)="unicodeCharacters.modifierSymbols = !unicodeCharacters.modifierSymbols">
+      <label class="form-check-label">
+        Modifier symbols
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.initialPunctuation"
+             (change)="unicodeCharacters.initialPunctuation = !unicodeCharacters.initialPunctuation">
+      <label class="form-check-label">
+        Initial punctuation
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.unassignedCharacters"
+             (change)="unicodeCharacters.unassignedCharacters = !unicodeCharacters.unassignedCharacters">
+      <label class="form-check-label">
+        Unassigned characters
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.spacingCombiningMarks"
+             (change)="unicodeCharacters.spacingCombiningMarks = !unicodeCharacters.spacingCombiningMarks">
+      <label class="form-check-label">
+        Spacing combining marks
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.otherSymbols"
+             (change)="unicodeCharacters.otherSymbols = !unicodeCharacters.otherSymbols">
+      <label class="form-check-label">
+        Other symbols
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.finalPunctuation"
+             (change)="unicodeCharacters.finalPunctuation = !unicodeCharacters.finalPunctuation">
+      <label class="form-check-label">
+        Final punctuation
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="unicodeCharacters.matchAllExceptSelectedOnes"
+             (change)="unicodeCharacters.matchAllExceptSelectedOnes = !unicodeCharacters.matchAllExceptSelectedOnes">
+      <label class="form-check-label">
+        Match all characters except the selected ones
+      </label>
+    </div>
+  </div>
+
+</div>

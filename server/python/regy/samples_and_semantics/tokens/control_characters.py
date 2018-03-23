@@ -1,6 +1,6 @@
 from enum import Enum
 
-from regy.samples_and_semantics.tokens import TargetLanguage
+from regy.samples_and_semantics.tokens import Target
 
 
 class ControlCharacters(Enum):
@@ -90,7 +90,7 @@ control_char_to_token = {
 
 control_char_to_re = {
 
-    TargetLanguage.JAVA: {
+    Target.JAVA: {
         ControlCharacters.NULL                     : '\\\\x00',
         ControlCharacters.START_OF_HEADING         : '\\\\x01',
         ControlCharacters.START_OF_TEXT            : '\\\\x02',
@@ -125,7 +125,7 @@ control_char_to_re = {
         ControlCharacters.UNIT_SEPARATOR           : '\\\\x1F'
     },
 
-    TargetLanguage.PERL: {
+    Target.PERL: {
         ControlCharacters.NULL                     : '\\x00',
         ControlCharacters.START_OF_HEADING         : '\\x01',
         ControlCharacters.START_OF_TEXT            : '\\x02',
@@ -160,7 +160,7 @@ control_char_to_re = {
         ControlCharacters.UNIT_SEPARATOR           : '\\x1F'
     },
 
-    TargetLanguage.POSIX: {
+    Target.POSIX: {
 
     }
 

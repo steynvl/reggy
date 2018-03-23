@@ -1,5 +1,5 @@
 from enum import Enum
-from regy.samples_and_semantics.tokens import TargetLanguage
+from regy.samples_and_semantics.tokens import Target
 
 
 class BasicCharacters(Enum):
@@ -21,7 +21,7 @@ char_keys = [
 
 basic_characters_to_re = {
 
-    TargetLanguage.JAVA: {
+    Target.JAVA: {
         BasicCharacters.LOWER_CASE_LETTERS         : 'a-z',
         BasicCharacters.UPPER_CASE_LETTERS         : 'A-Z',
         BasicCharacters.DIGITS                     : '\\\\d',
@@ -31,7 +31,7 @@ basic_characters_to_re = {
         BasicCharacters.LINE_BREAKS                : '\\\\r\\\\n',
     },
 
-    TargetLanguage.PERL: {
+    Target.PERL: {
         BasicCharacters.LOWER_CASE_LETTERS         : '[a-z]',
         BasicCharacters.UPPER_CASE_LETTERS         : 'A-Z',
         BasicCharacters.DIGITS                     : '\\d',
@@ -41,7 +41,7 @@ basic_characters_to_re = {
         BasicCharacters.LINE_BREAKS                : '\\r\\n',
     },
 
-    TargetLanguage.POSIX: {
+    Target.POSIX: {
 
     }
 

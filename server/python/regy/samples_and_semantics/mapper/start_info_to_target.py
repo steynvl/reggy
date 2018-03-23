@@ -1,8 +1,8 @@
-from regy.samples_and_semantics.tokens import TargetLanguage, RegexStartInfo
+from regy.samples_and_semantics.tokens import Target, RegexStartInfo
 
-start_info_to_lang = {
+start_info_to_target = {
 
-    TargetLanguage.JAVA: {
+    Target.JAVA: {
         RegexStartInfo.ANYWHERE        : '',
         RegexStartInfo.START_OF_TEXT   : '\\\\b',
         RegexStartInfo.START_OF_LINE   : '^',
@@ -10,7 +10,7 @@ start_info_to_lang = {
         RegexStartInfo.START_OF_ATTEMPT: '\\\\G'
     },
 
-    TargetLanguage.PERL: {
+    Target.PERL: {
         RegexStartInfo.ANYWHERE        : '',
         RegexStartInfo.START_OF_TEXT   : '\\b',
         RegexStartInfo.START_OF_LINE   : '^',
@@ -18,7 +18,7 @@ start_info_to_lang = {
         RegexStartInfo.START_OF_ATTEMPT: '\\G'
     },
 
-    TargetLanguage.POSIX: {
+    Target.POSIX: {
         RegexStartInfo.ANYWHERE        : '',
         RegexStartInfo.START_OF_TEXT   : '\\b',
         RegexStartInfo.START_OF_LINE   : '^',

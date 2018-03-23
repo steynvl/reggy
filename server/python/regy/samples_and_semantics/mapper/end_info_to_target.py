@@ -1,22 +1,22 @@
-from regy.samples_and_semantics.tokens import TargetLanguage, RegexEndInfo
+from regy.samples_and_semantics.tokens import Target, RegexEndInfo
 
-end_info_to_lang = {
+end_info_to_target = {
 
-    TargetLanguage.JAVA: {
+    Target.JAVA: {
         RegexEndInfo.ANYWHERE   : '',
         RegexEndInfo.END_OF_TEXT: '\\\\z',
         RegexEndInfo.END_OF_LINE: '$',
         RegexEndInfo.END_OF_WORD: '\\\\b'
     },
 
-    TargetLanguage.PERL: {
+    Target.PERL: {
         RegexEndInfo.ANYWHERE   : '',
         RegexEndInfo.END_OF_TEXT: '\\z',
         RegexEndInfo.END_OF_LINE: '$',
         RegexEndInfo.END_OF_WORD: '\\b'
     },
 
-    TargetLanguage.POSIX: {
+    Target.POSIX: {
         RegexEndInfo.ANYWHERE   : '',
         RegexEndInfo.END_OF_TEXT: '\\z',
         RegexEndInfo.END_OF_LINE: '$',

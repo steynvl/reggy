@@ -1,6 +1,6 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples_and_semantics.tokens import Token, TargetLanguage
+from regy.samples_and_semantics.tokens import Token, Target
 
 
 class MapDigits:
@@ -17,11 +17,11 @@ class MapDigits:
     def _map_info(self):
         marker_info = self._info[Token.DIGITS]
         if len(marker_info) == 10:
-            if self._target_lang == TargetLanguage.JAVA:
+            if self._target_lang == Target.JAVA:
                 self._re.append('\\\\d')
-            elif self._target_lang == TargetLanguage.PERL:
+            elif self._target_lang == Target.PERL:
                 self._re.append('\\d')
-            elif self._target_lang == TargetLanguage.POSIX:
+            elif self._target_lang == Target.POSIX:
                 self._re.append('\\d')
         else:
             self._re.append(self._calculate_character_class(marker_info))
