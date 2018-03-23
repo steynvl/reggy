@@ -29,6 +29,8 @@ class SamplesAndSemantics:
                 self._re.extend(mapper.MapNumbers(scanned_sample, target_lang).get_re())
             elif marker_type == MarkerType.BASIC_CHARACTERS:
                 self._re.extend(mapper.MapBasicCharacters(scanned_sample, target_lang).get_re())
+            elif marker_type == MarkerType.CONTROL_CHARACTERS:
+                self._re.extend(mapper.MapControlCharacters(scanned_sample, target_lang).get_re())
 
         self._add_general_info(scanned_samples)
 

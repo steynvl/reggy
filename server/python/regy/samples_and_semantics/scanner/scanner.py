@@ -3,6 +3,7 @@ import re
 from collections import OrderedDict
 
 from regy.samples_and_semantics.tokens.basic_characters_info import BasicCharactersInfo
+from regy.samples_and_semantics.tokens.control_characters_info import control_char_to_token, control_chars
 from regy.samples_and_semantics.tokens.token import Token
 from regy.samples_and_semantics.tokens import MarkerType, MarkerTextInfo, RepeatInfo
 from regy.samples_and_semantics.utils.repeat_info_to_enum import repeat_info_to_enum
@@ -21,25 +22,6 @@ class Scanner:
     def get_scanned_samples(self):
         return self._scanned_samples
 
-    @staticmethod
-    def _insert_repeat_info(samples, info):
-        repeat_info = samples['repeatInfo']['repeat']
-
-        if repeat_info == 'Custom range':
-            info[Token.REPEAT_INFO] = RepeatInfo.CUSTOM_RANGE
-            info[Token.REPEAT_RANGE] = {
-                Token.REPEAT_START: int(samples['repeatInfo']['start']),
-                Token.REPEAT_END  : int(samples['repeatInfo']['end']),
-            }
-        elif repeat_info == 'n or more times':
-            info[Token.REPEAT_INFO] = RepeatInfo.N_OR_MORE_TIMES
-            info[Token.REPEAT_RANGE] = {
-                Token.REPEAT_START: int(samples['repeatInfo']['start'])
-            }
-        else:
-            info[Token.REPEAT_INFO] = repeat_info_to_enum[repeat_info]
-
-
     def _parse_samples(self):
         self._parse_general_regex_info(self.samples['generalRegexInfo'])
 
@@ -47,15 +29,20 @@ class Scanner:
 
         for sample in self.samples['sampleStringsInfo']:
             info = {}
-            if sample['markerType'] == 'Marked text':
+            marker_type = sample['markerType']
+
+            if marker_type == 'Marked text':
                 info[Token.MARKER_TYPE] = MarkerType.MARKED_TEXT
                 self._parse_marked_text(sample, info)
-            elif sample['markerType'] == 'Basic characters':
+            elif marker_type == 'Basic characters':
                 info[Token.MARKER_TYPE] = MarkerType.BASIC_CHARACTERS
                 self._parse_basic_characters(sample, info)
-            elif sample['markerType'] == 'Numbers':
+            elif marker_type == 'Numbers':
                 info[Token.MARKER_TYPE] = MarkerType.NUMBERS
                 self._parse_numbers(sample, info)
+            elif marker_type == 'Control characters':
+                info[Token.MARKER_TYPE] = MarkerType.CONTROL_CHARACTERS
+                self._parse_control_characters(sample, info)
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
@@ -104,9 +91,43 @@ class Scanner:
 
         self._insert_repeat_info(sample, info)
 
+    def _parse_control_characters(self, sample, info):
+        marker_info = sample['markerInfo']
+        match_all_except_spec = marker_info['matchAllExceptSelectedOnes']
+
+        wanted_control_chars = []
+
+        for control_char in control_chars:
+            if not match_all_except_spec and marker_info[control_char]:
+                wanted_control_chars.append(control_char_to_token[control_char])
+            elif match_all_except_spec and not marker_info[control_char]:
+                wanted_control_chars.append(control_char_to_token[control_char])
+
+        info[Token.CONTROL_CHARACTERS] = wanted_control_chars
+
+        self._insert_repeat_info(sample, info)
+
     def _parse_general_regex_info(self, regex_info):
         self._scanned_samples[Token.GENERAL_REGEX_INFO] = {
             Token.TARGET_LANGUAGE : language_to_tok[regex_info['regexTarget']],
             Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
             Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]
         }
+
+    @staticmethod
+    def _insert_repeat_info(samples, info):
+        repeat_info = samples['repeatInfo']['repeat']
+
+        if repeat_info == 'Custom range':
+            info[Token.REPEAT_INFO] = RepeatInfo.CUSTOM_RANGE
+            info[Token.REPEAT_RANGE] = {
+                Token.REPEAT_START: int(samples['repeatInfo']['start']),
+                Token.REPEAT_END: int(samples['repeatInfo']['end']),
+            }
+        elif repeat_info == 'n or more times':
+            info[Token.REPEAT_INFO] = RepeatInfo.N_OR_MORE_TIMES
+            info[Token.REPEAT_RANGE] = {
+                Token.REPEAT_START: int(samples['repeatInfo']['start'])
+            }
+        else:
+            info[Token.REPEAT_INFO] = repeat_info_to_enum[repeat_info]

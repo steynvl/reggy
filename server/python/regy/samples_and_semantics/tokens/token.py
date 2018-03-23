@@ -30,3 +30,5 @@ class Token(Enum):
     REPEAT_END                 = 20
 
     ESCAPED_STRINGS            = 21
+
+    CONTROL_CHARACTERS         = 22
