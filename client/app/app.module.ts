@@ -5,8 +5,14 @@ import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
+
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
+import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
+import { GenerateInductionComponent } from './generate/induction/generate.induction.component';
+
 import { GenerateSamplesService } from './services/generate.samples.service';
+import { GenerateCommonService } from './services/generate.common.service';
+import { GenerateInductionService } from './services/generate.induction.service';
 
 import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
@@ -31,6 +37,8 @@ export function tokenGetter() {
     AppComponent,
     AboutComponent,
     GenerateSamplesComponent,
+    GenerateCommonComponent,
+    GenerateInductionComponent,
     MarkedTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
@@ -54,7 +62,10 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [GenerateSamplesService],
+  providers: [GenerateSamplesService,
+              GenerateCommonService,
+              GenerateInductionService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
