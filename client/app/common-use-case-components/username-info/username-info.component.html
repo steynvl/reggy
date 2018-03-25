@@ -1,0 +1,124 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-center"><strong>Username</strong></h4>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="text" class="form-control" [placeholder]="shouldStartWithMsg" disabled>
+          <div class="input-group-btn">
+            <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li *ngFor="let item of shouldStartWithData" (click)="shouldStartWithChange(item)"><a>
+                <div class="form-check">
+                  <label class="form-check-label dropdown-items">
+                    <input type="radio" name="should-contain" class="form-check-input">
+                    {{item}}
+                  </label>
+                </div>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="text" class="form-control" [placeholder]="shouldContainMsg" disabled>
+          <div class="input-group-btn">
+            <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li *ngFor="let item of shouldContainData" (click)="addToShouldContain($event, item)"><a>
+                <div class="form-check">
+                  <label class="form-check-label dropdown-items">
+                    <input type="checkbox" class="form-check-input">
+                    {{item}}
+                  </label>
+                </div>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="text" class="form-control" [placeholder]="minimumLengthMsg" disabled>
+          <div class="input-group-btn">
+            <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li *ngFor="let item of minimumLengthData" (click)="changeMinData(item)"><a>
+                <div class="form-check">
+                  <label class="form-check-label dropdown-items">
+                    <input type="radio" name="min-length" class="form-check-input">
+                    {{item}}
+                  </label>
+                </div>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="text" class="form-control" [placeholder]="maximumLengthMsg" disabled>
+          <div class="input-group-btn">
+            <button tabindex="-1" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li *ngFor="let item of maximumLengthData" (click)="changeMaxData(item)"><a>
+                <div class="form-check">
+                  <label class="form-check-label dropdown-items">
+                    <input type="radio" name="min-length" class="form-check-input">
+                    {{item}}
+                  </label>
+                </div>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" *ngIf="username.minimumLength !== undefined && username.maximumLength !== undefined">
+
+      <div class="col-md-6">
+        <input [(ngModel)]="username.minimumLength" *ngIf="minLengthIsCustom" (change)="minCustomChange()"
+               type="number" class="form-control"
+               [ngClass]="{
+                  'is-valid'  : minRangeIsValid(),
+                  'is-invalid': minRangeIsInvalid()
+               }"/>
+      </div>
+
+      <div class="col-md-6">
+        <input [(ngModel)]="username.maximumLength" *ngIf="maxLengthIsCustom" (change)="maxCustomChange()"
+               type="number" class="form-control"
+               [ngClass]="{
+                  'is-valid'  : maxRangeIsValid(),
+                  'is-invalid': maxRangeIsInvalid()
+               }"/>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
