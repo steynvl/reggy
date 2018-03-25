@@ -3,10 +3,6 @@
   padding-left: 5px;
 }
 
-input[readonly] {
-  background-color: white;
-}
-
 .move-down {
   padding-top: 10px;
 }
@@ -14,4 +10,8 @@ input[readonly] {
   min-width: 0;
   width: auto;
   display: inline;
+}
+
+input[readonly] {
+  background-color: white;
 }

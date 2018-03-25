@@ -1,7 +1,7 @@
-import { GeneralRegexInfo } from './general-regex-info';
-import { SampleStringsInfo } from './sample-strings-info';
+import { GeneralRegexInfo } from '../general-regex-info';
+import { SampleStringsInfo } from '../sample-strings-info';
 
-export class Payload {
+export class PayloadSamples {
 
   /* array of sample strings info */
   sampleStringsInfo: Array<SampleStringsInfo>;

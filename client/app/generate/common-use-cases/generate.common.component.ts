@@ -3,6 +3,8 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { Username } from '../../models/common-use-case-models/username';
+import { ValidateCommon } from '../../validation/validate.common';
+import { PayloadCommon } from '../../models/payload/payload-common';
 
 @Component({
   selector: 'app-generate-common',
@@ -18,7 +20,7 @@ export class GenerateCommonComponent implements OnInit {
   generatedRegex: string;
   generalRegexInfo: GeneralRegexInfo;
 
-  constructor(private generateService: GenerateCommonService,
+  constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) {
   }
 
@@ -30,15 +32,58 @@ export class GenerateCommonComponent implements OnInit {
     };
   }
 
+  private constructPayload(): PayloadCommon {
+    return {
+      type            : this.type,
+      information     : this.username,
+      generalRegexInfo: this.generalRegexInfo
+    };
+  }
+
+  private callService() {
+    const payload = JSON.stringify(this.constructPayload());
+    this.generateCommonService.generateRegex(payload).subscribe(
+      data => this.generatedRegex = data.trim(),
+      error => console.log(error)
+    );
+  }
+
   generateRegex() {
-  //   this.generatedRegex = undefined;
-  //
-  //   const payload = JSON.stringify(this.constructPayload());
-  //
-  //   this.generateService.generateRegex(payload).subscribe(
-  //     data => this.generatedRegex = data.trim(),
-  //     error => console.log(error)
-  //   );
+    this.generatedRegex = undefined;
+
+    switch (this.type) {
+      case 'Username':
+        if (ValidateCommon.validateUsername(this.username)) {
+          this.toast.setMessage('Invalid input information!', 'warning');
+        } else {
+          this.callService();
+        }
+        break;
+
+      case 'Password':
+
+        break;
+
+      case 'Email address':
+
+        break;
+
+      case 'URL':
+
+        break;
+
+      default:
+        // TODO
+        break;
+
+    }
+
+    // const payload = JSON.stringify(this.constructPayload());
+
+    // this.generateService.generateRegex(payload).subscribe(
+    //   data => this.generatedRegex = data.trim(),
+    //   error => console.log(error)
+    // );
   }
 
 

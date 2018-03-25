@@ -103,7 +103,7 @@
                type="number" class="form-control"
                [ngClass]="{
                   'is-valid'  : minRangeIsValid(),
-                  'is-invalid': minRangeIsInvalid()
+                  'is-invalid': !minRangeIsValid()
                }"/>
       </div>
 
@@ -112,7 +112,7 @@
                type="number" class="form-control"
                [ngClass]="{
                   'is-valid'  : maxRangeIsValid(),
-                  'is-invalid': maxRangeIsInvalid()
+                  'is-invalid': !maxRangeIsValid()
                }"/>
       </div>
 

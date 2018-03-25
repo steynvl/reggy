@@ -8,7 +8,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { Digits } from '../../models/marker-info/digits';
 import { SampleStringsInfo } from '../../models/sample-strings-info';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
-import { Payload } from '../../models/payload';
+import { PayloadSamples } from '../../models/payload/payload-samples';
 import { ControlCharacters } from '../../models/marker-info/control-characters';
 import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 
@@ -76,7 +76,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.userHighlightEnd = finish;
   }
 
-  private constructPayload(): Payload {
+  private constructPayload(): PayloadSamples {
     const sampleStringsInfo: Array<SampleStringsInfo> = [];
 
     this.markedElements.forEach(markedElement => {

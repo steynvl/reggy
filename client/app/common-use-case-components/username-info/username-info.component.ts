@@ -85,17 +85,9 @@ export class UsernameComponent implements OnInit {
       Number.parseInt(this.username.minimumLength) <  Number.parseInt(this.username.maximumLength);
   }
 
-  minRangeIsInvalid(): boolean {
-    return !this.minRangeIsValid();
-  }
-
   maxRangeIsValid(): boolean {
     return this.validLength.test(this.username.maximumLength) &&
       Number.parseInt(this.username.maximumLength) >  Number.parseInt(this.username.minimumLength);
-  }
-
-  maxRangeIsInvalid(): boolean {
-    return !this.maxRangeIsValid();
   }
 
 }
