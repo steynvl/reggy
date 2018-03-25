@@ -2,6 +2,10 @@
   padding-top: 10px;
 }
 
+input[readonly] {
+  background-color: white;
+}
+
 /*.btn-separator:after {*/
 /*content: ' ';*/
 /*display: block;*/
