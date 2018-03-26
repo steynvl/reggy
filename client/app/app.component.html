@@ -8,20 +8,21 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
+
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            <i class="fa fa-home"></i> Home
+          <a routerLink="/" class="nav-link route" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+             HOME
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/tutorial" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            <i class="fa fa-info"></i> Tutorial
+          <a routerLink="/tutorial" class="nav-link route" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            TUTORIAL
           </a>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-cog"></i> Generate Regex <span class="caret"></span></a>
+          <a class="nav-link dropdown-toggle route" data-toggle="dropdown" href="#" id="themes">GENERATE REGEX<span class="caret"></span></a>
           <div class="dropdown-menu" aria-labelledby="themes">
             <a routerLink="/generate/samples" class="dropdown-item">
               via input sample strings
@@ -35,13 +36,9 @@
             </a>
           </div>
         </li>
-
-      </ul>
-
-      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a routerLink="/register" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            <i class="fa fa-user-plus"></i> Login/Register
+          <a routerLink="/register" class="nav-link route" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            LOGIN/REGISTER
           </a>
         </li>
       </ul>

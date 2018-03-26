@@ -58,3 +58,62 @@ body {
   display: none;
   text-align: center;
 }
+
+a {
+  color: #B1C1C0 !important;
+}
+
+.route:hover {
+  color: #fffff9 !important;
+}
+
+ol, ul {
+  list-style: none;
+}
+li {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.route:hover, .route:focus, .route:active {
+  color: #999;
+  text-decoration: none;
+}
+
+.route {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  margin: 0 12px;
+  letter-spacing: 1px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+  color: #18BC9C;
+}
+
+.route:before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #18BC9C;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: color 0.1s,transform 0.2s ease-out;
+}
+
+.route:active::before {
+  background-color: #18BC9C;
+}
+
+.route:hover::before, .route:focus::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
