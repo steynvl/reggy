@@ -37,6 +37,9 @@ export class GenerateSamplesComponent implements OnInit {
 
   generalRegexInfo: GeneralRegexInfo;
 
+  markersIsCollapsed = false;
+  markerTabIndex = 0;
+
   constructor(private generateService: GenerateSamplesService,
               public toast: ToastComponent) {
   }

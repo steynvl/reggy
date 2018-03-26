@@ -27,8 +27,38 @@
     </div>
 
   </div>
+
   <div class="row pad-upload-btn">
-    <div class="col">
+
+    <div class="col-sm-11">
+
+      <div *ngIf="markedElements.length > 1">
+
+        <button *ngIf="!markersIsCollapsed" (click)="markersIsCollapsed = !markersIsCollapsed"
+                class="btn btn-md"><i class="fa fa-compress"></i>
+        </button>
+
+        <nav *ngIf="markersIsCollapsed">
+          <div class="nav nav-tabs" role="tablist">
+
+            <button (click)="markersIsCollapsed = !markersIsCollapsed"
+                    class="btn btn-md"><i class="fa fa-expand"></i>
+            </button>
+
+            <a *ngFor="let markedElement of markedElements; let idx = index" (click)="markerTabIndex = idx"
+               class="nav-item nav-link marker-tab" data-toggle="tab" href="#">
+              <strong>{{markedElement.id}}</strong>
+            </a>
+
+          </div>
+        </nav>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-1">
+
       <div class="right-allign">
         <label class="btn btn-outline-primary" for="my-file-selector">
           <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
@@ -39,107 +69,113 @@
     </div>
   </div>
 
+  <br />
+
   <div *ngFor="let markedElement of markedElements; let idx = index">
 
-    <div class="card">
+    <div *ngIf="!markersIsCollapsed || idx === markerTabIndex">
 
-      <div class="card-header">
-        <div class="row">
-          <div class="col-sm-11">
-            <h4 class="text-center"><strong>{{markedElement.fieldType}}</strong></h4>
+      <div class="card">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-11">
+              <h4 class="text-center"><strong>{{markedElement.fieldType}}</strong></h4>
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
+            </div>
           </div>
-          <div class="col-sm-1">
-            <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
-          </div>
+
         </div>
+        <div class="card-body">
+          <div class="row">
 
-      </div>
-      <div class="card-body">
-        <div class="row">
+            <div class="col-md-2">
+              <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
+                      [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
-          <div class="col-md-2">
-            <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
-                    [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
-
-            <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
-              <i class="fa fa-arrow-up"></i>
-            </button>
-            <button *ngIf="idx !== markedElements.length - 1" type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
-              <i class="fa fa-arrow-down"></i>
-            </button>
-          </div>
-
-          <div class="col-md-5">
-            <label>Field info:</label>
-            <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
-
-              <option>Marked text</option>
-              <option>Basic characters</option>
-              <option>Digits</option>
-              <option>Control characters</option>
-              <option>Unicode characters</option>
-            </select>
-          </div>
-
-          <div class="col-md-5">
-            <label>Repeat:</label>
-
-            <select class="form-control" style="font-family: 'FontAwesome', Arial;"
-                    (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
-
-              <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
-
-            </select>
-
-            <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
-              <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
-              <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
+              <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
+                <i class="fa fa-arrow-up"></i>
+              </button>
+              <button *ngIf="idx !== markedElements.length - 1" type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
+                <i class="fa fa-arrow-down"></i>
+              </button>
             </div>
 
-            <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
-              <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
+            <div class="col-md-5">
+              <label>Field info:</label>
+              <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
+
+                <option>Marked text</option>
+                <option>Basic characters</option>
+                <option>Digits</option>
+                <option>Control characters</option>
+                <option>Unicode characters</option>
+              </select>
+            </div>
+
+            <div class="col-md-5">
+              <label>Repeat:</label>
+
+              <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                      (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
+
+                <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
+
+              </select>
+
+              <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
+                <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
+                <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
+              </div>
+
+              <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
+                <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
+              </div>
+
             </div>
 
           </div>
 
+          <div class="info-pad" *ngIf="selectedMarkerIdx === idx">
+
+            <app-marked-text-info
+              *ngIf="markedElement.fieldType === 'Marked text'"
+              [markedText]="markedText"
+              [possibleMatches]="markedElement.markedTextInfo" >
+            </app-marked-text-info>
+
+            <app-basic-characters-info
+              *ngIf="markedElement.fieldType === 'Basic characters'"
+              [basicCharacters]="basicCharacters">
+            </app-basic-characters-info>
+
+            <app-digits-info
+              *ngIf="markedElement.fieldType === 'Digits'"
+              [digits]="digits">
+            </app-digits-info>
+
+            <app-control-characters-info
+              *ngIf="markedElement.fieldType === 'Control characters'"
+              [controlCharacters]="controlCharacters">
+            </app-control-characters-info>
+
+            <app-unicode-characters-info
+              *ngIf="markedElement.fieldType === 'Unicode characters'"
+              [unicodeCharacters]="unicodeCharacters">
+            </app-unicode-characters-info>
+
+          </div>
+
         </div>
-
-        <div class="info-pad" *ngIf="selectedMarkerIdx == idx">
-
-          <app-marked-text-info
-            *ngIf="markedElement.fieldType === 'Marked text'"
-            [markedText]="markedText"
-            [possibleMatches]="markedElement.markedTextInfo" >
-          </app-marked-text-info>
-
-          <app-basic-characters-info
-            *ngIf="markedElement.fieldType === 'Basic characters'"
-            [basicCharacters]="basicCharacters">
-          </app-basic-characters-info>
-
-          <app-digits-info
-            *ngIf="markedElement.fieldType === 'Digits'"
-            [digits]="digits">
-          </app-digits-info>
-
-          <app-control-characters-info
-            *ngIf="markedElement.fieldType === 'Control characters'"
-            [controlCharacters]="controlCharacters">
-          </app-control-characters-info>
-
-          <app-unicode-characters-info
-            *ngIf="markedElement.fieldType === 'Unicode characters'"
-            [unicodeCharacters]="unicodeCharacters">
-          </app-unicode-characters-info>
-
-        </div>
-
       </div>
+
     </div>
 
-    <br />
-
   </div>
+
+  <br />
 
   <div *ngIf="markedElements.length > 0">
 

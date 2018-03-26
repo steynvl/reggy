@@ -35,3 +35,17 @@
 .pad-down {
   padding-top: 20px;
 }
+
+.pad-right {
+  padding-left: 5px;
+}
+
+.marker-tab {
+  border-bottom: 1px solid #DDD;
+}
+
+.marker-tab:hover, .marker-tab:focus, .marker-tab:active {
+  border-bottom: 3px solid #18BC9C;
+}
+
+.nav-tabs { border-bottom: none; }
