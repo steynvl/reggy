@@ -316,6 +316,14 @@ export class GenerateSamplesComponent implements OnInit {
     }
 
     this.selectedMarkerIdx = idx === 0 ? -1 : idx - 1;
+    if (this.markedElements.length > 1) {
+      this.markerTabIndex = this.selectedMarkerIdx;
+    } else {
+      if (this.markersIsCollapsed) {
+        this.markersIsCollapsed = !this.markersIsCollapsed;
+        this.markerTabIndex = -1;
+      }
+    }
     this.highlightTextArea();
   }
 
@@ -325,6 +333,33 @@ export class GenerateSamplesComponent implements OnInit {
 
   clickCopyToClipboard() {
     this.toast.setMessage('Regex copied to clipboard! ', 'success');
+  }
+
+  validateStartRepeatInfo(): boolean {
+    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+    return repeatInfo.start < repeatInfo.end && /^\d*$/.test(repeatInfo.start.toString());
+  }
+
+  validateEndRepeatInfo(): boolean {
+    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+    return repeatInfo.end > repeatInfo.start && /^\d*$/.test(repeatInfo.end.toString());
+  }
+
+  validateMinNrOfTimes(): boolean {
+    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+    return repeatInfo.start !== undefined && /^\d*$/.test(repeatInfo.start.toString());
+  }
+
+  tabClicked(idx: number) {
+    this.markerTabIndex = idx;
+    this.selectedMarkerIdx = idx;
+
+    this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+    this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
+    this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
+    this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
+    this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
+    this.highlightTextArea();
   }
 
 }

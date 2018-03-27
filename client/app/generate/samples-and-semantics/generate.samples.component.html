@@ -45,7 +45,7 @@
                     class="btn btn-md"><i class="fa fa-expand"></i>
             </button>
 
-            <a *ngFor="let markedElement of markedElements; let idx = index" (click)="markerTabIndex = idx"
+            <a *ngFor="let markedElement of markedElements; let idx = index" (click)="tabClicked(idx)"
                class="nav-item nav-link marker-tab" data-toggle="tab" href="#">
               <strong>{{markedElement.id}}</strong>
             </a>
@@ -95,10 +95,12 @@
               <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
                       [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
 
-              <button *ngIf="idx !== 0" type="button" class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
+              <button *ngIf="idx !== 0 && !markersIsCollapsed" type="button"
+                      class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
                 <i class="fa fa-arrow-up"></i>
               </button>
-              <button *ngIf="idx !== markedElements.length - 1" type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
+              <button *ngIf="idx !== markedElements.length - 1 && !markersIsCollapsed"
+                      type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
                 <i class="fa fa-arrow-down"></i>
               </button>
             </div>
@@ -126,12 +128,30 @@
               </select>
 
               <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
-                <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Start (inclusive)"/>
-                <input [(ngModel)]="markedElement.repeatInfo.end" type="text" class="form-control" placeholder="End (inclusive)"/>
+                <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
+                       class="form-control" placeholder="Start (inclusive)"
+                       [ngClass]="{
+                        'is-valid'  : validateStartRepeatInfo(),
+                        'is-invalid': !validateStartRepeatInfo()
+                       }"
+                />
+                <input [(ngModel)]="markedElement.repeatInfo.end" type="text"
+                       class="form-control" placeholder="End (inclusive)"
+                       [ngClass]="{
+                        'is-valid'  : validateEndRepeatInfo(),
+                        'is-invalid': !validateEndRepeatInfo()
+                       }"
+                />
               </div>
 
               <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
-                <input [(ngModel)]="markedElement.repeatInfo.start" type="text" class="form-control" placeholder="Minimum number of times (inclusive)"/>
+                <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
+                       class="form-control" placeholder="Minimum number of times (inclusive)"
+                       [ngClass]="{
+                        'is-valid'  : validateMinNrOfTimes(),
+                        'is-invalid': !validateMinNrOfTimes()
+                       }"
+                />
               </div>
 
             </div>
@@ -288,3 +308,5 @@
   </div>
 
 </div>
+
+<button class="btn btn-primary" (click)="testtt()">awe</button>
