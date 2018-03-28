@@ -6,7 +6,7 @@ import { Username } from '../../models/common-use-case-models/username';
   templateUrl: './username-info.component.html',
   styleUrls: ['./username-info.component.css']
 })
-export class UsernameComponent implements OnInit {
+export class UsernameComponent {
 
   @Input() username: Username;
 
@@ -26,15 +26,6 @@ export class UsernameComponent implements OnInit {
 
   validLength = /^[1-9]\d*$/;
 
-  ngOnInit() {
-    this.username = {
-      shouldStartWith: '',
-      shouldContain  : [],
-      minimumLength  : '',
-      maximumLength  : ''
-    };
-  }
-
   shouldStartWithChange(choice: string) {
     this.username.shouldStartWith = choice;
     this.shouldStartWithMsg = `Should start with: ${choice}`;
@@ -47,10 +38,13 @@ export class UsernameComponent implements OnInit {
       this.username.shouldContain = this.username.shouldContain.filter(u => u !== choice);
     }
 
-    const newMsg = ['Should contain: ['];
-    this.username.shouldContain.forEach((u, index) => {
-      index === this.username.shouldContain.length - 1 ? newMsg.push(`${u}]`) : newMsg.push(`${u}, `);
-    });
+    const newMsg = ['Should contain: '];
+    if (this.username.shouldContain.length > 0) {
+      newMsg.push('[');
+      this.username.shouldContain.forEach((u, index) => {
+        index === this.username.shouldContain.length - 1 ? newMsg.push(`${u}]`) : newMsg.push(`${u}, `);
+      });
+    }
     this.shouldContainMsg = newMsg.join('');
   }
 
@@ -65,6 +59,7 @@ export class UsernameComponent implements OnInit {
 
   minCustomChange() {
     this.minimumLengthMsg = `Minimum length (inclusive): ${this.username.minimumLength}`;
+    // TODO update max length options
   }
 
   changeMaxData(choice: string) {
@@ -78,6 +73,7 @@ export class UsernameComponent implements OnInit {
 
   maxCustomChange() {
     this.maximumLengthMsg = `Maximum length (exclusive): ${this.username.maximumLength}`;
+    // TODO update min length options
   }
 
   minRangeIsValid(): boolean {

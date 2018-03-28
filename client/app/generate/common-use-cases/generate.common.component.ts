@@ -30,13 +30,20 @@ export class GenerateCommonComponent implements OnInit {
       endRegexMatchAt  : 'Anywhere',
       regexTarget      : 'Java'
     };
+    this.username = {
+      shouldStartWith: '',
+      shouldContain  : [],
+      minimumLength  : '',
+      maximumLength  : ''
+    };
   }
 
   private constructPayload(): PayloadCommon {
     return {
       type            : this.type,
       information     : this.username,
-      generalRegexInfo: this.generalRegexInfo
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
     };
   }
 
@@ -53,10 +60,11 @@ export class GenerateCommonComponent implements OnInit {
 
     switch (this.type) {
       case 'Username':
-        if (ValidateCommon.validateUsername(this.username)) {
-          this.toast.setMessage('Invalid input information!', 'warning');
-        } else {
+        console.log(this.username);
+        if (ValidateCommon.isValidUsernameInfo(this.username)) {
           this.callService();
+        } else {
+          this.toast.setMessage('Invalid input information!', 'warning');
         }
         break;
 

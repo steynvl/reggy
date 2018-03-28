@@ -12,4 +12,7 @@ export class PayloadCommon {
   /* general information about the regex to generate */
   generalRegexInfo: GeneralRegexInfo;
 
+  /* method the backend should use to generate the regex */
+  generateMethod: string;
+
 }

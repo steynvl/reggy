@@ -2,12 +2,15 @@ import { Username } from '../models/common-use-case-models/username';
 
 export class ValidateCommon {
 
-  static validateUsername(username: Username): boolean {
+  static isValidUsernameInfo(username: Username): boolean {
     const validLength = /^[1-9]\d*$/;
 
-    if (!username.shouldStartWith || username.shouldStartWith.trim() === ''
-        || username.shouldContain || !username.minimumLength || !username.maximumLength
-        || username.minimumLength.trim() === '' || username.maximumLength.trim() === '') {
+    username.minimumLength += '';
+    username.maximumLength += '';
+
+    if (username.shouldStartWith === undefined || username.shouldStartWith.trim() === ''
+        || username.shouldContain === undefined || username.minimumLength === undefined ||
+        username.maximumLength === undefined || username.minimumLength.trim() === '' || username.maximumLength.trim() === '') {
       return false;
     }
 
