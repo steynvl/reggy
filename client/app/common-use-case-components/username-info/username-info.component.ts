@@ -1,20 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Username } from '../../models/common-use-case-models/username';
+import { GeneralRegexInfo } from '../../models/general-regex-info';
+import { PayloadCommon } from '../../models/payload/payload-common';
+import { GenerateCommonService } from '../../services/generate.common.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
   selector: 'app-username-info',
   templateUrl: './username-info.component.html',
   styleUrls: ['./username-info.component.css']
 })
-export class UsernameComponent {
+export class UsernameComponent implements OnInit {
 
-  @Input() username: Username;
+  @Input() generalRegexInfo: GeneralRegexInfo;
+
+  username: Username;
 
   shouldStartWithMsg = 'Should start with: ';
-  shouldStartWithData = ['Letter', 'Uppercase letter', 'Lowercase letter', 'Letter or number'];
+  shouldStartWithData = ['Anything', 'Letter', 'Letter or number', 'Lowercase letter', 'Uppercase letter'];
 
   shouldContainMsg = 'Should contain: ';
-  shouldContainData = ['Uppercase letter', 'Lowercase letter', 'Number', 'Special character'];
+  shouldContainData = ['Lowercase letter', 'Number', 'Special character', 'Uppercase letter'];
 
   minimumLengthMsg = 'Minimum length (inclusive): ';
   minimumLengthData = ['1', '2', '3', '4', '5', 'Custom length'];
@@ -25,6 +31,28 @@ export class UsernameComponent {
   maxLengthIsCustom: boolean;
 
   validLength = /^[1-9]\d*$/;
+
+  generatedRegex: string;
+
+  shouldStartWithIsValid   = true;
+  minLengthIsValid         = true;
+  maxLengthIsValid         = true;
+  minRangeIsLess           = true;
+
+  constructor(private generateCommonService: GenerateCommonService,
+              public toast: ToastComponent) {
+
+  }
+
+  ngOnInit() {
+    this.username = {
+      shouldStartWith: '',
+      shouldContain  : [],
+      minimumLength  : '',
+      maximumLength  : ''
+    };
+  }
+
 
   shouldStartWithChange(choice: string) {
     this.username.shouldStartWith = choice;
@@ -84,6 +112,60 @@ export class UsernameComponent {
   maxRangeIsValid(): boolean {
     return this.validLength.test(this.username.maximumLength) &&
       Number.parseInt(this.username.maximumLength) >  Number.parseInt(this.username.minimumLength);
+  }
+
+  private constructPayload(): PayloadCommon {
+    return {
+      type            : 'Username',
+      information     : this.username,
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
+    };
+  }
+
+  generateRegex() {
+    if (this.isValidUsernameInfo()) {
+      this.callService();
+    } else {
+
+      console.log('not valid');
+      console.log(this.shouldStartWithIsValid);
+      console.log(this.minLengthIsValid);
+      console.log(this.maxLengthIsValid);
+      console.log(this.minRangeIsLess);
+
+      this.toast.setMessage('Invalid input information!', 'warning');
+    }
+
+  }
+
+  private callService() {
+    const payload = JSON.stringify(this.constructPayload());
+    this.generateCommonService.generateRegex(payload).subscribe(
+      data => this.generatedRegex = data.trim(),
+      error => console.log(error)
+    );
+  }
+
+  isValidUsernameInfo(): boolean {
+    const validLength = /^[1-9]\d*$/;
+
+    this.username.minimumLength += '';
+    this.username.maximumLength += '';
+
+    this.shouldStartWithIsValid = this.username.shouldStartWith.trim() !== '';
+    this.minLengthIsValid = this.username.minimumLength.trim() !== '' && validLength.test(this.username.minimumLength);
+    this.maxLengthIsValid = this.username.maximumLength.trim() !== '' && validLength.test(this.username.maximumLength);
+
+    if (this.minLengthIsValid && this.maxLengthIsValid) {
+        this.minRangeIsLess = Number.parseInt(this.username.minimumLength) < Number.parseInt(this.username.maximumLength);
+    }
+
+    return this.shouldStartWithIsValid && this.minLengthIsValid && this.maxLengthIsValid && this.minRangeIsLess;
+  }
+
+  clickCopyToClipboard() {
+    this.toast.setMessage('Regex copied to clipboard! ', 'success');
   }
 
 }

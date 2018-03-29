@@ -17,7 +17,7 @@ class CommonUseCases:
         self._calculate_regex()
 
     def get_re(self):
-        return ''.join(self._re)
+        return ''.join(self._re).strip()
 
     def _parse_general_regex_info(self):
         general_info = self._samples['generalRegexInfo']

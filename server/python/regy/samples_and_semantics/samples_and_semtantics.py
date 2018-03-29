@@ -13,7 +13,7 @@ class SamplesAndSemantics:
         self._calculate_regex()
 
     def get_re(self):
-        return ''.join(self._re)
+        return ''.join(self._re).strip()
 
     def _calculate_regex(self):
         scanner = Scanner(self._samples)

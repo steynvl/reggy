@@ -20,7 +20,11 @@ class Username:
         self._re.append(target[self._info['shouldStartWith']])
         self._re.extend(['(?=.*{})'.format(target[should_contain]) for should_contain in self._info['shouldContain']])
 
-        min_len = int(self._info['minimumLength']) - 1
-        max_len = int(self._info['maximumLength']) - 1
+        min_len = int(self._info['minimumLength'])
+        max_len = int(self._info['maximumLength'])
+
+        if self._info['shouldStartWith'] != 'Anything':
+            min_len -= 1
+            max_len -= 1
 
         self._re.append('.{%d,%d}' % (min_len, max_len))
