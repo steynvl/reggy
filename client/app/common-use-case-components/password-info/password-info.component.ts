@@ -1,33 +1,33 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Username } from '../../models/common-use-case-models/username';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { Password } from '../../models/common-use-case-models/password';
 
 @Component({
-  selector: 'app-username-info',
-  templateUrl: './username-info.component.html',
-  styleUrls: ['./username-info.component.css']
+  selector: 'app-password-info',
+  templateUrl: './password-info.component.html',
+  styleUrls: ['./password-info.component.css']
 })
-export class UsernameInfoComponent implements OnInit {
+export class PasswordInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
-  username: Username;
+  password: Password;
 
   shouldStartWithMsg = 'Should start with: ';
-  shouldStartWithData = ['Anything', 'Letter', 'Letter or number', 'Lowercase letter', 'Uppercase letter'];
+  shouldStartWithData = ['Anything', 'Digit', 'Letter', 'Letter or digit', 'Lowercase letter', 'Uppercase letter'];
 
   shouldContainMsg = 'Should contain: ';
-  shouldContainData = ['Lowercase letter', 'Number', 'Special character', 'Uppercase letter'];
+  shouldContainData = ['Bracket', 'Digit', 'Lowercase letter', 'Minus', 'Whitespace', 'Special character', 'Underline', 'Uppercase letter'];
 
   minimumLengthMsg = 'Minimum length (inclusive): ';
-  minimumLengthData = ['1', '2', '3', '4', '5', 'Custom length'];
+  minimumLengthData = ['4', '5', '6', '7', '8', 'Custom length'];
   minLengthIsCustom: boolean;
 
   maximumLengthMsg = 'Maximum length (inclusive): ';
-  maximumLengthData = ['6', '7', '8', '9', '10', 'Custom length', 'No maximum length required'];
+  maximumLengthData = ['9', '10', '11', '12', '13', 'Custom length', 'No maximum length required'];
   maxLengthIsCustom: boolean;
 
   validLength = /^[1-9]\d*$/;
@@ -45,7 +45,7 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.username = {
+    this.password = {
       shouldStartWith: '',
       shouldContain  : [],
       minimumLength  : '',
@@ -54,22 +54,22 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   shouldStartWithChange(choice: string) {
-    this.username.shouldStartWith = choice;
+    this.password.shouldStartWith = choice;
     this.shouldStartWithMsg = `Should start with: ${choice}`;
   }
 
   addToShouldContain(event: any, choice: string) {
-    if (event.target.checked && this.username.shouldContain.indexOf(choice) === -1) {
-      this.username.shouldContain.push(choice);
+    if (event.target.checked && this.password.shouldContain.indexOf(choice) === -1) {
+      this.password.shouldContain.push(choice);
     } else {
-      this.username.shouldContain = this.username.shouldContain.filter(u => u !== choice);
+      this.password.shouldContain = this.password.shouldContain.filter(u => u !== choice);
     }
 
     const newMsg = ['Should contain: '];
-    if (this.username.shouldContain.length > 0) {
+    if (this.password.shouldContain.length > 0) {
       newMsg.push('[');
-      this.username.shouldContain.forEach((u, index) => {
-        index === this.username.shouldContain.length - 1 ? newMsg.push(`${u}]`) : newMsg.push(`${u}, `);
+      this.password.shouldContain.forEach((u, index) => {
+        index === this.password.shouldContain.length - 1 ? newMsg.push(`${u}]`) : newMsg.push(`${u}, `);
       });
     }
     this.shouldContainMsg = newMsg.join('');
@@ -78,22 +78,22 @@ export class UsernameInfoComponent implements OnInit {
   changeMinData(choice: string) {
     this.minLengthIsCustom = choice === 'Custom length';
     if (!this.minLengthIsCustom) {
-      this.username.minimumLength = choice;
+      this.password.minimumLength = choice;
       this.minimumLengthMsg = `Minimum length (inclusive): ${choice}`;
       // TODO update max length options
     }
   }
 
   minCustomChange() {
-    this.minimumLengthMsg = `Minimum length (inclusive): ${this.username.minimumLength}`;
+    this.minimumLengthMsg = `Minimum length (inclusive): ${this.password.minimumLength}`;
     // TODO update max length options
   }
 
   changeMaxData(choice: string) {
-    if (this.username.maximumLength !== 'No maximum length required') {
+    if (this.password.maximumLength !== 'No maximum length required') {
       this.maxLengthIsCustom = choice === 'Custom length';
       if (!this.maxLengthIsCustom) {
-        this.username.maximumLength = choice;
+        this.password.maximumLength = choice;
         this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
         // TODO update min values
       }
@@ -101,31 +101,31 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   maxCustomChange() {
-    this.maximumLengthMsg = `Maximum length (exclusive): ${this.username.maximumLength}`;
+    this.maximumLengthMsg = `Maximum length (exclusive): ${this.password.maximumLength}`;
     // TODO update min length options
   }
 
   minRangeIsValid(): boolean {
-    return this.validLength.test(this.username.minimumLength) &&
-      Number.parseInt(this.username.minimumLength) <  Number.parseInt(this.username.maximumLength);
+    return this.validLength.test(this.password.minimumLength) &&
+      Number.parseInt(this.password.minimumLength) <  Number.parseInt(this.password.maximumLength);
   }
 
   maxRangeIsValid(): boolean {
-    return this.validLength.test(this.username.maximumLength) &&
-      Number.parseInt(this.username.maximumLength) >  Number.parseInt(this.username.minimumLength);
+    return this.validLength.test(this.password.maximumLength) &&
+      Number.parseInt(this.password.maximumLength) >  Number.parseInt(this.password.minimumLength);
   }
 
   private constructPayload(): PayloadCommon {
     return {
-      type            : 'Username',
-      information     : this.username,
+      type            : 'Password',
+      information     : this.password,
       generalRegexInfo: this.generalRegexInfo,
       generateMethod  : 'commonUseCases'
     };
   }
 
   generateRegex() {
-    if (this.isValidUsernameInfo()) {
+    if (this.isValidPasswordInfo()) {
       this.callService();
     } else {
       this.toast.setMessage('Invalid input information!', 'warning');
@@ -141,25 +141,25 @@ export class UsernameInfoComponent implements OnInit {
     );
   }
 
-  isValidUsernameInfo(): boolean {
+  isValidPasswordInfo(): boolean {
     const validLength = /^[1-9]\d*$/;
 
-    this.username.minimumLength += '';
-    this.username.maximumLength += '';
+    this.password.minimumLength += '';
+    this.password.maximumLength += '';
 
-    this.shouldStartWithIsValid = this.username.shouldStartWith.trim() !== '';
-    this.minLengthIsValid = this.username.minimumLength.trim() !== '' && validLength.test(this.username.minimumLength);
+    this.shouldStartWithIsValid = this.password.shouldStartWith.trim() !== '';
+    this.minLengthIsValid = this.password.minimumLength.trim() !== '' && validLength.test(this.password.minimumLength);
 
-    const noMaxLength = this.username.maximumLength === 'No maximum length required';
+    const noMaxLength = this.password.maximumLength === 'No maximum length required';
     if (noMaxLength) {
       this.maxLengthIsValid = true;
     } else {
-      this.maxLengthIsValid = this.username.maximumLength.trim() !== '' && validLength.test(this.username.maximumLength);
+      this.maxLengthIsValid = this.password.maximumLength.trim() !== '' && validLength.test(this.password.maximumLength);
     }
 
     if (!noMaxLength) {
       if (this.minLengthIsValid && this.maxLengthIsValid) {
-        this.minRangeIsLess = Number.parseInt(this.username.minimumLength) < Number.parseInt(this.username.maximumLength);
+        this.minRangeIsLess = Number.parseInt(this.password.minimumLength) < Number.parseInt(this.password.maximumLength);
       }
     } else {
       this.minRangeIsLess = true;

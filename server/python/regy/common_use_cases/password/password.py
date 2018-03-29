@@ -1,9 +1,9 @@
 from collections import deque
 
-from regy.common_use_cases.username.options_to_re import opt_to_re
+from regy.common_use_cases.password.options_to_re import opt_to_re
 
 
-class Username:
+class Password:
 
     def __init__(self, info, target):
         self._info = info

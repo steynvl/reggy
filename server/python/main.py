@@ -10,8 +10,9 @@ def deserialize_samples(samples):
     return json.loads(samples)
 
 def main():
-    # samples = deserialize_samples(sys.argv[1])
-    samples = deserialize_samples('{"type":"Username","information":{"shouldStartWith":"Letter","shouldContain":["Lowercase letter","Number"],"minimumLength":"3","maximumLength":"7"},"generalRegexInfo":{"startRegexMatchAt":"Start of text","endRegexMatchAt":"End of line","regexTarget":"Java"},"generateMethod":"commonUseCases"}')
+    samples = deserialize_samples(sys.argv[1])
+    # samples = deserialize_samples('{"type":"Password","information":{"shouldStartWith":"Anything","shouldContain":[],"minimumLength":"6","maximumLength":"No maximum length required"},"generalRegexInfo":{"startRegexMatchAt":"Anywhere","endRegexMatchAt":"Anywhere","regexTarget":"Java"},"generateMethod":"commonUseCases"}')
+
 
     gen_method_map = {
         'samplesAndSemantics': GenerateMethod.SAMPLES_AND_SEMANTICS,

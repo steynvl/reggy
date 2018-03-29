@@ -20,7 +20,8 @@ import { DigitsInfoComponent } from './field-info/digits-info/digits-info.compon
 import { ControlCharactersInfoComponent } from './field-info/control-characters-info/control-characters-info.component';
 import { UnicodeCharactersInfoComponent } from './field-info/unicode-characters-info/unicode-characters-info.component';
 
-import { UsernameComponent } from './common-use-case-components/username-info/username-info.component';
+import { UsernameInfoComponent } from './common-use-case-components/username-info/username-info.component';
+import { PasswordInfoComponent } from './common-use-case-components/password-info/password-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -46,7 +47,8 @@ export function tokenGetter() {
     DigitsInfoComponent,
     ControlCharactersInfoComponent,
     UnicodeCharactersInfoComponent,
-    UsernameComponent,
+    UsernameInfoComponent,
+    PasswordInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

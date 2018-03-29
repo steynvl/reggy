@@ -1,5 +1,6 @@
 from collections import deque
 
+from regy.common_use_cases.password.password import Password
 from regy.common_use_cases.username import Username
 from regy.samples_and_semantics.mapper.end_info_to_target import end_info_to_target
 from regy.samples_and_semantics.mapper.start_info_to_target import start_info_to_target
@@ -33,6 +34,8 @@ class CommonUseCases:
 
         if self._samples['type'] == 'Username':
             self._re.append(Username(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'Password':
+            self._re.append(Password(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
 
         self._add_general_info()
 
