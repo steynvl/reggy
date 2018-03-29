@@ -10,55 +10,11 @@
 
       <div class="col-sm-4">
 
-        <label for="schemes">Schemes:</label>
-        <select id="schemes" class="form-control">
-          <option>http</option>
-          <option>https</option>
-          <option>http;https</option>
-          <option>http;https;www.</option>
-          <option>ftp</option>
-          <option>ftp;ftp.</option>
-          <option>ftp;http</option>
-          <option>ftp;http;ftp.;www.</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-4">
-
-        <label for="port-numbers">Port numbers:</label>
-        <select id="port-numbers" class="form-control">
-          <option>No port number</option>
-          <option>Optional port number</option>
-          <option>Require port number</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-4">
-
-        <label for="user-names">User names:</label>
+        <label for="user-names">User name:</label>
         <select id="user-names" class="form-control">
-          <option>No user names</option>
           <option>Allow any user name</option>
-          <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
-          <option>Basic characters only [A-Za-z0-9._-]</option>
+          <option>Basic characters only [a-z0-9._-]</option>
           <option>Specific user names only</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div class="row move-down">
-
-      <div class="col-sm-4">
-
-        <label for="password">Password:</label>
-        <select id="password" class="form-control">
-          <option>No password</option>
-          <option>Optional password</option>
-          <option>Require password</option>
         </select>
 
       </div>
@@ -68,7 +24,7 @@
         <label for="domain-name">Domain name:</label>
         <select id="domain-name" class="form-control">
           <option>Allow any domain name</option>
-          <option>Any domain on specific TLDs</option>
+          <option>Allow domain on specific TLDs</option>
           <option>Any subdomain on specific domains</option>
           <option>Specific domains only</option>
         </select>
@@ -77,51 +33,18 @@
 
       <div class="col-sm-4">
 
-        <label for="folders">Folders:</label>
-        <select id="folders" class="form-control">
-          <option>No folders</option>
-          <option>Allow any path</option>
-          <option>Safe URL characters only [A-Za-z0-9$_.+!*'(),-]</option>
-          <option>Safe folder characters only [A-Za-z0-9$_+!'(),-]</option>
-          <option>Basic characters only [A-Za-z0-9._-]</option>
-          <option>Basic folder characters only [A-Za-z0-9_-]</option>
-          <option>Specific folders only</option>
-          <option>Specific paths only</option>
+        <label for="mailto-prefix">Mailto: prefix:</label>
+        <select id="mailto-prefix" class="form-control">
+          <option>No prefix</option>
+          <option>Optional prefix</option>
+          <option>Require prefix</option>
         </select>
 
-      </div>
-
-    </div>
-
-    <div class="row move-down">
-
-      <div class="col-sm-4">
-        <label for="file-names">File names:</label>
-        <select id="file-names" class="form-control">
-          <option>No file names</option>
-          <option>Allow any file name</option>
-          <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
-          <option>Basic characters only [A-Za-z0-9._-]</option>
-          <option>Specific extensions only</option>
-          <option>Specific file names only</option>
-        </select>
-      </div>
-
-      <div class="col-sm-4">
-        <label for="parameters">Parameters:</label>
-        <select id="parameters" class="form-control">
-          <option>No parameters</option>
-          <option>Allow any parameters</option>
-          <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
-          <option>Basic characters only [A-Za-z0-9._-]</option>
-          <option>Specific parameters only</option>
-        </select>
       </div>
 
     </div>
 
   </div>
-
 
   <div class="card">
     <div class="card-header">
