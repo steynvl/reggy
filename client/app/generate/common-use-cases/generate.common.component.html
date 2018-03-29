@@ -13,6 +13,7 @@
           <option>Password</option>
           <option>Email address</option>
           <option>URL</option>
+          <option>Credit card number</option>
         </select>
       </div>
     </div>
@@ -38,5 +39,10 @@
     *ngIf="type === 'URL'"
     [generalRegexInfo]="generalRegexInfo">
   </app-url-info>
+
+  <app-credit-card-info
+    *ngIf="type === 'Credit card number'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-credit-card-info>
 
 </div>
