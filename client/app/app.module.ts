@@ -22,6 +22,7 @@ import { UnicodeCharactersInfoComponent } from './field-info/unicode-characters-
 
 import { UsernameInfoComponent } from './common-use-case-components/username-info/username-info.component';
 import { PasswordInfoComponent } from './common-use-case-components/password-info/password-info.component';
+import { UrlInfoComponent } from './common-use-case-components/url-info/url-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -49,6 +50,7 @@ export function tokenGetter() {
     UnicodeCharactersInfoComponent,
     UsernameInfoComponent,
     PasswordInfoComponent,
+    UrlInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

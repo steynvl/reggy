@@ -1,0 +1,231 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-center"><strong>Uniform Resource Locator (URL)</strong></h4>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-sm-4">
+
+        <label for="schemes">Schemes:</label>
+        <select id="schemes" class="form-control">
+          <option>http</option>
+          <option>https</option>
+          <option>http;https</option>
+          <option>http;https;www.</option>
+          <option>ftp</option>
+          <option>ftp;ftp.</option>
+          <option>ftp;http</option>
+          <option>ftp;http;ftp.;www.</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-4">
+
+        <label for="port-numbers">Port numbers:</label>
+        <select id="port-numbers" class="form-control">
+          <option>No port number</option>
+          <option>Optional port number</option>
+          <option>Require port number</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-4">
+
+        <label for="user-names">User names:</label>
+        <select id="user-names" class="form-control">
+          <option>No user names</option>
+          <option>Allow any user name</option>
+          <option>Safe characters only [a-z0-9$_.+!*'(),-]</option>
+          <option>Basic characters only [a-z0-9._-]</option>
+          <option>Specific user names only</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-4">
+
+        <label for="password">Password:</label>
+        <select id="password" class="form-control">
+          <option>No password</option>
+          <option>Optional password</option>
+          <option>Require password</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-4">
+
+        <label for="domain-name">Domain name:</label>
+        <select id="domain-name" class="form-control">
+          <option>Allow any domain name</option>
+          <option>Any domain on specific TLDs</option>
+          <option>Any subdomain on specific domains</option>
+          <option>Specific domains only</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-4">
+
+        <label for="folders">Folders:</label>
+        <select id="folders" class="form-control">
+          <option>No folders</option>
+          <option>Allow any path</option>
+          <option>Safe URL characters only [a-z0-9$_.+!*'(),-]</option>
+          <option>Safe folder characters only [a-z0-9$_+!'(),-]</option>
+          <option>Basic characters only [a-z0-9._-]</option>
+          <option>Basic folder characters only [a-z0-9_-]</option>
+          <option>Specific folders only</option>
+          <option>Specific paths only</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-4">
+        <label for="file-names">File names:</label>
+        <select id="file-names" class="form-control">
+          <option>No file names</option>
+          <option>Allow any file name</option>
+          <option>Safe characters only [a-z0-9$_.+!*'(),-]</option>
+          <option>Basic characters only [a-z0-9._-]</option>
+          <option>Specific extensions only</option>
+          <option>Specific file names only</option>
+        </select>
+      </div>
+
+      <div class="col-sm-4">
+        <label for="parameters">Parameters:</label>
+        <select id="parameters" class="form-control">
+          <option>No parameters</option>
+          <option>Allow any parameters</option>
+          <option>Safe characters only [a-z0-9$_.+!*'(),-]</option>
+          <option>Basic characters only [a-z0-9._-]</option>
+          <option>Specific parameters only</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="text-center"><strong>General regular expression information</strong></h4>
+    </div>
+    <div class="card-body">
+      <div class="row pad-down">
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="begin-regex-at">Start regex match at:</label>
+            <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+              <option>Anywhere</option>
+              <option>Start of text</option>
+              <option>Start of line</option>
+              <option>Start of word</option>
+              <option>Start of attempt</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="end-regex-at">End regex match at:</label>
+            <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+              <option>Anywhere</option>
+              <option>End of text</option>
+              <option>End of line</option>
+              <option>End of word</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="what-standard">Target language:</label>
+            <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+              <option>Java</option>
+              <option>Perl</option>
+              <option>POSIX</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
+    </div>
+  </div>
+
+
+  <div *ngIf="generatedRegex !== undefined">
+
+    <br />
+    <br />
+
+    <div class="row">
+      <div class="col">
+        <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+
+        <div class="input-group">
+          <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+          <span class="input-group-btn">
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                type="button"><i class="fa fa-clipboard"></i>
+        </button>
+        </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="generatedRegex" class="pad-down">
+
+    <br />
+    <br />
+
+    <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
+      <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
+    </div>
+    <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
+      <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
+    </div>
+
+  </div>
+
+
+</div>
