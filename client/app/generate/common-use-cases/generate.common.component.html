@@ -13,6 +13,7 @@
           <option>Date and time</option>
           <option>Email address</option>
           <option>GUID</option>
+          <option>National ID</option>
           <option>Password</option>
           <option>URL</option>
           <option>Username</option>
@@ -62,5 +63,10 @@
     *ngIf="type === 'GUID'"
     [generalRegexInfo]="generalRegexInfo">
   </app-guid-info>
+
+  <app-national-id-info
+    *ngIf="type === 'National ID'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-national-id-info>
 
 </div>

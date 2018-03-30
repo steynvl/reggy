@@ -19,6 +19,7 @@ import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/
 import { DigitsInfoComponent } from './field-info/digits-info/digits-info.component';
 import { ControlCharactersInfoComponent } from './field-info/control-characters-info/control-characters-info.component';
 import { UnicodeCharactersInfoComponent } from './field-info/unicode-characters-info/unicode-characters-info.component';
+import { NumbersInfoComponent } from './field-info/numbers-info/numbers-info.component';
 
 import { UsernameInfoComponent } from './common-use-case-components/username-info/username-info.component';
 import { PasswordInfoComponent } from './common-use-case-components/password-info/password-info.component';
@@ -28,6 +29,7 @@ import { CreditCardInfoComponent } from './common-use-case-components/credit-car
 import { VatNumberInfoComponent } from './common-use-case-components/vat-number-info/vat-number-info.component';
 import { DateAndTimeInfoComponent } from './common-use-case-components/date-and-time-info/date-and-time-info.component';
 import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-info.component';
+import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -53,6 +55,7 @@ export function tokenGetter() {
     DigitsInfoComponent,
     ControlCharactersInfoComponent,
     UnicodeCharactersInfoComponent,
+    NumbersInfoComponent,
     UsernameInfoComponent,
     PasswordInfoComponent,
     UrlInfoComponent,
@@ -61,6 +64,7 @@ export function tokenGetter() {
     VatNumberInfoComponent,
     DateAndTimeInfoComponent,
     GuidInfoComponent,
+    NationalIdInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent
