@@ -1,0 +1,235 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-center"><strong>Date and time</strong></h4>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-sm-4">
+
+        <label for="date-separators">Date separators:</label>
+        <select id="date-separators" class="form-control">
+          <option>Slash, hyphen or dot</option>
+        </select>
+
+      </div>
+      <div class="col-sm-4">
+
+        <label for="time-separators">Time separators:</label>
+        <select id="time-separators" class="form-control">
+          <option>Colon or dot</option>
+        </select>
+
+      </div>
+      <div class="col-sm-4">
+
+        <label for="am-pm-indicators">AM/PM indicators:</label>
+        <select id="am-pm-indicators" class="form-control">
+          <option>AM;PM</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-12">
+
+        <label for="names-of-months">Names of months:</label>
+        <select id="names-of-months" class="form-control">
+          <option>Jan,January;Feb,February;Mar,March;Apr,April;May,May;Jun,June;Jul,July;
+            Aug,August;Sep,September;Oct,October;Nov,November;Dec,December;</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-12">
+
+        <label for="names-of-days">Names of days:</label>
+        <select id="names-of-days" class="form-control">
+          <option>Sun,Sunday;Mon,Monday;Tue,Tuesday;Wed,Wednesday;Thu,Thursday;Fri,Friday;Sat,Saturday;</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="row move-down-2">
+
+      <div class="col-sm-2">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox">
+            Limit date values
+          </label>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <label for="beginning-date">Beginning date:</label>
+        <select id="beginning-date" class="form-control">
+          <option>Insert date picker</option>
+        </select>
+      </div>
+
+      <div class="col-sm-4">
+        <label for="ending-date">Ending date:</label>
+        <select id="ending-date" class="form-control">
+          <option>Insert date picker</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row move-down">
+
+      <div class="col-sm-2">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox">
+            Limit time values
+          </label>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <label for="beginning-time">Beginning time:</label>
+        <select id="beginning-time" class="form-control">
+          <option>00:00:00</option>
+        </select>
+      </div>
+
+      <div class="col-sm-3">
+        <label for="ending-time">Ending time:</label>
+        <select id="ending-time" class="form-control">
+          <option>01:00:00</option>
+        </select>
+      </div>
+
+      <div class="col-sm-4">
+
+        <label for="leading-zeros">Leading zeros:</label>
+        <select id="leading-zeros" class="form-control">
+          <option>No leading zeros allowed</option>
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="text-center"><strong>General regular expression information</strong></h4>
+    </div>
+    <div class="card-body">
+      <div class="row pad-down">
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="begin-regex-at">Start regex match at:</label>
+            <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+              <option>Anywhere</option>
+              <option>Start of text</option>
+              <option>Start of line</option>
+              <option>Start of word</option>
+              <option>Start of attempt</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="end-regex-at">End regex match at:</label>
+            <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+              <option>Anywhere</option>
+              <option>End of text</option>
+              <option>End of line</option>
+              <option>End of word</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="what-standard">Target language:</label>
+            <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+              <option>Java</option>
+              <option>Perl</option>
+              <option>POSIX</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
+    </div>
+  </div>
+
+
+  <div *ngIf="generatedRegex !== undefined">
+
+    <br />
+    <br />
+
+    <div class="row">
+      <div class="col">
+        <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+
+        <div class="input-group">
+          <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+          <span class="input-group-btn">
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                type="button"><i class="fa fa-clipboard"></i>
+        </button>
+        </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="generatedRegex" class="pad-down">
+
+    <br />
+    <br />
+
+    <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
+      <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
+    </div>
+    <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
+      <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
+    </div>
+
+  </div>
+
+
+</div>

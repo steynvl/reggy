@@ -9,11 +9,12 @@
       <div class="form-group">
         <label for="use-case"><strong>Select your common use case:</strong></label>
         <select id="use-case" class="form-control" [(ngModel)]="type">
-          <option>Username</option>
-          <option>Password</option>
-          <option>Email address</option>
-          <option>URL</option>
           <option>Credit card number</option>
+          <option>Date and time</option>
+          <option>Email address</option>
+          <option>Password</option>
+          <option>URL</option>
+          <option>Username</option>
           <option>VAT number</option>
         </select>
       </div>
@@ -50,5 +51,10 @@
     *ngIf="type === 'VAT number'"
     [generalRegexInfo]="generalRegexInfo">
   </app-vat-number-info>
+
+  <app-date-and-time-info
+    *ngIf="type === 'Date and time'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-date-and-time-info>
 
 </div>
