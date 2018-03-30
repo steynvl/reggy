@@ -26,7 +26,8 @@ import { UrlInfoComponent } from './common-use-case-components/url-info/url-info
 import { EmailInfoComponent } from './common-use-case-components/email-info/email-info.component';
 import { CreditCardInfoComponent } from './common-use-case-components/credit-card-info/credit-card-info.component';
 import { VatNumberInfoComponent } from './common-use-case-components/vat-number-info/vat-number-info.component';
-import { DateAndTimeInfoComponent } from './common-use-case-components/date-and-time/date-and-time-info.component';
+import { DateAndTimeInfoComponent } from './common-use-case-components/date-and-time-info/date-and-time-info.component';
+import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -59,6 +60,7 @@ export function tokenGetter() {
     CreditCardInfoComponent,
     VatNumberInfoComponent,
     DateAndTimeInfoComponent,
+    GuidInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

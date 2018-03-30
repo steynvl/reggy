@@ -2,130 +2,43 @@
 
 <div class="card">
   <div class="card-header">
-    <h4 class="text-center"><strong>Date and time</strong></h4>
+    <h4 class="text-center"><strong>GUID (Globally Unique Identifier)</strong></h4>
   </div>
   <div class="card-body">
 
     <div class="row">
 
       <div class="col-sm-4">
-
-        <label for="date-separators">Date separators:</label>
-        <select id="date-separators" class="form-control">
-          <option>Slash, hyphen or dot</option>
-        </select>
-
-      </div>
-      <div class="col-sm-4">
-
-        <label for="time-separators">Time separators:</label>
-        <select id="time-separators" class="form-control">
-          <option>Colon or dot</option>
-        </select>
-
-      </div>
-      <div class="col-sm-4">
-
-        <label for="am-pm-indicators">AM/PM indicators:</label>
-        <select id="am-pm-indicators" class="form-control">
-          <option>AM;PM</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div class="row move-down">
-
-      <div class="col-sm-12">
-
-        <label for="names-of-months">Names of months:</label>
-        <select id="names-of-months" class="form-control">
-          <option>Jan,January;Feb,February;Mar,March;Apr,April;May,May;Jun,June;Jul,July;
-            Aug,August;Sep,September;Oct,October;Nov,November;Dec,December;</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div class="row move-down">
-
-      <div class="col-sm-12">
-
-        <label for="names-of-days">Names of days:</label>
-        <select id="names-of-days" class="form-control">
-          <option>Sun,Sunday;Mon,Monday;Tue,Tuesday;Wed,Wednesday;Thu,Thursday;Fri,Friday;Sat,Saturday;</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div class="row move-down-2">
-
-      <div class="col-sm-2">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
-            Limit date values
-          </label>
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <label for="beginning-date">Beginning date:</label>
-        <select id="beginning-date" class="form-control">
-          <option>Insert date picker</option>
+        <label for="braces-around">Braces around the GUID:</label>
+        <select id="braces-around" class="form-control">
+          <option>Required</option>
+          <option>Optional</option>
+          <option>Not allowed</option>
         </select>
       </div>
 
       <div class="col-sm-4">
-        <label for="ending-date">Ending date:</label>
-        <select id="ending-date" class="form-control">
-          <option>Insert date picker</option>
-        </select>
-      </div>
-
-    </div>
-
-    <div class="row move-down">
-
-      <div class="col-sm-2">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
-            Limit time values
-          </label>
-        </div>
-      </div>
-
-      <div class="col-sm-3">
-        <label for="beginning-time">Beginning time:</label>
-        <select id="beginning-time" class="form-control">
-          <option>00:00:00</option>
-        </select>
-      </div>
-
-      <div class="col-sm-3">
-        <label for="ending-time">Ending time:</label>
-        <select id="ending-time" class="form-control">
-          <option>01:00:00</option>
+        <label for="hyphens-in">Hyphens in the GUID:</label>
+        <select id="hyphens-in" class="form-control">
+          <option>Required</option>
+          <option>Optional</option>
+          <option>Not allowed</option>
         </select>
       </div>
 
       <div class="col-sm-4">
-
-        <label for="leading-zeros">Leading zeros:</label>
-        <select id="leading-zeros" class="form-control">
-          <option>No leading zeros allowed</option>
+        <label for="case">Case:</label>
+        <select id="case" class="form-control">
+          <option>Case insensitive</option>
+          <option>Uppercase</option>
+          <option>Lowercase</option>
         </select>
-
       </div>
 
     </div>
 
   </div>
+
 
   <div class="card">
     <div class="card-header">

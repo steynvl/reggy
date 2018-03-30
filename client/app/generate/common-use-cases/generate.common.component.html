@@ -12,6 +12,7 @@
           <option>Credit card number</option>
           <option>Date and time</option>
           <option>Email address</option>
+          <option>GUID</option>
           <option>Password</option>
           <option>URL</option>
           <option>Username</option>
@@ -56,5 +57,10 @@
     *ngIf="type === 'Date and time'"
     [generalRegexInfo]="generalRegexInfo">
   </app-date-and-time-info>
+
+  <app-guid-info
+    *ngIf="type === 'GUID'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-guid-info>
 
 </div>
