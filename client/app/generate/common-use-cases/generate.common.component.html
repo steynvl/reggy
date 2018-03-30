@@ -14,6 +14,7 @@
           <option>Email address</option>
           <option>URL</option>
           <option>Credit card number</option>
+          <option>VAT number</option>
         </select>
       </div>
     </div>
@@ -44,5 +45,10 @@
     *ngIf="type === 'Credit card number'"
     [generalRegexInfo]="generalRegexInfo">
   </app-credit-card-info>
+
+  <app-vat-number-info
+    *ngIf="type === 'VAT number'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-vat-number-info>
 
 </div>
