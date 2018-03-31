@@ -80,13 +80,24 @@ export class PasswordInfoComponent implements OnInit {
     if (!this.minLengthIsCustom) {
       this.password.minimumLength = choice;
       this.minimumLengthMsg = `Minimum length (inclusive): ${choice}`;
-      // TODO update max length options
+      this.updateMaxLengths();
     }
   }
 
   minCustomChange() {
     this.minimumLengthMsg = `Minimum length (inclusive): ${this.password.minimumLength}`;
-    // TODO update max length options
+    this.updateMaxLengths();
+  }
+
+  updateMaxLengths() {
+    const minVal = Number.parseInt(this.password.minimumLength);
+
+    this.maximumLengthData = [];
+    for (let i = 1; i <= 5; i++) {
+      this.maximumLengthData.push((minVal + i).toString());
+    }
+    this.maximumLengthData.push('Custom length');
+    this.maximumLengthData.push('No maximum length required');
   }
 
   changeMaxData(choice: string) {
@@ -95,14 +106,28 @@ export class PasswordInfoComponent implements OnInit {
       if (!this.maxLengthIsCustom) {
         this.password.maximumLength = choice;
         this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
-        // TODO update min values
+        this.updateMinLengths();
       }
     }
   }
 
   maxCustomChange() {
     this.maximumLengthMsg = `Maximum length (exclusive): ${this.password.maximumLength}`;
-    // TODO update min length options
+    this.updateMinLengths();
+  }
+
+  updateMinLengths() {
+    const maxVal = Number.parseInt(this.password.maximumLength);
+
+    this.minimumLengthData = [];
+    for (let i = 5; i >= 1; i--) {
+      const val = maxVal - i;
+      if (val <= 0) {
+        continue;
+      }
+      this.minimumLengthData.push(val.toString());
+    }
+    this.minimumLengthData.push('Custom length');
   }
 
   minRangeIsValid(): boolean {

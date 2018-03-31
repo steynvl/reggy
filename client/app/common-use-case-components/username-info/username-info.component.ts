@@ -80,13 +80,24 @@ export class UsernameInfoComponent implements OnInit {
     if (!this.minLengthIsCustom) {
       this.username.minimumLength = choice;
       this.minimumLengthMsg = `Minimum length (inclusive): ${choice}`;
-      // TODO update max length options
+      this.updateMaxLengths();
     }
   }
 
   minCustomChange() {
     this.minimumLengthMsg = `Minimum length (inclusive): ${this.username.minimumLength}`;
-    // TODO update max length options
+    this.updateMaxLengths();
+  }
+
+  updateMaxLengths() {
+    const minVal = Number.parseInt(this.username.minimumLength);
+
+    this.maximumLengthData = [];
+    for (let i = 1; i <= 5; i++) {
+      this.maximumLengthData.push((minVal + i).toString());
+    }
+    this.maximumLengthData.push('Custom length');
+    this.maximumLengthData.push('No maximum length required');
   }
 
   changeMaxData(choice: string) {
@@ -95,14 +106,28 @@ export class UsernameInfoComponent implements OnInit {
       if (!this.maxLengthIsCustom) {
         this.username.maximumLength = choice;
         this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
-        // TODO update min values
+        this.updateMinLengths();
       }
     }
   }
 
   maxCustomChange() {
     this.maximumLengthMsg = `Maximum length (exclusive): ${this.username.maximumLength}`;
-    // TODO update min length options
+    this.updateMinLengths();
+  }
+
+  updateMinLengths() {
+    const maxVal = Number.parseInt(this.username.maximumLength);
+
+    this.minimumLengthData = [];
+    for (let i = 5; i >= 1; i--) {
+      const val = maxVal - i;
+      if (val <= 0) {
+        continue;
+      }
+      this.minimumLengthData.push(val.toString());
+    }
+    this.minimumLengthData.push('Custom length');
   }
 
   minRangeIsValid(): boolean {
@@ -130,7 +155,6 @@ export class UsernameInfoComponent implements OnInit {
     } else {
       this.toast.setMessage('Invalid input information!', 'warning');
     }
-
   }
 
   private callService() {
