@@ -3,6 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { Email } from '../../models/common-use-case-models/email';
 
 @Component({
   selector: 'app-email-info',
@@ -13,38 +14,41 @@ export class EmailInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
+  email: Email;
+
   generatedRegex: string;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) {
-
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.email = {
+      username    : 'Allow any user name',
+      domainName  : 'Allow any domain name',
+      mailtoPrefix: 'No prefix'
+    };
+  }
 
   private constructPayload(): PayloadCommon {
-    return null;
+    return {
+      type            : 'Email address',
+      information     : this.email,
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
+    };
   }
 
   generateRegex() {
-    if (this.isValidUrlInfo()) {
-      this.callService();
-    } else {
-      this.toast.setMessage('Invalid input information!', 'warning');
-    }
-
+    this.callService();
   }
 
   private callService() {
-    const payload = JSON.stringify(this.constructPayload());
+    const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => this.generatedRegex = data.trim(),
       error => console.log(error)
     );
-  }
-
-  isValidUrlInfo(): boolean {
-    return true;
   }
 
   clickCopyToClipboard() {

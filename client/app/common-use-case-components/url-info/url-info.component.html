@@ -11,7 +11,7 @@
       <div class="col-sm-4">
 
         <label for="schemes">Schemes:</label>
-        <select id="schemes" class="form-control">
+        <select id="schemes" class="form-control" [(ngModel)]="url.schemes">
           <option>http</option>
           <option>https</option>
           <option>http;https</option>
@@ -27,7 +27,7 @@
       <div class="col-sm-4">
 
         <label for="port-numbers">Port numbers:</label>
-        <select id="port-numbers" class="form-control">
+        <select id="port-numbers" class="form-control" [(ngModel)]="url.portNumbers">
           <option>No port number</option>
           <option>Optional port number</option>
           <option>Require port number</option>
@@ -38,7 +38,7 @@
       <div class="col-sm-4">
 
         <label for="user-names">User names:</label>
-        <select id="user-names" class="form-control">
+        <select id="user-names" class="form-control" [(ngModel)]="url.username">
           <option>No user names</option>
           <option>Allow any user name</option>
           <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
@@ -55,7 +55,7 @@
       <div class="col-sm-4">
 
         <label for="password">Password:</label>
-        <select id="password" class="form-control">
+        <select id="password" class="form-control" [(ngModel)]="url.password">
           <option>No password</option>
           <option>Optional password</option>
           <option>Require password</option>
@@ -66,7 +66,7 @@
       <div class="col-sm-4">
 
         <label for="domain-name">Domain name:</label>
-        <select id="domain-name" class="form-control">
+        <select id="domain-name" class="form-control" [(ngModel)]="url.domainName">
           <option>Allow any domain name</option>
           <option>Any domain on specific TLDs</option>
           <option>Any subdomain on specific domains</option>
@@ -78,7 +78,7 @@
       <div class="col-sm-4">
 
         <label for="folders">Folders:</label>
-        <select id="folders" class="form-control">
+        <select id="folders" class="form-control" [(ngModel)]="url.folders">
           <option>No folders</option>
           <option>Allow any path</option>
           <option>Safe URL characters only [A-Za-z0-9$_.+!*'(),-]</option>
@@ -97,7 +97,7 @@
 
       <div class="col-sm-4">
         <label for="file-names">File names:</label>
-        <select id="file-names" class="form-control">
+        <select id="file-names" class="form-control" [(ngModel)]="url.fileNames">
           <option>No file names</option>
           <option>Allow any file name</option>
           <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
@@ -109,7 +109,7 @@
 
       <div class="col-sm-4">
         <label for="parameters">Parameters:</label>
-        <select id="parameters" class="form-control">
+        <select id="parameters" class="form-control" [(ngModel)]="url.parameters">
           <option>No parameters</option>
           <option>Allow any parameters</option>
           <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>

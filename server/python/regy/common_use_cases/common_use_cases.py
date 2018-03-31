@@ -1,6 +1,9 @@
 from collections import deque
 
+from regy.common_use_cases.email.email import Email
+from regy.common_use_cases.guid.url import Guid
 from regy.common_use_cases.password.password import Password
+from regy.common_use_cases.url.url import Url
 from regy.common_use_cases.username import Username
 from regy.samples_and_semantics.mapper.end_info_to_target import end_info_to_target
 from regy.samples_and_semantics.mapper.start_info_to_target import start_info_to_target
@@ -36,6 +39,12 @@ class CommonUseCases:
             self._re.append(Username(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
         elif self._samples['type'] == 'Password':
             self._re.append(Password(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'Email address':
+            self._re.append(Email(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'URL':
+            self._re.append(Url(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'GUID':
+            self._re.append(Guid(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
 
         self._add_general_info()
 

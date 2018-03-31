@@ -10,7 +10,7 @@
 
       <div class="col-sm-4">
         <label for="braces-around">Braces around the GUID:</label>
-        <select id="braces-around" class="form-control">
+        <select id="braces-around" class="form-control" [(ngModel)]="guid.bracesAround">
           <option>Required</option>
           <option>Optional</option>
           <option>Not allowed</option>
@@ -19,7 +19,7 @@
 
       <div class="col-sm-4">
         <label for="hyphens-in">Hyphens in the GUID:</label>
-        <select id="hyphens-in" class="form-control">
+        <select id="hyphens-in" class="form-control" [(ngModel)]="guid.hyphensIn">
           <option>Required</option>
           <option>Optional</option>
           <option>Not allowed</option>
@@ -28,7 +28,7 @@
 
       <div class="col-sm-4">
         <label for="case">Case:</label>
-        <select id="case" class="form-control">
+        <select id="case" class="form-control" [(ngModel)]="guid.guidCase">
           <option>Case insensitive</option>
           <option>Uppercase</option>
           <option>Lowercase</option>

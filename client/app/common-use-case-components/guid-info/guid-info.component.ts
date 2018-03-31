@@ -3,6 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { Guid } from '../../models/common-use-case-models/guid';
 
 @Component({
   selector: 'app-guid-info',
@@ -13,38 +14,40 @@ export class GuidInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
+  guid: Guid;
+
   generatedRegex: string;
 
   constructor(private generateCommonService: GenerateCommonService,
-              public toast: ToastComponent) {
+              public toast: ToastComponent) { }
 
+  ngOnInit() {
+    this.guid = {
+      bracesAround: 'Required',
+      hyphensIn   : 'Required',
+      guidCase    : 'Case insensitive'
+    };
   }
 
-  ngOnInit() { }
-
   private constructPayload(): PayloadCommon {
-    return null;
+    return {
+      type            : 'GUID',
+      information     : this.guid,
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
+    };
   }
 
   generateRegex() {
-    if (this.isValidUrlInfo()) {
-      this.callService();
-    } else {
-      this.toast.setMessage('Invalid input information!', 'warning');
-    }
-
+    this.callService();
   }
 
   private callService() {
-    const payload = JSON.stringify(this.constructPayload());
+    const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => this.generatedRegex = data.trim(),
       error => console.log(error)
     );
-  }
-
-  isValidUrlInfo(): boolean {
-    return true;
   }
 
   clickCopyToClipboard() {

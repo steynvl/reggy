@@ -11,7 +11,7 @@
       <div class="col-sm-4">
 
         <label for="user-names">User name:</label>
-        <select id="user-names" class="form-control">
+        <select id="user-names" class="form-control" [(ngModel)]="email.username">
           <option>Allow any user name</option>
           <option>Basic characters only [a-z0-9._-]</option>
           <option>Specific user names only</option>
@@ -22,7 +22,7 @@
       <div class="col-sm-4">
 
         <label for="domain-name">Domain name:</label>
-        <select id="domain-name" class="form-control">
+        <select id="domain-name" class="form-control" [(ngModel)]="email.domainName">
           <option>Allow any domain name</option>
           <option>Allow domain on specific TLDs</option>
           <option>Any subdomain on specific domains</option>
@@ -34,7 +34,7 @@
       <div class="col-sm-4">
 
         <label for="mailto-prefix">Mailto: prefix:</label>
-        <select id="mailto-prefix" class="form-control">
+        <select id="mailto-prefix" class="form-control" [(ngModel)]="email.mailtoPrefix">
           <option>No prefix</option>
           <option>Optional prefix</option>
           <option>Require prefix</option>

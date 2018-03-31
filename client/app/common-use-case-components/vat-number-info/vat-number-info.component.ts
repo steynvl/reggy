@@ -36,7 +36,7 @@ export class VatNumberInfoComponent implements OnInit {
   }
 
   private callService() {
-    const payload = JSON.stringify(this.constructPayload());
+    const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => this.generatedRegex = data.trim(),
       error => console.log(error)
