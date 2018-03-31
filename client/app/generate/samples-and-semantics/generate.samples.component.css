@@ -42,10 +42,18 @@
 
 .marker-tab {
   border-bottom: 1px solid #DDD;
+  outline-color: transparent;
 }
 
 .marker-tab:hover, .marker-tab:focus, .marker-tab:active {
   border-bottom: 3px solid #18BC9C;
+}
+
+.selected-tab {
+  border-bottom: 3px solid #18BC9C;
+  border-left: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  border-top: 1px solid #DDD;
 }
 
 .nav-tabs { border-bottom: none; }

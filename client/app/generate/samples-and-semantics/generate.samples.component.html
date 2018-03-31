@@ -34,7 +34,7 @@
 
       <div *ngIf="markedElements.length > 1">
 
-        <button *ngIf="!markersIsCollapsed" (click)="markersIsCollapsed = !markersIsCollapsed"
+        <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()"
                 class="btn btn-md"><i class="fa fa-compress"></i>
         </button>
 
@@ -46,7 +46,11 @@
             </button>
 
             <a *ngFor="let markedElement of markedElements; let idx = index" (click)="tabClicked(idx)"
-               class="nav-item nav-link marker-tab" data-toggle="tab" href="#">
+               class="nav-item nav-link marker-tab" data-toggle="tab" href="#"
+               [ngClass]="{
+                  'selected-tab': idx === markerTabIndex
+               }"
+            >
               <strong>{{markedElement.id}}</strong>
             </a>
 

@@ -362,4 +362,9 @@ export class GenerateSamplesComponent implements OnInit {
     this.highlightTextArea();
   }
 
+  collapseMarkers() {
+    this.markersIsCollapsed = !this.markersIsCollapsed;
+    this.markerTabIndex = this.selectedMarkerIdx;
+  }
+
 }
