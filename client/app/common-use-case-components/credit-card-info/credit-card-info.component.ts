@@ -3,6 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { CreditCardNumber } from '../../models/common-use-case-models/credit-card-number';
 
 @Component({
   selector: 'app-credit-card-info',
@@ -13,26 +14,36 @@ export class CreditCardInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
+  creditCardNumber: CreditCardNumber;
+
   generatedRegex: string;
 
   constructor(private generateCommonService: GenerateCommonService,
-              public toast: ToastComponent) {
+              public toast: ToastComponent) { }
 
+  ngOnInit() {
+    this.creditCardNumber = {
+      visa           : false,
+      dinersClub     : false,
+      masterCard     : false,
+      discover       : false,
+      americanExpress: false,
+      jcb            : false,
+      spacesAndDashes: 'No spaces or dashes'
+    };
   }
 
-  ngOnInit() { }
-
   private constructPayload(): PayloadCommon {
-    return null;
+    return {
+      type            : 'Credit card number',
+      information     : this.creditCardNumber,
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
+    };
   }
 
   generateRegex() {
-    if (this.isValidUrlInfo()) {
-      this.callService();
-    } else {
-      this.toast.setMessage('Invalid input information!', 'warning');
-    }
-
+    this.callService();
   }
 
   private callService() {
@@ -41,10 +52,6 @@ export class CreditCardInfoComponent implements OnInit {
       data => this.generatedRegex = data.trim(),
       error => console.log(error)
     );
-  }
-
-  isValidUrlInfo(): boolean {
-    return true;
   }
 
   clickCopyToClipboard() {

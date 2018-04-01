@@ -12,7 +12,9 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
+            <input class="form-check-input" type="checkbox"
+                 [checked]="creditCardNumber.visa"
+                 (change)="creditCardNumber.visa = !creditCardNumber.visa">
             Visa
           </label>
         </div>
@@ -23,7 +25,9 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
+            <input class="form-check-input" type="checkbox"
+                   [checked]="creditCardNumber.dinersClub"
+                   (change)="creditCardNumber.dinersClub = !creditCardNumber.dinersClub">
             Diners Club
           </label>
         </div>
@@ -34,7 +38,8 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="credit-card-extra" checked>
+            <input class="form-check-input" type="radio" name="credit-card-extra" checked
+                   (click)="creditCardNumber.spacesAndDashes = 'No spaces or dashes'">
             No spaces or dashes
           </label>
         </div>
@@ -49,7 +54,9 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
+            <input class="form-check-input" type="checkbox"
+                   [checked]="creditCardNumber.masterCard"
+                   (change)="creditCardNumber.masterCard = !creditCardNumber.masterCard">
             MasterCard
           </label>
         </div>
@@ -71,7 +78,8 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="credit-card-extra" >
+            <input class="form-check-input" type="radio" name="credit-card-extra"
+                   (click)="creditCardNumber.spacesAndDashes = 'Spaces and dashes to group digits'">
             Spaces and dashes to group digits
           </label>
         </div>
@@ -86,7 +94,9 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
+            <input class="form-check-input" type="checkbox"
+                   [checked]="creditCardNumber.americanExpress"
+                   (change)="creditCardNumber.americanExpress = !creditCardNumber.americanExpress">
             American Express
           </label>
         </div>
@@ -97,7 +107,9 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox">
+            <input class="form-check-input" type="checkbox"
+                   [checked]="creditCardNumber.jcb"
+                   (change)="creditCardNumber.jcb = !creditCardNumber.jcb">
             JCB
           </label>
         </div>
@@ -108,7 +120,8 @@
 
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="credit-card-extra" >
+            <input class="form-check-input" type="radio" name="credit-card-extra"
+                   (click)="creditCardNumber.spacesAndDashes = 'Spaces and dashes anywhere'">
             Spaces and dashes anywhere
           </label>
         </div>

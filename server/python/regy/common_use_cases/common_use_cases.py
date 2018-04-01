@@ -1,7 +1,9 @@
 from collections import deque
 
+from regy.common_use_cases.credt_card_number.credit_card_number import CreditCardNumber
 from regy.common_use_cases.email.email import Email
-from regy.common_use_cases.guid.url import Guid
+from regy.common_use_cases.guid.guid import Guid
+from regy.common_use_cases.national_id.national_id import NationalId
 from regy.common_use_cases.password.password import Password
 from regy.common_use_cases.url.url import Url
 from regy.common_use_cases.username import Username
@@ -45,6 +47,12 @@ class CommonUseCases:
             self._re.append(Url(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
         elif self._samples['type'] == 'GUID':
             self._re.append(Guid(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'Credit card number':
+            self._re.append(CreditCardNumber(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'National ID':
+            self._re.append(NationalId(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
+        elif self._samples['type'] == 'VAT number':
+            self._re.append(VatNumber(self._samples['information'], self._lang_info[Token.TARGET]).get_re())
 
         self._add_general_info()
 

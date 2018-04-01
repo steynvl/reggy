@@ -3,6 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { NationalId } from '../../models/common-use-case-models/national-id';
 
 @Component({
   selector: 'app-national-id-info',
@@ -13,26 +14,30 @@ export class NationalIdInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
+  nationalId: NationalId;
+
   generatedRegex: string;
 
   constructor(private generateCommonService: GenerateCommonService,
-              public toast: ToastComponent) {
+              public toast: ToastComponent) { }
 
+  ngOnInit() {
+    this.nationalId = {
+      kind: 'Austrian social security number'
+    };
   }
 
-  ngOnInit() { }
-
   private constructPayload(): PayloadCommon {
-    return null;
+    return {
+      type            : 'National ID',
+      information     : this.nationalId,
+      generalRegexInfo: this.generalRegexInfo,
+      generateMethod  : 'commonUseCases'
+    };
   }
 
   generateRegex() {
-    if (this.isValidUrlInfo()) {
-      this.callService();
-    } else {
-      this.toast.setMessage('Invalid input information!', 'warning');
-    }
-
+    this.callService();
   }
 
   private callService() {
@@ -41,10 +46,6 @@ export class NationalIdInfoComponent implements OnInit {
       data => this.generatedRegex = data.trim(),
       error => console.log(error)
     );
-  }
-
-  isValidUrlInfo(): boolean {
-    return true;
   }
 
   clickCopyToClipboard() {
