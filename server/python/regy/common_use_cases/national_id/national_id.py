@@ -1,6 +1,6 @@
 from collections import deque
 
-from regy.common_use_cases.national_id.options_to_re import opt_to_re
+from regy.common_use_cases.national_id.options_to_re import national_id_to_re
 
 
 class NationalId:
@@ -15,5 +15,5 @@ class NationalId:
         return ''.join(self._re)
 
     def _calculate_regex(self):
-        target = opt_to_re[self._target]
-
+        id_to_re = national_id_to_re[self._target]
+        self._re.append(id_to_re[self._info['kind']])
