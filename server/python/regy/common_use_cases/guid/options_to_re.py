@@ -1,18 +1,43 @@
 from regy.samples_and_semantics.tokens import Target
 
-opt_to_re = {
+braces_to_re = {
 
     Target.JAVA: {
-
+        'Required'   : '\\\\{%s}',
+        'Optional'   : '%s|\\\\{%s}'
     },
 
     Target.PERL: {
-
+        'Required'   : '\\{%s}',
+        'Optional'   : '%s|\\{%s}'
     },
 
     Target.POSIX: {
-
+        'Required'   : '',
+        'Optional'   : ''
     }
 
+
+}
+
+case_to_re = {
+
+    Target.JAVA: {
+        'Case insensitive': '[\\\\dA-Fa-f]',
+        'Uppercase'       : '[\\\\dA-F]',
+        'Lowercase'       : '[\\\\da-f]'
+    },
+
+    Target.PERL: {
+        'Case insensitive': '[\\dA-Fa-f]',
+        'Uppercase'       : '[\\dA-F]',
+        'Lowercase'       : '[\\da-f]'
+    },
+
+    Target.POSIX: {
+        'Case insensitive': '',
+        'Uppercase'       : '',
+        'Lowercase'       : ''
+    }
 
 }
