@@ -7,6 +7,7 @@ from regy.common_use_cases.national_id.national_id import NationalId
 from regy.common_use_cases.password.password import Password
 from regy.common_use_cases.url.url import Url
 from regy.common_use_cases.username import Username
+from regy.common_use_cases.vat_number.vat_number import VatNumber
 from regy.samples_and_semantics.mapper.end_info_to_target import end_info_to_target
 from regy.samples_and_semantics.mapper.start_info_to_target import start_info_to_target
 from regy.samples_and_semantics.tokens import Token
