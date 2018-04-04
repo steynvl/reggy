@@ -21,7 +21,6 @@ export class VatNumber {
   romania           : boolean;
   france            : boolean;
   luxembourg        : boolean;
-  southAfrica       : boolean;
   unitedKingdom     : boolean;
   latvia            : boolean;
   sweden            : boolean;

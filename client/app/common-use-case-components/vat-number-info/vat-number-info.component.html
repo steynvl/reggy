@@ -222,9 +222,9 @@
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox"
-                   [checked]="vatNumber.southAfrica"
-                   (change)="vatNumber.southAfrica = !vatNumber.southAfrica">
-            South Africa
+                   [checked]="vatNumber.sweden"
+                   (change)="vatNumber.sweden = !vatNumber.sweden">
+            SE Sweden
           </label>
         </div>
       </div>
@@ -267,9 +267,9 @@
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox"
-                   [checked]="vatNumber.sweden"
-                   (change)="vatNumber.sweden = !vatNumber.sweden">
-            SE Sweden
+                   [checked]="vatNumber.slovenia"
+                   (change)="vatNumber.slovenia = !vatNumber.slovenia">
+            SI Slovenia
           </label>
         </div>
       </div>
@@ -312,9 +312,9 @@
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox"
-                   [checked]="vatNumber.slovenia"
-                   (change)="vatNumber.slovenia = !vatNumber.slovenia">
-            SI Slovenia
+                   [checked]="vatNumber.slovakia"
+                   (change)="vatNumber.slovakia = !vatNumber.slovakia">
+            SK Slovakia
           </label>
         </div>
       </div>
@@ -322,17 +322,6 @@
     </div>
 
     <div class="row">
-
-      <div class="col-sm-3">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox"
-                   [checked]="vatNumber.slovakia"
-                   (change)="vatNumber.slovakia = !vatNumber.slovakia">
-            SK Slovakia
-          </label>
-        </div>
-      </div>
 
       <div class="col-sm-3">
         <div class="form-check">
@@ -351,15 +340,24 @@
 
       <div class="col-sm-6">
         <label for="country-code">Country code:</label>
-        <select id="country-code" class="form-control">
+        <select id="country-code" class="form-control" [(ngModel)]="vatNumber.countryCode">
           <option>No country code</option>
+          <option>Optional country code</option>
+          <option>Require country code</option>
         </select>
       </div>
 
       <div class="col-sm-6">
         <label for="grouping-characters">Grouping characters:</label>
-        <select id="grouping-characters" class="form-control">
+        <select id="grouping-characters" class="form-control" [(ngModel)]="vatNumber.groupingCharacters">
+          <option>None</option>
+          <option>Space</option>
+          <option>Dot</option>
+          <option>Hyphen</option>
           <option>Space and dot</option>
+          <option>Space and hyphen</option>
+          <option>Dot and hyphen</option>
+          <option>Space, dot and hyphen</option>
         </select>
       </div>
 

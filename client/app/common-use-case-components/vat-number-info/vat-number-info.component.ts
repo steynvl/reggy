@@ -44,7 +44,6 @@ export class VatNumberInfoComponent implements OnInit {
       romania           : false,
       france            : false,
       luxembourg        : false,
-      southAfrica       : false,
       unitedKingdom     : false,
       latvia            : false,
       sweden            : false,
@@ -53,8 +52,8 @@ export class VatNumberInfoComponent implements OnInit {
       slovenia          : false,
       hungary           : false,
       netherlands       : false,
-      countryCode       : '',
-      groupingCharacters: ''
+      countryCode       : 'No country code',
+      groupingCharacters: 'None'
     };
   }
 
