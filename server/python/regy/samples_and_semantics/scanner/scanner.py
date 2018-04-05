@@ -4,7 +4,7 @@ from collections import OrderedDict
 from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters
 from regy.samples_and_semantics.tokens.control_characters import control_char_to_token, control_chars
 from regy.samples_and_semantics.tokens.token import Token
-from regy.samples_and_semantics.tokens import MarkerType, MarkedText, RepeatInfo
+from regy.samples_and_semantics.tokens import MarkerType, LiteralText, RepeatInfo
 from regy.samples_and_semantics.tokens.unicode_characters import unicode_chars, unicode_char_to_token
 from regy.samples_and_semantics.utils.repeat_info_to_enum import repeat_info_to_enum
 from regy.samples_and_semantics.utils.number_to_enum import number_to_enum_dict
@@ -31,8 +31,8 @@ class Scanner:
             info = {}
             marker_type = sample['markerType']
 
-            if marker_type == 'Marked text':
-                info[Token.MARKER_TYPE] = MarkerType.MARKED_TEXT
+            if marker_type == 'Literal text':
+                info[Token.MARKER_TYPE] = MarkerType.LITERAL_TEXT
                 self._parse_marked_text(sample, info)
             elif marker_type == 'Basic characters':
                 info[Token.MARKER_TYPE] = MarkerType.BASIC_CHARACTERS
@@ -55,9 +55,9 @@ class Scanner:
 
         marker_info = sample['markerInfo']
         if marker_info['caseInsensitive']:
-            info[Token.MARKER_INFO].append(MarkedText.CASE_INSENSITIVE)
+            info[Token.MARKER_INFO].append(LiteralText.CASE_INSENSITIVE)
         else:
-            info[Token.MARKER_INFO].append(MarkedText.CASE_SENSITIVE)
+            info[Token.MARKER_INFO].append(LiteralText.CASE_SENSITIVE)
 
         self._insert_repeat_info(sample, info)
 

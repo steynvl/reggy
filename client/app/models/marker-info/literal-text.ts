@@ -1,6 +1,6 @@
 
 
-export class MarkedText {
+export class LiteralText {
   caseInsensitive: boolean;
   matchAllExceptSpecified: boolean;
 }

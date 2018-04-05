@@ -1,5 +1,5 @@
 import { BasicCharacters } from './marker-info/basic-characters';
-import { MarkedText } from './marker-info/marked-text';
+import { LiteralText } from './marker-info/literal-text';
 import { Digits } from './marker-info/digits';
 import { MarkedTextInfo } from './marked-text-info';
 import { RepeatInfo } from './marker-info/repeat-info';
@@ -12,7 +12,7 @@ export class Marker {
   colour: string;
   fieldType: string;
   markedTextInfo: Array<MarkedTextInfo>;
-  markerInfo: BasicCharacters | MarkedText | Digits | ControlCharacters | UnicodeCharacters;
+  markerInfo: BasicCharacters | LiteralText | Digits | ControlCharacters | UnicodeCharacters;
   repeatInfo: RepeatInfo;
 
   repeatInfoView: Array<string>;

@@ -1,5 +1,5 @@
 import { BasicCharacters } from './marker-info/basic-characters';
-import { MarkedText } from './marker-info/marked-text';
+import { LiteralText } from './marker-info/literal-text';
 import { Digits } from './marker-info/digits';
 import { RepeatInfo } from './marker-info/repeat-info';
 import { ControlCharacters } from './marker-info/control-characters';
@@ -14,7 +14,7 @@ export class SampleStringsInfo {
   markedStrings: Array<string>;
 
   /* semantical information about the marker  */
-  markerInfo: MarkedText | BasicCharacters | Digits | ControlCharacters | UnicodeCharacters;
+  markerInfo: LiteralText | BasicCharacters | Digits | ControlCharacters | UnicodeCharacters;
 
   /* tells us how many times the marker needs to be repeated */
   repeatInfo: RepeatInfo;

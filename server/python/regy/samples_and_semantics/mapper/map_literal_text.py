@@ -4,7 +4,7 @@ from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import RepeatInfo, Token
 
 
-class MapMarkedText:
+class MapLiteralText:
 
     def __init__(self, info, target_lang):
         self._info = info

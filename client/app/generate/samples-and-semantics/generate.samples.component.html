@@ -115,7 +115,7 @@
                 <option>Basic characters</option>
                 <option>Control characters</option>
                 <option>Digits</option>
-                <option>Marked text</option>
+                <option>Literal text</option>
                 <option>Numbers</option>
                 <option>Unicode characters</option>
               </select>
@@ -164,11 +164,11 @@
 
           <div class="info-pad" *ngIf="selectedMarkerIdx === idx">
 
-            <app-marked-text-info
-              *ngIf="markedElement.fieldType === 'Marked text'"
-              [markedText]="markedText"
+            <app-literal-text-info
+              *ngIf="markedElement.fieldType === 'Literal text'"
+              [literalText]="literalText"
               [possibleMatches]="markedElement.markedTextInfo" >
-            </app-marked-text-info>
+            </app-literal-text-info>
 
             <app-basic-characters-info
               *ngIf="markedElement.fieldType === 'Basic characters'"

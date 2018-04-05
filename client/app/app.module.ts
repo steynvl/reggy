@@ -14,7 +14,7 @@ import { GenerateSamplesService } from './services/generate.samples.service';
 import { GenerateCommonService } from './services/generate.common.service';
 import { GenerateInductionService } from './services/generate.induction.service';
 
-import { MarkedTextInfoComponent } from './field-info/marked-text-info/marked-text-info.component';
+import { LiteralTextInfoComponent } from './field-info/literal-text-info/literal-text-info.component';
 import { BasicCharacterInfoComponent } from './field-info/basic-characters-info/basic-characters-info.component';
 import { DigitsInfoComponent } from './field-info/digits-info/digits-info.component';
 import { ControlCharactersInfoComponent } from './field-info/control-characters-info/control-characters-info.component';
@@ -50,7 +50,7 @@ export function tokenGetter() {
     GenerateSamplesComponent,
     GenerateCommonComponent,
     GenerateInductionComponent,
-    MarkedTextInfoComponent,
+    LiteralTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
     ControlCharactersInfoComponent,

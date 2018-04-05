@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Marker } from '../../models/marker';
 import { colours } from '../../colours/colours';
 import { GenerateSamplesService } from '../../services/generate.samples.service';
-import { MarkedText } from '../../models/marker-info/marked-text';
+import { LiteralText } from '../../models/marker-info/literal-text';
 import { BasicCharacters } from '../../models/marker-info/basic-characters';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Digits } from '../../models/marker-info/digits';
@@ -26,7 +26,7 @@ export class GenerateSamplesComponent implements OnInit {
   markedElements: Array<Marker> = [];
   generatedRegex: string;
   selectedMarkerIdx = -1;
-  markedText: MarkedText;
+  literalText: LiteralText;
   basicCharacters: BasicCharacters;
   digits: Digits;
   controlCharacters: ControlCharacters;
@@ -134,7 +134,7 @@ export class GenerateSamplesComponent implements OnInit {
         });
 
         this.selectedText = '';
-        this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+        this.literalText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as LiteralText;
         this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
         this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
         this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
@@ -148,7 +148,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.markedElements.push({
             id: this.markedElements.length + 1,
             colour: colours[this.markedElements.length],
-            fieldType: 'Marked text',
+            fieldType: 'Literal text',
             markerInfo: {
               caseInsensitive:         false,
               matchAllExceptSpecified: false
@@ -172,7 +172,7 @@ export class GenerateSamplesComponent implements OnInit {
 
         this.selectedText = '';
         this.selectedMarkerIdx = this.markedElements.length - 1;
-        this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+        this.literalText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as LiteralText;
 
         this.highlightTextArea();
       } else {
@@ -193,12 +193,12 @@ export class GenerateSamplesComponent implements OnInit {
 
     switch (this.markedElements[this.selectedMarkerIdx].fieldType) {
 
-      case 'Marked text':
-        this.markedText = {
+      case 'Literal text':
+        this.literalText = {
           caseInsensitive:         false,
           matchAllExceptSpecified: false
         };
-        this.markedElements[this.selectedMarkerIdx].markerInfo = this.markedText;
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.literalText;
         break;
 
       case 'Basic characters':
@@ -259,7 +259,7 @@ export class GenerateSamplesComponent implements OnInit {
       this.mark(true);
     }
 
-    this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+    this.literalText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as LiteralText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
     this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
@@ -354,7 +354,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.markerTabIndex = idx;
     this.selectedMarkerIdx = idx;
 
-    this.markedText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MarkedText;
+    this.literalText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as LiteralText;
     this.basicCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BasicCharacters;
     this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
