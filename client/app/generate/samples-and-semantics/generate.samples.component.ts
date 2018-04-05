@@ -11,6 +11,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadSamples } from '../../models/payload/payload-samples';
 import { ControlCharacters } from '../../models/marker-info/control-characters';
 import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
+import { MatchAnything } from '../../models/marker-info/match-anything';
 
 declare var jQuery: any;
 
@@ -31,6 +32,7 @@ export class GenerateSamplesComponent implements OnInit {
   digits: Digits;
   controlCharacters: ControlCharacters;
   unicodeCharacters: UnicodeCharacters;
+  matchAnything: MatchAnything;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -41,8 +43,7 @@ export class GenerateSamplesComponent implements OnInit {
   markerTabIndex = 0;
 
   constructor(private generateService: GenerateSamplesService,
-              public toast: ToastComponent) {
-  }
+              public toast: ToastComponent) { }
 
   ngOnInit() {
     this.generalRegexInfo = {
@@ -139,6 +140,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
         this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
         this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
+        this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
       }
 
     } else {
@@ -246,6 +248,24 @@ export class GenerateSamplesComponent implements OnInit {
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.unicodeCharacters;
         break;
 
+      case 'Match anything':
+        this.matchAnything = {
+          matchAnythingExcept: 'Basic characters',
+          specificCharacters : '',
+          specificCharacter  : '',
+          canSpanAcrossLines : false,
+          basicCharacters: {
+            lowerCaseLetters     : false,
+            upperCaseLetters     : false,
+            digits               : false,
+            punctuationAndSymbols: false,
+            whiteSpace           : false,
+            lineBreaks           : false
+          }
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.matchAnything;
+        break;
+
       default:
         break;
     }
@@ -264,6 +284,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
+    this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
     this.highlightTextArea();
   }
 
@@ -359,6 +380,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.digits = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Digits;
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
+    this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
     this.highlightTextArea();
   }
 

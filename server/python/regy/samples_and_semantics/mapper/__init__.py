@@ -4,3 +4,4 @@ from regy.samples_and_semantics.mapper.map_digits import MapDigits
 from regy.samples_and_semantics.mapper.map_basic_characters import MapBasicCharacters
 from regy.samples_and_semantics.mapper.map_control_characters import MapControlCharacters
 from regy.samples_and_semantics.mapper.map_unicode_characters import MapUnicodeCharacters
+from regy.samples_and_semantics.mapper.map_match_anything import MapMatchAnything

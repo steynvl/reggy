@@ -1,0 +1,151 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox"
+        [checked]="matchAnything.canSpanAcrossLines"
+        (change)="matchAnything.canSpanAcrossLines = !matchAnything.canSpanAcrossLines">
+        Match can span across lines
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-10">
+
+    <label for="match-anything-except">Match anything except:</label>
+    <select id="match-anything-except" class="form-control" [(ngModel)]="matchAnything.matchAnythingExcept">
+      <option>Basic characters</option>
+      <option>Specific characters</option>
+      <option>Specific character</option>
+      <option>Nothing</option>
+    </select>
+
+  </div>
+
+</div>
+
+<div class="row move-down"
+     *ngIf="matchAnything.matchAnythingExcept === 'Specific characters' ||
+            matchAnything.matchAnythingExcept === 'Specific character'">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-10">
+
+    <div class="form-group">
+
+      <input type="text" class="form-control"
+             *ngIf="matchAnything.matchAnythingExcept === 'Specific characters'"
+             placeholder="Characters that should not be matched..."
+             [(ngModel)]="matchAnything.specificCharacters"
+      >
+
+      <input type="text" class="form-control"
+             *ngIf="matchAnything.matchAnythingExcept === 'Specific character'"
+             placeholder="Character that should not be matched..."
+             [(ngModel)]="matchAnything.specificCharacter"
+      >
+
+    </div>
+
+  </div>
+
+
+</div>
+
+<div class="row move-down" *ngIf="matchAnything.matchAnythingExcept === 'Basic characters'">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.lowerCaseLetters"
+             (change)="matchAnything.basicCharacters.lowerCaseLetters = !matchAnything.basicCharacters.lowerCaseLetters">
+      <label class="form-check-label">
+        Lowercase letters
+      </label>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.upperCaseLetters"
+             (change)="matchAnything.basicCharacters.upperCaseLetters = !matchAnything.basicCharacters.upperCaseLetters">
+      <label class="form-check-label">
+        Uppercase letters
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row move-down" *ngIf="matchAnything.matchAnythingExcept === 'Basic characters'">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.digits"
+             (change)="matchAnything.basicCharacters.digits = !matchAnything.basicCharacters.digits">
+      <label class="form-check-label">
+        Digits
+      </label>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.punctuationAndSymbols"
+             (change)="matchAnything.basicCharacters.punctuationAndSymbols = !matchAnything.basicCharacters.punctuationAndSymbols">
+      <label class="form-check-label">
+        Punctuation and symbols
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row move-down" *ngIf="matchAnything.matchAnythingExcept === 'Basic characters'">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.whiteSpace"
+             (change)="matchAnything.basicCharacters.whiteSpace = !matchAnything.basicCharacters.whiteSpace">
+      <label class="form-check-label">
+        Whitespace
+      </label>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5">
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox"
+             [checked]="matchAnything.basicCharacters.lineBreaks"
+             (change)="matchAnything.basicCharacters.lineBreaks = !matchAnything.basicCharacters.lineBreaks">
+      <label class="form-check-label">
+        Line breaks
+      </label>
+    </div>
+
+  </div>
+
+</div>

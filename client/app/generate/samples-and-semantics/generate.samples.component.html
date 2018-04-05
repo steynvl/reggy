@@ -116,6 +116,7 @@
                 <option>Control characters</option>
                 <option>Digits</option>
                 <option>Literal text</option>
+                <option>Match anything</option>
                 <option>Numbers</option>
                 <option>Unicode characters</option>
               </select>
@@ -194,6 +195,12 @@
               *ngIf="markedElement.fieldType === 'Numbers'"
               >
             </app-numbers-info>
+
+            <app-match-anything-info
+              *ngIf="markedElement.fieldType === 'Match anything'"
+              [matchAnything]="matchAnything"
+              >
+            </app-match-anything-info>
 
           </div>
 

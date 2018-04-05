@@ -7,3 +7,4 @@ class MarkerType(Enum):
     DIGITS             = 3
     CONTROL_CHARACTERS = 4
     UNICODE_CHARACTERS = 5
+    MATCH_ANYTHING     = 6

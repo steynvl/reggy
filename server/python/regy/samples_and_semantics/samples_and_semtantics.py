@@ -33,6 +33,8 @@ class SamplesAndSemantics:
                 self._re.extend(mapper.MapControlCharacters(scanned_sample, target_lang).get_re())
             elif marker_type == MarkerType.UNICODE_CHARACTERS:
                 self._re.extend(mapper.MapUnicodeCharacters(scanned_sample, target_lang).get_re())
+            elif marker_type == MarkerType.MATCH_ANYTHING:
+                self._re.extend(mapper.MapMatchAnything(scanned_sample, target_lang).get_re())
 
         self._add_general_info(scanned_samples)
 

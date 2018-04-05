@@ -19,7 +19,7 @@ class Token(Enum):
     CONTAINS_DIGIT             = 11
     MATCH_ALL_EXCEPT_SPECIFIED = 12
 
-    DIGITS                    = 13
+    DIGITS                     = 13
     MINUS_INFO                 = 14
     INCLUDE_MINUS              = 15
     INCLUDE_OPTIONAL_MINUS     = 16

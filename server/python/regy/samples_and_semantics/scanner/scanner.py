@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters
 from regy.samples_and_semantics.tokens.control_characters import control_char_to_token, control_chars
+from regy.samples_and_semantics.tokens.match_anything import MatchAnything, basic_char_to_tok
 from regy.samples_and_semantics.tokens.token import Token
 from regy.samples_and_semantics.tokens import MarkerType, LiteralText, RepeatInfo
 from regy.samples_and_semantics.tokens.unicode_characters import unicode_chars, unicode_char_to_token
@@ -46,6 +47,9 @@ class Scanner:
             elif marker_type == 'Unicode characters':
                 info[Token.MARKER_TYPE] = MarkerType.UNICODE_CHARACTERS
                 self._parse_unicode_characters(sample, info)
+            elif marker_type == 'Match anything':
+                info[Token.MARKER_TYPE] = MarkerType.MATCH_ANYTHING
+                self._parse_match_anything(sample, info)
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
@@ -121,6 +125,25 @@ class Scanner:
                 wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
 
         info[Token.UNICODE_CHARACTERS] = wanted_unicode_chars
+
+        self._insert_repeat_info(sample, info)
+
+    def _parse_match_anything(self, sample, info):
+        marker_info = sample['markerInfo']
+
+        match_anything_except = marker_info['matchAnythingExcept']
+
+        if match_anything_except == 'Specific characters':
+            info[MatchAnything.SPECIFIC_CHARACTERS] = ''.join(set(marker_info['specificCharacters']))
+        elif match_anything_except == 'Specific character':
+            info[MatchAnything.SPECIFIC_CHARACTER] = marker_info['specificCharacter'][0]
+        elif match_anything_except == 'Nothing':
+            info[MatchAnything.NOTHING] = True
+        elif match_anything_except == 'Basic characters':
+            basic_chars = marker_info['basicCharacters']
+            info[MatchAnything.BASIC_CHARACTERS] = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
+
+        info[MatchAnything.CAN_SPAN_ACROSS_LINES] = marker_info['canSpanAcrossLines']
 
         self._insert_repeat_info(sample, info)
 

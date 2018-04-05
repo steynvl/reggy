@@ -32,7 +32,7 @@ basic_characters_to_re = {
     },
 
     Target.PERL: {
-        BasicCharacters.LOWER_CASE_LETTERS         : '[a-z]',
+        BasicCharacters.LOWER_CASE_LETTERS         : 'a-z',
         BasicCharacters.UPPER_CASE_LETTERS         : 'A-Z',
         BasicCharacters.DIGITS                     : '\\d',
         BasicCharacters.PUNCTUATION_AND_SYMBOLS    : '\\p{PosixPunct}',

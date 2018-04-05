@@ -9,6 +9,9 @@ export default class GenerateSamplesCtrl extends BaseCtrl {
     const samples = req.body.params;
 
     const pathToRegex = process.env.PATH_TO_SAMPLES;
+    console.log('-------------');
+    console.log(samples);
+    console.log('-------------');
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));
     let regex = '';
 
