@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MatchAnything } from '../../models/marker-info/match-anything';
+import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 
 @Component({
   selector: 'app-list-of-literal-text-info',
@@ -8,6 +8,11 @@ import { MatchAnything } from '../../models/marker-info/match-anything';
 })
 export class ListOfLiteralTextInfoComponent {
 
-  // @Input() matchAnything: MatchAnything;
+  @Input() listOfLiteralText: ListOfLiteralText;
+  inputFields = [0];
 
+  addLiteralTextToList() {
+    this.inputFields.push(this.inputFields[this.inputFields.length - 1] + 1);
+    this.listOfLiteralText.literalText.push('');
+  }
 }

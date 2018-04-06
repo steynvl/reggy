@@ -5,3 +5,4 @@ from regy.samples_and_semantics.mapper.map_basic_characters import MapBasicChara
 from regy.samples_and_semantics.mapper.map_control_characters import MapControlCharacters
 from regy.samples_and_semantics.mapper.map_unicode_characters import MapUnicodeCharacters
 from regy.samples_and_semantics.mapper.map_match_anything import MapMatchAnything
+from regy.samples_and_semantics.mapper.map_list_of_literal_text import MapListOfLiteralText

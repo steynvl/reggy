@@ -6,6 +6,7 @@ import { RepeatInfo } from './marker-info/repeat-info';
 import { ControlCharacters } from './marker-info/control-characters';
 import { UnicodeCharacters } from './marker-info/unicode-characters';
 import { MatchAnything } from './marker-info/match-anything';
+import { ListOfLiteralText } from './marker-info/list-of-literal-text';
 
 export class Marker {
 
@@ -13,7 +14,8 @@ export class Marker {
   colour: string;
   fieldType: string;
   markedTextInfo: Array<MarkedTextInfo>;
-  markerInfo: BasicCharacters | LiteralText | Digits | ControlCharacters | UnicodeCharacters | MatchAnything;
+  markerInfo: BasicCharacters | LiteralText | Digits | ControlCharacters | UnicodeCharacters
+    | MatchAnything | ListOfLiteralText;
   repeatInfo: RepeatInfo;
 
   repeatInfoView: Array<string>;

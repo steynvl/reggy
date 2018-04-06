@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 from regy.samples_and_semantics.tokens.basic_characters_ import BasicCharacters
 from regy.samples_and_semantics.tokens.control_characters import control_char_to_token, control_chars
+from regy.samples_and_semantics.tokens.list_of_literal_text import ListOfLiteralText
 from regy.samples_and_semantics.tokens.match_anything import MatchAnything, basic_char_to_tok
 from regy.samples_and_semantics.tokens.token import Token
 from regy.samples_and_semantics.tokens import MarkerType, LiteralText, RepeatInfo
@@ -50,6 +51,9 @@ class Scanner:
             elif marker_type == 'Match anything':
                 info[Token.MARKER_TYPE] = MarkerType.MATCH_ANYTHING
                 self._parse_match_anything(sample, info)
+            elif marker_type == 'List of literal text':
+                info[Token.MARKER_TYPE] = MarkerType.LIST_OF_LITERAL_TEXT
+                self._parse_list_of_literal_text(sample, info)
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
@@ -144,6 +148,14 @@ class Scanner:
             info[MatchAnything.BASIC_CHARACTERS] = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
 
         info[MatchAnything.CAN_SPAN_ACROSS_LINES] = marker_info['canSpanAcrossLines']
+
+        self._insert_repeat_info(sample, info)
+
+    def _parse_list_of_literal_text(self, sample, info):
+        marker_info = sample['markerInfo']
+
+        info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED] = marker_info['matchAnythingExceptSpecified']
+        info[ListOfLiteralText.LITERAL_TEXT] = marker_info['literalText']
 
         self._insert_repeat_info(sample, info)
 

@@ -12,6 +12,7 @@ import { PayloadSamples } from '../../models/payload/payload-samples';
 import { ControlCharacters } from '../../models/marker-info/control-characters';
 import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 import { MatchAnything } from '../../models/marker-info/match-anything';
+import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 
 declare var jQuery: any;
 
@@ -33,6 +34,7 @@ export class GenerateSamplesComponent implements OnInit {
   controlCharacters: ControlCharacters;
   unicodeCharacters: UnicodeCharacters;
   matchAnything: MatchAnything;
+  listOfLiteralText: ListOfLiteralText;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -141,6 +143,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
         this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
+        this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
       }
 
     } else {
@@ -266,6 +269,14 @@ export class GenerateSamplesComponent implements OnInit {
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.matchAnything;
         break;
 
+      case 'List of literal text':
+        this.listOfLiteralText = {
+          literalText                 : [''],
+          matchAnythingExceptSpecified: false
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.listOfLiteralText;
+        break;
+
       default:
         break;
     }
@@ -285,6 +296,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
     this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
+    this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
     this.highlightTextArea();
   }
 
@@ -381,6 +393,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.controlCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ControlCharacters;
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
     this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
+    this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
     this.highlightTextArea();
   }
 

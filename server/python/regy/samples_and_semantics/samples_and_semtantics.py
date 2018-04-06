@@ -35,6 +35,8 @@ class SamplesAndSemantics:
                 self._re.extend(mapper.MapUnicodeCharacters(scanned_sample, target_lang).get_re())
             elif marker_type == MarkerType.MATCH_ANYTHING:
                 self._re.extend(mapper.MapMatchAnything(scanned_sample, target_lang).get_re())
+            elif marker_type == MarkerType.LIST_OF_LITERAL_TEXT:
+                self._re.extend(mapper.MapListOfLiteralText(scanned_sample, target_lang).get_re())
 
         self._add_general_info(scanned_samples)
 
