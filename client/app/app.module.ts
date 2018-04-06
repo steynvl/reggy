@@ -21,6 +21,7 @@ import { ControlCharactersInfoComponent } from './field-info/control-characters-
 import { UnicodeCharactersInfoComponent } from './field-info/unicode-characters-info/unicode-characters-info.component';
 import { NumbersInfoComponent } from './field-info/numbers-info/numbers-info.component';
 import { MatchAnythingInfoComponent } from './field-info/match-anything-info/match-anything-info.component';
+import { ListOfLiteralTextInfoComponent } from './field-info/list-of-literal-text-info/list-of-literal-text-info.component';
 
 import { UsernameInfoComponent } from './common-use-case-components/username-info/username-info.component';
 import { PasswordInfoComponent } from './common-use-case-components/password-info/password-info.component';
@@ -58,6 +59,7 @@ export function tokenGetter() {
     UnicodeCharactersInfoComponent,
     NumbersInfoComponent,
     MatchAnythingInfoComponent,
+    ListOfLiteralTextInfoComponent,
     UsernameInfoComponent,
     PasswordInfoComponent,
     UrlInfoComponent,

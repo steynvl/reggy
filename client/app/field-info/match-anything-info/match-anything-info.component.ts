@@ -10,9 +10,4 @@ export class MatchAnythingInfoComponent {
 
   @Input() matchAnything: MatchAnything;
 
-
-  mmm() {
-    console.log(this.matchAnything.matchAnythingExcept);
-  }
-
 }

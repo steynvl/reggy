@@ -115,6 +115,7 @@
                 <option>Basic characters</option>
                 <option>Control characters</option>
                 <option>Digits</option>
+                <option>List of literal text</option>
                 <option>Literal text</option>
                 <option>Match anything</option>
                 <option>Numbers</option>
@@ -201,6 +202,11 @@
               [matchAnything]="matchAnything"
               >
             </app-match-anything-info>
+
+            <app-list-of-literal-text-info
+              *ngIf="markedElement.fieldType === 'List of literal text'"
+              >
+            </app-list-of-literal-text-info>
 
           </div>
 
