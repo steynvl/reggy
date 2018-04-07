@@ -23,14 +23,17 @@ export class UrlInfoComponent implements OnInit {
 
   ngOnInit() {
     this.url = {
-      schemes    : 'http',
-      portNumbers: 'No port number',
-      username   : 'No user names',
-      password   : 'No password',
-      domainName : 'Allow any domain name',
-      folders    : 'No folders',
-      fileNames  : 'No file names',
-      parameters : 'No parameters'
+      schemes                : 'http',
+      portNumbers            : 'No port number',
+      specOptionalPortNumbers: '',
+      specRequiredPortNumbers: '',
+      username               : 'No user names',
+      specUserNames          : '',
+      password               : 'No password',
+      domainName             : 'Allow any domain name',
+      folders                : 'No folders',
+      fileNames              : 'No file names',
+      parameters             : 'No parameters'
     };
   }
 

@@ -1,9 +1,91 @@
 from regy.samples_and_semantics.tokens import Target
-
-opt_to_re = {
+url_to_re = {
 
     Target.JAVA: {
+        'scheme': {
+            'http'                         : 'http://',
+            'https'                        : 'https://',
+            'http;https'                   : 'https?://',
+            'http;https;www.'              : '(?:https?//|www\\\\.)',
+            'ftp'                          : 'ftp://',
+            'ftp;ftp.'                     : '(?:ftp://|ftp\\\\.)',
+            'ftp;http'                     : '(?:ht|f)tp://',
+            'ftp;http;ftp.;www.'           : '(?:(?:ht|f)tp://|(?:ftp|www)\\\\.)',
+            'file'                         : 'file://',
+            'file;http;https'              : '(?:file|https?)://',
+            'file;http;https;www.'         : '(?:(?:file|https?)://|www\\\\.)',
+            'file;ftp'                     : 'f(?:ile|tp)://',
+            'file;ftp;http;https'          : '(?:file|ftp|https?)://',
+            'file;ftp;http;https;ftp.;www.': '(?:(?:file|ftp|https?)://|(?:ftp|www)\\\\.)',
+            'feed'                         : 'feed://',
+            'feed;http;https'              : '(?:feed|https?)://',
+            'feed;http;https;www.'         : '(?:(?:feed|https?)://|www\\\\.)',
+            'news;nntp'                    : 'bn(?:ews|ntp)://',
+            'news;nntp;news.'              : '(?:n(?:ews|ntp)://|news\\\\.)',
+            'dns'                          : 'dns://',
+            'ldap'                         : 'ldap://',
+            'nfs'                          : 'nfs://',
+            'pop'                          : 'pop://',
+            'rtsp'                         : 'rtsp://',
+            'snmp'                         : 'snmp://'
+        },
+        'username': {
+            'No user names': '',
+            'Allow any user name': '(?:[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]+{}{}?',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:[\d!$\'()*+,._a-z-]+{}{}?',
+            'Basic characters only [A-Za-z0-9._-]': '(?:[\d._a-z-]+{}{}?',
+            'Specific user names only': ''
+        },
+        'password': {
+            'No password': '',
+            'Optional password': '(?::[\d!#$%&\'*+./=?_`a-z{|}~^-]+)?@)?',
+            'Require password': ':[\d!#$%&\'*+./=?_`a-z{|}~^-]+@)?',
+            'specUserOptionalPassword': '(?::[\w!#$%&\'*+./=?`{|}~^-]+)?@',
+            'specUserRequirePassword': ':[\w!#$%&\'*+./=?`{|}~^-]+@'
+        },
+        'host': {
 
+        },
+        'portNumbers': {
+            'No port number': '',
+            'Optional port number': '(?::\\\\d{1,5}+)?',
+            'Specify optional port numbers': '(?::(?:{}))?',
+            'Require port number' : ':\\\\d{1,5}+',
+            'Require specific port numbers': ':(?:{})'
+        },
+        'Folders': {
+            'No folders': '',
+            'Allow any path': '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\_`a-z{|}~^-]+)',
+            'Safe URL characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\\\\d!$\'()*+,._a-z-]++)',
+            'Safe folder characters only [A-Za-z0-9$_+!\'(),-]': '(?:/[\\\\d!$\'()+,_a-z-]++)',
+            'Basic characters only [A-Za-z0-9._-]': '(?:/[\\\\d._a-z-]++)',
+            'Basic folder characters only [A-Za-z0-9_-]': '(?:/[\d_a-z-]++)',
+            'Specific folders only': '(?:{})?',
+            'Specific paths only': '/(?:{})/'
+        },
+        'File names': {
+            'required': {
+            'Allow any file name'                         : '/[]\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]+',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/[\d!$\'()*+,._a-z-]+',
+            'Basic characters only [A-Za-z0-9._-]'        : '/[\d._a-z-]+',
+            'Specific extensions only'                    : '',
+            'Specific file names only'                    : ''
+            },
+            'optional': {
+            'Allow any file name'                         : '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\d!$\'()*+,._a-z-]*)?',
+            'Basic characters only [A-Za-z0-9._-]'        : '(?:/[\d._a-z-]*)?',
+            'Specific extensions only'                    : '',
+            'Specific file names only'                    : ''
+            }
+        },
+        'Parameters': {
+            'No parameters': '',
+            'Allow any parameters': '/?(?:\?[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/?(?:\?[\d!$&\'()*+,.=_a-z-]*)?',
+            'Basic characters only [A-Za-z0-9._-]': '',
+            'Specific parameters only': ''
+        }
     },
 
     Target.PERL: {
@@ -16,3 +98,4 @@ opt_to_re = {
 
 
 }
+

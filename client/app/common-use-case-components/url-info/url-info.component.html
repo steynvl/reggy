@@ -20,6 +20,23 @@
           <option>ftp;ftp.</option>
           <option>ftp;http</option>
           <option>ftp;http;ftp.;www.</option>
+          <option>file</option>
+          <option>file;http;https</option>
+          <option>file;http;https;www.</option>
+          <option>file;ftp</option>
+          <option>file;ftp;http;https</option>
+          <option>file;ftp;http;https;ftp.;www.</option>
+          <option>feed</option>
+          <option>feed;http;https</option>
+          <option>feed;http;https;www.</option>
+          <option>news;nntp</option>
+          <option>news;nntp;news.</option>
+          <option>dns</option>
+          <option>ldap</option>
+          <option>nfs</option>
+          <option>pop</option>
+          <option>rtsp</option>
+          <option>snmp</option>
         </select>
 
       </div>
@@ -31,6 +48,9 @@
           <option>No port number</option>
           <option>Optional port number</option>
           <option>Require port number</option>
+          <option>Specify optional port numbers</option>
+          <option>Specify required port numbers</option>
+          <option></option>
         </select>
 
       </div>
@@ -50,12 +70,40 @@
 
     </div>
 
+    <div class="row" *ngIf="url.username === 'Specific user names only'
+        || url.portNumbers === 'Specify optional port numbers'
+        || url.portNumbers === 'Specify required port numbers'">
+
+      <div class="col-sm-4"></div>
+
+      <div class="col-sm-4" *ngIf="url.portNumbers === 'Specify optional port numbers'">
+        <input type="text" class="form-control" placeholder="Optional port number(s)..."
+               [(ngModel)]="url.specOptionalPortNumbers">
+      </div>
+
+      <div class="col-sm-4" *ngIf="url.portNumbers === 'Specify required port numbers'">
+        <input type="text" class="form-control" placeholder="Required port number(s)..."
+               [(ngModel)]="url.specRequiredPortNumbers">
+      </div>
+
+      <div class="col-sm-4"
+           *ngIf="url.portNumbers !== 'Specify required port numbers'
+           && url.portNumbers !== 'Specify optional port numbers'">
+      </div>
+
+      <div class="col-sm-4" *ngIf="url.username === 'Specific user names only'">
+        <input type="text" class="form-control" placeholder="Specific username(s)..."
+               [(ngModel)]="url.specUserNames">
+      </div>
+
+    </div>
+
     <div class="row move-down">
 
       <div class="col-sm-4">
 
         <label for="password">Password:</label>
-        <select id="password" class="form-control" [(ngModel)]="url.password">
+        <select id="password" class="form-control" [(ngModel)]="url.password" [disabled]="url.username === 'No user names'">
           <option>No password</option>
           <option>Optional password</option>
           <option>Require password</option>
@@ -78,7 +126,7 @@
       <div class="col-sm-4">
 
         <label for="folders">Folders:</label>
-        <select id="folders" class="form-control" [(ngModel)]="url.folders">
+        <select id="folders" class="form-control" [(ngModel)]="url.folders" [disabled]="url.fileNames !== 'No file names'">
           <option>No folders</option>
           <option>Allow any path</option>
           <option>Safe URL characters only [A-Za-z0-9$_.+!*'(),-]</option>
@@ -97,7 +145,7 @@
 
       <div class="col-sm-4">
         <label for="file-names">File names:</label>
-        <select id="file-names" class="form-control" [(ngModel)]="url.fileNames">
+        <select id="file-names" class="form-control" [(ngModel)]="url.fileNames" [disabled]="url.folders !== 'No folders'">
           <option>No file names</option>
           <option>Allow any file name</option>
           <option>Safe characters only [A-Za-z0-9$_.+!*'(),-]</option>
