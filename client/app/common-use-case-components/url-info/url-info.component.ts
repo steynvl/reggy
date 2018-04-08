@@ -31,9 +31,17 @@ export class UrlInfoComponent implements OnInit {
       specUserNames          : '',
       password               : 'No password',
       domainName             : 'Allow any domain name',
+      specDomainNames        : '',
       folders                : 'No folders',
+      minFolderDepth         : '',
+      maxFolderDepth         : '',
+      specFoldersOnly        : '',
+      specPathsOnly          : '',
       fileNames              : 'No file names',
-      parameters             : 'No parameters'
+      specExtensions         : '',
+      specFileNames          : '',
+      parameters             : 'No parameters',
+      specParameters         : ''
     };
   }
 

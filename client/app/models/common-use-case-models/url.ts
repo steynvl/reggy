@@ -8,8 +8,15 @@ export class Url {
   specUserNames          : string;
   password               : string;
   domainName             : string;
+  specDomainNames        : string;
   folders                : string;
+  minFolderDepth         : string;
+  maxFolderDepth         : string;
+  specFoldersOnly        : string;
+  specPathsOnly          : string;
   fileNames              : string;
+  specExtensions         : string;
+  specFileNames          : string;
   parameters             : string;
-
+  specParameters         : string;
 }
