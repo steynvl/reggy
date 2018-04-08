@@ -13,6 +13,7 @@
           <option>Date and time</option>
           <option>Email address</option>
           <option>GUID</option>
+          <option>IPv4 address</option>
           <option>National ID</option>
           <option>Password</option>
           <option>URL</option>
@@ -68,5 +69,10 @@
     *ngIf="type === 'National ID'"
     [generalRegexInfo]="generalRegexInfo">
   </app-national-id-info>
+
+  <app-ipv4-address-info
+    *ngIf="type === 'IPv4 address'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-ipv4-address-info>
 
 </div>

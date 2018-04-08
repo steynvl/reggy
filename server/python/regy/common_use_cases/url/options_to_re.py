@@ -1,4 +1,5 @@
 from regy.samples_and_semantics.tokens import Target
+
 url_to_re = {
 
     Target.JAVA: {
@@ -38,10 +39,10 @@ url_to_re = {
         },
         'password': {
             'No password': '',
-            'Optional password': '(?::[\d!#$%&\'*+./=?_`a-z{|}~^-]+)?@)?',
-            'Require password': ':[\d!#$%&\'*+./=?_`a-z{|}~^-]+@)?',
-            'specUserOptionalPassword': '(?::[\w!#$%&\'*+./=?`{|}~^-]+)?@',
-            'specUserRequirePassword': ':[\w!#$%&\'*+./=?`{|}~^-]+@'
+            'Optional password': '(?::[\\\\d!#$%&\'*+./=?_`a-z{|}~^-]+)?@)?',
+            'Require password': ':[\\\\d!#$%&\'*+./=?_`a-z{|}~^-]+@)?',
+            'specUserOptionalPassword': '(?::[\\\\w!#$%&\'*+./=?`{|}~^-]+)?@',
+            'specUserRequirePassword': ':[\\\\w!#$%&\'*+./=?`{|}~^-]+@'
         },
         'host': {
 
@@ -53,7 +54,7 @@ url_to_re = {
             'Require port number' : ':\\\\d{1,5}+',
             'Require specific port numbers': ':(?:{})'
         },
-        'Folders': {
+        'folders': {
             'No folders': '',
             'Allow any path': '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\_`a-z{|}~^-]+)',
             'Safe URL characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\\\\d!$\'()*+,._a-z-]++)',
@@ -63,27 +64,27 @@ url_to_re = {
             'Specific folders only': '(?:{})?',
             'Specific paths only': '/(?:{})/'
         },
-        'File names': {
+        'fileNames': {
             'required': {
-            'Allow any file name'                         : '/[]\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]+',
-            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/[\d!$\'()*+,._a-z-]+',
-            'Basic characters only [A-Za-z0-9._-]'        : '/[\d._a-z-]+',
-            'Specific extensions only'                    : '',
-            'Specific file names only'                    : ''
+            'Allow any file name'                         : '/[]\\\\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]+',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/[\\\\d!$\'()*+,._a-z-]+',
+            'Basic characters only [A-Za-z0-9._-]'        : '/[\\\\d._a-z-]+',
+            'Specific extensions only'                    : '/[\\\\w.-]+\\\\.{}',
+            'Specific file names only'                    : '/{}'
             },
             'optional': {
-            'Allow any file name'                         : '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
-            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\d!$\'()*+,._a-z-]*)?',
-            'Basic characters only [A-Za-z0-9._-]'        : '(?:/[\d._a-z-]*)?',
-            'Specific extensions only'                    : '',
-            'Specific file names only'                    : ''
+            'Allow any file name'                         : '(?:/[]\\\\d!"#$%&\'()*+,.:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
+            'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\\\\d!$\'()*+,._a-z-]*)?',
+            'Basic characters only [A-Za-z0-9._-]'        : '(?:/[\\\\d._a-z-]*)?',
+            'Specific extensions only'                    : '(?:/[\\\\w.-]+\\\\.{}?)?',
+            'Specific file names only'                    : '(?:/{}?)?'
             }
         },
-        'Parameters': {
+        'parameters': {
             'No parameters': '',
             'Allow any parameters': '/?(?:\?[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
             'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/?(?:\?[\d!$&\'()*+,.=_a-z-]*)?',
-            'Basic characters only [A-Za-z0-9._-]': '',
+            'Basic characters only [A-Za-z0-9._-]': '/?(?:\?[A-Za-z0-9._-]*)?',
             'Specific parameters only': ''
         }
     },

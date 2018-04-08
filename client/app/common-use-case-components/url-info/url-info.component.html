@@ -204,11 +204,16 @@
 
     </div>
 
-    <div class="row" *ngIf="url.fileNames === 'Specific extensions only'
-        || url.fileNames === 'Specific file names only' || url.parameters === 'Specific parameters only'">
+    <div class="row" *ngIf="url.fileNames !== 'No file names' || url.parameters === 'Specific parameters only'">
 
-      <div class="col-sm-4"
+      <div class="col-sm-4 text-center"
         *ngIf="url.fileNames !== 'Specific extensions only' && url.fileNames !== 'Specific file names only'">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox"
+                 [checked]="url.optionalFileNames"
+                 (change)="url.optionalFileNames = !url.optionalFileNames">
+          Optional file names
+        </label>
       </div>
 
       <div class="col-sm-4" *ngIf="url.fileNames === 'Specific extensions only'">
@@ -227,6 +232,20 @@
         <input type="text" class="form-control"
                placeholder="Specify parameters separated by semicolons"
                [(ngModel)]="url.specParameters">
+      </div>
+
+    </div>
+
+    <div class="row"
+         *ngIf="url.fileNames === 'Specific extensions only' || url.fileNames === 'Specific file names only'">
+
+      <div class="col-sm-4 text-center">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox"
+                 [checked]="url.optionalFileNames"
+                 (change)="url.optionalFileNames = !url.optionalFileNames">
+          Optional file names
+        </label>
       </div>
 
     </div>

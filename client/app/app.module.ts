@@ -32,6 +32,7 @@ import { VatNumberInfoComponent } from './common-use-case-components/vat-number-
 import { DateAndTimeInfoComponent } from './common-use-case-components/date-and-time-info/date-and-time-info.component';
 import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-info.component';
 import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
+import { Ipv4AddressInfoComponent } from './common-use-case-components/ipv4-address-info/ipv4-address-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -69,6 +70,7 @@ export function tokenGetter() {
     DateAndTimeInfoComponent,
     GuidInfoComponent,
     NationalIdInfoComponent,
+    Ipv4AddressInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

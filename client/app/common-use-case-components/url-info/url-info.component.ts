@@ -40,6 +40,7 @@ export class UrlInfoComponent implements OnInit {
       fileNames              : 'No file names',
       specExtensions         : '',
       specFileNames          : '',
+      optionalFileNames      : false,
       parameters             : 'No parameters',
       specParameters         : ''
     };

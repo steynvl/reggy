@@ -17,6 +17,7 @@ export class Url {
   fileNames              : string;
   specExtensions         : string;
   specFileNames          : string;
+  optionalFileNames      : boolean;
   parameters             : string;
   specParameters         : string;
 }
