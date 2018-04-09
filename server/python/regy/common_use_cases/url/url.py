@@ -27,8 +27,7 @@ class Url:
         files_to_re    = target['fileNames']
         param_to_re    = target['parameters']
 
-
-        self._re.append(scheme_to_re[self._info['scheme']])
+        self._re.append(scheme_to_re[self._info['schemes']])
 
         if self._info['password'] == 'No password':
             if self._info['username'] == 'Specific user names only':
@@ -42,24 +41,34 @@ class Url:
             elif self._info['username'] != 'No user names':
                 self._re.append(username_to_re[self._info['username']].format('', ''))
 
-            if self._info['password'] == 'Optional password':
-                self._re.append(password_to_re['specUserOptionalPassword'])
-            elif self._info['password'] == 'Require password':
-                self._re.append(password_to_re['specUserRequirePassword'])
+            if self._info['username'] != 'No user names':
+                if self._info['password'] == 'Optional password':
+                    self._re.append(password_to_re['specUserOptionalPassword'])
+                elif self._info['password'] == 'Require password':
+                    self._re.append(password_to_re['specUserRequirePassword'])
 
-        if self._info['domainName'] == 'Specific domains only':
-            pass
+        domain = self._info['domainName']
+        if domain == 'Specific domains only':
+            self._re.append(self._parse_specific_field(self._info['specDomainNames']))
+        elif domain == 'Allow any domain on specific TLD':
+            self._re.append(domain_to_re[domain].format(self._info['specificTld']))
+        elif domain == 'Allow any subdomain on specific domain':
+            self._re.append(domain_to_re[domain].format(self._info['subdomainOnSpecDomain']))
         else:
-            self._re.append('')
+            self._re.append(domain_to_re[domain])
 
         port_nrs = self._info['portNumbers']
-        if port_nrs == 'Optional port numbers' or port_nrs == 'Require port numbers':
+
+        if port_nrs != 'No port number':
+            self._re.append('/?')
+
+        if port_nrs == 'Optional port number' or port_nrs == 'Require port number':
             self._re.append(port_nr_to_re[port_nrs])
         elif port_nrs == 'Specify optional port numbers':
-            alternation = self._alternate_sequence(self._info['specOptionalPortNumbers'])
+            alternation = self._parse_specific_field(self._info['specOptionalPortNumbers'])
             self._re.append(port_nr_to_re[port_nrs].format(alternation))
         elif port_nrs == 'Specify required port numbers':
-            alternation = self._alternate_sequence(self._info['specRequiredPortNumbers'])
+            alternation = self._parse_specific_field(self._info['specRequiredPortNumbers'])
             self._re.append(port_nr_to_re[port_nrs].format(alternation))
 
         folders = self._info['folders']
@@ -92,9 +101,20 @@ class Url:
         parameters = self._info['parameters']
         if parameters != 'No parameters':
             if parameters == 'Specific parameters only':
-                pass
+                params = self._parse_parameters(self._info['specParameters'])
+                if len(params) == 1:
+                    to_re = param_to_re[parameters]['one']
+                    self._re.append(to_re.format(params[0]))
+                elif len(params) > 1:
+                    to_re = param_to_re[parameters]['multiple']
+                    self._re.append(to_re.format('|'.join(params), len(params)))
+
             else:
                 self._re.append(param_to_re[parameters])
+
+    def _parse_parameters(self, values):
+        field = filter(lambda u: u != '', re.split(self._split_semicolons, values))
+        return  [i.replace('\\;', ';') for i in field]
 
     def _parse_specific_field(self, values):
         field = filter(lambda u: u != '', re.split(self._split_semicolons, values))

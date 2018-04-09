@@ -7,6 +7,7 @@ import { Guid } from '../common-use-case-models/guid';
 import { CreditCardNumber } from '../common-use-case-models/credit-card-number';
 import { NationalId } from '../common-use-case-models/national-id';
 import { VatNumber } from '../common-use-case-models/vat-number';
+import { Ipv4Address } from '../common-use-case-models/ipv4-address';
 
 export class PayloadCommon {
 
@@ -14,7 +15,8 @@ export class PayloadCommon {
   type: string;
 
   /* information about the common use case */
-  information: Username | Password | Email | Url | Guid | CreditCardNumber | NationalId | VatNumber;
+  information: Username | Password | Email | Url
+    | Guid | CreditCardNumber | NationalId | VatNumber | Ipv4Address;
 
   /* general information about the regex to generate */
   generalRegexInfo: GeneralRegexInfo;

@@ -9,6 +9,8 @@ export class Url {
   password               : string;
   domainName             : string;
   specDomainNames        : string;
+  specificTld            : string;
+  subdomainOnSpecDomain  : string;
   folders                : string;
   minFolderDepth         : string;
   maxFolderDepth         : string;

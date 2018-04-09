@@ -32,7 +32,7 @@ url_to_re = {
         },
         'username': {
             'No user names': '',
-            'Allow any user name': '(?:[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]+{}{}?',
+            'Allow any user name': '(?:[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{{|}}~^-]+{}{}?',
             'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:[\d!$\'()*+,._a-z-]+{}{}?',
             'Basic characters only [A-Za-z0-9._-]': '(?:[\d._a-z-]+{}{}?',
             'Specific user names only': ''
@@ -45,24 +45,26 @@ url_to_re = {
             'specUserRequirePassword': ':[\\\\w!#$%&\'*+./=?`{|}~^-]+@'
         },
         'host': {
-
+            'Allow any domain name'                 : "(?:[\\\\da-z-]++\\\\.)+[a-z]{2,63}+",
+            'Allow any domain on specific TLD'      : "(?:[\\\\da-z-]++\\\\.)+{}",
+            'Allow any subdomain on specific domain': "(?:[\\\\da-z-]++\\\\.)*{}"
         },
         'portNumbers': {
-            'No port number': '',
-            'Optional port number': '(?::\\\\d{1,5}+)?',
+            'No port number'               : '',
+            'Optional port number'         : '(?::\\\\d{1,5}+)?',
             'Specify optional port numbers': '(?::(?:{}))?',
-            'Require port number' : ':\\\\d{1,5}+',
-            'Require specific port numbers': ':(?:{})'
+            'Require port number'          : ':\\\\d{1,5}+',
+            'Specify required port numbers': ':(?:{})'
         },
         'folders': {
             'No folders': '',
-            'Allow any path': '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\_`a-z{|}~^-]+)',
-            'Safe URL characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\\\\d!$\'()*+,._a-z-]++)',
-            'Safe folder characters only [A-Za-z0-9$_+!\'(),-]': '(?:/[\\\\d!$\'()+,_a-z-]++)',
-            'Basic characters only [A-Za-z0-9._-]': '(?:/[\\\\d._a-z-]++)',
-            'Basic folder characters only [A-Za-z0-9_-]': '(?:/[\d_a-z-]++)',
-            'Specific folders only': '(?:{})?',
-            'Specific paths only': '/(?:{})/'
+            'Allow any path': '(?:/[]\d!"#$%&\'()*+,.:;<=>?@\[\\_`a-z{|}~^-]+)/?',
+            'Safe URL characters only [A-Za-z0-9$_.+!*\'(),-]': '(?:/[\\\\d!$\'()*+,._a-z-]++)/?',
+            'Safe folder characters only [A-Za-z0-9$_+!\'(),-]': '(?:/[\\\\d!$\'()+,_a-z-]++)/?',
+            'Basic characters only [A-Za-z0-9._-]': '(?:/[\\\\d._a-z-]++)/?',
+            'Basic folder characters only [A-Za-z0-9_-]': '(?:/[\d_a-z-]++)/?',
+            'Specific folders only': '(?:{})?/?',
+            'Specific paths only': '/(?:{})/?'
         },
         'fileNames': {
             'required': {
@@ -81,11 +83,13 @@ url_to_re = {
             }
         },
         'parameters': {
-            'No parameters': '',
-            'Allow any parameters': '/?(?:\?[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
+            'Allow any parameters'                        : '/?(?:\?[]\d!"#$%&\'()*+,./:;<=>?@\[\\\\_`a-z{|}~^-]*)?',
             'Safe characters only [A-Za-z0-9$_.+!*\'(),-]': '/?(?:\?[\d!$&\'()*+,.=_a-z-]*)?',
-            'Basic characters only [A-Za-z0-9._-]': '/?(?:\?[A-Za-z0-9._-]*)?',
-            'Specific parameters only': ''
+            'Basic characters only [A-Za-z0-9._-]'        : '/?(?:\?[A-Za-z0-9._-]*)?',
+            'Specific parameters only'                    : {
+                'one'     : '?\?{}(?:=[]\d!"#$%\'()*+,./:;<=>?@\[\\_`a-z{{|}}~^-]*+)?',
+                'multiple': '\?(?:{})(?:=[]\d!"#$%\'()*+,./:;<=>?@\[\\_`a-z{{|}}~^-]*+)?&?){{{}}}'
+            }
         }
     },
 

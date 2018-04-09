@@ -33,20 +33,15 @@ export class Ipv4AddressInfoComponent implements OnInit {
 
   private constructPayload(): PayloadCommon {
     return {
-      type            : 'Password',
-      information     : undefined,
+      type            : 'IPv4 address',
+      information     : this.ipv4Address,
       generalRegexInfo: this.generalRegexInfo,
       generateMethod  : 'commonUseCases'
     };
   }
 
   generateRegex() {
-    // if (this.isValidPasswordInfo()) {
-    //   this.callService();
-    // } else {
-    //   this.toast.setMessage('Invalid input information!', 'warning');
-    // }
-
+    this.callService();
   }
 
   private callService() {
