@@ -1,11 +1,12 @@
 from collections import deque
 
+from regy.common_use_cases.models.vat_number_info import VatNumberInfo
 from regy.common_use_cases.vat_number.options_to_re import vat_to_re, group_chars_to_re, countries_with_two_groupings
 
 
 class VatNumber:
 
-    def __init__(self, info, target):
+    def __init__(self, info: VatNumberInfo, target):
         self._info = info
         self._target = target
         self._re = deque()
@@ -17,9 +18,9 @@ class VatNumber:
     def _calculate_regex(self):
         vat = vat_to_re[self._target]
 
-        countries = self._get_checked_countries()
-        country_code = self._info['countryCode']
-        grouping_chars = self._info['groupingCharacters']
+        countries = self._info.get_checked_countries()
+        country_code = self._info.country_code
+        grouping_chars = self._info.grouping_characters
         grouping_chars_re = group_chars_to_re[self._target][grouping_chars]
 
         optional_code = country_code == 'Optional country code'
@@ -114,7 +115,3 @@ class VatNumber:
             else:
                 self._re.appendleft('{}{}*'.format(country_mappings['code'], grouping_chars_re))
 
-    def _get_checked_countries(self):
-        return [
-            k for k in self._info.keys() if k != 'countryCode' and k != 'groupingCharacters' and self._info[k]
-        ]

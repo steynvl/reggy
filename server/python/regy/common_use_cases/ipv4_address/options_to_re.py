@@ -28,10 +28,3 @@ ip_to_re = {
 
 }
 
-field_to_key = {
-    'dotted'      : 'Dotted 192.168.0.1',
-    'decimal'     : 'Decimal 3232235521',
-    'hexadecimal1': 'Hexadecimal C0A8000',
-    'hexadecimal2': 'Hexadecimal C0A80001h',
-    'hexadecimal3': 'Hexadecimal 0xC0A80001'
-}

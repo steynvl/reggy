@@ -1,11 +1,12 @@
 from collections import deque
 
+from regy.common_use_cases.models.password_info import PasswordInfo
 from regy.common_use_cases.password.options_to_re import opt_to_re
 
 
 class Password:
 
-    def __init__(self, info, target):
+    def __init__(self, info: PasswordInfo, target):
         self._info = info
         self._target = target
         self._re = deque()
@@ -17,19 +18,19 @@ class Password:
     def _calculate_regex(self):
         target = opt_to_re[self._target]
 
-        self._re.append(target[self._info['shouldStartWith']])
-        self._re.extend(['(?=.*{})'.format(target[should_contain]) for should_contain in self._info['shouldContain']])
+        self._re.append(target[self._info.should_start_with])
+        self._re.extend(['(?=.*{})'.format(target[should_contain]) for should_contain in self._info.should_contain])
 
-        min_len = int(self._info['minimumLength'])
+        min_len = int(self._info.min_length)
 
-        if self._info['maximumLength'] == 'No maximum length required':
-            if self._info['shouldStartWith'] != 'Anything':
+        if self._info.max_length == 'No maximum length required':
+            if self._info.should_start_with != 'Anything':
                 min_len -= 1
             self._re.append('.{%d,}' % min_len)
         else:
-            max_len = int(self._info['maximumLength'])
+            max_len = int(self._info.max_length)
 
-            if self._info['shouldStartWith'] != 'Anything':
+            if self._info.should_start_with != 'Anything':
                 min_len -= 1
                 max_len -= 1
             self._re.append('.{%d,%d}' % (min_len, max_len))

@@ -1,11 +1,13 @@
 from collections import deque
 import re
+
+from regy.common_use_cases.models.url_info import UrlInfo
 from regy.common_use_cases.url.options_to_re import url_to_re
 
 
 class Url:
 
-    def __init__(self, info, target):
+    def __init__(self, info: UrlInfo, target):
         self._split_semicolons = re.compile(r'(?<![\\]);')
         self._info = info
         self._target = target
@@ -27,37 +29,37 @@ class Url:
         files_to_re    = target['fileNames']
         param_to_re    = target['parameters']
 
-        self._re.append(scheme_to_re[self._info['schemes']])
+        self._re.append(scheme_to_re[self._info.schemes])
 
-        if self._info['password'] == 'No password':
-            if self._info['username'] == 'Specific user names only':
-                self._re.append(self._parse_specific_field(self._info['specUserNames']))
+        if self._info.password == 'No password':
+            if self._info.username == 'Specific user names only':
+                self._re.append(self._parse_specific_field(self._info.spec_usernames))
                 self._re.append('@')
-            elif self._info['username'] != 'No user names':
-                self._re.append(username_to_re[self._info['username']].format('@', ')'))
+            elif self._info.username != 'No user names':
+                self._re.append(username_to_re[self._info.username].format('@', ')'))
         else:
-            if self._info['username'] == 'Specific user names only':
+            if self._info.username == 'Specific user names only':
                 self._re.append(password_to_re['specUserOptionalPassword'])
-            elif self._info['username'] != 'No user names':
-                self._re.append(username_to_re[self._info['username']].format('', ''))
+            elif self._info.username != 'No user names':
+                self._re.append(username_to_re[self._info.username].format('', ''))
 
-            if self._info['username'] != 'No user names':
-                if self._info['password'] == 'Optional password':
+            if self._info.username != 'No user names':
+                if self._info.password == 'Optional password':
                     self._re.append(password_to_re['specUserOptionalPassword'])
-                elif self._info['password'] == 'Require password':
+                elif self._info.password == 'Require password':
                     self._re.append(password_to_re['specUserRequirePassword'])
 
-        domain = self._info['domainName']
+        domain = self._info.domain_name
         if domain == 'Specific domains only':
-            self._re.append(self._parse_specific_field(self._info['specDomainNames']))
+            self._re.append(self._parse_specific_field(self._info.spec_domain_names))
         elif domain == 'Allow any domain on specific TLD':
-            self._re.append(domain_to_re[domain].format(self._info['specificTld']))
+            self._re.append(domain_to_re[domain].format(self._info.specific_tld))
         elif domain == 'Allow any subdomain on specific domain':
-            self._re.append(domain_to_re[domain].format(self._info['subdomainOnSpecDomain']))
+            self._re.append(domain_to_re[domain].format(self._info.subdomain_on_spec_domain))
         else:
             self._re.append(domain_to_re[domain])
 
-        port_nrs = self._info['portNumbers']
+        port_nrs = self._info.port_numbers
 
         if port_nrs != 'No port number':
             self._re.append('/?')
@@ -65,43 +67,43 @@ class Url:
         if port_nrs == 'Optional port number' or port_nrs == 'Require port number':
             self._re.append(port_nr_to_re[port_nrs])
         elif port_nrs == 'Specify optional port numbers':
-            alternation = self._parse_specific_field(self._info['specOptionalPortNumbers'])
+            alternation = self._parse_specific_field(self._info.spec_optional_port_numbers)
             self._re.append(port_nr_to_re[port_nrs].format(alternation))
         elif port_nrs == 'Specify required port numbers':
-            alternation = self._parse_specific_field(self._info['specRequiredPortNumbers'])
+            alternation = self._parse_specific_field(self._info.spec_required_port_numbers)
             self._re.append(port_nr_to_re[port_nrs].format(alternation))
 
-        folders = self._info['folders']
+        folders = self._info.folders
         if folders != 'No folders':
             if folders == 'Specific folders only':
-                spec_folders = self._parse_specific_field(self._info['specFoldersOnly'])
+                spec_folders = self._parse_specific_field(self._info.spec_folders_only)
                 self._re.append(folders_to_re[folders].format(spec_folders))
             elif folders == 'Specific paths only':
-                spec_paths = self._parse_specific_field(self._info['specPathsOnly'])
+                spec_paths = self._parse_specific_field(self._info.spec_paths_only)
                 self._re.append(folders_to_re[folders].format(spec_paths))
             else:
                 self._re.append(folders_to_re[folders])
 
-            min_depth = int(self._info['minFolderDepth'])
-            max_depth = int(self._info['maxFolderDepth'])
+            min_depth = int(self._info.min_folder_depth)
+            max_depth = int(self._info.max_folder_depth)
             self._re.append(self._get_folder_depth_range(min_depth, max_depth))
 
-        files = self._info['fileNames']
+        files = self._info.file_names
         if files != 'No file names':
-            option = 'optional' if self._info['optionalFileNames'] else 'required'
+            option = 'optional' if self._info.optional_file_names else 'required'
             if files == 'Specific extensions only':
-                file_extensions = self._alternate_sequence(self._info['specExtensions'])
+                file_extensions = self._alternate_sequence(self._info.spec_extensions)
                 self._re.append(files_to_re[option][file_extensions])
             elif files == 'Specific file names only':
-                file_names = self._alternate_sequence(self._info['specFileNames'])
+                file_names = self._alternate_sequence(self._info.spec_file_names)
                 self._re.append(files_to_re[option][file_names])
             else:
                 self._re.append(files_to_re[option][files])
 
-        parameters = self._info['parameters']
+        parameters = self._info.parameters
         if parameters != 'No parameters':
             if parameters == 'Specific parameters only':
-                params = self._parse_parameters(self._info['specParameters'])
+                params = self._parse_parameters(self._info.spec_parameters)
                 if len(params) == 1:
                     to_re = param_to_re[parameters]['one']
                     self._re.append(to_re.format(params[0]))

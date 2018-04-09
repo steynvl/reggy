@@ -1,11 +1,12 @@
 from collections import deque
 
-from regy.common_use_cases.ipv4_address.options_to_re import ip_to_re, field_to_key
+from regy.common_use_cases.ipv4_address.options_to_re import ip_to_re
+from regy.common_use_cases.models.ipv4_info import Ipv4Info
 
 
 class Ipv4Address:
 
-    def __init__(self, info, target):
+    def __init__(self, info: Ipv4Info, target):
         self._info = info
         self._target = target
         self._re = deque()
@@ -16,7 +17,7 @@ class Ipv4Address:
 
     def _calculate_regex(self):
         target = ip_to_re[self._target]
-        checked_options = self._get_checked_options()
+        checked_options = self._info.get_checked_options()
 
         if len(checked_options) == 0:
             return
@@ -24,6 +25,3 @@ class Ipv4Address:
             self._re.append(target[checked_options[0]])
         else:
             self._re.append('(?:{})'.format('|'.join([target[i] for i in checked_options])))
-
-    def _get_checked_options(self):
-        return [field_to_key[option] for option in field_to_key.keys() if self._info[option]]
