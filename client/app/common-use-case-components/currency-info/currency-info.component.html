@@ -1,0 +1,158 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-center"><strong>Currency</strong></h4>
+  </div>
+</div>
+
+<div class="table-style">
+  <data-table id="currencies-grid"
+              headerTitle="Currencies"
+              [items]="currencies"
+              [itemCount]="currencyCount"
+              (reload)="reloadCurrencies($event)"
+              (rowClick)="clickedRow($event)"
+
+              [limit]="16"
+              [sortBy]="'country'"
+              [sortAsc]="true"
+
+              [selectColumn]="true"
+              [multiSelect]="true"
+              [substituteRows]="false"
+              [expandableRows]="false"
+              [translations]="translations"
+              [indexColumnHeader]="'#'"
+              [selectOnRowClick]="true"
+  >
+    <data-table-column
+      [property]="'country'"
+      [header]="'Country or territory'"
+      [sortable]="true">
+    </data-table-column>
+    <data-table-column
+      [property]="'currency'"
+      [header]="'Currency'"
+      [sortable]="true">
+    </data-table-column>
+    <data-table-column
+      [property]="'code'"
+      [header]="'ISO-4712'"
+      [sortable]="true">
+    </data-table-column>
+  </data-table>
+  <div class="table-bottom">
+    <b>Selected currencies:</b>
+    <span *ngIf="currenciesTable.selectedRows.length == 0"><i>No currency selected</i></span>
+    <span [textContent]="selectedCurrencies()"></span>
+  </div>
+</div>
+
+<div class="move-down">
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="text-center"><strong>General regular expression information</strong></h4>
+    </div>
+    <div class="card-body">
+      <div class="row pad-down">
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="begin-regex-at">Start regex match at:</label>
+            <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+              <option>Anywhere</option>
+              <option>Start of text</option>
+              <option>Start of line</option>
+              <option>Start of word</option>
+              <option>Start of attempt</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="end-regex-at">End regex match at:</label>
+            <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+              <option>Anywhere</option>
+              <option>End of text</option>
+              <option>End of line</option>
+              <option>End of word</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label for="what-standard">Target language:</label>
+            <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+              <option>Java</option>
+              <option>Perl</option>
+              <option>POSIX</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
+    </div>
+  </div>
+
+
+  <div *ngIf="generatedRegex !== undefined">
+
+    <br />
+    <br />
+
+    <div class="row">
+      <div class="col">
+        <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+
+        <div class="input-group">
+          <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+          <span class="input-group-btn">
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+                data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                type="button"><i class="fa fa-clipboard"></i>
+        </button>
+        </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="generatedRegex" class="pad-down">
+
+    <br />
+    <br />
+
+    <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
+      <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
+    </div>
+    <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
+      <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
+    </div>
+
+  </div>
+
+</div>

@@ -10,6 +10,7 @@
         <label for="use-case"><strong>Select your common use case:</strong></label>
         <select id="use-case" class="form-control" [(ngModel)]="type">
           <option>Credit card number</option>
+          <option>Currency</option>
           <option>Date and time</option>
           <option>Email address</option>
           <option>GUID</option>
@@ -74,5 +75,10 @@
     *ngIf="type === 'IPv4 address'"
     [generalRegexInfo]="generalRegexInfo">
   </app-ipv4-address-info>
+
+  <app-currency-info
+    *ngIf="type === 'Currency'"
+    [generalRegexInfo]="generalRegexInfo">
+  </app-currency-info>
 
 </div>

@@ -33,11 +33,13 @@ import { DateAndTimeInfoComponent } from './common-use-case-components/date-and-
 import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-info.component';
 import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
 import { Ipv4AddressInfoComponent } from './common-use-case-components/ipv4-address-info/ipv4-address-info.component';
+import { CurrencyInfoComponent } from './common-use-case-components/currency-info/currency-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { HighlightModule } from 'ngx-highlightjs';
+import { DataTableModule } from 'angular5-data-table';
 
 import { JavaComponent } from './language-examples/java/java.component';
 import { PerlComponent } from './language-examples/perl/perl.component';
@@ -71,6 +73,7 @@ export function tokenGetter() {
     GuidInfoComponent,
     NationalIdInfoComponent,
     Ipv4AddressInfoComponent,
+    CurrencyInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent
@@ -79,6 +82,7 @@ export function tokenGetter() {
     RoutingModule,
     SharedModule,
     ClipboardModule,
+    DataTableModule,
     HighlightModule.forRoot({
       path: 'assets/lib/highlight'
     }),
