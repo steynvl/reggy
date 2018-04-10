@@ -1,10 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';;
+import { Component, Input, OnInit, ViewChild } from '@angular/core';;
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { currencies } from './currencies';
 import { DataTable, DataTableTranslations, DataTableResource } from 'angular5-data-table';
+import { Currency } from '../../models/common-use-case-models/currency';
 
 @Component({
   selector: 'app-currency-info',
@@ -46,24 +47,31 @@ export class CurrencyInfoComponent implements OnInit {
   }
 
   selectedCurrencies() {
-    const selectedCurrencies = new Set();
-    this.currenciesTable.selectedRows.forEach(u => selectedCurrencies.add(u.item.currency));
-    return Array.from(selectedCurrencies).join(', ');
+    return Array.from(this.getCurrenciesWithDuplicates()).join(', ');
   }
 
   clickedRow(rowEvent) {
-    // TODO
-    // console.log('Country = ' + rowEvent.row.item.country);
-    // console.log('Currency= ' + rowEvent.row.item.currency);
+    const item = rowEvent.row.item;
+    this.selectedItems.delete(item) ? this.selectedItems.has(item) : this.selectedItems.add(item);
   }
 
   private constructPayload(): PayloadCommon {
+    const payloadInfo: Currency = {
+      currencies: Array.from(this.getCurrenciesWithDuplicates())
+    };
+
     return {
       type            : 'Currency',
-      information     : undefined,
+      information     : payloadInfo,
       generalRegexInfo: this.generalRegexInfo,
       generateMethod  : 'commonUseCases'
     };
+  }
+
+  getCurrenciesWithDuplicates(): Set<string> {
+    const uniqueCurrencies = new Set();
+    this.selectedItems.forEach(item => uniqueCurrencies.add(item.currency));
+    return uniqueCurrencies;
   }
 
   generateRegex() {
