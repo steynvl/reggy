@@ -1,14 +1,14 @@
 import BaseCtrl from './base';
 import * as child_process from 'child_process';
 
-export default class GenerateCommonCtrl extends BaseCtrl {
+export default class GenerateCtrl extends BaseCtrl {
 
   model = null;
 
   generate = (req, res) => {
     const samples = req.body.params;
 
-    const pathToRegex = process.env.PATH_TO_COMMON;
+    const pathToRegex = process.env.PATH_TO_PY;
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));
     console.log([pathToRegex].concat(samples));
     let regex = '';

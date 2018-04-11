@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';;
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
@@ -21,7 +21,7 @@ export class CurrencyInfoComponent implements OnInit {
   currencyResource = new DataTableResource(currencies);
   currencies = [];
   currencyCount = 0;
-  selectedItems = new Set();
+  selectedItems = new Set<any>();
 
   /* special params */
   translations = <DataTableTranslations>{
@@ -69,7 +69,7 @@ export class CurrencyInfoComponent implements OnInit {
   }
 
   getCurrenciesWithDuplicates(): Set<string> {
-    const uniqueCurrencies = new Set();
+    const uniqueCurrencies = new Set<string>();
     this.selectedItems.forEach(item => uniqueCurrencies.add(item.currency));
     return uniqueCurrencies;
   }
