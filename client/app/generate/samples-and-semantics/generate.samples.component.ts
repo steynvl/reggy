@@ -13,6 +13,7 @@ import { ControlCharacters } from '../../models/marker-info/control-characters';
 import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 import { MatchAnything } from '../../models/marker-info/match-anything';
 import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
+import { Numbers } from '../../models/marker-info/numbers';
 
 declare var jQuery: any;
 
@@ -35,6 +36,7 @@ export class GenerateSamplesComponent implements OnInit {
   unicodeCharacters: UnicodeCharacters;
   matchAnything: MatchAnything;
   listOfLiteralText: ListOfLiteralText;
+  numbers: Numbers;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -144,6 +146,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
         this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
+        this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
       }
 
     } else {
@@ -277,6 +280,32 @@ export class GenerateSamplesComponent implements OnInit {
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.listOfLiteralText;
         break;
 
+      case 'Numbers':
+        this.numbers = {
+          minValOfIntPart              : '',
+          maxValOfIntPart              : '',
+          decimalSeparator             : '',
+          minNrOfDecimals              : '',
+          maxNrOfDecimals              : '',
+          thousandSeparator            : '',
+          codePosition                 : '',
+          currencySign                 : '',
+          currencyCodes                : '',
+          limitIntegerPart             : false,
+          allowPlusSign                : false,
+          allowMinusSign               : false,
+          allowParentheses             : false,
+          signIsRequired               : false,
+          whitespaceAllowedAfterSign   : false,
+          thousandSeparatorsAreRequired: false,
+          allowLeadingZeros            : false,
+          requireIntegerPart           : false,
+          allowExponent                : false,
+          currencySignOrCodeRequired   : false
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.numbers;
+        break;
+
       default:
         break;
     }
@@ -297,6 +326,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
     this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
     this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
+    this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
     this.highlightTextArea();
   }
 
@@ -394,6 +424,7 @@ export class GenerateSamplesComponent implements OnInit {
     this.unicodeCharacters = (this.markedElements[this.selectedMarkerIdx].markerInfo) as UnicodeCharacters;
     this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
     this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
+    this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
     this.highlightTextArea();
   }
 

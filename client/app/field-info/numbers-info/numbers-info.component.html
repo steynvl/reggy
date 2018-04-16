@@ -3,14 +3,14 @@
   <div class="col-sm-6">
     <div class="form-group">
       <label for="min-value">Minimum value of integer part:</label>
-      <input type="text" class="form-control" id="min-value" placeholder="">
+      <input type="text" class="form-control" id="min-value" placeholder="" [(ngModel)]="numbers.minValOfIntPart">
     </div>
   </div>
 
   <div class="col-sm-6">
     <div class="form-group">
       <label for="max-value">Maximum value of integer part:</label>
-      <input type="text" class="form-control" id="max-value" placeholder="">
+      <input type="text" class="form-control" id="max-value" placeholder="" [(ngModel)]="numbers.maxValOfIntPart">
     </div>
   </div>
 
@@ -20,19 +20,22 @@
 
   <div class="col-sm-6">
     <label for="decimal-separator">Decimal separator:</label>
-    <select id="decimal-separator" class="form-control">
-      <option>Any</option>
+    <select id="decimal-separator" class="form-control" [(ngModel)]="numbers.decimalSeparator">
+      <option>None</option>
+      <option>Comma or period</option>
+      <option>Comma</option>
+      <option>Period</option>
     </select>
   </div>
 
   <div class="col-sm-3">
     <label for="min-nr-of-decimals">Min. nr of decimals</label>
-    <input id="min-nr-of-decimals" class="form-control" type="number">
+    <input id="min-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.minNrOfDecimals">
   </div>
 
   <div class="col-sm-3">
     <label for="max-nr-of-decimals">Max. nr of decimals</label>
-    <input id="max-nr-of-decimals" class="form-control" type="number">
+    <input id="max-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.maxNrOfDecimals">
   </div>
 
 </div>
@@ -41,15 +44,20 @@
 
   <div class="col-sm-6">
     <label for="thousand-separator">Thousand separator:</label>
-    <select id="thousand-separator" class="form-control">
+    <select id="thousand-separator" class="form-control" [(ngModel)]="numbers.thousandSeparator">
       <option>None</option>
+      <option>Comma</option>
+      <option>Quote</option>
+      <option>Space</option>
     </select>
   </div>
 
   <div class="col-sm-6">
     <label for="code-position">Currency sign/code position:</label>
-    <select id="code-position" class="form-control">
+    <select id="code-position" class="form-control" [(ngModel)]="numbers.codePosition">
       <option>Before only</option>
+      <option>After only</option>
+      <option>Before or after</option>
     </select>
   </div>
 
@@ -59,14 +67,16 @@
 
   <div class="col-sm-6">
     <label for="currency-sign">Currency sign:</label>
-    <select id="currency-sign" class="form-control">
+    <select id="currency-sign" class="form-control" [(ngModel)]="numbers.currencySign">
       <option>None</option>
+      <option>Required</option>
+      <option>Optional</option>
     </select>
   </div>
 
   <div class="col-sm-6">
     <label for="currency-codes">Currency codes:</label>
-    <select id="currency-codes" class="form-control">
+    <select id="currency-codes" class="form-control" [(ngModel)]="numbers.currencyCodes">
     </select>
   </div>
 
@@ -77,7 +87,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.limitIntegerPart"
+               (change)="numbers.limitIntegerPart = !numbers.limitIntegerPart">
         Limit integer part
       </label>
     </div>
@@ -85,7 +97,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.allowPlusSign"
+               (change)="numbers.allowPlusSign = !numbers.allowPlusSign">
         Allow plus sign
       </label>
     </div>
@@ -93,7 +107,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.allowMinusSign"
+               (change)="numbers.allowMinusSign = !numbers.allowMinusSign">
         Allow minus sign
       </label>
     </div>
@@ -101,7 +117,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.allowParentheses"
+               (change)="numbers.allowParentheses = !numbers.allowParentheses">
         Allow parentheses
       </label>
     </div>
@@ -114,7 +132,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.signIsRequired"
+               (change)="numbers.signIsRequired = !numbers.signIsRequired">
         Sign is required
       </label>
     </div>
@@ -122,7 +142,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.whitespaceAllowedAfterSign"
+               (change)="numbers.whitespaceAllowedAfterSign = !numbers.whitespaceAllowedAfterSign">
         Whitespace allowed after sign
       </label>
     </div>
@@ -130,7 +152,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.thousandSeparatorsAreRequired"
+               (change)="numbers.thousandSeparatorsAreRequired = !numbers.thousandSeparatorsAreRequired">
         Thousand separators are required
       </label>
     </div>
@@ -138,7 +162,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.allowLeadingZeros"
+               (change)="numbers.allowLeadingZeros = !numbers.allowLeadingZeros">
         Allow leading zeros
       </label>
     </div>
@@ -151,7 +177,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.requireIntegerPart"
+               (change)="numbers.requireIntegerPart = !numbers.requireIntegerPart">
         Require integer part
       </label>
     </div>
@@ -159,7 +187,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.allowExponent"
+               (change)="numbers.allowExponent = !numbers.allowExponent">
         Allow exponent
       </label>
     </div>
@@ -167,7 +197,9 @@
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">
+        <input class="form-check-input" type="checkbox"
+               [checked]="numbers.currencySignOrCodeRequired"
+               (change)="numbers.currencySignOrCodeRequired = !numbers.currencySignOrCodeRequired">
         Currency sign or code required
       </label>
     </div>

@@ -192,11 +192,6 @@
               [unicodeCharacters]="unicodeCharacters">
             </app-unicode-characters-info>
 
-            <app-numbers-info
-              *ngIf="markedElement.fieldType === 'Numbers'"
-              >
-            </app-numbers-info>
-
             <app-match-anything-info
               *ngIf="markedElement.fieldType === 'Match anything'"
               [matchAnything]="matchAnything"
@@ -208,6 +203,12 @@
               [listOfLiteralText]="listOfLiteralText"
               >
             </app-list-of-literal-text-info>
+
+            <app-numbers-info
+              *ngIf="markedElement.fieldType === 'Numbers'"
+              [numbers]="numbers"
+              >
+            </app-numbers-info>
 
           </div>
 
