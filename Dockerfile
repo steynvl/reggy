@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-RUN apt-get -y update
+RUN apt-get -qq update
 RUN apt-get install locales
 
 # install curl
@@ -22,10 +22,7 @@ WORKDIR /usr/src/app
 # install app dependencies
 RUN npm install --only=prod
 
-# compile server
-RUN npm run compileServer
-
-# build the angular client with production and aot flags
+# compile server and build the angular client with production and aot flags
 RUN npm run buildProd
 
 # expose port 3000 for node application
