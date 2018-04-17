@@ -9,3 +9,4 @@ class MarkerType(Enum):
     UNICODE_CHARACTERS   = 5
     MATCH_ANYTHING       = 6
     LIST_OF_LITERAL_TEXT = 7
+    NUMBERS              = 8

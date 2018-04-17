@@ -54,6 +54,9 @@ class Scanner:
             elif marker_type == 'List of literal text':
                 info[Token.MARKER_TYPE] = MarkerType.LIST_OF_LITERAL_TEXT
                 self._parse_list_of_literal_text(sample, info)
+            elif marker_type == 'Numbers':
+                info[Token.MARKER_TYPE] = MarkerType.NUMBERS
+                self._parse_numbers(sample, info)
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
@@ -156,6 +159,14 @@ class Scanner:
 
         info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED] = marker_info['matchAnythingExceptSpecified']
         info[ListOfLiteralText.LITERAL_TEXT] = marker_info['literalText']
+
+        self._insert_repeat_info(sample, info)
+
+    def _parse_numbers(self, sample, info):
+        marker_info = sample['markerInfo']
+
+        # TODO
+
 
         self._insert_repeat_info(sample, info)
 
