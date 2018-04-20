@@ -1,5 +1,3 @@
-from collections import deque
-
 from regy.common_use_cases.date_and_time.options_to_re import identifiers_to_re, options_to_re
 from regy.common_use_cases.models.date_and_time_info import DateAndTimeInfo
 
@@ -9,7 +7,7 @@ class DateAndTime:
     def __init__(self, info: DateAndTimeInfo, target):
         self._info = info
         self._target = target
-        self._re = deque()
+        self._re = []
         self._calculate_regex()
 
     def get_re(self):
@@ -24,17 +22,27 @@ class DateAndTime:
 
         formats = self._get_formats()
 
-        for char in formats:
+        for format in formats:
 
-            if char in identifiers_to_re.keys():
-                pass
-            elif char == '/':
-                pass
-            elif char == 'a':
-                pass
-            elif char == ':':
-                pass
+            tmp = []
+            for char in format:
 
+                if char in identifiers_to_re.keys():
+                    if char == 'y' or char == 'Y':
+                        tmp.append(identifiers_to_re[char])
+                    else:
+                        tmp.append(identifiers_to_re[char][self._info.leading_zeros])
+                elif char == '/':
+                    tmp.append(date_sep)
+                elif char == 'a':
+                    tmp.append(am_pm_inc)
+                elif char == ':':
+                    tmp.append(time_sep)
+            
+            self._re.append(''.join(tmp))
+
+        if len(self._re) > 1:
+            self._re = ['(?:{})'.format('|'.join(self._re))]
 
     def _get_formats(self):
         return map(str.strip, self._info.date_formats.split('\n'))

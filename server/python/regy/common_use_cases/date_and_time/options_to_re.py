@@ -2,14 +2,14 @@ from regy.samples_and_semantics.tokens import Target
 
 identifiers_to_re = {
     'd': {
-        'No leading zeros allowed': '',
-        'Optional leading zeros'  : '',
-        'Leading zeros required'  : '',
+        'No leading zeros allowed': '[12][0-9]|[1-9]|30|[12][0-9]|[1-9]|3[01]|[12][0-9]|[1-9]',
+        'Optional leading zeros'  : '[12][0-9]|0?[1-9]|30|[12][0-9]|0?[1-9]|3[01]|[12][0-9]|0?[1-9]',
+        'Leading zeros required'  : '[12][0-9]|0[1-9]|30|[12][0-9]|0[1-9]|3[01]|[12][0-9]|0[1-9]',
     },
     'm': {
-        'No leading zeros allowed': '',
-        'Optional leading zeros'  : '',
-        'Leading zeros required'  : '',
+        'No leading zeros allowed': '1[0-2]|[1-9]',
+        'Optional leading zeros'  : '1[0-2]|0?[1-9]',
+        'Leading zeros required'  : '1[0-2]|0[1-9]',
     },
     'y': '[0-9]{2}',
     'Y': '[0-9]{4}',
