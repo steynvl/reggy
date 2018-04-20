@@ -13,8 +13,6 @@ body {
   left: 50%;
   top: 50%;
   z-index: 1;
-  width: 150px;
-  height: 150px;
   margin: -75px 0 0 -75px;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -116,4 +114,12 @@ li {
 .route:hover::before, .route:focus::before {
   transform-origin: left top;
   transform: scale(1, 1);
+}
+
+.my-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }

@@ -47,6 +47,11 @@ export class DateAndTimeInfoComponent implements OnInit {
       this.callService();
     } else {
       this.isValidInfo = false;
+
+      setTimeout(() => {
+        this.isValidInfo = true;
+      }, 5000);
+
       this.toast.setMessage('Invalid input information!', 'warning');
     }
 

@@ -86,8 +86,7 @@
                   placeholder="Specify date and format(s)..."
                   [(ngModel)]="dateAndTime.dateFormats"
                   [ngClass]="{
-                    'is-invalid': !isValidInfo && dateAndTime.dateFormats.trim() === '',
-                    'is-valid'  : dateAndTime.dateFormats.trim() !== ''
+                    'is-invalid': !isValidInfo && dateAndTime.dateFormats.trim() === ''
                     }">
         </textarea>
 
@@ -157,10 +156,12 @@
   </div>
 </div>
 
+<div *ngIf="generatedRegex === undefined">
+  <br />
+</div>
 
 <div *ngIf="generatedRegex !== undefined">
 
-  <br />
   <br />
 
   <div class="row">
