@@ -11,6 +11,10 @@
   padding-top: 15px;
 }
 
+.move-down-3 {
+  padding-top: 22px;
+}
+
 .form-control-inline {
   min-width: 0;
   width: auto;
@@ -25,15 +29,6 @@ li {
   display: block;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #000000;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #000000;
-}
-
-:-ms-input-placeholder { /* Microsoft Edge */
-  color: #000000;
+.move-up {
+  padding-bottom: 10px;
 }
