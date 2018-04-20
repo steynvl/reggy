@@ -2,11 +2,13 @@ from collections import deque
 
 from regy.common_use_cases.credt_card_number.credit_card_number import CreditCardNumber
 from regy.common_use_cases.currency.currency import Currency
+from regy.common_use_cases.date_and_time.date_and_time import DateAndTime
 from regy.common_use_cases.email.email import Email
 from regy.common_use_cases.guid.guid import Guid
 from regy.common_use_cases.ipv4_address.ipv4_address import Ipv4Address
 from regy.common_use_cases.models.credit_card_info import CreditCardInfo
 from regy.common_use_cases.models.currency_info import CurrencyInfo
+from regy.common_use_cases.models.date_and_time_info import DateAndTimeInfo
 from regy.common_use_cases.models.email_info import EmailInfo
 from regy.common_use_cases.models.guid_info import GuidInfo
 from regy.common_use_cases.models.ipv4_info import Ipv4Info
@@ -82,6 +84,10 @@ class CommonUseCases:
         elif sample_type == 'Currency':
             currency_info = CurrencyInfo(info)
             self._re.append(Currency(currency_info, self._lang_info[Token.TARGET]).get_re())
+        elif sample_type == 'Date and time':
+            date_and_time_info = DateAndTimeInfo(info)
+            self._re.append(DateAndTime(date_and_time_info, self._lang_info[Token.TARGET]).get_re())
+
 
         self._add_general_info()
 

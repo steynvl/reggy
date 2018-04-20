@@ -167,7 +167,6 @@ class Scanner:
 
         # TODO
 
-
         self._insert_repeat_info(sample, info)
 
     def _parse_general_regex_info(self, regex_info):
