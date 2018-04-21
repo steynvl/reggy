@@ -84,7 +84,7 @@ export function tokenGetter() {
     ClipboardModule,
     DataTableModule,
     HighlightModule.forRoot({
-      path: 'assets/lib/highlight'
+      path: 'assets/lib/highlight/'
     }),
     JwtModule.forRoot({
       config: {
