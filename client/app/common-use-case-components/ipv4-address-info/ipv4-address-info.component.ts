@@ -17,6 +17,7 @@ export class Ipv4AddressInfoComponent implements OnInit {
   ipv4Address: Ipv4Address;
 
   generatedRegex: string;
+  isLoading = false;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
@@ -45,6 +46,11 @@ export class Ipv4AddressInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -54,8 +60,12 @@ export class Ipv4AddressInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

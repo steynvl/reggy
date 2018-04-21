@@ -18,6 +18,7 @@ export class DateAndTimeInfoComponent implements OnInit {
   dateAndTime: DateAndTime;
 
   generatedRegex: string;
+  isLoading = false;
 
   isValidInfo = true;
 
@@ -59,18 +60,26 @@ export class DateAndTimeInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
         const response = data;
-        console.log(response);
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

@@ -18,6 +18,8 @@ export class CreditCardInfoComponent implements OnInit {
 
   generatedRegex: string;
 
+  isLoading = false;
+
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
@@ -47,6 +49,11 @@ export class CreditCardInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -56,8 +63,12 @@ export class CreditCardInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

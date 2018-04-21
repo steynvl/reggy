@@ -104,6 +104,18 @@
   <br />
 </div>
 
+<div *ngIf="isLoading">
+  <br />
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </div>
+  </div>
+
+  <br />
+</div>
+
 <div *ngIf="generatedRegex !== undefined">
 
   <br />

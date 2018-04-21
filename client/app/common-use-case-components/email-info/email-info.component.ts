@@ -17,6 +17,7 @@ export class EmailInfoComponent implements OnInit {
   email: Email;
 
   generatedRegex: string;
+  isLoading = false;
 
   showUsernameErrorMsg: boolean;
   showDomainErrorMsg: boolean;
@@ -48,8 +49,6 @@ export class EmailInfoComponent implements OnInit {
   }
 
   generateRegex() {
-    this.generatedRegex = undefined;
-
     if (this.email.username === 'Specific user names only') {
       this.showUsernameErrorMsg = this.email.specificUserNamesOnly === undefined || this.email.specificUserNamesOnly.trim() === '';
     }
@@ -85,6 +84,11 @@ export class EmailInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -94,8 +98,12 @@ export class EmailInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

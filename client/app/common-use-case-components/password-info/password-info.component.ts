@@ -15,6 +15,7 @@ export class PasswordInfoComponent implements OnInit {
   @Input() generalRegexInfo: GeneralRegexInfo;
 
   password: Password;
+  isLoading = false;
 
   shouldStartWithMsg = 'Should start with: ';
   shouldStartWithData = ['Anything', 'Digit', 'Letter', 'Letter or digit', 'Lowercase letter', 'Uppercase letter'];
@@ -157,6 +158,11 @@ export class PasswordInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -166,8 +172,12 @@ export class PasswordInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

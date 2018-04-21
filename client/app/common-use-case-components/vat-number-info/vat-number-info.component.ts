@@ -16,6 +16,7 @@ export class VatNumberInfoComponent implements OnInit {
 
   vatNumber: VatNumber;
   selectAll = false;
+  isLoading = false;
 
   generatedRegex: string;
 
@@ -71,6 +72,11 @@ export class VatNumberInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -80,8 +86,12 @@ export class VatNumberInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

@@ -17,6 +17,7 @@ export class CurrencyInfoComponent implements OnInit {
   @Input() generalRegexInfo: GeneralRegexInfo;
 
   generatedRegex: string;
+  isLoading = false;
 
   currencyResource = new DataTableResource(currencies);
   currencies = [];
@@ -75,11 +76,15 @@ export class CurrencyInfoComponent implements OnInit {
   }
 
   generateRegex() {
-    this.generatedRegex = undefined;
     this.callService();
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
@@ -89,8 +94,12 @@ export class CurrencyInfoComponent implements OnInit {
         } else {
           this.generatedRegex = response.regex;
         }
+        this.isLoading = false;
       },
-      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 
