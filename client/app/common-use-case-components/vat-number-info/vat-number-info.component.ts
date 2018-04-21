@@ -73,8 +73,15 @@ export class VatNumberInfoComponent implements OnInit {
   private callService() {
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
-      data => this.generatedRegex = data.trim(),
-      error => console.log(error)
+      data => {
+        const response = data;
+        if (response.code !== 0) {
+          this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        } else {
+          this.generatedRegex = response.regex;
+        }
+      },
+      _ => this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger')
     );
   }
 
