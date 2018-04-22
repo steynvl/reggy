@@ -5,6 +5,7 @@ import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
+import { TutorialComponent } from '../app/tutorial/tutorial.component'
 
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
@@ -52,6 +53,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     AboutComponent,
+    TutorialComponent,
     GenerateSamplesComponent,
     GenerateCommonComponent,
     GenerateInductionComponent,
