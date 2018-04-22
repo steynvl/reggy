@@ -19,7 +19,7 @@ RUN apt-get install -y git-core
 COPY . usr/src/app
 WORKDIR /usr/src/app
 
-# install app dependencies, compile server ad build the angular client
+# install app dependencies, compile server and build the angular client
 # with production and aot compilation flags
 RUN npm install --only=prod
 
