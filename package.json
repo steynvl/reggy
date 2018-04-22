@@ -14,15 +14,23 @@
     "start": "node dist/server/app.js",
     "predev": "tsc -p server",
     "dev": "concurrently \"ng serve -pc proxy.conf.json --open\" \"tsc -w -p server\" \"nodemon dist/server/app.js\"",
-    "buildProd": "concurrently \"ng build -aot -prod && tsc -p server\"",
+    "buildProduction": "ng build -aot -prod && tsc -p server",
     "test": "ng test",
     "testbe": "tsc -p server && mocha dist/server/test --exit",
     "lint": "ng lint",
     "lintbe": "tslint server/**/**.ts{,x}",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "tsc -p server && ng build -aot -prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~1.7.0",
+    "@angular/compiler-cli": "^5.2.0",
+    "@types/jasmine": "~2.8.3",
+    "@types/node": "~6.0.60",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "typescript": "~2.5.3",
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -54,16 +62,10 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "~1.7.0",
-    "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/express": "^4.11.0",
-    "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/jquery": "^3.3.0",
-    "@types/node": "~6.0.60",
-    "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
     "codelyzer": "~4.0.1",
     "concurrently": "^3.5.1",
     "jasmine-core": "~2.8.0",
@@ -77,7 +79,6 @@
     "nodemon": "^1.14.12",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
-    "tslint": "~5.9.1",
-    "typescript": "~2.5.3"
+    "tslint": "~5.9.1"
   }
 }
