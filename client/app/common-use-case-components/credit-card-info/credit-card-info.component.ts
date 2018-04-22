@@ -18,6 +18,8 @@ export class CreditCardInfoComponent implements OnInit {
 
   generatedRegex: string;
 
+  isLoading = false;
+
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
@@ -31,6 +33,9 @@ export class CreditCardInfoComponent implements OnInit {
       jcb            : false,
       spacesAndDashes: 'No spaces or dashes'
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {
@@ -43,14 +48,37 @@ export class CreditCardInfoComponent implements OnInit {
   }
 
   generateRegex() {
-    this.callService();
+    const ccn = this.creditCardNumber;
+
+    if (!ccn.visa && !ccn.dinersClub && !ccn.masterCard && !ccn.discover
+        && !ccn.americanExpress && !ccn.jcb) {
+      this.toast.setMessage('Please select atleast one credit card number type!', 'warning');
+    } else {
+      this.callService();
+    }
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
-      data => this.generatedRegex = data.trim(),
-      error => console.log(error)
+      data => {
+        const response = data;
+        if (response.code !== 0) {
+          this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        } else {
+          this.generatedRegex = response.regex.trim();
+        }
+        this.isLoading = false;
+      },
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

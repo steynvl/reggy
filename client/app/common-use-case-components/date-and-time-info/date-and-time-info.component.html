@@ -27,7 +27,7 @@
                 [(ngModel)]="dateAndTime.timeSeparator">
           <option>Colon</option>
           <option>Dot</option>
-          <option>Colon or space</option>
+          <option>Colon or dot</option>
         </select>
 
       </div>
@@ -65,7 +65,7 @@
     <div class="row">
 
       <div class="col-sm-11 move-down-3">
-        <h6 align="left"><strong>Please specify date formats</strong></h6>
+        <h6 align="left"><strong>Allowed date and time formats:</strong></h6>
       </div>
 
       <div class="col-sm-1 move-down-2">
@@ -83,13 +83,15 @@
       <div class="col-sm-12">
 
         <textarea class="form-control" rows="4"
-                  placeholder="Specify date formats..."
+                  placeholder="Specify date and format(s)..."
                   [(ngModel)]="dateAndTime.dateFormats"
                   [ngClass]="{
-                    'is-invalid': !isValidInfo && dateAndTime.dateFormats.trim() === '',
-                    'is-valid'  : dateAndTime.dateFormats.trim() !== ''
+                    'is-invalid': !isValidInfo && dateAndTime.dateFormats.trim() === ''
                     }">
         </textarea>
+        <small class="text-danger" *ngIf="errorMsg">
+            {{ errorMsg }}
+        </small>
 
       </div>
 
@@ -157,10 +159,24 @@
   </div>
 </div>
 
+<div *ngIf="generatedRegex === undefined">
+  <br />
+</div>
+
+<div *ngIf="isLoading">
+  <br />
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    </div>
+  </div>
+
+  <br />
+</div>
 
 <div *ngIf="generatedRegex !== undefined">
 
-  <br />
   <br />
 
   <div class="row">

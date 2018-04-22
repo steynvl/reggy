@@ -15,6 +15,7 @@ export class PasswordInfoComponent implements OnInit {
   @Input() generalRegexInfo: GeneralRegexInfo;
 
   password: Password;
+  isLoading = false;
 
   shouldStartWithMsg = 'Should start with: ';
   shouldStartWithData = ['Anything', 'Digit', 'Letter', 'Letter or digit', 'Lowercase letter', 'Uppercase letter'];
@@ -49,6 +50,9 @@ export class PasswordInfoComponent implements OnInit {
       minimumLength  : '',
       maximumLength  : ''
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of line';
+    this.generalRegexInfo.endRegexMatchAt = 'End of line';
   }
 
   shouldStartWithChange(choice: string) {
@@ -157,10 +161,26 @@ export class PasswordInfoComponent implements OnInit {
   }
 
   private callService() {
+    if (this.generatedRegex === undefined) {
+      this.isLoading = true;
+    }
+
+    this.generatedRegex = undefined;
     const payload = this.constructPayload();
     this.generateCommonService.generateRegex(payload).subscribe(
-      data => this.generatedRegex = data.trim(),
-      error => console.log(error)
+      data => {
+        const response = data;
+        if (response.code !== 0) {
+          this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        } else {
+          this.generatedRegex = response.regex;
+        }
+        this.isLoading = false;
+      },
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
 

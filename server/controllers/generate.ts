@@ -10,28 +10,27 @@ export default class GenerateCtrl extends BaseCtrl {
 
     const pathToRegex = process.env.PATH_TO_PY;
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));
-    console.log([pathToRegex].concat(samples));
-    let regex = '';
+    let output = '';
 
     py.stdout.on('data', (data) => {
-      regex += data.toString();
-    });
-
-    py.stdout.on('end', () => {
-      console.log('-----');
-      console.log(`Regex = ${regex.trim()}`);
-      console.log('-----');
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(regex));
+      output += data.toString();
     });
 
     py.on('close', (code) => {
-      console.log(`Exit code = ${code}`);
-      if (code !== 0) {
-        // TODO something went wrong
-      }
+      res.setHeader('Content-Type', 'application/json');
+
+      const serverResponse: ServerResponse = {
+        regex: output,
+        code : code
+      };
+      res.send(JSON.stringify(serverResponse));
     });
 
   }
 
+}
+
+export interface ServerResponse {
+  regex: string;
+  code : number;
 }
