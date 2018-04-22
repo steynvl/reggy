@@ -89,6 +89,9 @@
                     'is-invalid': !isValidInfo && dateAndTime.dateFormats.trim() === ''
                     }">
         </textarea>
+        <small class="text-danger" *ngIf="errorMsg">
+            {{ errorMsg }}
+        </small>
 
       </div>
 

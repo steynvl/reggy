@@ -50,6 +50,9 @@ export class PasswordInfoComponent implements OnInit {
       minimumLength  : '',
       maximumLength  : ''
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of line';
+    this.generalRegexInfo.endRegexMatchAt = 'End of line';
   }
 
   shouldStartWithChange(choice: string) {

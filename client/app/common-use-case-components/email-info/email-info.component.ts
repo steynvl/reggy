@@ -37,6 +37,9 @@ export class EmailInfoComponent implements OnInit {
       anySubDomainOnSpecificDomain: '',
       specificDomainsOnly         : ''
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {

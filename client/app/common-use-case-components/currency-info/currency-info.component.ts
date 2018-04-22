@@ -41,6 +41,9 @@ export class CurrencyInfoComponent implements OnInit {
   ngOnInit() {
     this.currencies = currencies;
     this.currencyResource.count().then(count => this.currencyCount = count);
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   reloadCurrencies(params) {
@@ -48,7 +51,7 @@ export class CurrencyInfoComponent implements OnInit {
   }
 
   selectedCurrencies() {
-    return Array.from(this.getCurrenciesWithDuplicates()).join(', ');
+    return Array.from(this.getCurrenciesWithoutDuplicates()).join(', ');
   }
 
   clickedRow(rowEvent) {
@@ -56,9 +59,9 @@ export class CurrencyInfoComponent implements OnInit {
     this.selectedItems.delete(item) ? this.selectedItems.has(item) : this.selectedItems.add(item);
   }
 
-  private constructPayload(): PayloadCommon {
+  private constructPayload(uniqueCurrencies: Set<string>): PayloadCommon {
     const payloadInfo: Currency = {
-      currencies: Array.from(this.getCurrenciesWithDuplicates())
+      currencies: Array.from(uniqueCurrencies)
     };
 
     return {
@@ -69,30 +72,36 @@ export class CurrencyInfoComponent implements OnInit {
     };
   }
 
-  getCurrenciesWithDuplicates(): Set<string> {
+  getCurrenciesWithoutDuplicates(): Set<string> {
     const uniqueCurrencies = new Set<string>();
     this.selectedItems.forEach(item => uniqueCurrencies.add(item.currency));
     return uniqueCurrencies;
   }
 
   generateRegex() {
-    this.callService();
+    const uniqueCurrencies = this.getCurrenciesWithoutDuplicates();
+
+    if (uniqueCurrencies.size === 0) {
+      this.toast.setMessage('Please select atleast one currency!', 'warning');
+    } else {
+      this.callService(uniqueCurrencies);
+    }
   }
 
-  private callService() {
+  private callService(currencies: Set<string>) {
     if (this.generatedRegex === undefined) {
       this.isLoading = true;
     }
 
     this.generatedRegex = undefined;
-    const payload = this.constructPayload();
+    const payload = this.constructPayload(currencies);
     this.generateCommonService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = response.regex.trim();
         }
         this.isLoading = false;
       },

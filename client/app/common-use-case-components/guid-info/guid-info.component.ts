@@ -28,6 +28,9 @@ export class GuidInfoComponent implements OnInit {
       hyphensIn   : 'Required',
       guidCase    : 'Case insensitive'
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {

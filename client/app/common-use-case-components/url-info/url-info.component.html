@@ -97,6 +97,24 @@
 
     </div>
 
+    <div class="row">
+
+      <div class="col-sm-4"></div>
+
+      <div class="col-sm-4">
+          <small class="text-danger" *ngIf="portNumbersErr">
+            {{ portNumbersErr }}
+          </small>
+      </div>
+
+      <div class="col-sm-4">
+          <small class="text-danger" *ngIf="userNamesErr">
+              {{ userNamesErr }}
+          </small>
+      </div>
+
+    </div>
+
     <div class="row move-down">
 
       <div class="col-sm-4">
@@ -146,8 +164,8 @@
 
       <div class="col-sm-4"></div>
 
-      <div *ngIf="url.domainName !== 'Specific domains only' && url.domainName !== 'Any domain on specific TLDs'
-        && url.domainName !== 'Any subdomain on specific domains'" class="col-sm-4"></div>
+      <div *ngIf="url.domainName !== 'Specific domains only' && url.domainName !== 'Allow any domain on specific TLD'
+        && url.domainName !== 'Allow any subdomain on specific domain'" class="col-sm-4"></div>
 
       <div *ngIf="url.domainName === 'Specific domains only'" class="col-sm-4">
         <input type="text" class="form-control"
@@ -193,6 +211,24 @@
 
     </div>
 
+    <div class="row">
+
+      <div class="col-sm-4"></div>
+
+      <div class="col-sm-4">
+        <small class="text-danger" *ngIf="domainNameErr">
+          {{ domainNameErr }}
+        </small>
+      </div>
+
+      <div class="col-sm-4">
+        <small class="text-danger" *ngIf="foldersErr">
+          {{ foldersErr }}
+        </small>
+      </div>
+
+    </div>
+
     <div class="row move-down">
 
       <div class="col-sm-4">
@@ -223,7 +259,8 @@
     <div class="row" *ngIf="url.fileNames !== 'No file names' || url.parameters === 'Specific parameters only'">
 
       <div class="col-sm-4 text-center"
-        *ngIf="url.fileNames !== 'Specific extensions only' && url.fileNames !== 'Specific file names only'">
+        *ngIf="url.fileNames !== 'Specific extensions only' && url.fileNames !== 'Specific file names only'
+               && url.fileNames !== 'No file names'">
         <label class="form-check-label">
           <input class="form-check-input" type="checkbox"
                  [checked]="url.optionalFileNames"
@@ -231,6 +268,8 @@
           Optional file names
         </label>
       </div>
+
+      <div class="col-sm-4" *ngIf="url.fileNames === 'No file names'"></div>
 
       <div class="col-sm-4" *ngIf="url.fileNames === 'Specific extensions only'">
         <input type="text" class="form-control"
@@ -249,6 +288,24 @@
                placeholder="Specify parameters separated by semicolons"
                [(ngModel)]="url.specParameters">
       </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-4">
+        <small class="text-danger" *ngIf="fileNamesErr">
+          {{ fileNamesErr }}
+        </small>
+      </div>
+
+      <div class="col-sm-4" *ngIf="parametersErr">
+        <small class="text-danger" *ngIf="parametersErr">
+          {{ parametersErr }}
+        </small>
+      </div>
+      
+      <div class="col-sm-4"></div>
 
     </div>
 

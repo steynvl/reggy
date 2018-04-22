@@ -26,6 +26,9 @@ export class NationalIdInfoComponent implements OnInit {
     this.nationalId = {
       kind: 'Austrian social security number'
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {

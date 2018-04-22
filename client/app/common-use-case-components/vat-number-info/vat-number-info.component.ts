@@ -56,6 +56,9 @@ export class VatNumberInfoComponent implements OnInit {
       countryCode       : 'No country code',
       groupingCharacters: 'None'
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {
@@ -68,7 +71,11 @@ export class VatNumberInfoComponent implements OnInit {
   }
 
   generateRegex() {
-    this.callService();
+    if (this.validInfo()) {
+      this.callService();
+    } else {
+      this.toast.setMessage('Please select atleast one VAT number!', 'warning');
+    }
   }
 
   private callService() {
@@ -109,4 +116,11 @@ export class VatNumberInfoComponent implements OnInit {
     });
   }
 
+  validInfo(): boolean {
+    return Object.values(this.vatNumber).some(vatNr => {
+      if (typeof vatNr === 'boolean') {
+        return vatNr;
+      }
+    });
+  }
 }

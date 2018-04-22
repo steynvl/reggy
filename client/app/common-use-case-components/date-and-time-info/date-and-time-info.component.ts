@@ -21,6 +21,7 @@ export class DateAndTimeInfoComponent implements OnInit {
   isLoading = false;
 
   isValidInfo = true;
+  errorMsg: string;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
@@ -33,6 +34,9 @@ export class DateAndTimeInfoComponent implements OnInit {
       leadingZeros : 'No leading zeros allowed',
       dateFormats  : ''
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {
@@ -46,13 +50,14 @@ export class DateAndTimeInfoComponent implements OnInit {
 
   generateRegex() {
     if (this.isValidUrlInfo()) {
+      this.errorMsg = undefined;
       this.callService();
     } else {
       this.isValidInfo = false;
 
       setTimeout(() => {
         this.isValidInfo = true;
-      }, 5000);
+      }, 3000);
 
       this.toast.setMessage('Invalid input information!', 'warning');
     }
@@ -72,7 +77,7 @@ export class DateAndTimeInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = response.regex.trim();
         }
         this.isLoading = false;
       },
@@ -84,7 +89,17 @@ export class DateAndTimeInfoComponent implements OnInit {
   }
 
   isValidUrlInfo(): boolean {
-    return this.dateAndTime.dateFormats.trim() !== '';
+    const input = this.dateAndTime.dateFormats.trim();
+    const validChars = /^[dmyYhHns/a:\s]+$/
+
+    if (input === '') {
+      this.errorMsg = 'Please input a date format to match in the text box above!';
+      return false;
+    } else {
+      this.errorMsg = 'Only the characters a,d,m,y,Y,h,H,n,s/,: are allowed in the text box!';
+    }
+
+    return /^[dmyYhHns/a:\s]+$/.test(this.dateAndTime.dateFormats.trim())
   }
 
   clickCopyToClipboard() {

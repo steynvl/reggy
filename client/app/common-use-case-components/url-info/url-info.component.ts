@@ -19,6 +19,15 @@ export class UrlInfoComponent implements OnInit {
 
   generatedRegex: string;
 
+  portNumbersErr: string;
+  userNamesErr  : string;
+  domainNameErr : string;
+  foldersErr    : string;
+  fileNamesErr  : string;
+  parametersErr : string;
+
+  validPortNumbersRe = /^(\d+;)*\d+$/;
+
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
@@ -47,6 +56,9 @@ export class UrlInfoComponent implements OnInit {
       parameters             : 'No parameters',
       specParameters         : ''
     };
+
+    this.generalRegexInfo.startRegexMatchAt = 'Start of word';
+    this.generalRegexInfo.endRegexMatchAt = 'End of word';
   }
 
   private constructPayload(): PayloadCommon {
@@ -59,7 +71,11 @@ export class UrlInfoComponent implements OnInit {
   }
 
   generateRegex() {
-    this.callService();
+    if (this.isValidUrl()) {
+      this.callService();
+    } else {
+      this.toast.setMessage('Invalid input information!', 'warning')
+    }
   }
 
   private callService() {
@@ -84,6 +100,66 @@ export class UrlInfoComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+
+  isValidUrl(): boolean {
+    if (this.url.portNumbers === 'Specify optional port numbers' || this.url.portNumbers === 'Specify required port numbers') {
+      const p = this.url.portNumbers === 'Specify optional port numbers'
+                ? this.url.specOptionalPortNumbers 
+                : this.url.specRequiredPortNumbers;
+      
+      if (p.trim() === '') {
+        this.portNumbersErr = 'Please specify port numbers separated by semicolons above!';
+      } else if (!this.validPortNumbersRe.test(p)) {
+        this.portNumbersErr = 'Wrong format, only digits separated by semicolons allowed!';
+      } else {
+        this.portNumbersErr = undefined;
+      }
+    }
+
+    if (this.url.username === 'Specific user names only') {
+      const u = this.url.specUserNames;
+
+      if (u.trim() === '') {
+        this.userNamesErr = 'Please specify usernames separated by semicolons!';
+      } else if (!/^\w+$/.test(u)) {
+        this.userNamesErr = 'Only basic characters [a-zA-Z0-9_] allowed!';
+      } else {
+        this.userNamesErr = undefined;
+      }
+    }
+
+    if (this.url.domainName === 'Allow any domain on specific TLD'
+                || this.url.domainName === 'Allow any subdomain on specific domain'
+                || this.url.domainName === 'Specific domains only') {
+          
+      // TODO domain names
+    }
+
+    if (this.url.folders === 'Specific folders only' || this.url.folders === 'Specific paths only') {
+      const f = this.url.portNumbers === 'Specific folders only'
+      ? this.url.specFoldersOnly 
+      : this.url.specFileNames;
+      
+      // TODO folders
+    }
+
+    if (this.url.fileNames === 'Specific extensions only' || this.url.fileNames === 'Specific file names only') {
+      const f = this.url.fileNames === 'Specific extensions only'
+      ? this.url.specExtensions
+      : this.url.specFileNames;
+
+      // TODO file names
+    }
+
+    if (this.url.parameters === 'Specific parameters only') {
+      const p = this.url.specParameters;
+
+      // TODO parameters
+    }
+
+    return !this.portNumbersErr && !this.userNamesErr && !this.domainNameErr
+      && !this.foldersErr && !this.fileNamesErr && !this.parametersErr;
   }
 
   clickCopyToClipboard() {
