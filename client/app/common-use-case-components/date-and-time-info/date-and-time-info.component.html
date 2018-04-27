@@ -70,7 +70,9 @@
 
       <div class="col-sm-1 move-down-2">
         <div class="text-right">
-          <button class="btn btn-sm btn-primary">
+          <button class="btn btn-sm btn-primary" 
+                  data-toggle="tooltip" data-placement="top"
+                  title="Click for help!" (click)="showInfo = !showInfo">
             <i class="fa fa-info" aria-hidden="true"></i>
           </button>
         </div>
@@ -93,6 +95,65 @@
             {{ errorMsg }}
         </small>
 
+      </div>
+
+    </div>
+
+    <div class="row" *ngIf="showInfo">
+
+      <div class="col-sm-12">
+
+        <p>
+          In the above textbox you have to specify the date and/or time format patterns that this field
+          can use. If you want to specify multiple patterns, separate then with line breaks. The following
+          characters have a special meaning in the date and time formats:
+        </p>
+
+
+        <dl>
+          <dt>d -</dt>
+          <dd>Day of the month, a number between 1 and 31</dd>
+
+          <dt>m -</dt>
+          <dd>Month number, a number between 1 and 12</dd>
+
+          <dt>y -</dt>
+          <dd>2-digit year, a number between 00 and 99</dd>
+
+          <dt>Y -</dt>
+          <dd>4-digit year, a number between 0000 and 9999</dd>
+
+          <dt>/ -</dt>
+          <dd>Date separator, one of the characters in the &ldquo;Date separators&rdquo; dropdown</dd>
+
+          <dt>h -</dt>
+          <dd>Hour on a 12-hour clock, a number between 1 and 12</dd>
+
+          <dt>H -</dt>
+          <dd>Hour on a 24-hour clock, a number between 0 and 23</dd>
+
+          <dt>n -</dt>
+          <dd>Minutes, a number between 0 and 59</dd>
+
+          <dt>s -</dt>
+          <dd>Seconds, a number between 0 and 59</dd>
+
+          <dt>a -</dt>
+          <dd>AM/PM indicator, one of the options in the "AM/PM indicators" dropdown</dd>
+
+          <dt>: -</dt>
+          <dd>Time separator, one of the characters in the "Time separators" dropdown</dd>
+
+      </dl>
+
+      </div>
+
+    </div>
+
+    <div class="row" *ngIf="showInfo">
+
+      <div class="col-sm-12">
+        <p>An example of a regular expression to match the American date format is: <strong>m/d/Y</strong></p>
       </div>
 
     </div>

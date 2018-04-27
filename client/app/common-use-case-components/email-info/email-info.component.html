@@ -24,8 +24,8 @@
         <label for="domain-name">Domain name:</label>
         <select id="domain-name" class="form-control" [(ngModel)]="email.domainName">
           <option>Allow any domain name</option>
-          <option>Allow any domain on specific TLD</option>
-          <option>Allow any subdomain on specific domain</option>
+          <option>Allow any domain on specific TLD(s)</option>
+          <option>Allow any subdomain on specific domain(s)</option>
           <option>Specific domains only</option>
         </select>
 
@@ -47,11 +47,11 @@
     <div class="row" *ngIf="showUsernameErrorMsg || showDomainErrorMsg">
 
       <div class="col-sm-4">
-        <small class="text-danger" *ngIf="showUsernameErrorMsg">Please specify usernames in the text box below!</small>
+        <small class="text-danger" *ngIf="showUsernameErrorMsg">{{ usernameErrorMsg }}</small>
       </div>
 
       <div class="col-sm-4">
-        <small class="text-danger" *ngIf="showDomainErrorMsg">{{domainErrorMsg}}</small>
+        <small class="text-danger" *ngIf="showDomainErrorMsg">{{ domainErrorMsg }}</small>
       </div>
 
     </div>
@@ -67,8 +67,6 @@
                  placeholder="Specify usernames separated by semicolons"
                  [(ngModel)]="email.specificUserNamesOnly"
           >
-          <!-- TODO hint with example -->
-
 
         </div>
 
@@ -79,25 +77,38 @@
         <div class="form-group">
 
           <input type="text" class="form-control"
-                 *ngIf="email.domainName === 'Allow any domain on specific TLD'"
-                 placeholder="Type name of specific top-level domain"
+                 *ngIf="email.domainName === 'Allow any domain on specific TLD(s)'"
                  [(ngModel)]="email.domainOnSpecificTld"
+                 data-toggle="tooltip" data-placement="top"
+                 title="Top-level domain(s) separated by semicolons e.g.
+com
+com;org
+net;com;org
+"
+                 placeholder="Top-level domain(s) separated by semicolons"
           >
-          <!-- TODO hint with example -->
 
           <input type="text" class="form-control"
-                 *ngIf="email.domainName === 'Allow any subdomain on specific domain'"
-                 placeholder="Type name of specific domain"
+                 *ngIf="email.domainName === 'Allow any subdomain on specific domain(s)'"
+                 placeholder="Domain(s) separated by semicolons"
                  [(ngModel)]="email.anySubDomainOnSpecificDomain"
+                 data-toggle="tooltip" data-placement="top"
+                 title="Domain(s) separated by semicolon e.g.
+co.za
+co.za;whatsapp.com
+"
           >
-          <!-- TODO hint with example -->
 
           <input type="text" class="form-control"
                  *ngIf="email.domainName === 'Specific domains only'"
-                 placeholder="Specify specific domains separated by semicolons"
+                 placeholder="Specific domain(s) separated by semicolons"
                  [(ngModel)]="email.specificDomainsOnly"
-          >
-          <!-- TODO hint with example -->
+                 data-toggle="tooltip" data-placement="top"
+                 title="Specific domain(s) separated by semicolon e.g.
+gmail.com
+gmail.com;com
+"
+           >
 
         </div>
 

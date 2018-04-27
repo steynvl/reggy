@@ -38,6 +38,8 @@ class DateAndTime:
                     tmp.append(am_pm_inc)
                 elif char == ':':
                     tmp.append(time_sep)
+                elif char == ' ':
+                    tmp.append(' ')
             
             self._re.append(''.join(tmp))
 

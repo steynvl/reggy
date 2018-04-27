@@ -89,9 +89,7 @@ export class CurrencyInfoComponent implements OnInit {
   }
 
   private callService(currencies: Set<string>) {
-    if (this.generatedRegex === undefined) {
-      this.isLoading = true;
-    }
+    this.isLoading = true;
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload(currencies);
