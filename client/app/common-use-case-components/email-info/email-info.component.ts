@@ -67,6 +67,8 @@ export class EmailInfoComponent implements OnInit {
       } else {
           this.showUsernameErrorMsg = false;
       }
+    } else {
+      this.showUsernameErrorMsg = false;
     }
 
     if (this.email.domainName === 'Allow any domain on specific TLD(s)') {
@@ -99,6 +101,8 @@ export class EmailInfoComponent implements OnInit {
       } else {
         this.showDomainErrorMsg = false;
       }
+    } else {
+      this.showDomainErrorMsg = false;
     }
 
     if (this.showUsernameErrorMsg || this.showDomainErrorMsg) {
