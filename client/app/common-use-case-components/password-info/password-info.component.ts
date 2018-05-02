@@ -21,13 +21,13 @@ export class PasswordInfoComponent implements OnInit {
   shouldStartWithData = ['Anything', 'Digit', 'Letter', 'Letter or digit', 'Lowercase letter', 'Uppercase letter'];
 
   shouldContainMsg = 'Should contain: ';
-  shouldContainData = ['Bracket', 'Digit', 'Lowercase letter', 'Minus', 'Whitespace', 'Special character', 'Underline', 'Uppercase letter'];
+  shouldContainData = ['Digit', 'Lowercase letter', 'Minus', 'Whitespace', 'Special character', 'Underline', 'Uppercase letter'];
 
   minimumLengthMsg = 'Minimum length (inclusive): ';
   minimumLengthData = ['4', '5', '6', '7', '8', 'Custom length'];
   minLengthIsCustom: boolean;
 
-  maximumLengthMsg = 'Maximum length (inclusive): ';
+  maximumLengthMsg = 'Maximum length (exclusive): ';
   maximumLengthData = ['9', '10', '11', '12', '13', 'Custom length', 'No maximum length required'];
   maxLengthIsCustom: boolean;
 
@@ -103,10 +103,14 @@ export class PasswordInfoComponent implements OnInit {
   }
 
   changeMaxData(choice: string) {
-    if (this.password.maximumLength !== 'No maximum length required') {
+    this.password.maximumLength = choice;
+
+    if (choice === 'No maximum length required') {
+      this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
+      this.maxLengthIsCustom = false;
+    } else {
       this.maxLengthIsCustom = choice === 'Custom length';
       if (!this.maxLengthIsCustom) {
-        this.password.maximumLength = choice;
         this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
         this.updateMinLengths();
       }
@@ -133,12 +137,16 @@ export class PasswordInfoComponent implements OnInit {
   }
 
   minRangeIsValid(): boolean {
-    return this.validLength.test(this.password.minimumLength) &&
+    if (this.password.maximumLength === 'No maximum length required') {
+      return /^\d+$/.test(this.password.minimumLength);
+    }
+
+    return this.validLength.test(this.password.minimumLength) && /^\d+$/.test(this.password.minimumLength) &&
       Number.parseInt(this.password.minimumLength) <  Number.parseInt(this.password.maximumLength);
   }
 
   maxRangeIsValid(): boolean {
-    return this.validLength.test(this.password.maximumLength) &&
+    return this.validLength.test(this.password.maximumLength) && /^\d+$/.test(this.password.maximumLength) &&
       Number.parseInt(this.password.maximumLength) >  Number.parseInt(this.password.minimumLength);
   }
 

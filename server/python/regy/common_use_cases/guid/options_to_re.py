@@ -13,8 +13,8 @@ braces_to_re = {
     },
 
     Target.POSIX: {
-        'Required'   : '',
-        'Optional'   : ''
+        'Required'   : '\\{%s}',
+        'Optional'   : '%s|\\{%s}'
     }
 
 
@@ -35,9 +35,9 @@ case_to_re = {
     },
 
     Target.POSIX: {
-        'Case insensitive': '',
-        'Uppercase'       : '',
-        'Lowercase'       : ''
+        'Case insensitive': '[\\dA-Fa-f]',
+        'Uppercase'       : '[\\dA-F]',
+        'Lowercase'       : '[\\da-f]'
     }
 
 }

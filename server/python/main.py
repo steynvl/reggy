@@ -21,7 +21,7 @@ def main():
     gen_method = gen_method_map[samples['generateMethod']]
     re = regy.Regy(samples=samples, gen_method=gen_method).get_re()
 
-    print(re)
+    sys.stdout.write(re)
     sys.stdout.flush()
 
 if __name__ == '__main__':
