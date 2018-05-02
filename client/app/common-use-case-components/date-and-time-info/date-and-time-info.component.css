@@ -32,3 +32,11 @@ li {
 .move-up {
   padding-bottom: 10px;
 }
+
+dt, dd {
+  float: left;
+  margin-left: 10px;
+}
+dt {
+  clear:both;
+}

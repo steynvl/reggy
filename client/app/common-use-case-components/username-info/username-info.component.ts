@@ -105,10 +105,14 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   changeMaxData(choice: string) {
-    if (this.username.maximumLength !== 'No maximum length required') {
+    this.username.maximumLength = choice;
+
+    if (choice === 'No maximum length required') {
+      this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
+      this.maxLengthIsCustom = false;
+    } else {
       this.maxLengthIsCustom = choice === 'Custom length';
       if (!this.maxLengthIsCustom) {
-        this.username.maximumLength = choice;
         this.maximumLengthMsg = `Maximum length (exclusive): ${choice}`;
         this.updateMinLengths();
       }
@@ -135,12 +139,16 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   minRangeIsValid(): boolean {
-    return this.validLength.test(this.username.minimumLength) &&
+    if (this.username.maximumLength === 'No maximum length required') {
+      return /^\d+$/.test(this.username.minimumLength);
+    }
+
+    return this.validLength.test(this.username.minimumLength) && /^\d+$/.test(this.username.minimumLength) &&
       Number.parseInt(this.username.minimumLength) <  Number.parseInt(this.username.maximumLength);
   }
 
   maxRangeIsValid(): boolean {
-    return this.validLength.test(this.username.maximumLength) &&
+    return this.validLength.test(this.username.maximumLength) && /^\d+$/.test(this.username.maximumLength) &&
       Number.parseInt(this.username.maximumLength) >  Number.parseInt(this.username.minimumLength);
   }
 
@@ -162,9 +170,7 @@ export class UsernameInfoComponent implements OnInit {
   }
 
   private callService() {
-    if (this.generatedRegex === undefined) {
-      this.isLoading = true;
-    }
+    this.isLoading = true;
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();

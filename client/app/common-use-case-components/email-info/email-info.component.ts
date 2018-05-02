@@ -5,6 +5,8 @@ import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Email } from '../../models/common-use-case-models/email';
 
+declare var jQuery: any;
+
 @Component({
   selector: 'app-email-info',
   templateUrl: './email-info.component.html',
@@ -23,11 +25,14 @@ export class EmailInfoComponent implements OnInit {
   showDomainErrorMsg: boolean;
 
   domainErrorMsg: string;
+  usernameErrorMsg: string;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
+    jQuery('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+
     this.email = {
       username                    : 'Allow any user name',
       domainName                  : 'Allow any domain name',
@@ -53,20 +58,36 @@ export class EmailInfoComponent implements OnInit {
 
   generateRegex() {
     if (this.email.username === 'Specific user names only') {
-      this.showUsernameErrorMsg = this.email.specificUserNamesOnly === undefined || this.email.specificUserNamesOnly.trim() === '';
+      if (this.email.specificUserNamesOnly === undefined || this.email.specificUserNamesOnly.trim() === '') {
+          this.usernameErrorMsg = 'Please specify usernames in the text box below!';
+          this.showUsernameErrorMsg = true;
+      } else if (!/^\w+(;\w+)*$/.test(this.email.specificUserNamesOnly)) {
+          this.usernameErrorMsg = 'Only basic characters [a-zA-Z0-9_] allowed!';
+          this.showUsernameErrorMsg = true;
+      } else {
+          this.showUsernameErrorMsg = false;
+      }
+    } else {
+      this.showUsernameErrorMsg = false;
     }
 
-    if (this.email.domainName === 'Allow any domain on specific TLD') {
+    if (this.email.domainName === 'Allow any domain on specific TLD(s)') {
       if (this.email.domainOnSpecificTld === undefined || this.email.domainOnSpecificTld.trim() === '') {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Please specify a top-level domain in the text box below!';
+      } else if (!/^[a-z]+(;[a-z]+)*$/.test(this.email.domainOnSpecificTld)) {
+          this.showDomainErrorMsg = true;
+          this.domainErrorMsg = 'Only top-level domains [a-z] separated by semicolons allowed!';
       } else {
         this.showDomainErrorMsg = false;
       }
-    } else if (this.email.domainName === 'Allow any subdomain on specific domain') {
+    } else if (this.email.domainName === 'Allow any subdomain on specific domain(s)') {
       if (this.email.anySubDomainOnSpecificDomain === undefined || this.email.anySubDomainOnSpecificDomain.trim() === '') {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Please specify a domain in the text box below';
+      } else if (!/^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/.test(this.email.anySubDomainOnSpecificDomain)) {
+        this.showDomainErrorMsg = true;
+        this.domainErrorMsg = 'Only domains [a-z] separated by semicolons allowed!';
       } else {
         this.showDomainErrorMsg = false;
       }
@@ -74,9 +95,14 @@ export class EmailInfoComponent implements OnInit {
       if (this.email.specificDomainsOnly === undefined || this.email.specificDomainsOnly.trim() === '') {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Please add specific domains to match in the text box below!';
+      } else if (!/^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/.test(this.email.specificDomainsOnly)) {
+        this.showDomainErrorMsg = true;
+        this.domainErrorMsg = 'Only domains [a-z] separated by semicolons allowed!';
       } else {
         this.showDomainErrorMsg = false;
       }
+    } else {
+      this.showDomainErrorMsg = false;
     }
 
     if (this.showUsernameErrorMsg || this.showDomainErrorMsg) {
@@ -87,9 +113,7 @@ export class EmailInfoComponent implements OnInit {
   }
 
   private callService() {
-    if (this.generatedRegex === undefined) {
-      this.isLoading = true;
-    }
+    this.isLoading = true;
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();

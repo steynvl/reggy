@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ToastComponent } from './toast/toast.component';
-import { LoadingComponent } from './loading/loading.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   imports: [
@@ -21,11 +21,11 @@ import { LoadingComponent } from './loading/loading.component';
     HttpClientModule,
     // Shared Components
     ToastComponent,
-    LoadingComponent
+    LoaderComponent
   ],
   declarations: [
     ToastComponent,
-    LoadingComponent
+    LoaderComponent
   ],
   providers: [
     ToastComponent

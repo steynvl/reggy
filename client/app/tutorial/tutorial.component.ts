@@ -10,8 +10,8 @@ export class TutorialComponent implements OnInit {
   constructor(private router: Router) { }
 
     ngOnInit(): void {
-        // TODO remove, was just testing injection router
-        this.router.navigate(['/generate/common']);    
+        // TODO remove, was just testing injecting router
+        this.router.navigate(['/tutorial']);    
     }
 
 }

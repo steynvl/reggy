@@ -8,6 +8,9 @@ export default class GenerateCtrl extends BaseCtrl {
 
   generate = (req, res) => {
     const samples = req.body.params;
+    console.log('---------');
+    console.log(samples);
+    console.log('---------');
 
     const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'python', 'main.py');
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));

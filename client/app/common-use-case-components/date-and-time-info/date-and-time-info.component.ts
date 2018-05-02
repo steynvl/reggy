@@ -6,6 +6,8 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { DateAndTime } from '../../models/common-use-case-models/date-and-time';
 import { ServerResponse } from '../../models/server-response/server-response';
 
+declare var jQuery: any;
+
 @Component({
   selector: 'app-date-and-time-info',
   templateUrl: './date-and-time-info.component.html',
@@ -22,11 +24,15 @@ export class DateAndTimeInfoComponent implements OnInit {
 
   isValidInfo = true;
   errorMsg: string;
+  
+  showInfo = false;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
+    jQuery('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+
     this.dateAndTime = {
       dateSeparator: 'Forward slash',
       timeSeparator: 'Colon',
@@ -65,9 +71,7 @@ export class DateAndTimeInfoComponent implements OnInit {
   }
 
   private callService() {
-    if (this.generatedRegex === undefined) {
-      this.isLoading = true;
-    }
+    this.isLoading = true;
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();

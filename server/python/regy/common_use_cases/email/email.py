@@ -37,10 +37,12 @@ class Email:
         domain_to_re = domain_name_to_re[self._target]
         if domain_name == 'Specific domains only':
             self._re.append(self._parse_specific_field(self._info.specific_domains_only))
-        elif domain_name == 'Allow any domain on specific TLD':
-            self._re.append(domain_to_re[domain_name].format(self._info.domain_on_spec_tld))
-        elif domain_name == 'Allow any subdomain on specific domain':
-            self._re.append(domain_to_re[domain_name].format(self._info.any_sub_domain_on_spec_domain))
+        elif domain_name == 'Allow any domain on specific TLD(s)':
+            domain_on_spec_tld = self._parse_specific_field(self._info.domain_on_spec_tld)
+            self._re.append(domain_to_re[domain_name].format(domain_on_spec_tld))
+        elif domain_name == 'Allow any subdomain on specific domain(s)':
+            sub_on_spec = self._parse_specific_field(self._info.any_sub_domain_on_spec_domain)
+            self._re.append(domain_to_re[domain_name].format(sub_on_spec))
         else:
             self._re.append(domain_to_re[domain_name])
 

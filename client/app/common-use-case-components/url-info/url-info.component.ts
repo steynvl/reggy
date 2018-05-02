@@ -79,9 +79,7 @@ export class UrlInfoComponent implements OnInit {
   }
 
   private callService() {
-    if (this.generatedRegex === undefined) {
-      this.isLoading = true;
-    }
+    this.isLoading = true;
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();
