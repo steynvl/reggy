@@ -27,6 +27,8 @@ export class EmailInfoComponent implements OnInit {
   domainErrorMsg: string;
   usernameErrorMsg: string;
 
+  validDomainsRe     = /^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/;
+
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
 
@@ -84,8 +86,8 @@ export class EmailInfoComponent implements OnInit {
     } else if (this.email.domainName === 'Allow any subdomain on specific domain(s)') {
       if (this.email.anySubDomainOnSpecificDomain === undefined || this.email.anySubDomainOnSpecificDomain.trim() === '') {
         this.showDomainErrorMsg = true;
-        this.domainErrorMsg = 'Please specify a domain in the text box below';
-      } else if (!/^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/.test(this.email.anySubDomainOnSpecificDomain)) {
+        this.domainErrorMsg = 'Please specify a domain in the text box below!';
+      } else if (!this.validDomainsRe.test(this.email.anySubDomainOnSpecificDomain)) {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Only domains [a-z] separated by semicolons allowed!';
       } else {
@@ -95,7 +97,7 @@ export class EmailInfoComponent implements OnInit {
       if (this.email.specificDomainsOnly === undefined || this.email.specificDomainsOnly.trim() === '') {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Please add specific domains to match in the text box below!';
-      } else if (!/^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/.test(this.email.specificDomainsOnly)) {
+      } else if (!this.validDomainsRe.test(this.email.specificDomainsOnly)) {
         this.showDomainErrorMsg = true;
         this.domainErrorMsg = 'Only domains [a-z] separated by semicolons allowed!';
       } else {

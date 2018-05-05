@@ -1,3 +1,4 @@
+from collections import deque
 from regy.common_use_cases.date_and_time.options_to_re import identifiers_to_re, options_to_re
 from regy.common_use_cases.models.date_and_time_info import DateAndTimeInfo
 
@@ -22,24 +23,31 @@ class DateAndTime:
 
         formats = self._get_formats()
 
-        for format in formats:
+        for _format in formats:
 
             tmp = []
-            for char in format:
-
+            for char in _format:
+                
+                curr = deque()
                 if char in identifiers_to_re.keys():
                     if char == 'y' or char == 'Y':
-                        tmp.append(identifiers_to_re[char])
+                        curr.append(identifiers_to_re[char])
                     else:
-                        tmp.append(identifiers_to_re[char][self._info.leading_zeros])
+                        curr.append(identifiers_to_re[char][self._info.leading_zeros])          
+                        if len(_format) > 1:
+                            curr.appendleft('(?:')
+                            curr.append(')')
+
                 elif char == '/':
-                    tmp.append(date_sep)
+                    curr.append(date_sep)
                 elif char == 'a':
-                    tmp.append(am_pm_inc)
+                    curr.append(am_pm_inc)
                 elif char == ':':
-                    tmp.append(time_sep)
+                    curr.append(time_sep)
                 elif char == ' ':
-                    tmp.append(' ')
+                    curr.append(' ')
+                
+                tmp.append(''.join(curr))
             
             self._re.append(''.join(tmp))
 

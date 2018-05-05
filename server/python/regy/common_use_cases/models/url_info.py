@@ -16,7 +16,6 @@ class UrlInfo:
         self.min_folder_depth           = info['minFolderDepth']
         self.max_folder_depth           = info['maxFolderDepth']
         self.spec_folders_only          = info['specFoldersOnly']
-        self.spec_paths_only            = info['specPathsOnly']
         self.file_names                 = info['fileNames']
         self.spec_extensions            = info['specExtensions']
         self.spec_file_names            = info['specFileNames']
