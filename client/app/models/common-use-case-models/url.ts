@@ -15,7 +15,6 @@ export class Url {
   minFolderDepth         : string;
   maxFolderDepth         : string;
   specFoldersOnly        : string;
-  specPathsOnly          : string;
   fileNames              : string;
   specExtensions         : string;
   specFileNames          : string;

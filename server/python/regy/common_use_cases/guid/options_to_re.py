@@ -17,7 +17,6 @@ braces_to_re = {
         'Optional'   : '%s|\\{%s}'
     }
 
-
 }
 
 case_to_re = {

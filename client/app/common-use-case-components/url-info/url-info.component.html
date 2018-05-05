@@ -133,8 +133,8 @@
         <label for="domain-name">Domain name:</label>
         <select id="domain-name" class="form-control" [(ngModel)]="url.domainName">
           <option>Allow any domain name</option>
-          <option>Allow any domain on specific TLD</option>
-          <option>Allow any subdomain on specific domain</option>
+          <option>Allow any domain on specific TLD(s)</option>
+          <option>Allow any subdomain on specific domain(s)</option>
           <option>Specific domains only</option>
         </select>
 
@@ -151,7 +151,6 @@
           <option>Basic characters only [A-Za-z0-9._-]</option>
           <option>Basic folder characters only [A-Za-z0-9_-]</option>
           <option>Specific folders only</option>
-          <option>Specific paths only</option>
         </select>
 
       </div>
@@ -159,54 +158,68 @@
     </div>
 
     <div class="row" *ngIf="url.domainName === 'Specific domains only'
-      || url.domainName === 'Allow any domain on specific TLD' || url.domainName === 'Allow any subdomain on specific domain'
+      || url.domainName === 'Allow any domain on specific TLD(s)' || url.domainName === 'Allow any subdomain on specific domain(s)'
       || url.folders !== 'No folders'">
 
       <div class="col-sm-4"></div>
 
-      <div *ngIf="url.domainName !== 'Specific domains only' && url.domainName !== 'Allow any domain on specific TLD'
-        && url.domainName !== 'Allow any subdomain on specific domain'" class="col-sm-4"></div>
+      <div *ngIf="url.domainName !== 'Specific domains only' && url.domainName !== 'Allow any domain on specific TLD(s)'
+        && url.domainName !== 'Allow any subdomain on specific domain(s)'" class="col-sm-4"></div>
 
       <div *ngIf="url.domainName === 'Specific domains only'" class="col-sm-4">
         <input type="text" class="form-control"
                placeholder="Specify domains separated by semicolons"
                [(ngModel)]="url.specDomainNames"
+               data-toggle="tooltip" data-placement="top"
+               title="Specific domain(s) separated by semicolons e.g.
+gmail.com
+gmail.com;com
+"
         >
       </div>
 
-      <div *ngIf="url.domainName === 'Allow any domain on specific TLD'" class="col-sm-4">
+      <div *ngIf="url.domainName === 'Allow any domain on specific TLD(s)'" class="col-sm-4">
         <input type="text" class="form-control"
                placeholder="Type name of specific top-level domain"
-               [(ngModel)]="url.specDomainNames"
+               [(ngModel)]="url.specificTld"
+               data-toggle="tooltip" data-placement="top"
+               title="Top-level domain(s) separated by semicolons e.g.
+com
+com;org
+net;com;org
+"
         >
       </div>
 
-      <div *ngIf="url.domainName === 'Allow any subdomain on specific domain'" class="col-sm-4">
+      <div *ngIf="url.domainName === 'Allow any subdomain on specific domain(s)'" class="col-sm-4">
         <input type="text" class="form-control"
                placeholder="Type name of specific domain"
-               [(ngModel)]="url.specDomainNames"
+               [(ngModel)]="url.subdomainOnSpecDomain"
+               data-toggle="tooltip" data-placement="top"
+               title="Domain(s) separated by semicolons e.g.
+co.za
+co.za;whatsapp.com
+"
         >
       </div>
 
-      <div *ngIf="url.folders !== 'No folders' && url.folders !== 'Specific paths only'
-        && url.folders !== 'Specific folders only'" class="col-sm-2">
+      <div *ngIf="url.folders !== 'No folders' && url.folders !== 'Specific folders only'" class="col-sm-2">
         <input type="number" class="form-control" placeholder="Min depth" [(ngModel)]="url.minFolderDepth">
       </div>
-      <div *ngIf="url.folders !== 'No folders' && url.folders !== 'Specific paths only'
-        && url.folders !== 'Specific folders only'" class="col-sm-2">
+      <div *ngIf="url.folders !== 'No folders' && url.folders !== 'Specific folders only'" class="col-sm-2">
         <input type="number" class="form-control" placeholder="Max depth" [(ngModel)]="url.maxFolderDepth">
-      </div>
-
-      <div class="col-sm-4" *ngIf="url.folders === 'Specific paths only'">
-        <input type="text" class="form-control"
-               placeholder="Specific paths separated by semicolons"
-               [(ngModel)]="url.specPathsOnly">
       </div>
 
       <div class="col-sm-4" *ngIf="url.folders === 'Specific folders only'">
         <input type="text" class="form-control"
                placeholder="Specific folders separated by semicolons"
-               [(ngModel)]="url.specFoldersOnly">
+               [(ngModel)]="url.specFoldersOnly"
+               data-toggle="tooltip" data-placement="top"
+               title="Folder(s) separated by semicolons e.g.
+/home/user/
+home/user/;/tmp/;/var/lib/
+"
+        >
       </div>
 
     </div>
@@ -221,11 +234,24 @@
         </small>
       </div>
 
-      <div class="col-sm-4">
-        <small class="text-danger" *ngIf="foldersErr">
+      <div *ngIf="foldersErr" class="col-sm-4">
+        <small class="text-danger">
           {{ foldersErr }}
         </small>
       </div>
+
+      <div *ngIf="foldersMinDepthErr" class="col-sm-2">
+        <small class="text-danger">
+          {{ foldersMinDepthErr }}
+        </small>
+      </div>
+
+      <div *ngIf="foldersMaxDepthErr" class="col-sm-2">
+        <small class="text-danger">
+          {{ foldersMaxDepthErr }}
+        </small>
+      </div>
+
 
     </div>
 
@@ -304,7 +330,7 @@
           {{ parametersErr }}
         </small>
       </div>
-      
+
       <div class="col-sm-4"></div>
 
     </div>

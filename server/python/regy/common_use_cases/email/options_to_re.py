@@ -8,7 +8,7 @@ username_to_re = {
     },
 
     Target.PERL: {
-        'Allow any user name': "[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*",
+        'Allow any user name': "[\\d!#$%&'*+\/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+\/=?_`a-z{|}~^-]+)*",
         'Basic characters only [a-z0-9._-]': "[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*"
     },
 

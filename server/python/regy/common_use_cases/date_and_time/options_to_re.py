@@ -42,7 +42,7 @@ options_to_re = {
           'Forward slash'       : '/',
           'Hyphen'              : '-',
           'Dot'                 : '\\\\.',
-          'Slash, hyphen or dot': '[/-.]'
+          'Slash, hyphen or dot': '[-/.]'
         },
         'timeSeparators': {
             'Colon'       : ':',
@@ -59,10 +59,10 @@ options_to_re = {
 
     Target.PERL: {
         'dateSeparators': {
-            'Forward slash'       : '/',
+            'Forward slash'       : '\/',
             'Hyphen'              : '-',
             'Dot'                 : '\\.',
-            'Slash, hyphen or dot': '[/-.]'
+            'Slash, hyphen or dot': '[-\/.]'
         },
         'timeSeparators': {
             'Colon'       : ':',
@@ -82,7 +82,7 @@ options_to_re = {
             'Forward slash'       : '/',
             'Hyphen'              : '-',
             'Dot'                 : '\\.',
-            'Slash, hyphen or dot': '[/-.]'
+            'Slash, hyphen or dot': '[-/.]'
         },
         'timeSeparators': {
             'Colon'       : ':',

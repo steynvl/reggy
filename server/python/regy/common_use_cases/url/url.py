@@ -3,6 +3,7 @@ import re
 
 from regy.common_use_cases.models.url_info import UrlInfo
 from regy.common_use_cases.url.options_to_re import url_to_re
+from regy.samples_and_semantics.tokens import Target
 
 
 class Url:
@@ -52,17 +53,16 @@ class Url:
         domain = self._info.domain_name
         if domain == 'Specific domains only':
             self._re.append(self._parse_specific_field(self._info.spec_domain_names))
-        elif domain == 'Allow any domain on specific TLD':
-            self._re.append(domain_to_re[domain].format(self._info.specific_tld))
-        elif domain == 'Allow any subdomain on specific domain':
-            self._re.append(domain_to_re[domain].format(self._info.subdomain_on_spec_domain))
+        elif domain == 'Allow any domain on specific TLD(s)':
+            top_level_domains = self._parse_specific_field(self._info.specific_tld)
+            self._re.append(domain_to_re[domain].format(top_level_domains))
+        elif domain == 'Allow any subdomain on specific domain(s)':
+            spec_domains = self._parse_specific_field(self._info.subdomain_on_spec_domain)
+            self._re.append(domain_to_re[domain].format(spec_domains))
         else:
             self._re.append(domain_to_re[domain])
 
         port_nrs = self._info.port_numbers
-
-        if port_nrs != 'No port number':
-            self._re.append('/?')
 
         if port_nrs == 'Optional port number' or port_nrs == 'Require port number':
             self._re.append(port_nr_to_re[port_nrs])
@@ -78,15 +78,16 @@ class Url:
             if folders == 'Specific folders only':
                 spec_folders = self._parse_specific_field(self._info.spec_folders_only)
                 self._re.append(folders_to_re[folders].format(spec_folders))
-            elif folders == 'Specific paths only':
-                spec_paths = self._parse_specific_field(self._info.spec_paths_only)
-                self._re.append(folders_to_re[folders].format(spec_paths))
             else:
                 self._re.append(folders_to_re[folders])
-
-            min_depth = int(self._info.min_folder_depth)
-            max_depth = int(self._info.max_folder_depth)
-            self._re.append(self._get_folder_depth_range(min_depth, max_depth))
+                min_depth = int(self._info.min_folder_depth)
+                max_depth = int(self._info.max_folder_depth)
+                self._re.append(self._get_folder_depth_range(min_depth, max_depth))
+        
+        if self._target == Target.PERL:
+            self._re.append('\/?')
+        else:
+            self._re.append('/?')
 
         files = self._info.file_names
         if files != 'No file names':
