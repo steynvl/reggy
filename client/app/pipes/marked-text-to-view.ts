@@ -8,7 +8,7 @@ import { MarkedTextInfo } from '../models/marked-text-info';
 export class MarkedTextToView implements PipeTransform {
 
   transform(value: Array<MarkedTextInfo>): string {
-    return value.map(u => u.text).join(' | ');
+    return value.map(u => u.text).join(' OR ');
   }
 
 }

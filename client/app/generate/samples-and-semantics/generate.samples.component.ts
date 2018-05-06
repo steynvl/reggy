@@ -24,6 +24,8 @@ declare var jQuery: any;
 })
 export class GenerateSamplesComponent implements OnInit {
 
+  isLoading = false;
+
   textArea = '';
   selectedText = '';
   markedElements: Array<Marker> = [];
@@ -106,15 +108,35 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   generateRegex() {
+    if (this.isValidUserInput()) {
+      this.callService();
+    } else {
+      this.toast.setMessage('Invalid input information, please check all your marked components!', 'warning');
+    }
+  }
+
+  private callService() {
+    this.isLoading = true;
+
     this.generatedRegex = undefined;
-
-    const payload = JSON.stringify(this.constructPayload());
-
+    const payload = this.constructPayload();
     this.generateService.generateRegex(payload).subscribe(
-      data => this.generatedRegex = data.trim(),
-      error => console.log(error)
+      data => {
+        const response = data;
+        if (response.code !== 0) {
+          this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        } else {
+          this.generatedRegex = response.regex.trim();
+        }
+        this.isLoading = false;
+      },
+      _ => {
+        this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
+        this.isLoading = false;
+      }
     );
   }
+
 
   private markerOverlap(start: number, end: number): boolean {
     const markerTextInfo = this.markedElements[this.selectedMarkerIdx].markedTextInfo;
@@ -431,6 +453,129 @@ export class GenerateSamplesComponent implements OnInit {
   collapseMarkers() {
     this.markersIsCollapsed = !this.markersIsCollapsed;
     this.markerTabIndex = this.selectedMarkerIdx;
+  }
+
+  isValidUserInput(): boolean {
+
+    for (const marker of this.markedElements) {
+
+      switch (marker.fieldType) {
+
+        case 'Basic characters':
+          if (!this.isValidBasicCharactersInfo(marker.markerInfo as BasicCharacters)) {
+            return false;
+          }
+          break;
+        case 'Control characters':
+          if (!this.isValidControlCharactersInfo(marker.markerInfo as ControlCharacters)) {
+            return false;
+          }
+          break;
+        case 'Digits':
+          if (!this.isValidDigitsInfo(marker.markerInfo as Digits)) {
+            return false;
+          }
+          break;
+        case 'List of literal text':
+          if (!this.isValidListOfLiteralTextInfo(marker.markerInfo as ListOfLiteralText)) {
+            return false;
+          }
+          break;
+        case 'Match anything':
+          if (!this.isValidMatchAnythingInfo(marker.markerInfo as MatchAnything)) {
+            return false;
+          }
+          break;
+        case 'Numbers':
+          if (!this.isValidNumbersInfo(marker.markerInfo as Numbers)) {
+            return false;
+          }
+          break;
+        case 'Unicode characters':
+          if (!this.isValidUnicodeCharactersInfo(marker.markerInfo as UnicodeCharacters)) {
+            return false;
+          }
+          break;
+        default:
+          break;
+
+      }
+
+    }
+
+    return true;
+  }
+
+  isValidBasicCharactersInfo(info: BasicCharacters): boolean {
+    if (info.individualCharacters !== undefined && info.individualCharacters.trim() !== '') {
+      return true;
+    }
+
+    if (info.matchAllExceptSpecified) {
+      return info.individualCharacters.trim() !== '';
+    }
+
+    return !(!info.digits && !info.whiteSpace && !info.lowerCaseLetters
+      && !info.punctuationAndSymbols && !info.lineBreaks
+      && !info.upperCaseLetters);
+  }
+
+  isValidControlCharactersInfo(info: ControlCharacters): boolean {
+    return Object.keys(info).filter(cc => cc !== 'matchAllExceptSelectedOnes')
+                            .some(cc => info[cc]);
+  }
+
+  isValidDigitsInfo(info: Digits): boolean {
+    const props = [];
+    Object.values(info).forEach(prop => {
+      if (typeof prop === 'object') {
+        props.push(prop.minus);
+        props.push(prop.optional);
+      } else {
+        props.push(prop);
+      }
+    });
+
+    return props.some(d => d);
+  }
+
+  isValidListOfLiteralTextInfo(info: ListOfLiteralText): boolean {
+    return info.literalText.every(llt => llt !== undefined && llt !== '');
+  }
+
+  isValidMatchAnythingInfo(info: MatchAnything): boolean {
+
+    switch (info.matchAnythingExcept) {
+
+      case 'Basic characters':
+        const bc = info.basicCharacters;
+        return !(!bc.lowerCaseLetters && !bc.digits && !bc.whiteSpace
+                  && !bc.upperCaseLetters && !bc.punctuationAndSymbols
+                  && !bc.lineBreaks);
+      case 'Specific characters':
+        return info.specificCharacters !== undefined && info.specificCharacters !== '';
+      case 'Specific character':
+        return info.specificCharacter !== undefined && /^.$/.test(info.specificCharacter);
+      default:
+        break;
+
+    }
+
+    return true;
+  }
+
+  isValidNumbersInfo(info: Numbers): boolean {
+    return true;
+  }
+
+  isValidUnicodeCharactersInfo(info: UnicodeCharacters): boolean {
+    const unicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
+
+    const validInput = info.individualCharacters === '' || unicode.test(info.individualCharacters);
+
+    return validInput || Object.keys(info)
+          .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
+          .some(cc => info[cc]);
   }
 
 }

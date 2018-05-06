@@ -16,7 +16,11 @@
     <div class="form-group">
 
       <input type="text" class="form-control" placeholder="Literal text to match..."
-             [(ngModel)]="listOfLiteralText.literalText[0]">
+             [(ngModel)]="listOfLiteralText.literalText[0]"
+             [ngClass]="{
+                  'is-invalid': listOfLiteralText.literalText[0] === ''
+               }"
+      >
 
     </div>
 
@@ -46,7 +50,11 @@
         <div class="form-group">
 
           <input type="text" class="form-control" placeholder="Literal text to match..."
-                 [(ngModel)]="listOfLiteralText.literalText[idx]">
+                 [(ngModel)]="listOfLiteralText.literalText[idx]"
+                 [ngClass]="{
+                  'is-invalid': listOfLiteralText.literalText[idx] === ''
+               }"
+          >
 
         </div>
 
