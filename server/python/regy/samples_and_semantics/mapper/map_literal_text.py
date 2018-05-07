@@ -1,7 +1,7 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples_and_semantics.tokens import RepeatInfo, Token
+from regy.samples_and_semantics.tokens import RepeatInfo, Token, LiteralText
 
 
 class MapLiteralText:
@@ -16,6 +16,7 @@ class MapLiteralText:
         return self._re
 
     def _map_info(self):
+        marker_info = self._info[Token.MARKER_INFO]
         marked_strings = self._info[Token.MARKED_TEXT_STRINGS]
         escaped_strings = self._escape_special_characters(marked_strings)
         self._info[Token.ESCAPED_STRINGS] = escaped_strings
@@ -23,11 +24,23 @@ class MapLiteralText:
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
             if len(esc_string) > 1 and esc_string[0] != '\\' and self._info[Token.REPEAT_INFO] != RepeatInfo.ONE:
-                self._re.extend(['(', esc_string, ')'])
+                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+                    self._re.extend(['(?!', esc_string, ')'])
+                else:
+                    self._re.extend(['(?:', esc_string, ')'])
             else:
-                self._re.append(esc_string)
+                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+                    self._re.append('(?!{})'.format(esc_string))
+                else:
+                    self._re.append(esc_string)
         else:
-            self._re.append('({})'.format('|'.join(escaped_strings)))
+            if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+                self._re.append('(?!{})'.format('|'.join(escaped_strings)))
+            else:
+                self._re.append('(?:{})'.format('|'.join(escaped_strings)))
+
+        if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+            self._re.append('.')
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)

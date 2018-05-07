@@ -18,13 +18,15 @@ class MapUnicodeCharacters:
     def _map_info(self):
         char_to_re = unicode_char_to_re[self._target_lang]
         unicode_chars = self._info[Token.UNICODE_CHARACTERS]
+        individual = self._info[Token.INDIVIDUAL_UNICODE_CHARS]
 
-        if len(unicode_chars) == 0:
+        if len(unicode_chars) + len(individual) == 0:
             return
-        elif len(unicode_chars) == 1:
+        elif len(unicode_chars) == 1 and len(individual) == 0:
             self._re.append(char_to_re[unicode_chars[0]])
         else:
             self._re.extend([char_to_re[unicode_char] for unicode_char in unicode_chars])
+            self._re.extend(individual)
             self._re.append(']')
             self._re.appendleft('[')
 

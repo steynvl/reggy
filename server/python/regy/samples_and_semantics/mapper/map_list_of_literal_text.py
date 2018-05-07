@@ -1,6 +1,8 @@
 from collections import deque
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
+from regy.samples_and_semantics.tokens import Token
+from regy.samples_and_semantics.tokens.repeat_info import RepeatInfo
 from regy.samples_and_semantics.tokens.list_of_literal_text import ListOfLiteralText
 
 
@@ -24,11 +26,17 @@ class MapListOfLiteralText:
         if match_anything_except:
             self._re.appendleft('(?!')
             self._re.append(').')
-
+        else:
+            repeat_info = self._info[Token.REPEAT_INFO]
+            llt = self._info[ListOfLiteralText.LITERAL_TEXT]
+                
+            if len(llt) > 1 or repeat_info != RepeatInfo.ONE:
+                if not (len(llt) == 1 and len(llt[0]) == 1):
+                    self._re.appendleft('(?:')
+                    self._re.append(')')
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
-
 
     def _escape_special_characters(self, marked_strings):
         meta_chars = meta_characters[self._target_lang]

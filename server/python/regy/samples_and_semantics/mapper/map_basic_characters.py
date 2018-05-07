@@ -23,12 +23,15 @@ class MapBasicCharacters:
             if self._info[char_key]:
                 found += 1
                 self._re.append(basic_char_to_re[char_key])
-
+        
         individual_chars = self._info[BasicCharacters.INDIVIDUAL_CHARACTERS]
+        
+        found += len(individual_chars)
+
         self._re.append(self._escape_special_characters(individual_chars))
 
         enclose = False
-        if self._info[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED] and found > 0:
+        if self._info[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED]:
             self._re.appendleft(basic_char_to_re[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED])
             enclose = True
         elif found == 1 and (self._info[BasicCharacters.UPPER_CASE_LETTERS]

@@ -14,6 +14,7 @@ import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 import { MatchAnything } from '../../models/marker-info/match-anything';
 import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 import { Numbers } from '../../models/marker-info/numbers';
+import { RepeatInfo } from '../../models/marker-info/repeat-info';
 
 declare var jQuery: any;
 
@@ -459,6 +460,10 @@ export class GenerateSamplesComponent implements OnInit {
 
     for (const marker of this.markedElements) {
 
+      if (!this.isValidRepeatInfo(marker.repeatInfo)) {
+        return false;
+      }
+
       switch (marker.fieldType) {
 
         case 'Basic characters':
@@ -507,12 +512,8 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidBasicCharactersInfo(info: BasicCharacters): boolean {
-    if (info.individualCharacters !== undefined && info.individualCharacters.trim() !== '') {
+    if (info.individualCharacters !== undefined && info.individualCharacters !== '') {
       return true;
-    }
-
-    if (info.matchAllExceptSpecified) {
-      return info.individualCharacters.trim() !== '';
     }
 
     return !(!info.digits && !info.whiteSpace && !info.lowerCaseLetters
@@ -551,7 +552,7 @@ export class GenerateSamplesComponent implements OnInit {
         const bc = info.basicCharacters;
         return !(!bc.lowerCaseLetters && !bc.digits && !bc.whiteSpace
                   && !bc.upperCaseLetters && !bc.punctuationAndSymbols
-                  && !bc.lineBreaks);
+                  && !bc.lineBreaks && !info.matchAnythingExcept);
       case 'Specific characters':
         return info.specificCharacters !== undefined && info.specificCharacters !== '';
       case 'Specific character':
@@ -569,13 +570,30 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidUnicodeCharactersInfo(info: UnicodeCharacters): boolean {
-    const unicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
+    const validUnicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
 
-    const validInput = info.individualCharacters === '' || unicode.test(info.individualCharacters);
+    const validInput = info.individualCharacters === '' || validUnicode.test(info.individualCharacters);
 
-    return validInput || Object.keys(info)
+    const checkboxes = Object.keys(info)
           .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
           .some(cc => info[cc]);
+    
+    if (validInput || checkboxes) {
+        return !(!checkboxes && info.individualCharacters === '');
+    } else {
+      return false;
+    }
+  }
+
+  isValidRepeatInfo(info: RepeatInfo): boolean {
+    switch (info.repeat) {
+      case 'Custom range':
+        return info.start >= 0 && info.end >= 0 && info.start < info.end;
+      case 'n or more times':
+        return info.start >= 0;
+      default:
+        return true;
+    }
   }
 
 }

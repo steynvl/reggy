@@ -134,14 +134,14 @@
               </select>
 
               <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
-                <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
+                <input [(ngModel)]="markedElement.repeatInfo.start" type="number"
                        class="form-control" placeholder="Start (inclusive)"
                        [ngClass]="{
                         'is-valid'  : validateStartRepeatInfo(),
                         'is-invalid': !validateStartRepeatInfo()
                        }"
                 />
-                <input [(ngModel)]="markedElement.repeatInfo.end" type="text"
+                <input [(ngModel)]="markedElement.repeatInfo.end" type="number"
                        class="form-control" placeholder="End (inclusive)"
                        [ngClass]="{
                         'is-valid'  : validateEndRepeatInfo(),

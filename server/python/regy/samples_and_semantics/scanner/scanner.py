@@ -69,6 +69,9 @@ class Scanner:
             info[Token.MARKER_INFO].append(LiteralText.CASE_INSENSITIVE)
         else:
             info[Token.MARKER_INFO].append(LiteralText.CASE_SENSITIVE)
+        
+        if marker_info['matchAllExceptSpecified']:
+            info[Token.MARKER_INFO].append(LiteralText.MATCH_ALL_EXCEPT_SPECIFIED)
 
         self._insert_repeat_info(sample, info)
 
@@ -132,6 +135,7 @@ class Scanner:
                 wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
 
         info[Token.UNICODE_CHARACTERS] = wanted_unicode_chars
+        info[Token.INDIVIDUAL_UNICODE_CHARS] = marker_info['individualCharacters'].split()
 
         self._insert_repeat_info(sample, info)
 
