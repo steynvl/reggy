@@ -162,8 +162,37 @@ unicode_char_to_re = {
     },
 
     Target.POSIX: {
-
+        UnicodeCharacters.LOWERCASE_LETTERS      : '\\p{Ll}',
+        UnicodeCharacters.UPPERCASE_LETTERS      : '\\p{Lu}',
+        UnicodeCharacters.TITLE_CASE_LETTERS     : '\\p{Lt}',
+        UnicodeCharacters.CASED_LETTERS          : '\\p{L}',
+        UnicodeCharacters.MODIFIER_LETTERS       : '\\p{Lm}',
+        UnicodeCharacters.OTHER_LETTERS          : '\\p{Lo}',
+        UnicodeCharacters.NON_SPACING_MARKS      : '\\p{Mn}',
+        UnicodeCharacters.SPACING_COMBINING_MARKS: '\\p{Mc}',
+        UnicodeCharacters.ENCLOSING_MARKS        : '\\p{Me}',
+        UnicodeCharacters.SPACE_SEPARATORS       : '\\p{Zs}',
+        UnicodeCharacters.LINE_SEPARATORS        : '\\p{Zl}',
+        UnicodeCharacters.PARAGRAPH_SEPARATORS   : '\\p{Zp}',
+        UnicodeCharacters.MATH_SYMBOLS           : '\\p{Sm}',
+        UnicodeCharacters.CURRENCY_SYMBOLS       : '\\p{Sc}',
+        UnicodeCharacters.MODIFIER_SYMBOLS       : '\\p{Sk}',
+        UnicodeCharacters.OTHER_SYMBOLS          : '\\p{So}',
+        UnicodeCharacters.DECIMAL_DIGIT_NUMBERS  : '\\p{Nd}',
+        UnicodeCharacters.LETTER_NUMBERS         : '\\p{Nl}',
+        UnicodeCharacters.OTHER_NUMBERS          : '\\p{No}',
+        UnicodeCharacters.DASH_PUNCTUATION       : '\\p{Pd}',
+        UnicodeCharacters.OPEN_PUNCTUATION       : '\\p{Ps}',
+        UnicodeCharacters.CLOSE_PUNCTUATION      : '\\p{Pe}',
+        UnicodeCharacters.INITIAL_PUNCTUATION    : '\\p{Pi}',
+        UnicodeCharacters.FINAL_PUNCTUATION      : '\\p{Pf}',
+        UnicodeCharacters.CONNECTOR_PUNCTUATION  : '\\p{Pc}',
+        UnicodeCharacters.OTHER_PUNCTUATION      : '\\p{Po}',
+        UnicodeCharacters.CONTROL_CHARACTERS     : '\\p{Cc}',
+        UnicodeCharacters.FORMAT_CHARACTERS      : '\\p{Cf}',
+        UnicodeCharacters.PRIVATE_USE_CHARACTERS : '\\p{Co}',
+        UnicodeCharacters.SURROGATE_CHARACTERS   : '\\p{Cs}',
+        UnicodeCharacters.UNASSIGNED_CHARACTERS  : '\\p{Cn}'
     }
-
 
 }
