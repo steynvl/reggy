@@ -1,5 +1,6 @@
 from collections import deque
 
+from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens.match_anything import MatchAnything, basic_char_to_re, can_span_across_lines
 
@@ -19,11 +20,13 @@ class MapMatchAnything:
         enclose_in_brackets = True
 
         if MatchAnything.SPECIFIC_CHARACTERS in self._info:
-            self._re.append(self._info[MatchAnything.SPECIFIC_CHARACTERS])
+            chars = self._escape_special_characters(self._info[MatchAnything.SPECIFIC_CHARACTERS])
+            self._re.append(chars)
             if self._info[MatchAnything.CAN_SPAN_ACROSS_LINES]:
                 self._re.appendleft(can_span_across_lines[self._target_lang])
         elif MatchAnything.SPECIFIC_CHARACTER in self._info:
-            self._re.append(self._info[MatchAnything.SPECIFIC_CHARACTER])
+            char = self._escape_special_characters(self._info[MatchAnything.SPECIFIC_CHARACTER])
+            self._re.append(char)
             if self._info[MatchAnything.CAN_SPAN_ACROSS_LINES]:
                 self._re.appendleft(can_span_across_lines[self._target_lang])
         elif MatchAnything.NOTHING in self._info:
@@ -48,3 +51,7 @@ class MapMatchAnything:
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
+
+    def _escape_special_characters(self, string):
+        meta_chars = meta_characters[self._target_lang]
+        return ''.join([meta_chars[c] if c in meta_chars else c for c in string])

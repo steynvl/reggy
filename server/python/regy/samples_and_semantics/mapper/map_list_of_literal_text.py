@@ -23,7 +23,8 @@ class MapListOfLiteralText:
     def _map_info(self):
         match_anything_except = self._info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED]
 
-        self._re.append('|'.join(self._info[ListOfLiteralText.LITERAL_TEXT]))
+        escaped_literals = self._escape_special_characters(self._info[ListOfLiteralText.LITERAL_TEXT])
+        self._re.append('|'.join(escaped_literals))
 
         if match_anything_except:
             self._re.appendleft('(?!')

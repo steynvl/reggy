@@ -551,9 +551,10 @@ export class GenerateSamplesComponent implements OnInit {
 
       case 'Basic characters':
         const bc = info.basicCharacters;
+        console.log('???');
         return !(!bc.lowerCaseLetters && !bc.digits && !bc.whiteSpace
                   && !bc.upperCaseLetters && !bc.punctuationAndSymbols
-                  && !bc.lineBreaks && !info.matchAnythingExcept);
+                  && !bc.lineBreaks);
       case 'Specific characters':
         return info.specificCharacters !== undefined && info.specificCharacters !== '';
       case 'Specific character':
