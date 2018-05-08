@@ -298,7 +298,8 @@ export class GenerateSamplesComponent implements OnInit {
       case 'List of literal text':
         this.listOfLiteralText = {
           literalText                 : [''],
-          matchAnythingExceptSpecified: false
+          matchAnythingExceptSpecified: false,
+          caseInsensitive             : false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.listOfLiteralText;
         break;

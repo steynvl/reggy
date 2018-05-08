@@ -22,4 +22,3 @@ class Regy:
             self._re = CommonUseCases(self._samples).get_re()
         elif self._gen_method == GenerateMethod.INDUCTION:
             self._re = Induction(self._samples).get_re()
-        

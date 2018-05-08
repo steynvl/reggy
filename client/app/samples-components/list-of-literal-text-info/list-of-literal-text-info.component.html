@@ -37,9 +37,48 @@
 
 </div>
 
+<div class="row">
+
+  <div class="col-sm-2">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox"
+               [checked]="listOfLiteralText.caseInsensitive"
+               (change)="listOfLiteralText.caseInsensitive = !listOfLiteralText.caseInsensitive">
+        Case insensitive
+      </label>
+    </div>
+  </div>
+
+  <div class="col-sm-9">
+
+    <div class="form-group" *ngIf="listOfLiteralText.literalText.length > 1">
+
+      <input type="text" class="form-control" placeholder="Literal text to match..."
+             [(ngModel)]="listOfLiteralText.literalText[1]"
+             [ngClass]="{
+                  'is-invalid': listOfLiteralText.literalText[1] === ''
+               }"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="col-sm-1">
+
+    <button class="btn" *ngIf="listOfLiteralText.literalText.length === 2"
+            (click)="addLiteralTextToList()">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </div>
+
+</div>
+
 <div *ngFor="let idx of inputFields">
 
-  <div *ngIf="idx !== 0">
+  <div *ngIf="idx > 1">
 
     <div class="row">
 
