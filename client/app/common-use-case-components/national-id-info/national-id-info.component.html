@@ -152,10 +152,10 @@
   <br />
 
   <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
-    <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
+    <app-java-code-samples [generatedRegex]="generatedRegex"></app-java-code-samples>
   </div>
   <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
-    <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
+    <app-perl-code-samples [generatedRegex]="generatedRegex"></app-perl-code-samples>
   </div>
 
 </div>

@@ -32,7 +32,7 @@ export class GenerateSamplesComponent implements OnInit {
 
   textArea = '';
   selectedText = '';
-  markedElements: Array<Marker> = [];;
+  markedElements: Array<Marker> = [];
   selectedMarkerIdx = -1;
   literalText: LiteralText;
   basicCharacters: BasicCharacters;
