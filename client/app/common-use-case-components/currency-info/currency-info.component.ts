@@ -6,6 +6,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { currencies } from './currencies';
 import { DataTable, DataTableTranslations, DataTableResource } from 'angular5-data-table';
 import { Currency } from '../../models/common-use-case-models/currency';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-currency-info',
@@ -16,7 +17,7 @@ export class CurrencyInfoComponent implements OnInit {
 
   @Input() generalRegexInfo: GeneralRegexInfo;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
   isLoading = false;
 
   currencyResource = new DataTableResource(currencies);
@@ -99,7 +100,10 @@ export class CurrencyInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

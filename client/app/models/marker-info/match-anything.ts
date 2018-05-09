@@ -3,6 +3,7 @@ export class MatchAnything {
   specificCharacters : string;
   specificCharacter  : string;
   canSpanAcrossLines : boolean;
+  caseInsensitive    : boolean;
   basicCharacters: {
     lowerCaseLetters       : boolean;
     upperCaseLetters       : boolean;

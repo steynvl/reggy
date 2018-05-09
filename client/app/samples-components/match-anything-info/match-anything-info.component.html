@@ -1,6 +1,7 @@
 <div class="row">
 
   <div class="col-sm-2">
+
     <div class="form-check">
       <label class="form-check-label">
         <input class="form-check-input" type="checkbox"
@@ -9,6 +10,16 @@
         Match can span across lines
       </label>
     </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox"
+        [checked]="matchAnything.caseInsensitive"
+        (change)="matchAnything.caseInsensitive = !matchAnything.caseInsensitive">
+        Case insensitive
+      </label>
+    </div>
+
   </div>
 
   <div class="col-sm-10">

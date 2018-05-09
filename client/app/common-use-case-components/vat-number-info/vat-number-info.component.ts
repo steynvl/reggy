@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { VatNumber } from '../../models/common-use-case-models/vat-number';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-vat-number-info',
@@ -18,7 +19,7 @@ export class VatNumberInfoComponent implements OnInit {
   selectAll = false;
   isLoading = false;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
@@ -89,7 +90,10 @@ export class VatNumberInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

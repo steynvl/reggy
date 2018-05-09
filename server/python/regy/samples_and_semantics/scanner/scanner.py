@@ -155,6 +155,7 @@ class Scanner:
             info[MatchAnything.BASIC_CHARACTERS] = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
 
         info[MatchAnything.CAN_SPAN_ACROSS_LINES] = marker_info['canSpanAcrossLines']
+        info[MatchAnything.CASE_INSENSITIVE] = marker_info['caseInsensitive']
 
         self._insert_repeat_info(sample, info)
 

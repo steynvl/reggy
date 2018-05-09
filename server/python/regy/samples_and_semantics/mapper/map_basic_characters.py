@@ -69,6 +69,9 @@ class MapBasicCharacters:
                     self._re.appendleft('(?-i)')
                     self._case_state['case'] = CaseSensitive.ON
 
+        if does_apply and not case_insensitive:
+            self._case_state['canUseCaseInsensitiveFlag'] = False
+
     def _escape_special_characters(self, individual_chars):
         meta_chars = meta_characters[self._target_lang]
         return ''.join([meta_chars[c] if c in meta_chars else c for c in individual_chars])

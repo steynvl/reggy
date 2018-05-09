@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Password } from '../../models/common-use-case-models/password';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-password-info',
@@ -33,7 +34,7 @@ export class PasswordInfoComponent implements OnInit {
 
   validLength = /^[1-9]\d*$/;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
 
   shouldStartWithIsValid   = true;
   minLengthIsValid         = true;
@@ -179,7 +180,10 @@ export class PasswordInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

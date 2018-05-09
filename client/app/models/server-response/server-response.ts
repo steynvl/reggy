@@ -1,8 +1,5 @@
 export interface ServerResponse {
-    // regex: {
-    //     regex        : string;
-    //     compiledRegex: string;
-    // };
-    regex: string;
-    code : number;
+    regex        : string;
+    compiledRegex: string;
+    code         : number;
 }

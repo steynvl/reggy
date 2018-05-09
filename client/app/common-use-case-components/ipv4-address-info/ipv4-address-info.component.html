@@ -161,7 +161,7 @@
 
   <div class="row">
     <div class="col">
-      <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
+      <label for="regex"><strong>Your {{ generalRegexInfo.regexTarget }} regular expression</strong></label>
     </div>
   </div>
 
@@ -170,9 +170,9 @@
     <div class="col">
 
       <div class="input-group">
-        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex.compiledRegex">
         <span class="input-group-btn">
-        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex.compiledRegex" (click)="clickCopyToClipboard()"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
                 type="button"><i class="fa fa-clipboard"></i>
         </button>

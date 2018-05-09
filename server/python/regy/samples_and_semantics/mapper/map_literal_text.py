@@ -1,4 +1,5 @@
 from collections import deque
+import re
 from regy.samples_and_semantics.mapper.meta_characters import meta_characters
 from regy.samples_and_semantics.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples_and_semantics.tokens import RepeatInfo, Token, LiteralText
@@ -47,9 +48,9 @@ class MapLiteralText:
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
 
-        self._add_case_state()
+        self._add_case_state(escaped_strings)
 
-    def _add_case_state(self):
+    def _add_case_state(self, escaped_strings):
         if LiteralText.CASE_INSENSITIVE in self._info[Token.MARKER_INFO]:
             if not self._case_state['case'] == CaseSensitive.OFF:
                 self._re.appendleft('(?i)')
@@ -60,7 +61,15 @@ class MapLiteralText:
                 self._re.appendleft('(?-i)')
                 self._case_state['case'] = CaseSensitive.ON
 
+            if self._does_contain_letters(escaped_strings):
+                self._case_state['canUseCaseInsensitiveFlag'] = False
+
     def _escape_special_characters(self, marked_strings):
         meta_chars = meta_characters[self._target_lang]
 
         return [''.join([meta_chars[c] if c in meta_chars else c for c in string]) for string in marked_strings]
+
+    @staticmethod
+    def _does_contain_letters(escaped_strings):
+        letters_re = re.compile(r'[A-Za-z]')
+        return any([letters_re.match(i) for i in escaped_strings])

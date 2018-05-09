@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { CreditCardNumber } from '../../models/common-use-case-models/credit-card-number';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-credit-card-info',
@@ -16,7 +17,7 @@ export class CreditCardInfoComponent implements OnInit {
 
   creditCardNumber: CreditCardNumber;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
 
   isLoading = false;
 
@@ -69,7 +70,10 @@ export class CreditCardInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

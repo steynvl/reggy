@@ -15,6 +15,7 @@ import { MatchAnything } from '../../models/marker-info/match-anything';
 import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 import { Numbers } from '../../models/marker-info/numbers';
 import { RepeatInfo } from '../../models/marker-info/repeat-info';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -27,10 +28,11 @@ export class GenerateSamplesComponent implements OnInit {
 
   isLoading = false;
 
+  generatedRegex: GeneratedRegex;
+
   textArea = '';
   selectedText = '';
-  markedElements: Array<Marker> = [];
-  generatedRegex: string;
+  markedElements: Array<Marker> = [];;
   selectedMarkerIdx = -1;
   literalText: LiteralText;
   basicCharacters: BasicCharacters;
@@ -127,7 +129,10 @@ export class GenerateSamplesComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
@@ -283,6 +288,7 @@ export class GenerateSamplesComponent implements OnInit {
           specificCharacters : '',
           specificCharacter  : '',
           canSpanAcrossLines : false,
+          caseInsensitive    : false,
           basicCharacters: {
             lowerCaseLetters     : false,
             upperCaseLetters     : false,
@@ -551,7 +557,6 @@ export class GenerateSamplesComponent implements OnInit {
 
       case 'Basic characters':
         const bc = info.basicCharacters;
-        console.log('???');
         return !(!bc.lowerCaseLetters && !bc.digits && !bc.whiteSpace
                   && !bc.upperCaseLetters && !bc.punctuationAndSymbols
                   && !bc.lineBreaks);
@@ -579,7 +584,7 @@ export class GenerateSamplesComponent implements OnInit {
     const checkboxes = Object.keys(info)
           .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
           .some(cc => info[cc]);
-    
+
     if (validInput || checkboxes) {
         return !(!checkboxes && info.individualCharacters === '');
     } else {

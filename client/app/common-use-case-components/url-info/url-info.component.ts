@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Url } from '../../models/common-use-case-models/url';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -19,7 +20,7 @@ export class UrlInfoComponent implements OnInit {
   url: Url;
   isLoading = false;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
 
   portNumbersErr    : string;
   userNamesErr      : string;
@@ -97,7 +98,10 @@ export class UrlInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
