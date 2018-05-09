@@ -34,7 +34,6 @@ class NumericRangeGenerator:
         self._add_alternation(regex)
 
     def _add_alternation(self, regex: list):
-        
         if len(regex) == 1:
             self._re = regex[0]
         else:

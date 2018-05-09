@@ -13,7 +13,6 @@ export class Numbers {
   limitIntegerPart             : boolean;
   allowPlusSign                : boolean;
   allowMinusSign               : boolean;
-  allowParentheses             : boolean;
   signIsRequired               : boolean;
   whitespaceAllowedAfterSign   : boolean;
   thousandSeparatorsAreRequired: boolean;
