@@ -42,7 +42,13 @@ basic_characters_to_re = {
     },
 
     Target.POSIX: {
-
+        BasicCharacters.LOWER_CASE_LETTERS         : 'a-z',
+        BasicCharacters.UPPER_CASE_LETTERS         : 'A-Z',
+        BasicCharacters.DIGITS                     : '\\d',
+        BasicCharacters.PUNCTUATION_AND_SYMBOLS    : '\\p{P}',
+        BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED : '^',
+        BasicCharacters.WHITE_SPACE                : '\\s',
+        BasicCharacters.LINE_BREAKS                : '\\r\\n',
     }
 
 }

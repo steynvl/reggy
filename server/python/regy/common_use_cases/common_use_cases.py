@@ -24,7 +24,7 @@ from regy.common_use_cases.username import Username
 from regy.common_use_cases.vat_number.vat_number import VatNumber
 from regy.samples_and_semantics.mapper.end_info_to_target import end_info_to_target
 from regy.samples_and_semantics.mapper.start_info_to_target import start_info_to_target
-from regy.samples_and_semantics.tokens import Token
+from regy.samples_and_semantics.tokens import Token, Target
 from regy.samples_and_semantics.utils.language_to_tok import language_to_tok
 from regy.samples_and_semantics.utils.regex_end_info_to_tok import regex_end_info_to_tok
 from regy.samples_and_semantics.utils.regex_start_info_to_tok import regex_start_info_to_tok
@@ -34,11 +34,11 @@ class CommonUseCases:
 
     def __init__(self, samples):
         self._samples = samples
-        self._re = deque()
+        self._re = None
         self._calculate_regex()
 
     def get_re(self):
-        return ''.join(self._re).strip()
+        return self._re
 
     def _parse_general_regex_info(self):
         general_info = self._samples['generalRegexInfo']
@@ -54,46 +54,63 @@ class CommonUseCases:
 
         sample_type = self._samples['type']
         info = self._samples['information']
+        regex = deque()
+
         if sample_type == 'Username':
             username_info = UsernameInfo(info)
-            self._re.append(Username(username_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Username(username_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'Password':
             password_info = PasswordInfo(info)
-            self._re.append(Password(password_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Password(password_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'Email address':
             email_info = EmailInfo(info)
-            self._re.append(Email(email_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Email(email_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'URL':
             url_info = UrlInfo(info)
-            self._re.append(Url(url_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Url(url_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'GUID':
             guid_info = GuidInfo(info)
-            self._re.append(Guid(guid_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Guid(guid_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'Credit card number':
             credit_card_info = CreditCardInfo(info)
-            self._re.append(CreditCardNumber(credit_card_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(CreditCardNumber(credit_card_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'National ID':
             national_id_info = NationalIdInfo(info)
-            self._re.append(NationalId(national_id_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(NationalId(national_id_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'VAT number':
             vat_number_info = VatNumberInfo(info)
-            self._re.append(VatNumber(vat_number_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(VatNumber(vat_number_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'IPv4 address':
             ipv4_info = Ipv4Info(info)
-            self._re.append(Ipv4Address(ipv4_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Ipv4Address(ipv4_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'Currency':
             currency_info = CurrencyInfo(info)
-            self._re.append(Currency(currency_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(Currency(currency_info, self._lang_info[Token.TARGET]).get_re())
         elif sample_type == 'Date and time':
             date_and_time_info = DateAndTimeInfo(info)
-            self._re.append(DateAndTime(date_and_time_info, self._lang_info[Token.TARGET]).get_re())
+            regex.append(DateAndTime(date_and_time_info, self._lang_info[Token.TARGET]).get_re())
 
+        self._add_general_info(regex)
 
-        self._add_general_info()
+        regex = ''.join(regex).strip()
+        self._map_re_to_target(regex, self._lang_info[Token.TARGET])
 
-    def _add_general_info(self):
+    def _map_re_to_target(self, regex, target):
+        self._re = { 'regex': regex }
+
+        compiled_re = None
+        if target == Target.JAVA:
+            compiled_re = 'Pattern regex = Pattern.compile("{}");'.format(regex)
+        elif target == Target.PERL:
+            compiled_re = '/{}/'.format(regex)
+        elif target == Target.POSIX:
+            compiled_re = regex[:]
+
+        self._re['compiledRegex'] = compiled_re
+
+    def _add_general_info(self, regex):
         start_info_to_re = start_info_to_target[self._lang_info[Token.TARGET]]
         end_info_to_re = end_info_to_target[self._lang_info[Token.TARGET]]
 
-        self._re.appendleft(start_info_to_re[self._lang_info[Token.REGEX_START_INFO]])
-        self._re.append(end_info_to_re[self._lang_info[Token.REGEX_END_INFO]])
+        regex.appendleft(start_info_to_re[self._lang_info[Token.REGEX_START_INFO]])
+        regex.append(end_info_to_re[self._lang_info[Token.REGEX_END_INFO]])

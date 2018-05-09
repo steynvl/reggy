@@ -15,30 +15,30 @@ const examples = {
   '} \n',
 
   'Create an object to use the same regex for many operations':
-  'Pattern regex = Pattern.compile("__regex__");\n',
+  '__compile__\n',
 
   'Create an object to apply a regex repeatedly to a given string':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n',
 
   'Apply the same regex to more than one string':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   '\n' +
   'regexMatcher.reset(anotherSubjectString);\n',
 
   'Use regex object to test if (part of) a string can be matched':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'boolean foundMatch = regexMatcher.find();\n',
 
   'Use regex object to test if a string can be matched entirely':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'boolean foundMatch = regexMatcher.matches();\n',
 
   'Use regex object for if/else branch whether (part of) a string can be matched':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'if (regexMatcher.find()) {\n' +
   '    // Successful match\n' +
@@ -47,7 +47,7 @@ const examples = {
   '} \n',
 
   'Use regex object for if/else branch whether a string can be matched entirely':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'if (regexMatcher.matches()) {\n' +
   '    // String matched entirely\n' +
@@ -57,7 +57,7 @@ const examples = {
 
   'Use regex object to get the part of a string matched by the regex':
   'String ResultString = null;\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'if (regexMatcher.find()) {\n' +
   '    ResultString = regexMatcher.group();\n' +
@@ -65,7 +65,7 @@ const examples = {
 
   'Use regex object to get the part of a string matched by a numbered group':
   'String ResultString = null;\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'if (regexMatcher.find()) {\n' +
   '    ResultString = regexMatcher.group(1);\n' +
@@ -73,7 +73,7 @@ const examples = {
 
   'Use regex object to get the part of a string matched by a named group':
   'String ResultString = null;\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'if (regexMatcher.find()) {\n' +
   '    ResultString = regexMatcher.group("group");\n' +
@@ -81,7 +81,7 @@ const examples = {
 
   'Use regex object to get a list of all regex matches in a string':
   'List<String> matchList = new ArrayList<>();\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'while (regexMatcher.find()) {\n' +
   '    matchList.add(regexMatcher.group());\n' +
@@ -89,7 +89,7 @@ const examples = {
 
   'Use regex match to get a list of all text matched by a numbered group':
   'List<String> matchList = new ArrayList<String>();\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'while (regexMatcher.find()) {\n' +
   '    matchList.add(regexMatcher.group(1));\n' +
@@ -97,14 +97,14 @@ const examples = {
 
   'Use regex object to get a list of all text matched by a named group':
   'List<String> matchList = new ArrayList<String>();\n' +
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'while (regexMatcher.find()) {\n' +
   '    matchList.add(regexMatcher.group("group"));\n' +
   '} \n',
 
   'Iterate over all matched in a string':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'while (regexMatcher.find()) {\n' +
   '    // matched text: regexMatcher.group()\n' +
@@ -113,7 +113,7 @@ const examples = {
   '} \n',
 
   'Iterate over all matches and capturing groups in a string':
-  'Pattern regex = Pattern.compile("__regex__");\n' +
+  '__compile__\n' +
   'Matcher regexMatcher = regex.matcher(subjectString);\n' +
   'while (regexMatcher.find()) {\n' +
   '    for (int i = 1; i <= regexMatcher.groupCount(); i++) {\n' +

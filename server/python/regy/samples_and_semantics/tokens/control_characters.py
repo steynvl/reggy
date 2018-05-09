@@ -161,7 +161,38 @@ control_char_to_re = {
     },
 
     Target.POSIX: {
-
+        ControlCharacters.NULL                     : '\\x00',
+        ControlCharacters.START_OF_HEADING         : '\\x01',
+        ControlCharacters.START_OF_TEXT            : '\\x02',
+        ControlCharacters.END_OF_TEXT              : '\\x03',
+        ControlCharacters.END_OF_TRANSMISSION      : '\\x04',
+        ControlCharacters.ENQUIRY                  : '\\x05',
+        ControlCharacters.ACKNOWLEDGE              : '\\x06',
+        ControlCharacters.BELL                     : '\\x07',
+        ControlCharacters.BACKSPACE                : '\\x08',
+        ControlCharacters.HORIZONTAL_TAB           : '\\x09',
+        ControlCharacters.NEW_LINE                 : '\\x0A',
+        ControlCharacters.VERTICAL_TAB             : '\\x0B',
+        ControlCharacters.FORM_FEED                : '\\x0C',
+        ControlCharacters.CARRIAGE_RETURN          : '\\x0D',
+        ControlCharacters.SHIFT_OUT                : '\\x0E',
+        ControlCharacters.SHIFT_IN                 : '\\x0F',
+        ControlCharacters.DATA_LINK_ESCAPE         : '\\x10',
+        ControlCharacters.DEVICE_CONTROL_ONE       : '\\x11',
+        ControlCharacters.DEVICE_CONTROL_TWO       : '\\x12',
+        ControlCharacters.DEVICE_CONTROL_THREE     : '\\x13',
+        ControlCharacters.DEVICE_CONTROL_FOUR      : '\\x14',
+        ControlCharacters.NEGATIVE_ACKNOWLEDGE     : '\\x15',
+        ControlCharacters.SYNCHRONOUS_IDLE         : '\\x16',
+        ControlCharacters.END_OF_TRANSMISSION_BLOCK: '\\x17',
+        ControlCharacters.CANCEL                   : '\\x18',
+        ControlCharacters.END_OF_MEDIUM            : '\\x19',
+        ControlCharacters.SUBSTITUTE               : '\\x1A',
+        ControlCharacters.ESCAPE                   : '\\x1B',
+        ControlCharacters.FILE_SEPARATOR           : '\\x1C',
+        ControlCharacters.GROUP_SEPARATOR          : '\\x1D',
+        ControlCharacters.RECORD_SEPARATOR         : '\\x1E',
+        ControlCharacters.UNIT_SEPARATOR           : '\\x1F'
     }
 
 

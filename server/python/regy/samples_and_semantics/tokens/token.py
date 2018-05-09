@@ -34,3 +34,4 @@ class Token(Enum):
     CONTROL_CHARACTERS         = 22
 
     UNICODE_CHARACTERS         = 23
+    INDIVIDUAL_UNICODE_CHARS   = 24

@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { NationalId } from '../../models/common-use-case-models/national-id';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-national-id-info',
@@ -16,7 +17,7 @@ export class NationalIdInfoComponent implements OnInit {
 
   nationalId: NationalId;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
   isLoading = false;
 
   constructor(private generateCommonService: GenerateCommonService,
@@ -55,7 +56,10 @@ export class NationalIdInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

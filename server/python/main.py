@@ -21,7 +21,9 @@ def main():
     gen_method = gen_method_map[samples['generateMethod']]
     re = regy.Regy(samples=samples, gen_method=gen_method).get_re()
 
-    sys.stdout.write(re)
+    serialized_re = json.dumps(re)
+
+    sys.stdout.write(serialized_re)
     sys.stdout.flush()
 
 if __name__ == '__main__':

@@ -70,7 +70,7 @@
 
       <div class="col-sm-1 move-down-2">
         <div class="text-right">
-          <button class="btn btn-sm btn-primary" 
+          <button class="btn btn-sm btn-primary"
                   data-toggle="tooltip" data-placement="top"
                   title="Click for help!" (click)="showInfo = !showInfo">
             <i class="fa fa-info" aria-hidden="true"></i>
@@ -242,7 +242,7 @@
 
   <div class="row">
     <div class="col">
-      <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
+      <label for="regex"><strong>Your {{ generalRegexInfo.regexTarget }} regular expression</strong></label>
     </div>
   </div>
 
@@ -251,9 +251,9 @@
     <div class="col">
 
       <div class="input-group">
-        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
+        <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex.compiledRegex">
         <span class="input-group-btn">
-        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex.compiledRegex" (click)="clickCopyToClipboard()"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
                 type="button"><i class="fa fa-clipboard"></i>
         </button>
@@ -272,10 +272,10 @@
   <br />
 
   <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
-    <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
+    <app-java-code-samples [generatedRegex]="generatedRegex"></app-java-code-samples>
   </div>
   <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
-    <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
+    <app-perl-code-samples [generatedRegex]="generatedRegex"></app-perl-code-samples>
   </div>
 
 </div>

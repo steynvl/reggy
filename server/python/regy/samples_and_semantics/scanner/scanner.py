@@ -35,7 +35,7 @@ class Scanner:
 
             if marker_type == 'Literal text':
                 info[Token.MARKER_TYPE] = MarkerType.LITERAL_TEXT
-                self._parse_marked_text(sample, info)
+                self._parse_literal_text(sample, info)
             elif marker_type == 'Basic characters':
                 info[Token.MARKER_TYPE] = MarkerType.BASIC_CHARACTERS
                 self._parse_basic_characters(sample, info)
@@ -60,7 +60,7 @@ class Scanner:
 
             self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
-    def _parse_marked_text(self, sample, info):
+    def _parse_literal_text(self, sample, info):
         info[Token.MARKED_TEXT_STRINGS] = sample['markedStrings']
         info[Token.MARKER_INFO] = []
 
@@ -69,6 +69,9 @@ class Scanner:
             info[Token.MARKER_INFO].append(LiteralText.CASE_INSENSITIVE)
         else:
             info[Token.MARKER_INFO].append(LiteralText.CASE_SENSITIVE)
+        
+        if marker_info['matchAllExceptSpecified']:
+            info[Token.MARKER_INFO].append(LiteralText.MATCH_ALL_EXCEPT_SPECIFIED)
 
         self._insert_repeat_info(sample, info)
 
@@ -132,6 +135,7 @@ class Scanner:
                 wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
 
         info[Token.UNICODE_CHARACTERS] = wanted_unicode_chars
+        info[Token.INDIVIDUAL_UNICODE_CHARS] = marker_info['individualCharacters'].split()
 
         self._insert_repeat_info(sample, info)
 
@@ -151,6 +155,7 @@ class Scanner:
             info[MatchAnything.BASIC_CHARACTERS] = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
 
         info[MatchAnything.CAN_SPAN_ACROSS_LINES] = marker_info['canSpanAcrossLines']
+        info[MatchAnything.CASE_INSENSITIVE] = marker_info['caseInsensitive']
 
         self._insert_repeat_info(sample, info)
 
@@ -159,6 +164,7 @@ class Scanner:
 
         info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED] = marker_info['matchAnythingExceptSpecified']
         info[ListOfLiteralText.LITERAL_TEXT] = marker_info['literalText']
+        info[ListOfLiteralText.CASE_INSENSITIVE] = marker_info['caseInsensitive']
 
         self._insert_repeat_info(sample, info)
 

@@ -1,4 +1,5 @@
 export interface ServerResponse {
-    regex: string;
-    code : number;
+    regex        : string;
+    compiledRegex: string;
+    code         : number;
 }

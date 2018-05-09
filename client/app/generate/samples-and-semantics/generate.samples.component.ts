@@ -14,6 +14,8 @@ import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 import { MatchAnything } from '../../models/marker-info/match-anything';
 import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 import { Numbers } from '../../models/marker-info/numbers';
+import { RepeatInfo } from '../../models/marker-info/repeat-info';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -26,10 +28,11 @@ export class GenerateSamplesComponent implements OnInit {
 
   isLoading = false;
 
+  generatedRegex: GeneratedRegex;
+
   textArea = '';
   selectedText = '';
   markedElements: Array<Marker> = [];
-  generatedRegex: string;
   selectedMarkerIdx = -1;
   literalText: LiteralText;
   basicCharacters: BasicCharacters;
@@ -126,7 +129,10 @@ export class GenerateSamplesComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
@@ -282,6 +288,7 @@ export class GenerateSamplesComponent implements OnInit {
           specificCharacters : '',
           specificCharacter  : '',
           canSpanAcrossLines : false,
+          caseInsensitive    : false,
           basicCharacters: {
             lowerCaseLetters     : false,
             upperCaseLetters     : false,
@@ -297,7 +304,8 @@ export class GenerateSamplesComponent implements OnInit {
       case 'List of literal text':
         this.listOfLiteralText = {
           literalText                 : [''],
-          matchAnythingExceptSpecified: false
+          matchAnythingExceptSpecified: false,
+          caseInsensitive             : false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.listOfLiteralText;
         break;
@@ -459,6 +467,10 @@ export class GenerateSamplesComponent implements OnInit {
 
     for (const marker of this.markedElements) {
 
+      if (!this.isValidRepeatInfo(marker.repeatInfo)) {
+        return false;
+      }
+
       switch (marker.fieldType) {
 
         case 'Basic characters':
@@ -507,12 +519,8 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidBasicCharactersInfo(info: BasicCharacters): boolean {
-    if (info.individualCharacters !== undefined && info.individualCharacters.trim() !== '') {
+    if (info.individualCharacters !== undefined && info.individualCharacters !== '') {
       return true;
-    }
-
-    if (info.matchAllExceptSpecified) {
-      return info.individualCharacters.trim() !== '';
     }
 
     return !(!info.digits && !info.whiteSpace && !info.lowerCaseLetters
@@ -569,13 +577,30 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidUnicodeCharactersInfo(info: UnicodeCharacters): boolean {
-    const unicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
+    const validUnicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
 
-    const validInput = info.individualCharacters === '' || unicode.test(info.individualCharacters);
+    const validInput = info.individualCharacters === '' || validUnicode.test(info.individualCharacters);
 
-    return validInput || Object.keys(info)
+    const checkboxes = Object.keys(info)
           .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
           .some(cc => info[cc]);
+
+    if (validInput || checkboxes) {
+        return !(!checkboxes && info.individualCharacters === '');
+    } else {
+      return false;
+    }
+  }
+
+  isValidRepeatInfo(info: RepeatInfo): boolean {
+    switch (info.repeat) {
+      case 'Custom range':
+        return info.start >= 0 && info.end >= 0 && info.start < info.end;
+      case 'n or more times':
+        return info.start >= 0;
+      default:
+        return true;
+    }
   }
 
 }

@@ -8,10 +8,10 @@ import { Numbers } from '../../models/marker-info/numbers';
 })
 export class NumbersInfoComponent implements OnInit {
 
+  @Input() numbers: Numbers;
+
   ngOnInit(): void {
     console.log(this.numbers);
   }
-
-  @Input() numbers: Numbers;
 
 }

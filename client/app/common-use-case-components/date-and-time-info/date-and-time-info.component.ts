@@ -4,7 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { DateAndTime } from '../../models/common-use-case-models/date-and-time';
-import { ServerResponse } from '../../models/server-response/server-response';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -19,12 +19,12 @@ export class DateAndTimeInfoComponent implements OnInit {
 
   dateAndTime: DateAndTime;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
   isLoading = false;
 
   isValidInfo = true;
   errorMsg: string;
-  
+
   showInfo = false;
 
   constructor(private generateCommonService: GenerateCommonService,
@@ -81,7 +81,10 @@ export class DateAndTimeInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
@@ -94,7 +97,7 @@ export class DateAndTimeInfoComponent implements OnInit {
 
   isValidUrlInfo(): boolean {
     const input = this.dateAndTime.dateFormats.trim();
-    const validChars = /^[dmyYhHns/a:\s]+$/
+    const validChars = /^[dmyYhHns/a:\s]+$/;
 
     if (input === '') {
       this.errorMsg = 'Please input a date format to match in the text box above!';
@@ -103,7 +106,7 @@ export class DateAndTimeInfoComponent implements OnInit {
       this.errorMsg = 'Only the characters a,d,m,y,Y,h,H,n,s/,: are allowed in the text box!';
     }
 
-    return /^[dmyYhHns/a:\s]+$/.test(this.dateAndTime.dateFormats.trim())
+    return validChars.test(this.dateAndTime.dateFormats.trim());
   }
 
   clickCopyToClipboard() {
