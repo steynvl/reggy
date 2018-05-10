@@ -53,12 +53,3 @@ class Factorizer:
     @staticmethod
     def _slice_str(string, prefix_length, suffix_length):
         return string[prefix_length:len(string) - suffix_length]
-
-
-if __name__ == '__main__':
-
-    a = [
-        'jake'
-    ]
-
-    print(Factorizer(a).get_re())

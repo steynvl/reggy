@@ -11,28 +11,24 @@ export class NumbersInfoComponent {
   @Input() numbers: Numbers;
 
   isValidNrOfDecimals(): boolean {
-    const validInput = /^[1-9]+$/;
     const min = this.numbers.minNrOfDecimals;
     const max = this.numbers.maxNrOfDecimals;
 
-    if (min === '' && max === '') {
+    if (min === 0 && max === 0) {
       return true;
     } else {
-      return validInput.test(min) && validInput.test(max)
-        && Number.parseInt(min) <= Number.parseInt(max);
+      return min > 0 && max > 0 && min <= max;
     }
   }
 
   isValidIntegerParts(): boolean {
-    const validInput = /^-?\d+$/;
     const min = this.numbers.minValOfIntPart;
     const max = this.numbers.maxValOfIntPart;
 
-    if (min === '' && max === '') {
+    if (min === 0 && max === 0) {
       return true;
     } else {
-      return validInput.test(min) && validInput.test(max)
-        && Number.parseInt(min) <= Number.parseInt(max);
+      return min < max;
     }
   }
 

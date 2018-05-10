@@ -61,7 +61,7 @@ class MapNumbers:
             self._re.append(self._const_to_re['number'])
             self._re.append('+' if numbers.require_integer_part else '*')
 
-        if numbers.min_nr_of_decimals != '' and numbers.max_nr_of_decimals != '':
+        if numbers.min_nr_of_decimals != 0 or numbers.max_nr_of_decimals != 0:
             self._build_decimal_part(numbers)
 
         if numbers.allow_exponent:
