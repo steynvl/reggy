@@ -128,7 +128,7 @@
                 <label>Repeat:</label>
 
                 <select class="form-control" style="font-family: 'FontAwesome', Arial;"
-                        (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
+                        [(ngModel)]="markedElement.repeatInfo.repeat">
 
                   <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
 
@@ -138,15 +138,15 @@
                   <input [(ngModel)]="markedElement.repeatInfo.start" type="number"
                          class="form-control" placeholder="Start (inclusive)"
                          [ngClass]="{
-                        'is-valid'  : validateStartRepeatInfo(),
-                        'is-invalid': !validateStartRepeatInfo()
+                        'is-valid'  : validateStartRepeatInfo(idx),
+                        'is-invalid': !validateStartRepeatInfo(idx)
                        }"
                   />
                   <input [(ngModel)]="markedElement.repeatInfo.end" type="number"
                          class="form-control" placeholder="End (inclusive)"
                          [ngClass]="{
-                        'is-valid'  : validateEndRepeatInfo(),
-                        'is-invalid': !validateEndRepeatInfo()
+                        'is-valid'  : validateEndRepeatInfo(idx),
+                        'is-invalid': !validateEndRepeatInfo(idx)
                        }"
                   />
                 </div>
@@ -155,8 +155,8 @@
                   <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
                          class="form-control" placeholder="Minimum number of times (inclusive)"
                          [ngClass]="{
-                        'is-valid'  : validateMinNrOfTimes(),
-                        'is-invalid': !validateMinNrOfTimes()
+                        'is-valid'  : validateMinNrOfTimes(idx),
+                        'is-invalid': !validateMinNrOfTimes(idx)
                        }"
                   />
                 </div>
