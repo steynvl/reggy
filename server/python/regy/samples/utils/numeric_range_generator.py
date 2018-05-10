@@ -3,20 +3,21 @@ from collections import deque
 
 class NumericRangeGenerator:
 
-    def __init__(self, start, end):
+    def __init__(self, start, end, insert_minus):
         self._re = None
-        self.start = start
-        self.end = end
+        self._start = start
+        self._end = end
+        self._insert_minus = insert_minus
         self._gen_regex()
 
     def get_regex(self):
         return ''.join(self._re)
 
     def _gen_regex(self):
-        left = self.left_bounds(self.start, self.end)
+        left = self.left_bounds(self._start, self._end)
         last_left = left.pop()
 
-        right = self.right_bounds(last_left.start, self.end)
+        right = self.right_bounds(last_left.start, self._end)
         first_right = right.popleft()
 
         merged = deque()
@@ -34,11 +35,11 @@ class NumericRangeGenerator:
         self._add_alternation(regex)
 
     def _add_alternation(self, regex: list):
+        minus = '-' if self._insert_minus else ''
         if len(regex) == 1:
-            self._re = regex[0]
+            self._re = '{}{}'.format(minus, regex[0])
         else:
-            self._re = '(?:{})'.format('|'.join(regex))
-
+            self._re = '{}(?:{})'.format(minus, '|'.join(regex))
 
     @staticmethod
     def left_bounds(start, end):
@@ -115,8 +116,3 @@ class _Range:
                 result.extend(['[', start_str[pos], '-', end_str[pos], ']'])
 
         return ''.join(result)
-
-
-if __name__ == '__main__':
-    import sys
-    print(NumericRangeGenerator(int(sys.argv[1]), int(sys.argv[2])).get_regex())

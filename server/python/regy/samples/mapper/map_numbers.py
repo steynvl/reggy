@@ -86,9 +86,6 @@ class MapNumbers:
 
         return '(?:{})'.format(currs[0] if len(currs) == 1 else '|'.join(currs))
 
-    def _build_limited_integer_part(self, start, end):
-        num_range = NumericRangeGenerator()
-
     def _build_decimal_part(self, numbers_info: NumbersInfo):
         decimal_separator_to_re = self._const_to_re['decimalSeparator']
 
@@ -101,6 +98,26 @@ class MapNumbers:
                                                 self._const_to_re['number'],
                                                 numbers_info.min_nr_of_decimals,
                                                 numbers_info.max_nr_of_decimals))
+
+    def _build_limited_integer_part(self, start, end):
+        regex = []
+        if start >= 0 and end >= 0:
+            regex.append(NumericRangeGenerator(start, end, insert_minus=False).get_regex())
+
+        elif start < 0 and end >= 0:
+            regex.append(NumericRangeGenerator(1, abs(start), insert_minus=True).get_regex())
+            if end == 0:
+                regex.append('0')
+            else:
+                regex.append(NumericRangeGenerator(0, end, insert_minus=False).get_regex())
+
+        else:
+            regex.append(NumericRangeGenerator(abs(end), abs(start), insert_minus=True).get_regex())
+
+        if len(regex) == 1:
+            self._re.append('|'.join(regex))
+        else:
+            self._re.append('(?:{})'.format('|'.join(regex)))
 
     @staticmethod
     def _parse_currency_codes(values):
