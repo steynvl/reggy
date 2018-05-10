@@ -16,20 +16,20 @@ from regy.samples.utils.language_to_tok import language_to_tok
 from regy.samples.utils.regex_start_info_to_tok import regex_start_info_to_tok
 from regy.samples.utils.regex_end_info_to_tok import regex_end_info_to_tok
 
-class Scanner:
+class Parser:
 
     def __init__(self, samples):
         self._samples = samples
-        self._scanned_samples = {}
+        self._parsed_samples = {}
         self._parse_samples()
 
-    def get_scanned_samples(self):
-        return self._scanned_samples
+    def get_parsed_samples(self):
+        return self._parsed_samples
 
     def _parse_samples(self):
         self._parse_general_regex_info(self._samples['generalRegexInfo'])
 
-        self._scanned_samples[Token.SAMPLE_STRINGS_INFO] = []
+        self._parsed_samples[Token.SAMPLE_STRINGS_INFO] = []
 
         for sample in self._samples['sampleStringsInfo']:
             info = {}
@@ -60,7 +60,7 @@ class Scanner:
                 info[Token.MARKER_TYPE] = MarkerType.NUMBERS
                 self._parse_numbers(sample, info)
 
-            self._scanned_samples[Token.SAMPLE_STRINGS_INFO].append(info)
+            self._parsed_samples[Token.SAMPLE_STRINGS_INFO].append(info)
 
     def _parse_literal_text(self, sample, info):
         info[Token.MARKED_TEXT_STRINGS] = sample['markedStrings']
@@ -178,7 +178,7 @@ class Scanner:
         self._insert_repeat_info(sample, info)
 
     def _parse_general_regex_info(self, regex_info):
-        self._scanned_samples[Token.GENERAL_REGEX_INFO] = {
+        self._parsed_samples[Token.GENERAL_REGEX_INFO] = {
             Token.TARGET : language_to_tok[regex_info['regexTarget']],
             Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
             Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]

@@ -4,6 +4,7 @@ from regy.samples.mapper.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.tokens import RepeatInfo, Token, LiteralText
 from regy.samples.tokens.case_state import CaseSensitive
+from regy.samples.utils.factorizer import Factorizer
 
 
 class MapLiteralText:
@@ -22,7 +23,6 @@ class MapLiteralText:
         marker_info = self._info[Token.MARKER_INFO]
         marked_strings = self._info[Token.MARKED_TEXT_STRINGS]
         escaped_strings = self._escape_special_characters(marked_strings)
-        self._info[Token.ESCAPED_STRINGS] = escaped_strings
 
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
@@ -37,10 +37,11 @@ class MapLiteralText:
                 else:
                     self._re.append(esc_string)
         else:
+            factorized_re = Factorizer(escaped_strings).get_re()
             if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
-                self._re.append('(?!{})'.format('|'.join(escaped_strings)))
+                self._re.append('(?!{})'.format(factorized_re))
             else:
-                self._re.append('(?:{})'.format('|'.join(escaped_strings)))
+                self._re.append(factorized_re)
 
         if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
             self._re.append('.')

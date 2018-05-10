@@ -76,6 +76,26 @@ class MapNumbers:
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
 
+    def _build_limited_integer_part(self, start, end):
+        regex = []
+        if start >= 0 and end >= 0:
+            regex.append(NumericRangeGenerator(start, end, insert_minus=False).get_regex())
+
+        elif start < 0 and end >= 0:
+            regex.append(NumericRangeGenerator(1, abs(start), insert_minus=True).get_regex())
+            if end == 0:
+                regex.append('0')
+            else:
+                regex.append(NumericRangeGenerator(0, end, insert_minus=False).get_regex())
+
+        else:
+            regex.append(NumericRangeGenerator(abs(end), abs(start), insert_minus=True).get_regex())
+
+        if len(regex) == 1:
+            self._re.append('|'.join(regex))
+        else:
+            self._re.append('(?:{})'.format('|'.join(regex)))
+
     def _build_currency(self, numbers_info: NumbersInfo):
         currs = deque()
         if self._currency_codes.match(numbers_info.currency_codes) is not None:
@@ -98,26 +118,6 @@ class MapNumbers:
                                                 self._const_to_re['number'],
                                                 numbers_info.min_nr_of_decimals,
                                                 numbers_info.max_nr_of_decimals))
-
-    def _build_limited_integer_part(self, start, end):
-        regex = []
-        if start >= 0 and end >= 0:
-            regex.append(NumericRangeGenerator(start, end, insert_minus=False).get_regex())
-
-        elif start < 0 and end >= 0:
-            regex.append(NumericRangeGenerator(1, abs(start), insert_minus=True).get_regex())
-            if end == 0:
-                regex.append('0')
-            else:
-                regex.append(NumericRangeGenerator(0, end, insert_minus=False).get_regex())
-
-        else:
-            regex.append(NumericRangeGenerator(abs(end), abs(start), insert_minus=True).get_regex())
-
-        if len(regex) == 1:
-            self._re.append('|'.join(regex))
-        else:
-            self._re.append('(?:{})'.format('|'.join(regex)))
 
     @staticmethod
     def _parse_currency_codes(values):

@@ -583,7 +583,7 @@ export class GenerateSamplesComponent implements OnInit {
       }
     }
 
-    const decimalsRe = /^(?:0|[1-9]\d*)$/;
+    const decimalsRe = /^[1-9]+$/;
     const minDec = this.numbers.minNrOfDecimals;
     const maxDec = this.numbers.maxNrOfDecimals;
     if (minDec !== '' || maxDec !== '') {

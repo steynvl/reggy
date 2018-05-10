@@ -11,7 +11,7 @@ export class NumbersInfoComponent {
   @Input() numbers: Numbers;
 
   isValidNrOfDecimals(): boolean {
-    const validInput = /^(?:0|[1-9]\d*)$/;
+    const validInput = /^[1-9]+$/;
     const min = this.numbers.minNrOfDecimals;
     const max = this.numbers.maxNrOfDecimals;
 

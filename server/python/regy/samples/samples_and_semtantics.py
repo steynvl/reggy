@@ -2,7 +2,7 @@ from collections import deque
 from regy.samples import mapper
 from regy.samples.mapper.end_info_to_target import end_info_to_target
 from regy.samples.mapper.start_info_to_target import start_info_to_target
-from regy.samples.scanner.scanner import Scanner
+from regy.samples.parser.parser import Parser
 from regy.samples.tokens import Token, MarkerType, Target
 from regy.samples.tokens.case_state import CaseSensitive
 
@@ -18,14 +18,14 @@ class SamplesAndSemantics:
         return self._re
 
     def _calculate_regex(self):
-        scanner = Scanner(self._samples)
-        scanned_samples = scanner.get_scanned_samples()
+        parser = Parser(self._samples)
+        parsed_samples = parser.get_parsed_samples()
 
         case_state = { 'case': CaseSensitive.ON, 'hasChanged': False, 'canUseCaseInsensitiveFlag': True }
-        target_lang = scanned_samples[Token.GENERAL_REGEX_INFO][Token.TARGET]
+        target_lang = parsed_samples[Token.GENERAL_REGEX_INFO][Token.TARGET]
 
         regex = deque()
-        for scanned_sample in scanned_samples[Token.SAMPLE_STRINGS_INFO]:
+        for scanned_sample in parsed_samples[Token.SAMPLE_STRINGS_INFO]:
 
             marker_type = scanned_sample[Token.MARKER_TYPE]
             if marker_type == MarkerType.LITERAL_TEXT:
@@ -45,7 +45,7 @@ class SamplesAndSemantics:
             elif marker_type == MarkerType.NUMBERS:
                 regex.extend(mapper.MapNumbers(scanned_sample, target_lang).get_re())
 
-        self._add_general_info(scanned_samples, regex)
+        self._add_general_info(parsed_samples, regex)
 
         regex = ''.join(regex).strip()
         self._map_re_to_target(regex, target_lang, case_state)
@@ -64,9 +64,9 @@ class SamplesAndSemantics:
         elif target == Target.PERL:
             if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
                 compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
-                compiled_re = '/{}/i'.format(compiled_re)
+                compiled_re = 'my $regex = /{}/i;'.format(compiled_re)
             else:
-                compiled_re = '/{}/'.format(compiled_re)
+                compiled_re = 'my $regex = /{}/;'.format(compiled_re)
 
         elif target == Target.POSIX:
             pass

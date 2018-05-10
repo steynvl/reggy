@@ -6,10 +6,10 @@ from regy.samples.tokens import Token
 from regy.samples.tokens.case_state import CaseSensitive
 from regy.samples.tokens.repeat_info import RepeatInfo
 from regy.samples.tokens.list_of_literal_text import ListOfLiteralText
+from regy.samples.utils.factorizer import Factorizer
 
 
 class MapListOfLiteralText:
-
 
     def __init__(self, info, target_lang, case_state):
         self._info = info
@@ -23,9 +23,9 @@ class MapListOfLiteralText:
 
     def _map_info(self):
         match_anything_except = self._info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED]
-
         escaped_literals = self._escape_special_characters(self._info[ListOfLiteralText.LITERAL_TEXT])
-        self._re.append('|'.join(escaped_literals))
+
+        self._re.append(Factorizer(escaped_literals).get_re())
 
         if match_anything_except:
             self._re.appendleft('(?!')
@@ -34,7 +34,7 @@ class MapListOfLiteralText:
             repeat_info = self._info[Token.REPEAT_INFO]
             llt = self._info[ListOfLiteralText.LITERAL_TEXT]
                 
-            if len(llt) > 1 or repeat_info != RepeatInfo.ONE:
+            if len(llt) == 1 and repeat_info != RepeatInfo.ONE:
                 if not (len(llt) == 1 and len(llt[0]) == 1):
                     self._re.appendleft('(?:')
                     self._re.append(')')
