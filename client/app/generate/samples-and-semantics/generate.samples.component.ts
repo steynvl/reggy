@@ -312,11 +312,11 @@ export class GenerateSamplesComponent implements OnInit {
 
       case 'Numbers':
         this.numbers = {
-          minValOfIntPart              : '',
-          maxValOfIntPart              : '',
+          minValOfIntPart              : 0,
+          maxValOfIntPart              : 0,
           decimalSeparator             : 'Any',
-          minNrOfDecimals              : '',
-          maxNrOfDecimals              : '',
+          minNrOfDecimals              : 0,
+          maxNrOfDecimals              : 0,
           thousandSeparator            : 'None',
           codePosition                 : 'Before only',
           currencySign                 : 'None',
@@ -576,21 +576,17 @@ export class GenerateSamplesComponent implements OnInit {
     const max = this.numbers.maxValOfIntPart;
 
     if (info.limitIntegerPart) {
-      const validInput = /^-?\d+$/;      
-
-      if (!(validInput.test(min) && validInput.test(max) && Number.parseInt(min) <= Number.parseInt(max))) {
-        return false
+      if (min >= max) {
+        return false;
       }
     }
 
-    const decimalsRe = /^[1-9]+$/;
     const minDec = this.numbers.minNrOfDecimals;
     const maxDec = this.numbers.maxNrOfDecimals;
-    if (minDec !== '' || maxDec !== '') {
-      if (!(decimalsRe.test(minDec) && decimalsRe.test(maxDec)
-        && Number.parseInt(minDec) <= Number.parseInt(maxDec))) {
-          return false;
-        }
+    if (minDec !== 0 || maxDec !== 0) {
+      if (minDec > 0 && maxDec > 0 && minDec > maxDec) {
+        return false;
+      }
     }
 
     if (info.currencyCodes !== '') {
@@ -600,18 +596,18 @@ export class GenerateSamplesComponent implements OnInit {
     }
 
     if (info.allowPlusSign && info.limitIntegerPart) {
-      if (Number.parseInt(min) <= 0 && Number.parseInt(max) <= 0) {
+      if (min <= 0 && max <= 0) {
         return false;
       }
-    }    
+    }
 
     if (info.thousandSeparatorsAreRequired && info.thousandSeparator === 'None') {
       return false;
-    }    
+    }
 
     if (info.currencySignOrCodeRequired && info.currencySign === 'None' && info.currencyCodes.trim() === '') {
       return false;
-    }  
+    }
     
     return true;
   }
