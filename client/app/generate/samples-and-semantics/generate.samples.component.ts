@@ -70,6 +70,8 @@ export class GenerateSamplesComponent implements OnInit {
       reader.readAsText(fileList[0]);
 
       reader.onload = () => {
+        this.markedElements = [];
+        jQuery('textarea').highlightTextarea('destroy');
         this.textArea = reader.result;
       };
     }
@@ -419,26 +421,22 @@ export class GenerateSamplesComponent implements OnInit {
     this.highlightTextArea();
   }
 
-  repeatInfoChanged(idx) {
-    this.selectedMarkerIdx = idx;
-  }
-
   clickCopyToClipboard() {
     this.toast.setMessage('Regex copied to clipboard! ', 'success');
   }
 
-  validateStartRepeatInfo(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateStartRepeatInfo(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.start < repeatInfo.end && /^\d*$/.test(repeatInfo.start.toString());
   }
 
-  validateEndRepeatInfo(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateEndRepeatInfo(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.end > repeatInfo.start && /^\d*$/.test(repeatInfo.end.toString());
   }
 
-  validateMinNrOfTimes(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateMinNrOfTimes(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.start !== undefined && /^\d*$/.test(repeatInfo.start.toString());
   }
 
