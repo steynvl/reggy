@@ -314,17 +314,16 @@ export class GenerateSamplesComponent implements OnInit {
         this.numbers = {
           minValOfIntPart              : '',
           maxValOfIntPart              : '',
-          decimalSeparator             : '',
+          decimalSeparator             : 'Any',
           minNrOfDecimals              : '',
           maxNrOfDecimals              : '',
-          thousandSeparator            : '',
-          codePosition                 : '',
-          currencySign                 : '',
+          thousandSeparator            : 'None',
+          codePosition                 : 'Before only',
+          currencySign                 : 'None',
           currencyCodes                : '',
           limitIntegerPart             : false,
           allowPlusSign                : false,
           allowMinusSign               : false,
-          allowParentheses             : false,
           signIsRequired               : false,
           whitespaceAllowedAfterSign   : false,
           thousandSeparatorsAreRequired: false,
@@ -573,6 +572,47 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidNumbersInfo(info: Numbers): boolean {
+    const min = this.numbers.minValOfIntPart;
+    const max = this.numbers.maxValOfIntPart;
+
+    if (info.limitIntegerPart) {
+      const validInput = /^-?\d+$/;      
+
+      if (!(validInput.test(min) && validInput.test(max) && Number.parseInt(min) <= Number.parseInt(max))) {
+        return false
+      }
+    }
+
+    const decimalsRe = /^[1-9]+$/;
+    const minDec = this.numbers.minNrOfDecimals;
+    const maxDec = this.numbers.maxNrOfDecimals;
+    if (minDec !== '' || maxDec !== '') {
+      if (!(decimalsRe.test(minDec) && decimalsRe.test(maxDec)
+        && Number.parseInt(minDec) <= Number.parseInt(maxDec))) {
+          return false;
+        }
+    }
+
+    if (info.currencyCodes !== '') {
+      if (!/^[A-Z]{3}(?:;[A-Z]{3})*$/.test(info.currencyCodes)) {
+        return false;
+      }
+    }
+
+    if (info.allowPlusSign && info.limitIntegerPart) {
+      if (Number.parseInt(min) <= 0 && Number.parseInt(max) <= 0) {
+        return false;
+      }
+    }    
+
+    if (info.thousandSeparatorsAreRequired && info.thousandSeparator === 'None') {
+      return false;
+    }    
+
+    if (info.currencySignOrCodeRequired && info.currencySign === 'None' && info.currencyCodes.trim() === '') {
+      return false;
+    }  
+    
     return true;
   }
 

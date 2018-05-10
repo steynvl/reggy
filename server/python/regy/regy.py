@@ -1,7 +1,7 @@
-from regy.common_use_cases import CommonUseCases
+from regy.common import CommonUseCases
 from regy.generate_method import GenerateMethod
 from regy.induction import Induction
-from regy.samples_and_semantics import SamplesAndSemantics
+from regy.samples import SamplesAndSemantics
 
 
 class Regy:

@@ -16,7 +16,7 @@ export class SampleStringsInfo {
   /* array containing actual values highlighted by user for this marker */
   markedStrings: Array<string>;
 
-  /* semantical information about the marker  */
+  /* semantical information home the marker  */
   markerInfo: LiteralText | BasicCharacters | Digits | ControlCharacters | UnicodeCharacters
     | MatchAnything | ListOfLiteralText | Numbers;
 

@@ -4,8 +4,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from './home/home.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { ContactComponent } from './contact/contact.component';
 
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
@@ -54,6 +55,7 @@ export function tokenGetter() {
     AppComponent,
     AboutComponent,
     TutorialComponent,
+    ContactComponent,
     GenerateSamplesComponent,
     GenerateCommonComponent,
     GenerateInductionComponent,

@@ -16,12 +16,12 @@ export class PayloadCommon {
   /* type of the common use case */
   type: string;
 
-  /* information about the common use case */
+  /* information home the common use case */
   information: Username | Password | Email | Url
     | Guid | CreditCardNumber | NationalId | VatNumber
     | Ipv4Address | Currency | DateAndTime;
 
-  /* general information about the regex to generate */
+  /* general information home the regex to generate */
   generalRegexInfo: GeneralRegexInfo;
 
   /* method the backend should use to generate the regex */

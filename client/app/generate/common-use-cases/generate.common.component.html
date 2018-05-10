@@ -1,84 +1,87 @@
-<app-toast [message]="toast.message"></app-toast>
+<div class="container background-col">
+  <app-toast [message]="toast.message"></app-toast>
 
-<div class="content">
+  <div class="content">
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-sm-12">
+      <div class="col-sm-12">
 
-      <div class="form-group">
-        <label for="use-case"><strong>Select your common use case:</strong></label>
-        <select id="use-case" class="form-control" [(ngModel)]="type">
-          <option>Credit card number</option>
-          <option>Currency</option>
-          <option>Date and time</option>
-          <option>Email address</option>
-          <option>GUID</option>
-          <option>IPv4 address</option>
-          <option>National ID</option>
-          <option>Password</option>
-          <option>URL</option>
-          <option>Username</option>
-          <option>VAT number</option>
-        </select>
+        <div class="form-group">
+          <label for="use-case"><strong>Select your common use case:</strong></label>
+          <select id="use-case" class="form-control" [(ngModel)]="type">
+            <option>Credit card number</option>
+            <option>Currency</option>
+            <option>Date and time</option>
+            <option>Email address</option>
+            <option>GUID</option>
+            <option>IPv4 address</option>
+            <option>National ID</option>
+            <option>Password</option>
+            <option>URL</option>
+            <option>Username</option>
+            <option>VAT number</option>
+          </select>
+        </div>
       </div>
+
     </div>
 
+    <app-username-info
+      *ngIf="type === 'Username'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-username-info>
+
+    <app-password-info
+      *ngIf="type === 'Password'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-password-info>
+
+    <app-email-info
+      *ngIf="type === 'Email address'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-email-info>
+
+    <app-url-info
+      *ngIf="type === 'URL'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-url-info>
+
+    <app-credit-card-info
+      *ngIf="type === 'Credit card number'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-credit-card-info>
+
+    <app-vat-number-info
+      *ngIf="type === 'VAT number'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-vat-number-info>
+
+    <app-date-and-time-info
+      *ngIf="type === 'Date and time'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-date-and-time-info>
+
+    <app-guid-info
+      *ngIf="type === 'GUID'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-guid-info>
+
+    <app-national-id-info
+      *ngIf="type === 'National ID'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-national-id-info>
+
+    <app-ipv4-address-info
+      *ngIf="type === 'IPv4 address'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-ipv4-address-info>
+
+    <app-currency-info
+      *ngIf="type === 'Currency'"
+      [generalRegexInfo]="generalRegexInfo">
+    </app-currency-info>
+
   </div>
-
-  <app-username-info
-    *ngIf="type === 'Username'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-username-info>
-
-  <app-password-info
-    *ngIf="type === 'Password'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-password-info>
-
-  <app-email-info
-    *ngIf="type === 'Email address'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-email-info>
-
-  <app-url-info
-    *ngIf="type === 'URL'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-url-info>
-
-  <app-credit-card-info
-    *ngIf="type === 'Credit card number'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-credit-card-info>
-
-  <app-vat-number-info
-    *ngIf="type === 'VAT number'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-vat-number-info>
-
-  <app-date-and-time-info
-    *ngIf="type === 'Date and time'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-date-and-time-info>
-
-  <app-guid-info
-    *ngIf="type === 'GUID'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-guid-info>
-
-  <app-national-id-info
-    *ngIf="type === 'National ID'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-national-id-info>
-
-  <app-ipv4-address-info
-    *ngIf="type === 'IPv4 address'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-ipv4-address-info>
-
-  <app-currency-info
-    *ngIf="type === 'Currency'"
-    [generalRegexInfo]="generalRegexInfo">
-  </app-currency-info>
 
 </div>
