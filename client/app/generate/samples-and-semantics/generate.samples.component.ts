@@ -78,6 +78,11 @@ export class GenerateSamplesComponent implements OnInit {
 
   }
 
+  reset() {
+    this.markedElements = [];
+    jQuery('textarea').highlightTextarea('destroy');
+  }
+
   showSelectedText() {
     const txtArea = document.getElementById('text-area');
 

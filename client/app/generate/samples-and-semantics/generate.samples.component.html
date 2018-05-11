@@ -33,10 +33,18 @@
 
       <div class="col-sm-11">
 
+        <button *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
+            <i class="fa fa-refresh"></i>
+        </button>
+
         <div *ngIf="markedElements.length > 1">
 
-          <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()"
-                  class="btn btn-md"><i class="fa fa-compress"></i>
+          <button *ngIf="!markersIsCollapsed" (click)="reset()" class="btn btn-md">
+              <i class="fa fa-refresh"></i>
+          </button>
+
+          <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()" class="btn btn-md">
+            <i class="fa fa-compress"></i>
           </button>
 
           <nav *ngIf="markersIsCollapsed">
@@ -65,10 +73,12 @@
       <div class="col-sm-1">
 
         <div class="right-allign">
+        
           <label class="btn btn-outline-primary" for="my-file-selector">
             <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
             Upload file
           </label>
+          
         </div>
 
       </div>

@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { AboutComponent } from './home.component';
+import { HomeComponent } from './home.component';
 
-describe('Component: About', () => {
-  let component: AboutComponent;
-  let fixture: ComponentFixture<AboutComponent>;
+describe('Component: Home', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutComponent ]
+      declarations: [ HomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -25,7 +25,7 @@ describe('Component: About', () => {
   });
 
   it('should display the string "Contact us" in h2', () => {
-    const el = fixture.debugElement.query(By.css('h4')).nativeElement;
+    const el = fixture.debugElement.query(By.css('h2')).nativeElement;
     expect(el.textContent).toContain('Contact us');
   });
 

@@ -4,7 +4,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { ContactComponent } from './contact/contact.component';
 
@@ -53,7 +53,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
+    HomeComponent,
     TutorialComponent,
     ContactComponent,
     GenerateSamplesComponent,

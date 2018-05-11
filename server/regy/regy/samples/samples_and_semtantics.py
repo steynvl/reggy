@@ -47,7 +47,7 @@ class SamplesAndSemantics:
 
         self._add_general_info(parsed_samples, regex)
 
-        regex = ''.join(regex).strip()
+        regex = ''.join(regex)
         self._map_re_to_target(regex, target_lang, case_state)
 
     def _map_re_to_target(self, regex, target, case_state):

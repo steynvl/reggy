@@ -10,8 +10,6 @@ class Factorizer:
         return self._re
 
     def _calculate_regex(self, strings: list):
-        strings = list(map(str.strip, strings))
-
         prefix = self._get_common_prefix(strings)
 
         suffix_sample_strings = [i[len(prefix):] for i in strings]
