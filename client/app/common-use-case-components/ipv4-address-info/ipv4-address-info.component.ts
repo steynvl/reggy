@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Ipv4Address } from '../../models/common-use-case-models/ipv4-address';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({
   selector: 'app-ipv4-address-info',
@@ -16,9 +17,8 @@ export class Ipv4AddressInfoComponent implements OnInit {
 
   ipv4Address: Ipv4Address;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
   isLoading = false;
-  errMsg: string;
 
   constructor(private generateCommonService: GenerateCommonService,
               public toast: ToastComponent) { }
@@ -64,7 +64,10 @@ export class Ipv4AddressInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
@@ -76,7 +79,7 @@ export class Ipv4AddressInfoComponent implements OnInit {
   }
 
   isValid(): boolean {
-    return Object.values(this.ipv4Address).some(ip => ip)
+    return Object.values(this.ipv4Address).some(ip => ip);
   }
 
   clickCopyToClipboard() {

@@ -1,6 +1,9 @@
 
 const examples = {
 
+  'Create an object to use the same regex for many operations':
+  '__compile__\n',
+
   'if/else branch whether the regex matches (part of) a string':
   'if ($subject =~ m/__regex__/) {\n' +
   '    # Successful match\n' +

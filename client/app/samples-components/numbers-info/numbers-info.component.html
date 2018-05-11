@@ -3,14 +3,22 @@
   <div class="col-sm-6">
     <div class="form-group">
       <label for="min-value">Minimum value of integer part:</label>
-      <input type="text" class="form-control" id="min-value" placeholder="" [(ngModel)]="numbers.minValOfIntPart">
+      <input type="number" class="form-control" id="min-value" placeholder="" [(ngModel)]="numbers.minValOfIntPart"
+      [ngClass]="{
+        'is-invalid': !isValidIntegerParts()
+        }"
+      >
     </div>
   </div>
 
   <div class="col-sm-6">
     <div class="form-group">
       <label for="max-value">Maximum value of integer part:</label>
-      <input type="text" class="form-control" id="max-value" placeholder="" [(ngModel)]="numbers.maxValOfIntPart">
+      <input type="number" class="form-control" id="max-value" placeholder="" [(ngModel)]="numbers.maxValOfIntPart"
+      [ngClass]="{
+        'is-invalid': !isValidIntegerParts()
+        }"
+      >
     </div>
   </div>
 
@@ -21,21 +29,28 @@
   <div class="col-sm-6">
     <label for="decimal-separator">Decimal separator:</label>
     <select id="decimal-separator" class="form-control" [(ngModel)]="numbers.decimalSeparator">
-      <option>None</option>
-      <option>Comma or period</option>
-      <option>Comma</option>
+      <option>Any</option>
       <option>Period</option>
+      <option>Comma</option>
     </select>
   </div>
 
   <div class="col-sm-3">
     <label for="min-nr-of-decimals">Min. nr of decimals</label>
-    <input id="min-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.minNrOfDecimals">
+    <input id="min-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.minNrOfDecimals"
+    [ngClass]="{
+      'is-invalid': !isValidNrOfDecimals()
+      }"
+    >
   </div>
 
   <div class="col-sm-3">
     <label for="max-nr-of-decimals">Max. nr of decimals</label>
-    <input id="max-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.maxNrOfDecimals">
+    <input id="max-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.maxNrOfDecimals"
+    [ngClass]="{
+      'is-invalid': !isValidNrOfDecimals()
+      }"
+    >
   </div>
 
 </div>
@@ -46,6 +61,7 @@
     <label for="thousand-separator">Thousand separator:</label>
     <select id="thousand-separator" class="form-control" [(ngModel)]="numbers.thousandSeparator">
       <option>None</option>
+      <option>Any</option>
       <option>Comma</option>
       <option>Quote</option>
       <option>Space</option>
@@ -69,15 +85,21 @@
     <label for="currency-sign">Currency sign:</label>
     <select id="currency-sign" class="form-control" [(ngModel)]="numbers.currencySign">
       <option>None</option>
-      <option>Required</option>
-      <option>Optional</option>
+      <option>Any</option>
+      <option>Dollar</option>
+      <option>Euro</option>
+      <option>Yen</option>
+      <option>Pound</option>
+      <option>Universal</option>
     </select>
   </div>
 
   <div class="col-sm-6">
     <label for="currency-codes">Currency codes:</label>
-    <select id="currency-codes" class="form-control" [(ngModel)]="numbers.currencyCodes">
-    </select>
+    <input type="text" class="form-control"
+           placeholder="Currency codes separated by semicolons"
+           [(ngModel)]="numbers.currencyCodes">
+
   </div>
 
 </div>
@@ -114,20 +136,6 @@
       </label>
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="form-check">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox"
-               [checked]="numbers.allowParentheses"
-               (change)="numbers.allowParentheses = !numbers.allowParentheses">
-        Allow parentheses
-      </label>
-    </div>
-  </div>
-
-</div>
-
-<div class="row move-down">
 
   <div class="col-sm-3">
     <div class="form-check">
@@ -139,6 +147,11 @@
       </label>
     </div>
   </div>
+
+</div>
+
+<div class="row move-down">
+
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
@@ -170,10 +183,6 @@
     </div>
   </div>
 
-</div>
-
-<div class="row move-down">
-
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">
@@ -184,6 +193,11 @@
       </label>
     </div>
   </div>
+
+</div>
+
+<div class="row move-down">
+
   <div class="col-sm-3">
     <div class="form-check">
       <label class="form-check-label">

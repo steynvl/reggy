@@ -4,6 +4,7 @@ import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Email } from '../../models/common-use-case-models/email';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -18,7 +19,7 @@ export class EmailInfoComponent implements OnInit {
 
   email: Email;
 
-  generatedRegex: string;
+  generatedRegex: GeneratedRegex;
   isLoading = false;
 
   showUsernameErrorMsg: boolean;
@@ -125,7 +126,10 @@ export class EmailInfoComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex;
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },

@@ -14,6 +14,8 @@ import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 import { MatchAnything } from '../../models/marker-info/match-anything';
 import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
 import { Numbers } from '../../models/marker-info/numbers';
+import { RepeatInfo } from '../../models/marker-info/repeat-info';
+import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;
 
@@ -26,10 +28,11 @@ export class GenerateSamplesComponent implements OnInit {
 
   isLoading = false;
 
+  generatedRegex: GeneratedRegex;
+
   textArea = '';
   selectedText = '';
   markedElements: Array<Marker> = [];
-  generatedRegex: string;
   selectedMarkerIdx = -1;
   literalText: LiteralText;
   basicCharacters: BasicCharacters;
@@ -67,10 +70,17 @@ export class GenerateSamplesComponent implements OnInit {
       reader.readAsText(fileList[0]);
 
       reader.onload = () => {
+        this.markedElements = [];
+        jQuery('textarea').highlightTextarea('destroy');
         this.textArea = reader.result;
       };
     }
 
+  }
+
+  reset() {
+    this.markedElements = [];
+    jQuery('textarea').highlightTextarea('destroy');
   }
 
   showSelectedText() {
@@ -126,7 +136,10 @@ export class GenerateSamplesComponent implements OnInit {
         if (response.code !== 0) {
           this.toast.setMessage('Unable to generate regex, server responded with an error!', 'danger');
         } else {
-          this.generatedRegex = response.regex.trim();
+          this.generatedRegex = {
+            regex        : response.regex,
+            compiledRegex: response.compiledRegex
+          };
         }
         this.isLoading = false;
       },
@@ -282,6 +295,7 @@ export class GenerateSamplesComponent implements OnInit {
           specificCharacters : '',
           specificCharacter  : '',
           canSpanAcrossLines : false,
+          caseInsensitive    : false,
           basicCharacters: {
             lowerCaseLetters     : false,
             upperCaseLetters     : false,
@@ -297,26 +311,26 @@ export class GenerateSamplesComponent implements OnInit {
       case 'List of literal text':
         this.listOfLiteralText = {
           literalText                 : [''],
-          matchAnythingExceptSpecified: false
+          matchAnythingExceptSpecified: false,
+          caseInsensitive             : false
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.listOfLiteralText;
         break;
 
       case 'Numbers':
         this.numbers = {
-          minValOfIntPart              : '',
-          maxValOfIntPart              : '',
-          decimalSeparator             : '',
-          minNrOfDecimals              : '',
-          maxNrOfDecimals              : '',
-          thousandSeparator            : '',
-          codePosition                 : '',
-          currencySign                 : '',
+          minValOfIntPart              : 0,
+          maxValOfIntPart              : 0,
+          decimalSeparator             : 'Any',
+          minNrOfDecimals              : 0,
+          maxNrOfDecimals              : 0,
+          thousandSeparator            : 'None',
+          codePosition                 : 'Before only',
+          currencySign                 : 'None',
           currencyCodes                : '',
           limitIntegerPart             : false,
           allowPlusSign                : false,
           allowMinusSign               : false,
-          allowParentheses             : false,
           signIsRequired               : false,
           whitespaceAllowedAfterSign   : false,
           thousandSeparatorsAreRequired: false,
@@ -412,26 +426,22 @@ export class GenerateSamplesComponent implements OnInit {
     this.highlightTextArea();
   }
 
-  repeatInfoChanged(idx) {
-    this.selectedMarkerIdx = idx;
-  }
-
   clickCopyToClipboard() {
     this.toast.setMessage('Regex copied to clipboard! ', 'success');
   }
 
-  validateStartRepeatInfo(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateStartRepeatInfo(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.start < repeatInfo.end && /^\d*$/.test(repeatInfo.start.toString());
   }
 
-  validateEndRepeatInfo(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateEndRepeatInfo(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.end > repeatInfo.start && /^\d*$/.test(repeatInfo.end.toString());
   }
 
-  validateMinNrOfTimes(): boolean {
-    const repeatInfo = this.markedElements[this.selectedMarkerIdx].repeatInfo;
+  validateMinNrOfTimes(idx: number): boolean {
+    const repeatInfo = this.markedElements[idx].repeatInfo;
     return repeatInfo.start !== undefined && /^\d*$/.test(repeatInfo.start.toString());
   }
 
@@ -458,6 +468,10 @@ export class GenerateSamplesComponent implements OnInit {
   isValidUserInput(): boolean {
 
     for (const marker of this.markedElements) {
+
+      if (!this.isValidRepeatInfo(marker.repeatInfo)) {
+        return false;
+      }
 
       switch (marker.fieldType) {
 
@@ -507,12 +521,8 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidBasicCharactersInfo(info: BasicCharacters): boolean {
-    if (info.individualCharacters !== undefined && info.individualCharacters.trim() !== '') {
+    if (info.individualCharacters !== undefined && info.individualCharacters !== '') {
       return true;
-    }
-
-    if (info.matchAllExceptSpecified) {
-      return info.individualCharacters.trim() !== '';
     }
 
     return !(!info.digits && !info.whiteSpace && !info.lowerCaseLetters
@@ -565,17 +575,71 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   isValidNumbersInfo(info: Numbers): boolean {
+    const min = this.numbers.minValOfIntPart;
+    const max = this.numbers.maxValOfIntPart;
+
+    if (info.limitIntegerPart) {
+      if (min >= max) {
+        return false;
+      }
+    }
+
+    const minDec = this.numbers.minNrOfDecimals;
+    const maxDec = this.numbers.maxNrOfDecimals;
+    if (minDec !== 0 || maxDec !== 0) {
+      if (minDec > 0 && maxDec > 0 && minDec > maxDec) {
+        return false;
+      }
+    }
+
+    if (info.currencyCodes !== '') {
+      if (!/^[A-Z]{3}(?:;[A-Z]{3})*$/.test(info.currencyCodes)) {
+        return false;
+      }
+    }
+
+    if (info.allowPlusSign && info.limitIntegerPart) {
+      if (min <= 0 && max <= 0) {
+        return false;
+      }
+    }
+
+    if (info.thousandSeparatorsAreRequired && info.thousandSeparator === 'None') {
+      return false;
+    }
+
+    if (info.currencySignOrCodeRequired && info.currencySign === 'None' && info.currencyCodes.trim() === '') {
+      return false;
+    }
+    
     return true;
   }
 
   isValidUnicodeCharactersInfo(info: UnicodeCharacters): boolean {
-    const unicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
+    const validUnicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
 
-    const validInput = info.individualCharacters === '' || unicode.test(info.individualCharacters);
+    const validInput = info.individualCharacters === '' || validUnicode.test(info.individualCharacters);
 
-    return validInput || Object.keys(info)
+    const checkboxes = Object.keys(info)
           .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
           .some(cc => info[cc]);
+
+    if (validInput || checkboxes) {
+        return !(!checkboxes && info.individualCharacters === '');
+    } else {
+      return false;
+    }
+  }
+
+  isValidRepeatInfo(info: RepeatInfo): boolean {
+    switch (info.repeat) {
+      case 'Custom range':
+        return info.start >= 0 && info.end >= 0 && info.start < info.end;
+      case 'n or more times':
+        return info.start >= 0;
+      default:
+        return true;
+    }
   }
 
 }

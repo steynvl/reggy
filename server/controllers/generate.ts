@@ -12,7 +12,7 @@ export default class GenerateCtrl extends BaseCtrl {
     console.log(samples);
     console.log('---------');
 
-    const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'python', 'main.py');
+    const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'regy', 'main.py');
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));
     let output = '';
 
@@ -23,10 +23,14 @@ export default class GenerateCtrl extends BaseCtrl {
     py.on('close', (code) => {
       res.setHeader('Content-Type', 'application/json');
 
+      const deserialized = JSON.parse(output);
+
       const serverResponse: ServerResponse = {
-        regex: output,
-        code : code
+        regex        : deserialized.regex,
+        compiledRegex: deserialized.compiledRegex,
+        code         : code
       };
+
       res.send(JSON.stringify(serverResponse));
     });
 
@@ -35,6 +39,7 @@ export default class GenerateCtrl extends BaseCtrl {
 }
 
 export interface ServerResponse {
-  regex: string;
-  code : number;
+  regex        : string;
+  compiledRegex: string;
+  code         : number;
 }

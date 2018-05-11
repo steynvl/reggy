@@ -1,347 +1,358 @@
-<app-toast [message]="toast.message"></app-toast>
+<div class="container background-col">
+  <app-toast [message]="toast.message"></app-toast>
 
-<div class="content">
+  <div class="content">
 
-  <div class="btn-toolbar">
+    <div class="btn-toolbar">
 
-    <button type="button" class="btn btn-primary" (click)="mark()">Mark</button>
-    <a class="fa-vertical-bar-medium:after"></a>
-    <span *ngIf="markedElements.length > 0" class="btn-separator"></span>
+      <button type="button" class="btn btn-primary" (click)="mark()">Mark</button>
+      <a class="fa-vertical-bar-medium:after"></a>
+      <span *ngIf="markedElements.length > 0" class="btn-separator"></span>
 
-    <div *ngFor="let markedElement of markedElements; let idx = index">
+      <div *ngFor="let markedElement of markedElements; let idx = index">
 
-      <button type="button" class="btn" (click)="clickMarkButton(idx, true)" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+        <button type="button" class="btn" (click)="clickMarkButton(idx, true)" [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+
+      </div>
 
     </div>
 
-  </div>
+    <div class="row text-area">
 
-  <div class="row text-area">
-
-    <div class="col-md-12" (mouseup)="showSelectedText()">
+      <div class="col-md-12" (mouseup)="showSelectedText()">
 
       <textarea
         [(ngModel)]="textArea" id="text-area" class="form-control" rows="8" placeholder="Sample text..." >
       </textarea>
 
+      </div>
+
     </div>
 
-  </div>
+    <div class="row pad-upload-btn">
 
-  <div class="row pad-upload-btn">
+      <div class="col-sm-11">
 
-    <div class="col-sm-11">
-
-      <div *ngIf="markedElements.length > 1">
-
-        <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()"
-                class="btn btn-md"><i class="fa fa-compress"></i>
+        <button *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
+            <i class="fa fa-refresh"></i>
         </button>
 
-        <nav *ngIf="markersIsCollapsed">
-          <div class="nav nav-tabs" role="tablist">
+        <div *ngIf="markedElements.length > 1">
 
-            <button (click)="markersIsCollapsed = !markersIsCollapsed"
-                    class="btn btn-md"><i class="fa fa-expand"></i>
-            </button>
+          <button *ngIf="!markersIsCollapsed" (click)="reset()" class="btn btn-md">
+              <i class="fa fa-refresh"></i>
+          </button>
 
-            <a *ngFor="let markedElement of markedElements; let idx = index" (click)="tabClicked(idx)"
-               class="nav-item nav-link marker-tab" data-toggle="tab" href="#"
-               [ngClass]="{
+          <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()" class="btn btn-md">
+            <i class="fa fa-compress"></i>
+          </button>
+
+          <nav *ngIf="markersIsCollapsed">
+            <div class="nav nav-tabs" role="tablist">
+
+              <button (click)="markersIsCollapsed = !markersIsCollapsed"
+                      class="btn btn-md"><i class="fa fa-expand"></i>
+              </button>
+
+              <a *ngFor="let markedElement of markedElements; let idx = index" (click)="tabClicked(idx)"
+                 class="nav-item nav-link marker-tab" data-toggle="tab" href="#"
+                 [ngClass]="{
                   'selected-tab': idx === markerTabIndex
                }"
-            >
-              <strong>{{markedElement.id}}</strong>
-            </a>
+              >
+                <strong>{{markedElement.id}}</strong>
+              </a>
+
+            </div>
+          </nav>
+
+        </div>
+
+      </div>
+
+      <div class="col-sm-1">
+
+        <div class="right-allign">
+        
+          <label class="btn btn-outline-primary" for="my-file-selector">
+            <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
+            Upload file
+          </label>
+          
+        </div>
+
+      </div>
+    </div>
+
+    <br />
+
+    <div *ngFor="let markedElement of markedElements; let idx = index">
+
+      <div *ngIf="!markersIsCollapsed || idx === markerTabIndex">
+
+        <div class="card">
+
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-11">
+                <h4 class="text-center"><strong>{{markedElement.fieldType}}</strong></h4>
+              </div>
+              <div class="col-sm-1">
+                <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
 
           </div>
-        </nav>
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-md-2">
+                <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
+                        [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+
+                <button *ngIf="idx !== 0 && !markersIsCollapsed" type="button"
+                        class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
+                  <i class="fa fa-arrow-up"></i>
+                </button>
+                <button *ngIf="idx !== markedElements.length - 1 && !markersIsCollapsed"
+                        type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
+                  <i class="fa fa-arrow-down"></i>
+                </button>
+              </div>
+
+              <div class="col-md-5">
+                <label>Field info:</label>
+                <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
+                  <option>Basic characters</option>
+                  <option>Control characters</option>
+                  <option>Digits</option>
+                  <option>List of literal text</option>
+                  <option>Literal text</option>
+                  <option>Match anything</option>
+                  <option>Numbers</option>
+                  <option>Unicode characters</option>
+                </select>
+              </div>
+
+              <div class="col-md-5">
+                <label>Repeat:</label>
+
+                <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                        [(ngModel)]="markedElement.repeatInfo.repeat">
+
+                  <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
+
+                </select>
+
+                <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
+                  <input [(ngModel)]="markedElement.repeatInfo.start" type="number"
+                         class="form-control" placeholder="Start (inclusive)"
+                         [ngClass]="{
+                        'is-valid'  : validateStartRepeatInfo(idx),
+                        'is-invalid': !validateStartRepeatInfo(idx)
+                       }"
+                  />
+                  <input [(ngModel)]="markedElement.repeatInfo.end" type="number"
+                         class="form-control" placeholder="End (inclusive)"
+                         [ngClass]="{
+                        'is-valid'  : validateEndRepeatInfo(idx),
+                        'is-invalid': !validateEndRepeatInfo(idx)
+                       }"
+                  />
+                </div>
+
+                <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
+                  <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
+                         class="form-control" placeholder="Minimum number of times (inclusive)"
+                         [ngClass]="{
+                        'is-valid'  : validateMinNrOfTimes(idx),
+                        'is-invalid': !validateMinNrOfTimes(idx)
+                       }"
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="info-pad" *ngIf="selectedMarkerIdx === idx">
+
+              <app-literal-text-info
+                *ngIf="markedElement.fieldType === 'Literal text'"
+                [literalText]="literalText"
+                [possibleMatches]="markedElement.markedTextInfo" >
+              </app-literal-text-info>
+
+              <app-basic-characters-info
+                *ngIf="markedElement.fieldType === 'Basic characters'"
+                [basicCharacters]="basicCharacters">
+              </app-basic-characters-info>
+
+              <app-digits-info
+                *ngIf="markedElement.fieldType === 'Digits'"
+                [digits]="digits">
+              </app-digits-info>
+
+              <app-control-characters-info
+                *ngIf="markedElement.fieldType === 'Control characters'"
+                [controlCharacters]="controlCharacters">
+              </app-control-characters-info>
+
+              <app-unicode-characters-info
+                *ngIf="markedElement.fieldType === 'Unicode characters'"
+                [unicodeCharacters]="unicodeCharacters">
+              </app-unicode-characters-info>
+
+              <app-match-anything-info
+                *ngIf="markedElement.fieldType === 'Match anything'"
+                [matchAnything]="matchAnything"
+              >
+              </app-match-anything-info>
+
+              <app-list-of-literal-text-info
+                *ngIf="markedElement.fieldType === 'List of literal text'"
+                [listOfLiteralText]="listOfLiteralText"
+              >
+              </app-list-of-literal-text-info>
+
+              <app-numbers-info
+                *ngIf="markedElement.fieldType === 'Numbers'"
+                [numbers]="numbers"
+              >
+              </app-numbers-info>
+
+            </div>
+
+          </div>
+        </div>
 
       </div>
 
     </div>
 
-    <div class="col-sm-1">
+    <br />
 
-      <div class="right-allign">
-        <label class="btn btn-outline-primary" for="my-file-selector">
-          <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
-          Upload file
-        </label>
-      </div>
-
-    </div>
-  </div>
-
-  <br />
-
-  <div *ngFor="let markedElement of markedElements; let idx = index">
-
-    <div *ngIf="!markersIsCollapsed || idx === markerTabIndex">
+    <div *ngIf="markedElements.length > 0">
 
       <div class="card">
-
         <div class="card-header">
-          <div class="row">
-            <div class="col-sm-11">
-              <h4 class="text-center"><strong>{{markedElement.fieldType}}</strong></h4>
-            </div>
-            <div class="col-sm-1">
-              <button type="button" class="btn float-right" (click)="removeMarker(idx)"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-
+          <h4 class="text-center"><strong>General regular expression information</strong></h4>
         </div>
         <div class="card-body">
-          <div class="row">
+          <div class="row pad-down">
 
-            <div class="col-md-2">
-              <button type="button" class="btn btn-md" (click)="clickMarkButton(idx, false)"
-                      [ngStyle]="setButtonColor(idx)">{{markedElement.id}}</button>
+            <div class="col-sm-4">
 
-              <button *ngIf="idx !== 0 && !markersIsCollapsed" type="button"
-                      class="btn btn-md" (click)="changeMarkerOrder('up', idx)">
-                <i class="fa fa-arrow-up"></i>
-              </button>
-              <button *ngIf="idx !== markedElements.length - 1 && !markersIsCollapsed"
-                      type="button" class="btn btn-md" (click)="changeMarkerOrder('down', idx)">
-                <i class="fa fa-arrow-down"></i>
-              </button>
+              <div class="form-group">
+                <label for="begin-regex-at">Start regex match at:</label>
+                <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+                  <option>Anywhere</option>
+                  <option>Start of text</option>
+                  <option>Start of line</option>
+                  <option>Start of word</option>
+                  <option>Start of attempt</option>
+                </select>
+              </div>
             </div>
 
-            <div class="col-md-5">
-              <label>Field info:</label>
-              <select class="form-control" [(ngModel)]="markedElement.fieldType" (ngModelChange)="markerInfoChanged(idx)">
-                <option>Basic characters</option>
-                <option>Control characters</option>
-                <option>Digits</option>
-                <option>List of literal text</option>
-                <option>Literal text</option>
-                <option>Match anything</option>
-                <option>Numbers</option>
-                <option>Unicode characters</option>
-              </select>
+            <div class="col-sm-4">
+
+              <div class="form-group">
+                <label for="end-regex-at">End regex match at:</label>
+                <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+                  <option>Anywhere</option>
+                  <option>End of text</option>
+                  <option>End of line</option>
+                  <option>End of word</option>
+                </select>
+              </div>
             </div>
 
-            <div class="col-md-5">
-              <label>Repeat:</label>
+            <div class="col-sm-4">
 
-              <select class="form-control" style="font-family: 'FontAwesome', Arial;"
-                      (change)="repeatInfoChanged(idx)" [(ngModel)]="markedElement.repeatInfo.repeat">
-
-                <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
-
-              </select>
-
-              <div *ngIf="markedElement.repeatInfo.repeat === 'Custom range'" class="input-group">
-                <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
-                       class="form-control" placeholder="Start (inclusive)"
-                       [ngClass]="{
-                        'is-valid'  : validateStartRepeatInfo(),
-                        'is-invalid': !validateStartRepeatInfo()
-                       }"
-                />
-                <input [(ngModel)]="markedElement.repeatInfo.end" type="text"
-                       class="form-control" placeholder="End (inclusive)"
-                       [ngClass]="{
-                        'is-valid'  : validateEndRepeatInfo(),
-                        'is-invalid': !validateEndRepeatInfo()
-                       }"
-                />
+              <div class="form-group">
+                <label for="what-standard">Target language:</label>
+                <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+                  <option>Java</option>
+                  <option>Perl</option>
+                  <option>POSIX</option>
+                </select>
               </div>
-
-              <div *ngIf="markedElement.repeatInfo.repeat === 'n or more times'">
-                <input [(ngModel)]="markedElement.repeatInfo.start" type="text"
-                       class="form-control" placeholder="Minimum number of times (inclusive)"
-                       [ngClass]="{
-                        'is-valid'  : validateMinNrOfTimes(),
-                        'is-invalid': !validateMinNrOfTimes()
-                       }"
-                />
-              </div>
-
             </div>
 
           </div>
-
-          <div class="info-pad" *ngIf="selectedMarkerIdx === idx">
-
-            <app-literal-text-info
-              *ngIf="markedElement.fieldType === 'Literal text'"
-              [literalText]="literalText"
-              [possibleMatches]="markedElement.markedTextInfo" >
-            </app-literal-text-info>
-
-            <app-basic-characters-info
-              *ngIf="markedElement.fieldType === 'Basic characters'"
-              [basicCharacters]="basicCharacters">
-            </app-basic-characters-info>
-
-            <app-digits-info
-              *ngIf="markedElement.fieldType === 'Digits'"
-              [digits]="digits">
-            </app-digits-info>
-
-            <app-control-characters-info
-              *ngIf="markedElement.fieldType === 'Control characters'"
-              [controlCharacters]="controlCharacters">
-            </app-control-characters-info>
-
-            <app-unicode-characters-info
-              *ngIf="markedElement.fieldType === 'Unicode characters'"
-              [unicodeCharacters]="unicodeCharacters">
-            </app-unicode-characters-info>
-
-            <app-match-anything-info
-              *ngIf="markedElement.fieldType === 'Match anything'"
-              [matchAnything]="matchAnything"
-              >
-            </app-match-anything-info>
-
-            <app-list-of-literal-text-info
-              *ngIf="markedElement.fieldType === 'List of literal text'"
-              [listOfLiteralText]="listOfLiteralText"
-              >
-            </app-list-of-literal-text-info>
-
-            <app-numbers-info
-              *ngIf="markedElement.fieldType === 'Numbers'"
-              [numbers]="numbers"
-              >
-            </app-numbers-info>
-
-          </div>
-
         </div>
       </div>
 
     </div>
 
-  </div>
+    <div *ngIf="markedElements.length > 0">
+      <br />
 
-  <br />
-
-  <div *ngIf="markedElements.length > 0">
-
-    <div class="card">
-      <div class="card-header">
-        <h4 class="text-center"><strong>General regular expression information</strong></h4>
-      </div>
-      <div class="card-body">
-        <div class="row pad-down">
-
-          <div class="col-sm-4">
-
-            <div class="form-group">
-              <label for="begin-regex-at">Start regex match at:</label>
-              <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
-                <option>Anywhere</option>
-                <option>Start of text</option>
-                <option>Start of line</option>
-                <option>Start of word</option>
-                <option>Start of attempt</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-
-            <div class="form-group">
-              <label for="end-regex-at">End regex match at:</label>
-              <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
-                <option>Anywhere</option>
-                <option>End of text</option>
-                <option>End of line</option>
-                <option>End of word</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-
-            <div class="form-group">
-              <label for="what-standard">Target language:</label>
-              <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
-                <option>Java</option>
-                <option>Perl</option>
-                <option>POSIX</option>
-              </select>
-            </div>
-          </div>
-
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
         </div>
       </div>
+
     </div>
 
-  </div>
+    <div *ngIf="isLoading">
+      <br />
 
-  <div *ngIf="markedElements.length > 0">
-    <br />
-
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+        </div>
       </div>
+
+      <br />
     </div>
 
-  </div>
+    <div *ngIf="markedElements.length > 0">
+      <br />
+      <br />
+    </div>
 
-  <div *ngIf="isLoading">
-    <br />
-  
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+    <div *ngIf="generatedRegex !== undefined">
+
+      <div class="row">
+        <div class="col">
+          <label for="regex"><strong>Your {{ generalRegexInfo.regexTarget }} regular expression</strong></label>
+        </div>
       </div>
-    </div>
-  
-    <br />
-  </div>
 
-  <div *ngIf="markedElements.length > 0">
-    <br />
-    <br />
-  </div>
-  
+      <div class="row">
 
-  <div *ngIf="generatedRegex !== undefined">
+        <div class="col">
 
-    <div class="row">
-      <div class="col">
-        <label for="regex"><strong>Your {{generalRegexInfo.regexTarget}} regular expression</strong></label>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="col">
-
-        <div class="input-group">
-          <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex">
-          <span class="input-group-btn">
-        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex" (click)="clickCopyToClipboard()"
+          <div class="input-group">
+            <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex.compiledRegex">
+            <span class="input-group-btn">
+        <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex.compiledRegex" (click)="clickCopyToClipboard()"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
                 type="button"><i class="fa fa-clipboard"></i>
         </button>
         </span>
+          </div>
+
         </div>
 
       </div>
 
+
     </div>
 
+    <div *ngIf="generatedRegex" class="pad-down">
+
+      <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
+        <app-java-code-samples [generatedRegex]="generatedRegex"></app-java-code-samples>
+      </div>
+      <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
+        <app-perl-code-samples [generatedRegex]="generatedRegex"></app-perl-code-samples>
+      </div>
+
+    </div>
 
   </div>
-
-  <div *ngIf="generatedRegex" class="pad-down">
-
-    <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
-      <app-java-code-samples [regex]="generatedRegex"></app-java-code-samples>
-    </div>
-    <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
-      <app-perl-code-samples [regex]="generatedRegex"></app-perl-code-samples>
-    </div>
-
-  </div>
-
 </div>

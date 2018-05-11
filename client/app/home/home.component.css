@@ -1,0 +1,29 @@
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.business-header {
+  height: 50vh;
+  min-height: 300px;
+  /*background: url('http://placehold.it/1920x400') center center no-repeat scroll;*/
+  background: url('../../assets/home-wallpaper.jpg') center center no-repeat scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.card {
+  height: 100%;
+}
+
+.full-width {
+  margin-left: -33.33%;
+  margin-right: -33.33%;
+}

@@ -1,11 +1,11 @@
 
 export class Numbers {
 
-  minValOfIntPart              : string;
-  maxValOfIntPart              : string;
+  minValOfIntPart              : number;
+  maxValOfIntPart              : number;
   decimalSeparator             : string;
-  minNrOfDecimals              : string;
-  maxNrOfDecimals              : string;
+  minNrOfDecimals              : number;
+  maxNrOfDecimals              : number;
   thousandSeparator            : string;
   codePosition                 : string;
   currencySign                 : string;
@@ -13,7 +13,6 @@ export class Numbers {
   limitIntegerPart             : boolean;
   allowPlusSign                : boolean;
   allowMinusSign               : boolean;
-  allowParentheses             : boolean;
   signIsRequired               : boolean;
   whitespaceAllowedAfterSign   : boolean;
   thousandSeparatorsAreRequired: boolean;
