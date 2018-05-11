@@ -10,7 +10,7 @@
 /.idea
 *.launch
 .settings/
-server/python/.idea/
+server/regy/.idea/
 
 # VSCode
 /.vscode
@@ -19,7 +19,7 @@ server/python/.idea/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-server/python/.vscode/
+server/regy/.vscode/
 
 # misc
 /.sass-cache
