@@ -12,7 +12,7 @@ export default class GenerateCtrl extends BaseCtrl {
     console.log(samples);
     console.log('---------');
 
-    const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'python', 'main.py');
+    const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'regy', 'main.py');
     const py = child_process.spawn('python3', [pathToRegex].concat(samples));
     let output = '';
 
