@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class RepeatInfo(Enum):
+class Repetition(Enum):
     CUSTOM_RANGE      = 1
     ZERO_OR_ONE       = 2
     ZERO_OR_MORE      = 3

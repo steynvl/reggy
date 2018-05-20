@@ -1,13 +1,13 @@
 from collections import deque
 
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples.tokens import Token
+from regy.samples.models.control_characters_info import ControlCharactersInfo
 from regy.samples.tokens.control_characters import control_char_to_re
 
 
 class MapControlCharacters:
 
-    def __init__(self, info, target_lang):
+    def __init__(self, info: ControlCharactersInfo, target_lang):
         self._info = info
         self._target_lang = target_lang
         self._re = deque()
@@ -18,7 +18,7 @@ class MapControlCharacters:
 
     def _map_info(self):
         char_to_re = control_char_to_re[self._target_lang]
-        control_chars = self._info[Token.CONTROL_CHARACTERS]
+        control_chars = self._info.wanted_control_chars
 
         if len(control_chars) == 0:
             return
@@ -26,7 +26,6 @@ class MapControlCharacters:
             self._re.append(char_to_re[control_chars[0]])
         else:
             ranges = []
-
             for i in range(len(control_chars)):
                 if i == 0:
                     ranges.append([control_chars[0], None])

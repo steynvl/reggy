@@ -13,12 +13,6 @@ class BasicCharacters(Enum):
     LINE_BREAKS                = 8
     INDIVIDUAL_CHARACTERS      = 9
 
-char_keys = [
-    BasicCharacters.LOWER_CASE_LETTERS, BasicCharacters.UPPER_CASE_LETTERS,
-    BasicCharacters.DIGITS, BasicCharacters.PUNCTUATION_AND_SYMBOLS,
-    BasicCharacters.WHITE_SPACE, BasicCharacters.LINE_BREAKS
-]
-
 basic_characters_to_re = {
 
     Target.JAVA: {
