@@ -2,14 +2,16 @@ from collections import deque
 import re
 from regy.samples.mapper.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples.tokens import RepeatInfo, Token, LiteralText
+from regy.samples.models.literal_text_info import LiteralTextInfo
+from regy.samples.tokens import LiteralText
 from regy.samples.tokens.case_state import CaseSensitive
+from regy.samples.tokens.repetition import Repetition
 from regy.samples.utils.factorizer import Factorizer
 
 
 class MapLiteralText:
 
-    def __init__(self, info, target_lang, case_state):
+    def __init__(self, info: LiteralTextInfo, target_lang, case_state):
         self._info = info
         self._target_lang = target_lang
         self._case_state = case_state
@@ -20,30 +22,29 @@ class MapLiteralText:
         return self._re
 
     def _map_info(self):
-        marker_info = self._info[Token.MARKER_INFO]
-        marked_strings = self._info[Token.MARKED_TEXT_STRINGS]
-        escaped_strings = self._escape_special_characters(marked_strings)
+        extra_info = self._info.extra_info
+        escaped_strings = self._escape_special_characters(self._info.literal_text)
 
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
-            if len(esc_string) > 1 and esc_string[0] != '\\' and self._info[Token.REPEAT_INFO] != RepeatInfo.ONE:
-                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+            if len(esc_string) > 1 and esc_string[0] != '\\' and self._info.repetition_info.repeat_info != Repetition.ONE:
+                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                     self._re.extend(['(?!', esc_string, ')'])
                 else:
                     self._re.extend(['(?:', esc_string, ')'])
             else:
-                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                     self._re.append('(?!{})'.format(esc_string))
                 else:
                     self._re.append(esc_string)
         else:
             factorized_re = Factorizer(escaped_strings).get_re()
-            if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+            if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                 self._re.append('(?!{})'.format(factorized_re))
             else:
                 self._re.append(factorized_re)
 
-        if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in marker_info:
+        if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
             self._re.append('.')
 
         repeat_info = repeat_info_to_regex(self._info)
@@ -52,7 +53,7 @@ class MapLiteralText:
         self._add_case_state(escaped_strings)
 
     def _add_case_state(self, escaped_strings):
-        if LiteralText.CASE_INSENSITIVE in self._info[Token.MARKER_INFO]:
+        if LiteralText.CASE_INSENSITIVE in self._info.extra_info:
             if not self._case_state['case'] == CaseSensitive.OFF:
                 self._re.appendleft('(?i)')
                 self._case_state['case'] = CaseSensitive.OFF
@@ -65,10 +66,12 @@ class MapLiteralText:
             if self._does_contain_letters(escaped_strings):
                 self._case_state['canUseCaseInsensitiveFlag'] = False
 
-    def _escape_special_characters(self, marked_strings):
+    def _escape_special_characters(self, strings):
         meta_chars = meta_characters[self._target_lang]
 
-        return [''.join([meta_chars[c] if c in meta_chars else c for c in string]) for string in marked_strings]
+        return [
+            ''.join([meta_chars[c] if c in meta_chars else c for c in string]) for string in strings
+        ]
 
     @staticmethod
     def _does_contain_letters(escaped_strings):

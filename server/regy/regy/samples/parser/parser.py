@@ -1,116 +1,89 @@
-import re
-from collections import OrderedDict
-
+from regy.samples.models.basic_characters_info import BasicCharactersInfo
+from regy.samples.models.control_characters_info import ControlCharactersInfo
+from regy.samples.models.digits_info import DigitsInfo
+from regy.samples.models.list_of_literal_text_info import ListOfLiteralTextInfo
+from regy.samples.models.literal_text_info import LiteralTextInfo
+from regy.samples.models.match_anything_info import MatchAnythingInfo
 from regy.samples.models.numbers_info import NumbersInfo
-from regy.samples.tokens.basic_characters_ import BasicCharacters
+from regy.samples.models.unicode_characters_info import UnicodeCharactersInfo
+from regy.samples.parser.samples import Samples
 from regy.samples.tokens.control_characters import control_char_to_token, control_chars
-from regy.samples.tokens.list_of_literal_text import ListOfLiteralText
-from regy.samples.tokens.match_anything import MatchAnything, basic_char_to_tok
-from regy.samples.tokens.numbers import Numbers
-from regy.samples.tokens.token import Token
-from regy.samples.tokens import MarkerType, LiteralText, RepeatInfo
+from regy.samples.tokens.match_anything import basic_char_to_tok
+from regy.samples.tokens.repetition import Repetition
+from regy.samples.tokens import LiteralText
 from regy.samples.tokens.unicode_characters import unicode_chars, unicode_char_to_token
+from regy.samples.utils.regex_info_to_tok import regex_info_to_tok
 from regy.samples.utils.repeat_info_to_enum import repeat_info_to_enum
 from regy.samples.utils.number_to_enum import number_to_enum_dict
-from regy.samples.utils.language_to_tok import language_to_tok
-from regy.samples.utils.regex_start_info_to_tok import regex_start_info_to_tok
-from regy.samples.utils.regex_end_info_to_tok import regex_end_info_to_tok
 
 class Parser:
 
-    def __init__(self, samples):
-        self._samples = samples
-        self._parsed_samples = {}
-        self._parse_samples()
+    def __init__(self, regex_info):
+        self._samples = Samples()
+        self._parse_samples(regex_info)
 
     def get_parsed_samples(self):
-        return self._parsed_samples
+        return self._samples
 
-    def _parse_samples(self):
-        self._parse_general_regex_info(self._samples['generalRegexInfo'])
+    def _parse_samples(self, regex_info):
+        self._parse_general_regex_info(regex_info)
 
-        self._parsed_samples[Token.SAMPLE_STRINGS_INFO] = []
-
-        for sample in self._samples['sampleStringsInfo']:
-            info = {}
+        for sample in regex_info['sampleStringsInfo']:
             marker_type = sample['markerType']
 
             if marker_type == 'Literal text':
-                info[Token.MARKER_TYPE] = MarkerType.LITERAL_TEXT
-                self._parse_literal_text(sample, info)
+                self._parse_literal_text(sample)
             elif marker_type == 'Basic characters':
-                info[Token.MARKER_TYPE] = MarkerType.BASIC_CHARACTERS
-                self._parse_basic_characters(sample, info)
+                self._parse_basic_characters(sample)
             elif marker_type == 'Digits':
-                info[Token.MARKER_TYPE] = MarkerType.DIGITS
-                self._parse_digits(sample, info)
+                self._parse_digits(sample)
             elif marker_type == 'Control characters':
-                info[Token.MARKER_TYPE] = MarkerType.CONTROL_CHARACTERS
-                self._parse_control_characters(sample, info)
+                self._parse_control_characters(sample)
             elif marker_type == 'Unicode characters':
-                info[Token.MARKER_TYPE] = MarkerType.UNICODE_CHARACTERS
-                self._parse_unicode_characters(sample, info)
+                self._parse_unicode_characters(sample)
             elif marker_type == 'Match anything':
-                info[Token.MARKER_TYPE] = MarkerType.MATCH_ANYTHING
-                self._parse_match_anything(sample, info)
+                self._parse_match_anything(sample)
             elif marker_type == 'List of literal text':
-                info[Token.MARKER_TYPE] = MarkerType.LIST_OF_LITERAL_TEXT
-                self._parse_list_of_literal_text(sample, info)
+                self._parse_list_of_literal_text(sample)
             elif marker_type == 'Numbers':
-                info[Token.MARKER_TYPE] = MarkerType.NUMBERS
-                self._parse_numbers(sample, info)
+                self._parse_numbers(sample)
 
-            self._parsed_samples[Token.SAMPLE_STRINGS_INFO].append(info)
+            self._insert_repeat_info(sample)
 
-    def _parse_literal_text(self, sample, info):
-        info[Token.MARKED_TEXT_STRINGS] = sample['markedStrings']
-        info[Token.MARKER_INFO] = []
-
+    def _parse_basic_characters(self, sample):
         marker_info = sample['markerInfo']
+        self._samples.parsed_samples.append(BasicCharactersInfo(marker_info))
+
+    def _parse_literal_text(self, sample):
+        marker_info = sample['markerInfo']
+
+        extra_info = []
         if marker_info['caseInsensitive']:
-            info[Token.MARKER_INFO].append(LiteralText.CASE_INSENSITIVE)
+            extra_info.append(LiteralText.CASE_INSENSITIVE)
         else:
-            info[Token.MARKER_INFO].append(LiteralText.CASE_SENSITIVE)
+            extra_info.append(LiteralText.CASE_SENSITIVE)
         
         if marker_info['matchAllExceptSpecified']:
-            info[Token.MARKER_INFO].append(LiteralText.MATCH_ALL_EXCEPT_SPECIFIED)
+            extra_info.append(LiteralText.MATCH_ALL_EXCEPT_SPECIFIED)
 
-        self._insert_repeat_info(sample, info)
+        self._samples.parsed_samples.append(LiteralTextInfo(sample['markedStrings'], extra_info))
 
-    def _parse_basic_characters(self, sample, info):
+    def _parse_digits(self, sample):
         marker_info = sample['markerInfo']
 
-        info[BasicCharacters.CASE_INSENSITIVE]           = marker_info['caseInsensitive']
-        info[BasicCharacters.LOWER_CASE_LETTERS]         = marker_info['lowerCaseLetters']
-        info[BasicCharacters.UPPER_CASE_LETTERS]         = marker_info['upperCaseLetters']
-        info[BasicCharacters.DIGITS]                     = marker_info['digits']
-        info[BasicCharacters.PUNCTUATION_AND_SYMBOLS]    = marker_info['punctuationAndSymbols']
-        info[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED] = marker_info['matchAllExceptSpecified']
-        info[BasicCharacters.WHITE_SPACE]                = marker_info['whiteSpace']
-        info[BasicCharacters.LINE_BREAKS]                = marker_info['lineBreaks']
-
-        individual_chars = marker_info['individualCharacters']
-        distinct_chars = ''.join(OrderedDict.fromkeys(re.sub(r'\s', '', individual_chars)))
-        info[BasicCharacters.INDIVIDUAL_CHARACTERS] = distinct_chars
-
-        self._insert_repeat_info(sample, info)
-
-    def _parse_digits(self, sample, info):
-        marker_info = sample['markerInfo']
-        info[Token.DIGITS] = []
+        digits_info = DigitsInfo()
         for i in marker_info:
             if i != 'minus' and marker_info[i]:
-                info[Token.DIGITS].append(number_to_enum_dict[i])
+                digits_info.digits.append(number_to_enum_dict[i])
             else:
                 minus_info = marker_info['minus']
-                info[Token.MINUS_INFO] = {
-                    Token.INCLUDE_MINUS         : minus_info['minus'],
-                    Token.INCLUDE_OPTIONAL_MINUS: minus_info['optional']
-                }
 
-        self._insert_repeat_info(sample, info)
+                digits_info.include_minus = minus_info['minus']
+                digits_info.include_optional_minus = minus_info['optional']
 
-    def _parse_control_characters(self, sample, info):
+        self._samples.parsed_samples.append(digits_info)
+
+    def _parse_control_characters(self, sample):
         marker_info = sample['markerInfo']
         match_all_except_spec = marker_info['matchAllExceptSelectedOnes']
 
@@ -121,11 +94,9 @@ class Parser:
             elif match_all_except_spec and not marker_info[control_char]:
                 wanted_control_chars.append(control_char_to_token[control_char])
 
-        info[Token.CONTROL_CHARACTERS] = wanted_control_chars
+        self._samples.parsed_samples.append(ControlCharactersInfo(wanted_control_chars))
 
-        self._insert_repeat_info(sample, info)
-
-    def _parse_unicode_characters(self, sample, info):
+    def _parse_unicode_characters(self, sample):
         marker_info = sample['markerInfo']
         match_all_except_spec = marker_info['matchAllExceptSelectedOnes']
 
@@ -136,68 +107,59 @@ class Parser:
             elif match_all_except_spec and not marker_info[unicode_char]:
                 wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
 
-        info[Token.UNICODE_CHARACTERS] = wanted_unicode_chars
-        info[Token.INDIVIDUAL_UNICODE_CHARS] = marker_info['individualCharacters'].split()
+        unicode_info = UnicodeCharactersInfo(wanted_unicode_chars,
+                                              marker_info['individualCharacters'].split())
 
-        self._insert_repeat_info(sample, info)
+        self._samples.parsed_samples.append(unicode_info)
 
-    def _parse_match_anything(self, sample, info):
+    def _parse_match_anything(self, sample):
         marker_info = sample['markerInfo']
+        match_anything_info = MatchAnythingInfo()
 
         match_anything_except = marker_info['matchAnythingExcept']
-
         if match_anything_except == 'Specific characters':
-            info[MatchAnything.SPECIFIC_CHARACTERS] = ''.join(set(marker_info['specificCharacters']))
+            match_anything_info.specific_characters = ''.join(set(marker_info['specificCharacters']))
         elif match_anything_except == 'Specific character':
-            info[MatchAnything.SPECIFIC_CHARACTER] = marker_info['specificCharacter'][0]
+            match_anything_info.specific_character = marker_info['specificCharacter'][0]
         elif match_anything_except == 'Nothing':
-            info[MatchAnything.NOTHING] = True
+            match_anything_info.nothing = True
         elif match_anything_except == 'Basic characters':
             basic_chars = marker_info['basicCharacters']
-            info[MatchAnything.BASIC_CHARACTERS] = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
+            match_anything_info.basic_characters = [basic_char_to_tok[i] for i in basic_chars.keys() if basic_chars[i]]
 
-        info[MatchAnything.CAN_SPAN_ACROSS_LINES] = marker_info['canSpanAcrossLines']
-        info[MatchAnything.CASE_INSENSITIVE] = marker_info['caseInsensitive']
+        match_anything_info.can_span_across_lines = marker_info['canSpanAcrossLines']
+        match_anything_info.case_insensitive = marker_info['caseInsensitive']
 
-        self._insert_repeat_info(sample, info)
+        self._samples.parsed_samples.append(match_anything_info)
 
-    def _parse_list_of_literal_text(self, sample, info):
+    def _parse_list_of_literal_text(self, sample):
         marker_info = sample['markerInfo']
+        self._samples.parsed_samples.append(ListOfLiteralTextInfo(marker_info['matchAnythingExceptSpecified'],
+                                                                  marker_info['literalText'],
+                                                                  marker_info['caseInsensitive']))
 
-        info[ListOfLiteralText.MATCH_ANYTHING_EXCEPT_SPECFIED] = marker_info['matchAnythingExceptSpecified']
-        info[ListOfLiteralText.LITERAL_TEXT] = marker_info['literalText']
-        info[ListOfLiteralText.CASE_INSENSITIVE] = marker_info['caseInsensitive']
-
-        self._insert_repeat_info(sample, info)
-
-    def _parse_numbers(self, sample, info):
+    def _parse_numbers(self, sample):
         marker_info = sample['markerInfo']
-
-        info[Numbers.MODEL] = NumbersInfo(marker_info)
-
-        self._insert_repeat_info(sample, info)
+        self._samples.parsed_samples.append(NumbersInfo(marker_info))
 
     def _parse_general_regex_info(self, regex_info):
-        self._parsed_samples[Token.GENERAL_REGEX_INFO] = {
-            Token.TARGET : language_to_tok[regex_info['regexTarget']],
-            Token.REGEX_START_INFO: regex_start_info_to_tok[regex_info['startRegexMatchAt']],
-            Token.REGEX_END_INFO  : regex_end_info_to_tok[regex_info['endRegexMatchAt']]
-        }
+        gen_re_info = regex_info['generalRegexInfo']
 
-    @staticmethod
-    def _insert_repeat_info(samples, info):
-        repeat_info = samples['repeatInfo']['repeat']
+        self._samples.target     = regex_info_to_tok[gen_re_info['regexTarget']]
+        self._samples.start_info = regex_info_to_tok[gen_re_info['startRegexMatchAt']]
+        self._samples.end_info   = regex_info_to_tok[gen_re_info['endRegexMatchAt']]
+
+    def _insert_repeat_info(self, sample):
+        repeat_info = sample['repeatInfo']['repeat']
+
+        curr = self._samples.parsed_samples[-1].repetition_info
 
         if repeat_info == 'Custom range':
-            info[Token.REPEAT_INFO] = RepeatInfo.CUSTOM_RANGE
-            info[Token.REPEAT_RANGE] = {
-                Token.REPEAT_START: int(samples['repeatInfo']['start']),
-                Token.REPEAT_END: int(samples['repeatInfo']['end']),
-            }
+            curr.repeat_info = Repetition.CUSTOM_RANGE
+            curr.repeat_start = int(sample['repeatInfo']['start'])
+            curr.repeat_end = int(sample['repeatInfo']['end'])
         elif repeat_info == 'n or more times':
-            info[Token.REPEAT_INFO] = RepeatInfo.N_OR_MORE_TIMES
-            info[Token.REPEAT_RANGE] = {
-                Token.REPEAT_START: int(samples['repeatInfo']['start'])
-            }
+            curr.repeat_info = Repetition.N_OR_MORE_TIMES
+            curr.repeat_start = int(sample['repeatInfo']['start'])
         else:
-            info[Token.REPEAT_INFO] = repeat_info_to_enum[repeat_info]
+            curr.repeat_info = repeat_info_to_enum[repeat_info]

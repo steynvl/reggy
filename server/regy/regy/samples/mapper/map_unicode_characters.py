@@ -1,12 +1,12 @@
 from collections import deque
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
-from regy.samples.tokens import Token
+from regy.samples.models.unicode_characters_info import UnicodeCharactersInfo
 from regy.samples.tokens.unicode_characters import unicode_char_to_re
 
 
 class MapUnicodeCharacters:
 
-    def __init__(self, info, target_lang):
+    def __init__(self, info: UnicodeCharactersInfo, target_lang):
         self._info = info
         self._target_lang = target_lang
         self._re = deque()
@@ -17,8 +17,8 @@ class MapUnicodeCharacters:
 
     def _map_info(self):
         char_to_re = unicode_char_to_re[self._target_lang]
-        unicode_chars = self._info[Token.UNICODE_CHARACTERS]
-        individual = self._info[Token.INDIVIDUAL_UNICODE_CHARS]
+        unicode_chars = self._info.unicode_characters
+        individual = self._info.individual_unicode_chars
 
         if len(unicode_chars) + len(individual) == 0:
             return

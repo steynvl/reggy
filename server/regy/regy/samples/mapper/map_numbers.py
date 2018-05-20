@@ -3,14 +3,13 @@ import re
 
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.numbers_info import NumbersInfo
-from regy.samples.tokens.numbers import Numbers
 from regy.samples.utils.numbers_helper import const_to_re
 from regy.samples.utils.numeric_range_generator import NumericRangeGenerator
 
 
 class MapNumbers:
 
-    def __init__(self, info, target_lang):
+    def __init__(self, info: NumbersInfo, target_lang):
         self._currency_codes = re.compile(r'^[A-Z]{3}(?:;[A-Z]{3})*$')
         self._info = info
         self._target_lang = target_lang
@@ -22,7 +21,7 @@ class MapNumbers:
         return self._re
 
     def _map_info(self):
-        numbers = self._info[Numbers.MODEL]
+        numbers = self._info
         contains_currency = False
 
         if numbers.currency_sign != 'None' \

@@ -1,19 +1,19 @@
-from regy.samples.tokens.repeat_info import RepeatInfo
+from regy.samples.tokens.repetition import Repetition
 
 repeat_info_map = {
-    RepeatInfo.CUSTOM_RANGE   : '{{{},{}}}',
-    RepeatInfo.ZERO_OR_ONE    : '?',
-    RepeatInfo.ZERO_OR_MORE   : '*',
-    RepeatInfo.ONE_OR_MORE    : '+',
-    RepeatInfo.ONE            : '',
-    RepeatInfo.TWO            : '{2}',
-    RepeatInfo.THREE          : '{3}',
-    RepeatInfo.FOUR           : '{4}',
-    RepeatInfo.FIVE           : '{5}',
-    RepeatInfo.SIX            : '{6}',
-    RepeatInfo.SEVEN          : '{7}',
-    RepeatInfo.EIGHT          : '{8}',
-    RepeatInfo.NINE           : '{9}',
-    RepeatInfo.TEN            : '{10}',
-    RepeatInfo.N_OR_MORE_TIMES: '{{{},}}'
+    Repetition.CUSTOM_RANGE   : '{{{},{}}}',
+    Repetition.ZERO_OR_ONE    : '?',
+    Repetition.ZERO_OR_MORE   : '*',
+    Repetition.ONE_OR_MORE    : '+',
+    Repetition.ONE            : '',
+    Repetition.TWO            : '{2}',
+    Repetition.THREE          : '{3}',
+    Repetition.FOUR           : '{4}',
+    Repetition.FIVE           : '{5}',
+    Repetition.SIX            : '{6}',
+    Repetition.SEVEN          : '{7}',
+    Repetition.EIGHT          : '{8}',
+    Repetition.NINE           : '{9}',
+    Repetition.TEN            : '{10}',
+    Repetition.N_OR_MORE_TIMES: '{{{},}}'
 }

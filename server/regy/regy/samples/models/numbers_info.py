@@ -1,3 +1,6 @@
+from regy.samples.parser.repetition_info import RepetitionInfo
+
+
 class NumbersInfo:
 
    def __init__(self, info):
@@ -20,3 +23,5 @@ class NumbersInfo:
        self.require_integer_part             = info['requireIntegerPart']
        self.allow_exponent                   = info['allowExponent']
        self.currency_sign_or_code_required   = info['currencySignOrCodeRequired']
+
+       self.repetition_info = RepetitionInfo()
