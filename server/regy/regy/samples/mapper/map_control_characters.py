@@ -1,8 +1,8 @@
 from collections import deque
 
+from regy.samples.constants.control_characters import control_char_to_re
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.control_characters_info import ControlCharactersInfo
-from regy.samples.tokens.control_characters import control_char_to_re
 
 
 class MapControlCharacters:

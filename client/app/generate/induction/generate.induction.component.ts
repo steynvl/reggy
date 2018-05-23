@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../../shared/toast/toast.component';
-
 import { GenerateInductionService } from '../../services/generate.induction.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-generate-induction',
   templateUrl: './generate.induction.component.html',
   styleUrls: ['./generate.induction.component.css']
 })
-export class GenerateInductionComponent {
+export class GenerateInductionComponent implements OnInit {
 
   // generatedRegex: string;
   // generalRegexInfo: GeneralRegexInfo;
 
   constructor(private generateService: GenerateInductionService,
-              public toast: ToastComponent) {
+              public toast: ToastComponent,
+              private titleService: Title) {
+  }
+
+
+  ngOnInit() {
+    this.titleService.setTitle('Induction | Reggy');
   }
 
   // generateRegex() {

@@ -7,14 +7,15 @@ from regy.samples.models.match_anything_info import MatchAnythingInfo
 from regy.samples.models.numbers_info import NumbersInfo
 from regy.samples.models.unicode_characters_info import UnicodeCharactersInfo
 from regy.samples.parser.samples import Samples
-from regy.samples.tokens.control_characters import control_char_to_token, control_chars
-from regy.samples.tokens.match_anything import basic_char_to_tok
+from regy.samples.constants.control_characters import control_char_to_token, control_chars
+from regy.samples.constants.match_anything import basic_char_to_tok
 from regy.samples.tokens.repetition import Repetition
-from regy.samples.tokens import LiteralText
-from regy.samples.tokens.unicode_characters import unicode_chars, unicode_char_to_token
+from regy.samples.tokens import LiteralTextTok
+from regy.samples.constants.unicode_characters import unicode_chars, unicode_char_to_token
 from regy.samples.utils.regex_info_to_tok import regex_info_to_tok
-from regy.samples.utils.repeat_info_to_enum import repeat_info_to_enum
-from regy.samples.utils.number_to_enum import number_to_enum_dict
+from regy.samples.utils.repetition_info_to_enum import repetition_info_to_enum
+from regy.samples.utils.digit_to_enum import digit_to_enum
+
 
 class Parser:
 
@@ -59,12 +60,12 @@ class Parser:
 
         extra_info = []
         if marker_info['caseInsensitive']:
-            extra_info.append(LiteralText.CASE_INSENSITIVE)
+            extra_info.append(LiteralTextTok.CASE_INSENSITIVE)
         else:
-            extra_info.append(LiteralText.CASE_SENSITIVE)
+            extra_info.append(LiteralTextTok.CASE_SENSITIVE)
         
         if marker_info['matchAllExceptSpecified']:
-            extra_info.append(LiteralText.MATCH_ALL_EXCEPT_SPECIFIED)
+            extra_info.append(LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED)
 
         self._samples.parsed_samples.append(LiteralTextInfo(sample['markedStrings'], extra_info))
 
@@ -74,7 +75,7 @@ class Parser:
         digits_info = DigitsInfo()
         for i in marker_info:
             if i != 'minus' and marker_info[i]:
-                digits_info.digits.append(number_to_enum_dict[i])
+                digits_info.digits.append(digit_to_enum[i])
             else:
                 minus_info = marker_info['minus']
 
@@ -162,4 +163,4 @@ class Parser:
             curr.repeat_info = Repetition.N_OR_MORE_TIMES
             curr.repeat_start = int(sample['repeatInfo']['start'])
         else:
-            curr.repeat_info = repeat_info_to_enum[repeat_info]
+            curr.repeat_info = repetition_info_to_enum[repeat_info]

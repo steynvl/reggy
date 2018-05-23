@@ -1,4 +1,3 @@
-from regy.samples.mapper import meta_characters
 from regy.samples.mapper.map_literal_text import MapLiteralText
 from regy.samples.mapper.map_digits import MapDigits
 from regy.samples.mapper.map_basic_characters import MapBasicCharacters

@@ -1,6 +1,6 @@
 from collections import deque
 import re
-from regy.samples.mapper.meta_characters import meta_characters
+from regy.samples.constants.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.list_of_literal_text_info import ListOfLiteralTextInfo
 from regy.samples.tokens.case_state import CaseSensitive

@@ -3,8 +3,8 @@ import re
 
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.numbers_info import NumbersInfo
-from regy.samples.utils.numbers_helper import const_to_re
-from regy.samples.utils.numeric_range_generator import NumericRangeGenerator
+from regy.samples.constants.numbers import const_to_re
+from regy.samples.utils.numeric_range import NumericRange
 
 
 class MapNumbers:
@@ -76,24 +76,7 @@ class MapNumbers:
         self._re.append(repeat_info)
 
     def _build_limited_integer_part(self, start, end):
-        regex = []
-        if start >= 0 and end >= 0:
-            regex.append(NumericRangeGenerator(start, end, insert_minus=False).get_regex())
-
-        elif start < 0 and end >= 0:
-            regex.append(NumericRangeGenerator(1, abs(start), insert_minus=True).get_regex())
-            if end == 0:
-                regex.append('0')
-            else:
-                regex.append(NumericRangeGenerator(0, end, insert_minus=False).get_regex())
-
-        else:
-            regex.append(NumericRangeGenerator(abs(end), abs(start), insert_minus=True).get_regex())
-
-        if len(regex) == 1:
-            self._re.append('|'.join(regex))
-        else:
-            self._re.append('(?:{})'.format('|'.join(regex)))
+        self._re.append(NumericRange(start, end).get_re())
 
     def _build_currency(self, numbers_info: NumbersInfo):
         currs = deque()

@@ -16,6 +16,7 @@ import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text
 import { Numbers } from '../../models/marker-info/numbers';
 import { RepeatInfo } from '../../models/marker-info/repeat-info';
 import { GeneratedRegex } from '../../models/generated-regex';
+import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
@@ -52,9 +53,12 @@ export class GenerateSamplesComponent implements OnInit {
   markerTabIndex = 0;
 
   constructor(private generateService: GenerateSamplesService,
-              public toast: ToastComponent) { }
+              public toast: ToastComponent,
+              private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Samples and Semantics | Reggy');
+
     this.generalRegexInfo = {
       startRegexMatchAt: 'Anywhere',
       endRegexMatchAt  : 'Anywhere',
@@ -611,7 +615,7 @@ export class GenerateSamplesComponent implements OnInit {
     if (info.currencySignOrCodeRequired && info.currencySign === 'None' && info.currencyCodes.trim() === '') {
       return false;
     }
-    
+
     return true;
   }
 

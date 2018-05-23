@@ -22,8 +22,8 @@ from regy.common.password.password import Password
 from regy.common.url.url import Url
 from regy.common.username import Username
 from regy.common.vat_number.vat_number import VatNumber
-from regy.samples.mapper.end_info_to_target import end_info_to_target
-from regy.samples.mapper.start_info_to_target import start_info_to_target
+from regy.samples.constants.end_info_to_target import end_info_to_target
+from regy.samples.constants.start_info_to_target import start_info_to_target
 from regy.samples.tokens import Target
 from regy.samples.utils.regex_info_to_tok import regex_info_to_tok
 

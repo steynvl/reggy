@@ -1,9 +1,9 @@
 from collections import deque
 import re
-from regy.samples.mapper.meta_characters import meta_characters
+from regy.samples.constants.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.literal_text_info import LiteralTextInfo
-from regy.samples.tokens import LiteralText
+from regy.samples.tokens import LiteralTextTok
 from regy.samples.tokens.case_state import CaseSensitive
 from regy.samples.tokens.repetition import Repetition
 from regy.samples.utils.factorizer import Factorizer
@@ -28,23 +28,23 @@ class MapLiteralText:
         if len(escaped_strings) == 1:
             esc_string = escaped_strings[0]
             if len(esc_string) > 1 and esc_string[0] != '\\' and self._info.repetition_info.repeat_info != Repetition.ONE:
-                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
+                if LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                     self._re.extend(['(?!', esc_string, ')'])
                 else:
                     self._re.extend(['(?:', esc_string, ')'])
             else:
-                if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
+                if LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                     self._re.append('(?!{})'.format(esc_string))
                 else:
                     self._re.append(esc_string)
         else:
             factorized_re = Factorizer(escaped_strings).get_re()
-            if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
+            if LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
                 self._re.append('(?!{})'.format(factorized_re))
             else:
                 self._re.append(factorized_re)
 
-        if LiteralText.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
+        if LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED in extra_info:
             self._re.append('.')
 
         repeat_info = repeat_info_to_regex(self._info)
@@ -53,7 +53,7 @@ class MapLiteralText:
         self._add_case_state(escaped_strings)
 
     def _add_case_state(self, escaped_strings):
-        if LiteralText.CASE_INSENSITIVE in self._info.extra_info:
+        if LiteralTextTok.CASE_INSENSITIVE in self._info.extra_info:
             if not self._case_state['case'] == CaseSensitive.OFF:
                 self._re.appendleft('(?i)')
                 self._case_state['case'] = CaseSensitive.OFF

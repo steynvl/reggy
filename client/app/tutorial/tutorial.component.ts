@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tutorial',
@@ -7,11 +8,14 @@ import { Router } from '@angular/router'
 })
 export class TutorialComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private titleService: Title) { }
 
     ngOnInit(): void {
+      this.titleService.setTitle('Tutorial | Reggy');
+
         // TODO remove, was just testing injecting router
-        this.router.navigate(['/tutorial']);    
+        this.router.navigate(['/tutorial']);
     }
 
 }

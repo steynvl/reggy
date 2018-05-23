@@ -1,5 +1,6 @@
 import os
 
+
 class Factorizer:
 
     def __init__(self, strings: list):

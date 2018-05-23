@@ -15,8 +15,9 @@ class Regy:
 
     def _calculate_regex(self):
         gen_method = self._samples['generateMethod']
+
         if gen_method == 'samplesAndSemantics':
-            self._re =  SamplesAndSemantics(self._samples).get_re()
+            self._re = SamplesAndSemantics(self._samples).get_re()
         elif gen_method == 'commonUseCases':
             self._re = CommonUseCases(self._samples).get_re()
         elif gen_method == 'induction':

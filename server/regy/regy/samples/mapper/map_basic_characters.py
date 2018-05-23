@@ -1,9 +1,11 @@
 from collections import deque
 import re
-from regy.samples.mapper.meta_characters import meta_characters
+
+from regy.samples.constants.basic_characters import basic_characters_to_re
+from regy.samples.constants.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.basic_characters_info import BasicCharactersInfo
-from regy.samples.tokens.basic_characters import BasicCharacters, basic_characters_to_re
+from regy.samples.tokens.basic_characters_tok import BasicCharactersTok
 from regy.samples.tokens.case_state import CaseSensitive
 
 
@@ -25,22 +27,22 @@ class MapBasicCharacters:
         basic_char_to_re = basic_characters_to_re[self._target_lang]
         if self._info.upper_case_letters:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.UPPER_CASE_LETTERS])
+            self._re.append(basic_char_to_re[BasicCharactersTok.UPPER_CASE_LETTERS])
         if self._info.lower_case_letters:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.LOWER_CASE_LETTERS])
+            self._re.append(basic_char_to_re[BasicCharactersTok.LOWER_CASE_LETTERS])
         if self._info.digits:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.DIGITS])
+            self._re.append(basic_char_to_re[BasicCharactersTok.DIGITS])
         if self._info.punctuation_and_symbols:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.PUNCTUATION_AND_SYMBOLS])
+            self._re.append(basic_char_to_re[BasicCharactersTok.PUNCTUATION_AND_SYMBOLS])
         if self._info.white_space:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.WHITE_SPACE])
+            self._re.append(basic_char_to_re[BasicCharactersTok.WHITE_SPACE])
         if self._info.line_breaks:
             found += 1
-            self._re.append(basic_char_to_re[BasicCharacters.LINE_BREAKS])
+            self._re.append(basic_char_to_re[BasicCharactersTok.LINE_BREAKS])
         
         individual_chars = self._info.individual_chars
         
@@ -50,7 +52,7 @@ class MapBasicCharacters:
 
         enclose = False
         if self._info.match_all_except_specified:
-            self._re.appendleft(basic_char_to_re[BasicCharacters.MATCH_ALL_EXCEPT_SPECIFIED])
+            self._re.appendleft(basic_char_to_re[BasicCharactersTok.MATCH_ALL_EXCEPT_SPECIFIED])
             enclose = True
         elif found == 1 and (self._info.upper_case_letters
                                 or self._info.lower_case_letters):

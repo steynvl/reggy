@@ -1,5 +1,3 @@
-
-
 class RepetitionInfo:
 
     def __init__(self):

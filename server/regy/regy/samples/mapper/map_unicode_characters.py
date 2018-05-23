@@ -1,7 +1,7 @@
 from collections import deque
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.unicode_characters_info import UnicodeCharactersInfo
-from regy.samples.tokens.unicode_characters import unicode_char_to_re
+from regy.samples.constants.unicode_characters import unicode_char_to_re
 
 
 class MapUnicodeCharacters:

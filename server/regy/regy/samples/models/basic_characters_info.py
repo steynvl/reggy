@@ -1,6 +1,5 @@
 import re
 from collections import OrderedDict
-
 from regy.samples.parser.repetition_info import RepetitionInfo
 
 

@@ -1,5 +1,5 @@
 from regy.samples.tokens.repetition import Repetition
-from regy.samples.mapper.map_repeat_info import repeat_info_map
+from regy.samples.constants.map_repeat_info import repeat_info_map
 
 def repeat_info_to_regex(info):
     repeat_info = info.repetition_info.repeat_info

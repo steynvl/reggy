@@ -1,10 +1,11 @@
 from collections import deque
 import re
-from regy.samples.mapper.meta_characters import meta_characters
+from regy.samples.constants.meta_characters import meta_characters
 from regy.samples.mapper.repeat_helper import repeat_info_to_regex
 from regy.samples.models.match_anything_info import MatchAnythingInfo
 from regy.samples.tokens.case_state import CaseSensitive
-from regy.samples.tokens.match_anything import MatchAnything, basic_char_to_re, can_span_across_lines
+from regy.samples.tokens.match_anything_tok import MatchAnythingTok
+from regy.samples.constants.match_anything import basic_char_to_re, can_span_across_lines
 
 
 class MapMatchAnything:
@@ -49,12 +50,12 @@ class MapMatchAnything:
                 self._re.append('.')
                 enclose_in_brackets = False
 
-            case_does_apply = MatchAnything.LOWER_CASE_LETTERS in self._info.basic_characters \
-                              or MatchAnything.UPPER_CASE_LETTERS in self._info.basic_characters
+            case_does_apply = MatchAnythingTok.LOWER_CASE_LETTERS in self._info.basic_characters \
+                              or MatchAnythingTok.UPPER_CASE_LETTERS in self._info.basic_characters
 
             basic_to_re = basic_char_to_re[self._target_lang]
             self._re.append(''.join([basic_to_re[i] for i in self._info.basic_characters]))
-            if self._info.can_span_across_lines and MatchAnything.LINE_BREAKS not in self._info.basic_characters:
+            if self._info.can_span_across_lines and MatchAnythingTok.LINE_BREAKS not in self._info.basic_characters:
                 self._re.append(can_span_across_lines[self._target_lang])
 
         if enclose_in_brackets:
@@ -81,7 +82,6 @@ class MapMatchAnything:
                 self._case_state['case'] = CaseSensitive.ON
 
             self._case_state['canUseCaseInsensitiveFlag'] = False
-
 
     def _escape_special_characters(self, string):
         meta_chars = meta_characters[self._target_lang]
