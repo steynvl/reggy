@@ -4,18 +4,24 @@
     <div class="form-group">
       <label for="min-value">Minimum value of integer part:</label>
       <input type="number" class="form-control" id="min-value" placeholder="" [(ngModel)]="numbers.minValOfIntPart"
-      [ngClass]="{
+             [ngClass]="{
         'is-invalid': !isValidIntegerParts()
         }"
       >
+
+      <small class="text-danger" *ngIf="err && err.integerPart">
+        {{ err.integerPart }}
+      </small>
+
     </div>
+
   </div>
 
   <div class="col-sm-6">
     <div class="form-group">
       <label for="max-value">Maximum value of integer part:</label>
       <input type="number" class="form-control" id="max-value" placeholder="" [(ngModel)]="numbers.maxValOfIntPart"
-      [ngClass]="{
+             [ngClass]="{
         'is-invalid': !isValidIntegerParts()
         }"
       >
@@ -38,19 +44,32 @@
   <div class="col-sm-3">
     <label for="min-nr-of-decimals">Min. nr of decimals</label>
     <input id="min-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.minNrOfDecimals"
-    [ngClass]="{
+           [ngClass]="{
       'is-invalid': !isValidNrOfDecimals()
       }"
     >
+
   </div>
 
   <div class="col-sm-3">
     <label for="max-nr-of-decimals">Max. nr of decimals</label>
     <input id="max-nr-of-decimals" class="form-control" type="number" [(ngModel)]="numbers.maxNrOfDecimals"
-    [ngClass]="{
+           [ngClass]="{
       'is-invalid': !isValidNrOfDecimals()
       }"
     >
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6"></div>
+
+  <div class="col-sm-6">
+    <small class="text-danger" *ngIf="err && err.decimalPart">
+      {{ err.decimalPart }}
+    </small>
   </div>
 
 </div>
@@ -66,6 +85,11 @@
       <option>Quote</option>
       <option>Space</option>
     </select>
+
+    <small class="text-danger" *ngIf="err && err.thousandSeparator">
+      {{ err.thousandSeparator }}
+    </small>
+
   </div>
 
   <div class="col-sm-6">
@@ -92,13 +116,23 @@
       <option>Pound</option>
       <option>Universal</option>
     </select>
+
+    <small class="text-danger" *ngIf="err && err.currencySignOrCode">
+      {{ err.currencySignOrCode }}
+    </small>
+
   </div>
 
   <div class="col-sm-6">
     <label for="currency-codes">Currency codes:</label>
-    <input type="text" class="form-control"
+    <input id="currency-codes" type="text" class="form-control"
            placeholder="Currency codes separated by semicolons"
            [(ngModel)]="numbers.currencyCodes">
+
+
+    <small class="text-danger" *ngIf="err && err.currencyCodes">
+      {{ err.currencyCodes }}
+    </small>
 
   </div>
 
@@ -170,6 +204,7 @@
                (change)="numbers.thousandSeparatorsAreRequired = !numbers.thousandSeparatorsAreRequired">
         Thousand separators are required
       </label>
+
     </div>
   </div>
   <div class="col-sm-3">

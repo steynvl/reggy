@@ -73,12 +73,12 @@
       <div class="col-sm-1">
 
         <div class="right-allign">
-        
+
           <label class="btn btn-outline-primary" for="my-file-selector">
             <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
             Upload file
           </label>
-          
+
         </div>
 
       </div>
@@ -185,40 +185,44 @@
 
               <app-basic-characters-info
                 *ngIf="markedElement.fieldType === 'Basic characters'"
-                [basicCharacters]="basicCharacters">
+                [basicCharacters]="basicCharacters"
+                [err]="markedElement.error">
               </app-basic-characters-info>
 
               <app-digits-info
                 *ngIf="markedElement.fieldType === 'Digits'"
-                [digits]="digits">
+                [digits]="digits"
+                [err]="markedElement.error">
               </app-digits-info>
 
               <app-control-characters-info
                 *ngIf="markedElement.fieldType === 'Control characters'"
-                [controlCharacters]="controlCharacters">
+                [controlCharacters]="controlCharacters"
+                [err]="markedElement.error">
               </app-control-characters-info>
 
               <app-unicode-characters-info
                 *ngIf="markedElement.fieldType === 'Unicode characters'"
-                [unicodeCharacters]="unicodeCharacters">
+                [unicodeCharacters]="unicodeCharacters"
+                [err]="markedElement.error">
               </app-unicode-characters-info>
 
               <app-match-anything-info
                 *ngIf="markedElement.fieldType === 'Match anything'"
                 [matchAnything]="matchAnything"
-              >
+                [err]="markedElement.error">
               </app-match-anything-info>
 
               <app-list-of-literal-text-info
                 *ngIf="markedElement.fieldType === 'List of literal text'"
                 [listOfLiteralText]="listOfLiteralText"
-              >
+                [err]="markedElement.error">
               </app-list-of-literal-text-info>
 
               <app-numbers-info
                 *ngIf="markedElement.fieldType === 'Numbers'"
                 [numbers]="numbers"
-              >
+                [err]="markedElement.error">
               </app-numbers-info>
 
             </div>

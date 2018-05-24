@@ -15,6 +15,7 @@ import { GenerateInductionComponent } from './generate/induction/generate.induct
 import { GenerateSamplesService } from './services/generate.samples.service';
 import { GenerateCommonService } from './services/generate.common.service';
 import { GenerateInductionService } from './services/generate.induction.service';
+import { VerificationService } from './services/verification.service';
 
 import { LiteralTextInfoComponent } from './samples-components/literal-text-info/literal-text-info.component';
 import { BasicCharacterInfoComponent } from './samples-components/basic-characters-info/basic-characters-info.component';
@@ -99,7 +100,8 @@ export function tokenGetter() {
   ],
   providers: [GenerateSamplesService,
               GenerateCommonService,
-              GenerateInductionService
+              GenerateInductionService,
+              VerificationService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

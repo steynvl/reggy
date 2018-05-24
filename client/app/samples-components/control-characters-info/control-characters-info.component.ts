@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ControlCharacters } from '../../models/marker-info/control-characters';
+import { ControlCharacters } from '../../models/samples/control-characters';
+import { ControlCharactersErr } from '../../models/samples/control-characters-err';
 
 @Component({
   selector: 'app-control-characters-info',
@@ -9,5 +10,6 @@ import { ControlCharacters } from '../../models/marker-info/control-characters';
 export class ControlCharactersInfoComponent {
 
   @Input() controlCharacters: ControlCharacters;
+  @Input() err: ControlCharactersErr;
 
 }

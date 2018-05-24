@@ -1,5 +1,17 @@
 <div class="row">
 
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-10">
+    <small class="text-danger" *ngIf="err.msg && listOfLiteralText.literalText[0] === ''">
+      {{ err.msg }}
+    </small>
+  </div>
+
+</div>
+
+<div class="row">
+
   <div class="col-sm-2">
     <div class="form-check">
       <label class="form-check-label">
@@ -33,6 +45,18 @@
       <i class="fa fa-plus"></i>
     </button>
 
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-10">
+    <small class="text-danger" *ngIf="err.msg && listOfLiteralText.literalText[1] === ''">
+      {{ err.msg }}
+    </small>
   </div>
 
 </div>
@@ -76,15 +100,27 @@
 
 </div>
 
-<div *ngFor="let idx of inputFields">
+        <div *ngFor="let idx of inputFields">
 
-  <div *ngIf="idx > 1">
+          <div *ngIf="idx > 1">
 
-    <div class="row">
+            <div class="row">
 
-      <div class="col-sm-2"></div>
+              <div class="col-sm-2"></div>
 
-      <div class="col-sm-9">
+              <div class="col-sm-10">
+                <small class="text-danger" *ngIf="err.msg && listOfLiteralText.literalText[idx] === ''">
+                  {{ err.msg }}
+                </small>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-2"></div>
+
+              <div class="col-sm-9">
 
         <div class="form-group">
 

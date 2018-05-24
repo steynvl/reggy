@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Username } from '../../models/common-use-case-models/username';
+import { Username } from '../../models/common-use-cases/username';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';

@@ -1,15 +1,15 @@
 import { GeneralRegexInfo } from '../general-regex-info';
-import { Username } from '../common-use-case-models/username';
-import { Password } from '../common-use-case-models/password';
-import { Email } from '../common-use-case-models/email';
-import { Url } from '../common-use-case-models/url';
-import { Guid } from '../common-use-case-models/guid';
-import { CreditCardNumber } from '../common-use-case-models/credit-card-number';
-import { NationalId } from '../common-use-case-models/national-id';
-import { VatNumber } from '../common-use-case-models/vat-number';
-import { Ipv4Address } from '../common-use-case-models/ipv4-address';
-import { Currency } from '../common-use-case-models/currency';
-import { DateAndTime } from '../common-use-case-models/date-and-time';
+import { Username } from '../common-use-cases/username';
+import { Password } from '../common-use-cases/password';
+import { Email } from '../common-use-cases/email';
+import { Url } from '../common-use-cases/url';
+import { Guid } from '../common-use-cases/guid';
+import { CreditCardNumber } from '../common-use-cases/credit-card-number';
+import { NationalId } from '../common-use-cases/national-id';
+import { VatNumber } from '../common-use-cases/vat-number';
+import { Ipv4Address } from '../common-use-cases/ipv4-address';
+import { Currency } from '../common-use-cases/currency';
+import { DateAndTime } from '../common-use-cases/date-and-time';
 
 export class PayloadCommon {
 

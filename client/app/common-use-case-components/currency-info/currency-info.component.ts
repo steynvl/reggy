@@ -5,7 +5,7 @@ import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { currencies } from './currencies';
 import { DataTable, DataTableTranslations, DataTableResource } from 'angular5-data-table';
-import { Currency } from '../../models/common-use-case-models/currency';
+import { Currency } from '../../models/common-use-cases/currency';
 import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({

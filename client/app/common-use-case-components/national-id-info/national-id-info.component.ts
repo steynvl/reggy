@@ -3,7 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
-import { NationalId } from '../../models/common-use-case-models/national-id';
+import { NationalId } from '../../models/common-use-cases/national-id';
 import { GeneratedRegex } from '../../models/generated-regex';
 
 @Component({

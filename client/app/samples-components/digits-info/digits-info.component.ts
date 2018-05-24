@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Digits } from '../../models/marker-info/digits';
+import { Digits } from '../../models/samples/digits';
+import { DigitsErr } from '../../models/samples/digits-err';
 
 @Component({
   selector: 'app-digits-info',
@@ -9,6 +10,7 @@ import { Digits } from '../../models/marker-info/digits';
 export class DigitsInfoComponent {
 
   @Input() digits: Digits;
+  @Input() err: DigitsErr;
 
   ticked(type: string) {
     if (type === 'minus' && this.digits.minus.optional) {

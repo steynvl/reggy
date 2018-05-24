@@ -3,7 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
-import { Url } from '../../models/common-use-case-models/url';
+import { Url } from '../../models/common-use-cases/url';
 import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;

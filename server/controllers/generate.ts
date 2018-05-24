@@ -23,7 +23,10 @@ export default class GenerateCtrl extends BaseCtrl {
     py.on('close', (code) => {
       res.setHeader('Content-Type', 'application/json');
 
-      const deserialized = JSON.parse(output);
+      let deserialized;
+      if (code === 0) {
+        deserialized = JSON.parse(output);
+      }
 
       const serverResponse: ServerResponse = {
         regex        : deserialized.regex,

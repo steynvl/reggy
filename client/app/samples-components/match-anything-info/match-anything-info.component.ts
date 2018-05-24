@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MatchAnything } from '../../models/marker-info/match-anything';
+import { MatchAnything } from '../../models/samples/match-anything';
+import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 
 @Component({
   selector: 'app-match-anything-info',
@@ -9,5 +10,6 @@ import { MatchAnything } from '../../models/marker-info/match-anything';
 export class MatchAnythingInfoComponent {
 
   @Input() matchAnything: MatchAnything;
+  @Input() err: MatchAnythingErr;
 
 }
