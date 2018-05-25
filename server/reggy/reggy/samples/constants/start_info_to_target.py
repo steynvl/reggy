@@ -1,0 +1,29 @@
+from reggy.samples.tokens import Target, RegexExtraInfo
+
+start_info_to_target = {
+
+    Target.JAVA: {
+        RegexExtraInfo.ANYWHERE        : '',
+        RegexExtraInfo.START_OF_TEXT   : '\\\\b',
+        RegexExtraInfo.START_OF_LINE   : '^',
+        RegexExtraInfo.START_OF_WORD   : '\\\\b',
+        RegexExtraInfo.START_OF_ATTEMPT: '\\\\G'
+    },
+
+    Target.PERL: {
+        RegexExtraInfo.ANYWHERE        : '',
+        RegexExtraInfo.START_OF_TEXT   : '\\b',
+        RegexExtraInfo.START_OF_LINE   : '^',
+        RegexExtraInfo.START_OF_WORD   : '\\b',
+        RegexExtraInfo.START_OF_ATTEMPT: '\\G'
+    },
+
+    Target.POSIX: {
+        RegexExtraInfo.ANYWHERE        : '',
+        RegexExtraInfo.START_OF_TEXT   : '\\b',
+        RegexExtraInfo.START_OF_LINE   : '^',
+        RegexExtraInfo.START_OF_WORD   : '\\b',
+        RegexExtraInfo.START_OF_ATTEMPT: '\\G'
+    }
+
+}

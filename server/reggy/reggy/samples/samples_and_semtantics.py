@@ -1,0 +1,85 @@
+from collections import deque
+from reggy.samples import mapper
+from reggy.samples.constants.end_info_to_target import end_info_to_target
+from reggy.samples.constants.start_info_to_target import start_info_to_target
+from reggy.samples.models.basic_characters_info import BasicCharactersInfo
+from reggy.samples.models.control_characters_info import ControlCharactersInfo
+from reggy.samples.models.digits_info import DigitsInfo
+from reggy.samples.models.list_of_literal_text_info import ListOfLiteralTextInfo
+from reggy.samples.models.literal_text_info import LiteralTextInfo
+from reggy.samples.models.match_anything_info import MatchAnythingInfo
+from reggy.samples.models.numbers_info import NumbersInfo
+from reggy.samples.models.unicode_characters_info import UnicodeCharactersInfo
+from reggy.samples.parser.parser import Parser
+from reggy.samples.tokens import Target
+from reggy.samples.tokens.case_state import CaseSensitive
+
+
+class SamplesAndSemantics:
+
+    def __init__(self, samples):
+        self._samples = samples
+        self._re = None
+        self._calculate_regex()
+
+    def get_re(self):
+        return self._re
+
+    def _calculate_regex(self):
+        parser = Parser(self._samples)
+        parsed_samples = parser.get_parsed_samples()
+
+        case_state = { 'case': CaseSensitive.ON, 'hasChanged': False, 'canUseCaseInsensitiveFlag': True }
+        target_lang = parsed_samples.target
+
+        regex = deque()
+        for parsed_sample in parsed_samples.parsed_samples:
+            if isinstance(parsed_sample, LiteralTextInfo):
+                regex.extend(mapper.MapLiteralText(parsed_sample, target_lang, case_state).get_re())
+            elif isinstance(parsed_sample, DigitsInfo):
+                regex.extend(mapper.MapDigits(parsed_sample, target_lang).get_re())
+            elif isinstance(parsed_sample, BasicCharactersInfo):
+                regex.extend(mapper.MapBasicCharacters(parsed_sample, target_lang, case_state).get_re())
+            elif isinstance(parsed_sample, ControlCharactersInfo):
+                regex.extend(mapper.MapControlCharacters(parsed_sample, target_lang).get_re())
+            elif isinstance(parsed_sample, UnicodeCharactersInfo):
+                regex.extend(mapper.MapUnicodeCharacters(parsed_sample, target_lang).get_re())
+            elif isinstance(parsed_sample, MatchAnythingInfo):
+                regex.extend(mapper.MapMatchAnything(parsed_sample, target_lang, case_state).get_re())
+            elif isinstance(parsed_sample, ListOfLiteralTextInfo):
+                regex.extend(mapper.MapListOfLiteralText(parsed_sample, target_lang, case_state).get_re())
+            elif isinstance(parsed_sample, NumbersInfo):
+                regex.extend(mapper.MapNumbers(parsed_sample, target_lang).get_re())
+
+        self._add_general_info(parsed_samples, regex)
+
+        regex = ''.join(regex)
+        self._map_re_to_target(regex, target_lang, case_state)
+
+    def _map_re_to_target(self, regex, target, case_state):
+        self._re = { 'regex': regex }
+
+        compiled_re = regex[:]
+        if target == Target.JAVA:
+            if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
+                compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
+                compiled_re = 'Pattern regex = Pattern.compile("{}", Pattern.CASE_INSENSITIVE);'.format(compiled_re)
+            else:
+                compiled_re = 'Pattern regex = Pattern.compile("{}");'.format(compiled_re)
+
+        elif target == Target.PERL:
+            if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
+                compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
+                compiled_re = 'my $regex = /{}/i;'.format(compiled_re)
+            else:
+                compiled_re = 'my $regex = /{}/;'.format(compiled_re)
+
+        elif target == Target.POSIX:
+            pass
+
+        self._re['compiledRegex'] = compiled_re
+
+    @staticmethod
+    def _add_general_info(parsed_samples, regex):
+        regex.appendleft(start_info_to_target[parsed_samples.target][parsed_samples.start_info])
+        regex.append(end_info_to_target[parsed_samples.target][parsed_samples.end_info])

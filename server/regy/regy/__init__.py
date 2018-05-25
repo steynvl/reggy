@@ -1,1 +1,0 @@
-from regy.regy import Regy
