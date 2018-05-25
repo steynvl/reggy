@@ -1,1 +1,1 @@
-from reggy.regy import Regy
+from reggy.reggy import Reggy

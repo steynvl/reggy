@@ -16,7 +16,7 @@ def serialize_re(re):
 def main():
     samples = deserialize_samples(sys.argv[1])
 
-    re = reggy.Regy(samples=samples).get_re()
+    re = reggy.Reggy(samples=samples).get_re()
 
     serialized_re = serialize_re(re)
 

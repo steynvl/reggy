@@ -3,7 +3,7 @@ from reggy.induction import Induction
 from reggy.samples import SamplesAndSemantics
 
 
-class Regy:
+class Reggy:
 
     def __init__(self, samples):
         self._samples = samples
