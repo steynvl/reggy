@@ -10,7 +10,7 @@
 /.idea
 *.launch
 .settings/
-server/regy/.idea/
+server/reggy/.idea/
 
 # VSCode
 /.vscode
@@ -19,7 +19,7 @@ server/regy/.idea/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-server/regy/.vscode/
+server/reggy/.vscode/
 
 # misc
 /.sass-cache
