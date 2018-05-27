@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "Regy"
+    "name": "Reggy"
   },
   "apps": [
     {
@@ -22,7 +22,8 @@
         "../node_modules/bootswatch/dist/flatly/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "styles.css",
-        "../node_modules/jquery-highlighttextarea/jquery.highlighttextarea.min.css"
+        "../node_modules/jquery-highlighttextarea/jquery.highlighttextarea.min.css",
+        "../node_modules/ng2-dnd/bundles/style.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

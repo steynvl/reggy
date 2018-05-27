@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tutorial',
-  templateUrl: './tutorial.component.html'
+  templateUrl: './tutorial.component.html',
+  styleUrls: ['./tutorial.component.css']
 })
 export class TutorialComponent implements OnInit {
 
@@ -19,3 +20,4 @@ export class TutorialComponent implements OnInit {
     }
 
 }
+

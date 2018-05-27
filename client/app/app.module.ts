@@ -48,6 +48,8 @@ import { DataTableModule } from 'angular5-data-table';
 import { JavaComponent } from './language-examples/java/java.component';
 import { PerlComponent } from './language-examples/perl/perl.component';
 
+import { DndModule } from 'ng2-dnd';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -97,7 +99,8 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         // whitelistedDomains: ['localhost:3000', 'localhost:4200']
       }
-    })
+    }),
+    DndModule.forRoot()
   ],
   providers: [GenerateSamplesService,
               GenerateCommonService,
