@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
+import { UnicodeCharacters } from '../../models/samples/unicode-characters';
+import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 
 @Component({
   selector: 'app-unicode-characters-info',
@@ -9,5 +10,6 @@ import { UnicodeCharacters } from '../../models/marker-info/unicode-characters';
 export class UnicodeCharactersInfoComponent {
 
   @Input() unicodeCharacters: UnicodeCharacters;
+  @Input() err: UnicodeCharactersErr;
 
 }

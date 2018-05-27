@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Numbers } from '../../models/marker-info/numbers';
+import { Numbers } from '../../models/samples/numbers';
+import { NumbersErr } from '../../models/samples/numbers-err';
 
 @Component({
   selector: 'app-numbers-info',
@@ -9,6 +10,7 @@ import { Numbers } from '../../models/marker-info/numbers';
 export class NumbersInfoComponent {
 
   @Input() numbers: Numbers;
+  @Input() err: NumbersErr;
 
   isValidNrOfDecimals(): boolean {
     const min = this.numbers.minNrOfDecimals;

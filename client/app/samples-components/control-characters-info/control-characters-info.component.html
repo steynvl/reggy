@@ -383,6 +383,7 @@
 
 </div>
 
+
 <div class="row">
 
   <div class="col-sm-12">
@@ -394,6 +395,18 @@
         Match all characters except the selected ones
       </label>
     </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12">
+
+    <small class="text-danger" *ngIf="err.msg">
+      {{ err.msg }}
+    </small>
+
   </div>
 
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text';
+import { ListOfLiteralText } from '../../models/samples/list-of-literal-text';
+import { ListOfLiteralTextErr } from '../../models/samples/list-of-literal-text-err';
 
 @Component({
   selector: 'app-list-of-literal-text-info',
@@ -9,6 +10,8 @@ import { ListOfLiteralText } from '../../models/marker-info/list-of-literal-text
 export class ListOfLiteralTextInfoComponent {
 
   @Input() listOfLiteralText: ListOfLiteralText;
+  @Input() err: ListOfLiteralTextErr;
+
   inputFields = [0];
 
   addLiteralTextToList() {

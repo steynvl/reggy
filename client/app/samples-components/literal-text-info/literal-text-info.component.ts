@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LiteralText } from '../../models/marker-info/literal-text';
+import { LiteralText } from '../../models/samples/literal-text';
 import { MarkedTextInfo } from '../../models/marked-text-info';
 
 @Component({

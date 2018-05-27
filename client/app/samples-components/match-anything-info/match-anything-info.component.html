@@ -36,6 +36,7 @@
 
 </div>
 
+
 <div class="row move-down"
      *ngIf="matchAnything.matchAnythingExcept === 'Specific characters' ||
             matchAnything.matchAnythingExcept === 'Specific character'">
@@ -52,16 +53,25 @@
              [(ngModel)]="matchAnything.specificCharacters"
       >
 
+      <small class="text-danger" *ngIf="matchAnything.matchAnythingExcept === 'Specific characters' &&
+                                        err && err.specCharactersMsg">
+        {{ err.specCharactersMsg }}
+      </small>
+
       <input type="text" class="form-control"
              *ngIf="matchAnything.matchAnythingExcept === 'Specific character'"
              placeholder="Character that should not be matched..."
              [(ngModel)]="matchAnything.specificCharacter"
       >
 
+      <small class="text-danger" *ngIf="matchAnything.matchAnythingExcept === 'Specific character' &&
+                                        err && err.specCharacterMsg">
+        {{ err.specCharacterMsg }}
+      </small>
+
     </div>
 
   </div>
-
 
 </div>
 
@@ -157,6 +167,18 @@
       </label>
     </div>
 
+  </div>
+
+</div>
+
+<div class="row" *ngIf="matchAnything.matchAnythingExcept === 'Basic characters'">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-10">
+    <small class="text-danger" *ngIf="err && err.basicCharactersMsg">
+      {{ err.basicCharactersMsg }}
+    </small>
   </div>
 
 </div>

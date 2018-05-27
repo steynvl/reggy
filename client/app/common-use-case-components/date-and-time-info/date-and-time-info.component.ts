@@ -3,7 +3,7 @@ import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
 import { GenerateCommonService } from '../../services/generate.common.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
-import { DateAndTime } from '../../models/common-use-case-models/date-and-time';
+import { DateAndTime } from '../../models/common-use-cases/date-and-time';
 import { GeneratedRegex } from '../../models/generated-regex';
 
 declare var jQuery: any;

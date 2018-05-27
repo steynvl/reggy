@@ -15,6 +15,8 @@ import { GenerateInductionComponent } from './generate/induction/generate.induct
 import { GenerateSamplesService } from './services/generate.samples.service';
 import { GenerateCommonService } from './services/generate.common.service';
 import { GenerateInductionService } from './services/generate.induction.service';
+import { VerificationService } from './services/verification.service';
+import { ContactService } from './services/contact.service';
 
 import { LiteralTextInfoComponent } from './samples-components/literal-text-info/literal-text-info.component';
 import { BasicCharacterInfoComponent } from './samples-components/basic-characters-info/basic-characters-info.component';
@@ -45,6 +47,8 @@ import { DataTableModule } from 'angular5-data-table';
 
 import { JavaComponent } from './language-examples/java/java.component';
 import { PerlComponent } from './language-examples/perl/perl.component';
+
+import { DndModule } from 'ng2-dnd';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -95,11 +99,14 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         // whitelistedDomains: ['localhost:3000', 'localhost:4200']
       }
-    })
+    }),
+    DndModule.forRoot()
   ],
   providers: [GenerateSamplesService,
               GenerateCommonService,
-              GenerateInductionService
+              GenerateInductionService,
+              VerificationService,
+              ContactService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

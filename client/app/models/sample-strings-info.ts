@@ -1,12 +1,12 @@
-import { BasicCharacters } from './marker-info/basic-characters';
-import { LiteralText } from './marker-info/literal-text';
-import { Digits } from './marker-info/digits';
-import { RepeatInfo } from './marker-info/repeat-info';
-import { ControlCharacters } from './marker-info/control-characters';
-import { UnicodeCharacters } from './marker-info/unicode-characters';
-import { MatchAnything } from './marker-info/match-anything';
-import { ListOfLiteralText } from './marker-info/list-of-literal-text';
-import { Numbers } from './marker-info/numbers';
+import { BasicCharacters } from './samples/basic-characters';
+import { LiteralText } from './samples/literal-text';
+import { Digits } from './samples/digits';
+import { RepeatInfo } from './samples/repeat-info';
+import { ControlCharacters } from './samples/control-characters';
+import { UnicodeCharacters } from './samples/unicode-characters';
+import { MatchAnything } from './samples/match-anything';
+import { ListOfLiteralText } from './samples/list-of-literal-text';
+import { Numbers } from './samples/numbers';
 
 export class SampleStringsInfo {
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-generate-common',
@@ -12,9 +13,12 @@ export class GenerateCommonComponent implements OnInit {
   type: string;
   generalRegexInfo: GeneralRegexInfo;
 
-  constructor(public toast: ToastComponent) { }
+  constructor(public toast: ToastComponent,
+              private titleService: Title) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.titleService.setTitle('Common Use Cases | Reggy');
+
     this.generalRegexInfo = {
       startRegexMatchAt: 'Anywhere',
       endRegexMatchAt  : 'Anywhere',
