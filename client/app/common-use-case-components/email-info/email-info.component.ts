@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';;
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
-import { GenerateCommonService } from '../../services/generate.common.service';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Email } from '../../models/common-use-cases/email';
 import { GeneratedRegex } from '../../models/generated-regex';
@@ -30,7 +30,7 @@ export class EmailInfoComponent implements OnInit {
 
   validDomainsRe     = /^[a-z]+(\.[a-z]+)*(;[a-z]+(\.[a-z]+)*)*$/;
 
-  constructor(private generateCommonService: GenerateCommonService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -120,7 +120,7 @@ export class EmailInfoComponent implements OnInit {
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();
-    this.generateCommonService.generateRegex(payload).subscribe(
+    this.generateService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
-import { GenerateInductionService } from '../../services/generate.induction.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -13,7 +13,7 @@ export class GenerateInductionComponent implements OnInit {
   // generatedRegex: string;
   // generalRegexInfo: GeneralRegexInfo;
 
-  constructor(private generateService: GenerateInductionService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent,
               private titleService: Title) {
   }

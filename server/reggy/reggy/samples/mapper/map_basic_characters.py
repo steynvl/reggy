@@ -54,7 +54,7 @@ class MapBasicCharacters:
         if self._info.match_all_except_specified:
             self._re.appendleft(basic_char_to_re[BasicCharactersTok.MATCH_ALL_EXCEPT_SPECIFIED])
             enclose = True
-        elif found == 1 and (self._info.upper_case_letters
+        elif found == 1 and (self._info.upper_case_letters or self._info.line_breaks
                                 or self._info.lower_case_letters):
             enclose = True
         elif found > 1:

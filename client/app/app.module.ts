@@ -12,9 +12,7 @@ import { GenerateSamplesComponent } from './generate/samples-and-semantics/gener
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
 import { GenerateInductionComponent } from './generate/induction/generate.induction.component';
 
-import { GenerateSamplesService } from './services/generate.samples.service';
-import { GenerateCommonService } from './services/generate.common.service';
-import { GenerateInductionService } from './services/generate.induction.service';
+import { GenerateService } from './services/generate.service';
 import { VerificationService } from './services/verification.service';
 import { ContactService } from './services/contact.service';
 
@@ -102,9 +100,7 @@ export function tokenGetter() {
     }),
     DndModule.forRoot()
   ],
-  providers: [GenerateSamplesService,
-              GenerateCommonService,
-              GenerateInductionService,
+  providers: [GenerateService,
               VerificationService,
               ContactService
   ],

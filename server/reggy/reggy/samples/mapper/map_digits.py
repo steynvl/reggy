@@ -59,4 +59,7 @@ class MapDigits:
             else:
                 char_class.append('{}-{}'.format(str(i[0]), str(i[1])))
 
-        return '[{}]'.format(''.join(char_class))
+        if len(char_class) == 1 and len(char_class[0]) == 1:
+            return ''.join(char_class)
+        else:
+            return '[{}]'.format(''.join(char_class))

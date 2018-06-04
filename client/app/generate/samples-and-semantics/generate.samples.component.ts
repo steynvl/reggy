@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Marker } from '../../models/marker';
 import { colours } from '../../colours/colours';
-import { GenerateSamplesService } from '../../services/generate.samples.service';
+import { GenerateService } from '../../services/generate.service';
 import { LiteralText } from '../../models/samples/literal-text';
 import { BasicCharacters } from '../../models/samples/basic-characters';
 import { ToastComponent } from '../../shared/toast/toast.component';
@@ -24,6 +24,7 @@ import { ListOfLiteralTextErr } from '../../models/samples/list-of-literal-text-
 import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 import { NumbersErr } from '../../models/samples/numbers-err';
+import {Container} from '../../models/alternation-container/container';
 
 declare var jQuery: any;
 
@@ -51,6 +52,8 @@ export class GenerateSamplesComponent implements OnInit {
   listOfLiteralText: ListOfLiteralText;
   numbers: Numbers;
 
+  containers: Array<Container>;
+
   userHighlightStart: string;
   userHighlightEnd: string;
 
@@ -59,7 +62,7 @@ export class GenerateSamplesComponent implements OnInit {
   markersIsCollapsed = false;
   markerTabIndex = 0;
 
-  constructor(private generateService: GenerateSamplesService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent,
               private titleService: Title,
               private verificationService: VerificationService) { }
@@ -237,6 +240,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.toast.setMessage('No text selected!', 'warning');
       }
 
+      this.createAlternationContainers();
     }
   }
 
@@ -455,7 +459,9 @@ export class GenerateSamplesComponent implements OnInit {
         this.markerTabIndex = -1;
       }
     }
+
     this.highlightTextArea();
+    this.createAlternationContainers();
   }
 
   clickCopyToClipboard() {
@@ -583,5 +589,26 @@ export class GenerateSamplesComponent implements OnInit {
 
     return isValid;
   }
+
+  createAlternationContainers() {
+    this.containers = [];
+
+    this.markedElements.forEach((marker, i) => {
+      this.containers.push({
+        id: i,
+        markers: [{
+          id: marker.id,
+          colour: marker.colour
+        }]
+      });
+    });
+  }
+
+  setButtonColour(marker): any {
+    return {
+      'background-color': marker.colour
+    };
+  }
+
 
 }

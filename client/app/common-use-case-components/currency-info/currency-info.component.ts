@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
-import { GenerateCommonService } from '../../services/generate.common.service';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { currencies } from './currencies';
 import { DataTable, DataTableTranslations, DataTableResource } from 'angular5-data-table';
@@ -36,7 +36,7 @@ export class CurrencyInfoComponent implements OnInit {
 
   @ViewChild(DataTable) currenciesTable;
 
-  constructor(private generateCommonService: GenerateCommonService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -83,18 +83,18 @@ export class CurrencyInfoComponent implements OnInit {
     const uniqueCurrencies = this.getCurrenciesWithoutDuplicates();
 
     if (uniqueCurrencies.size === 0) {
-      this.toast.setMessage('Please select atleast one currency!', 'warning');
+      this.toast.setMessage('Please select at least one currency!', 'warning');
     } else {
       this.callService(uniqueCurrencies);
     }
   }
 
-  private callService(currencies: Set<string>) {
+  private callService(selectedCurrencies: Set<string>) {
     this.isLoading = true;
 
     this.generatedRegex = undefined;
-    const payload = this.constructPayload(currencies);
-    this.generateCommonService.generateRegex(payload).subscribe(
+    const payload = this.constructPayload(selectedCurrencies);
+    this.generateService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {

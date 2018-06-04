@@ -34,13 +34,13 @@
       <div class="col-sm-11">
 
         <button *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
-            <i class="fa fa-refresh"></i>
+          <i class="fa fa-refresh"></i>
         </button>
 
         <div *ngIf="markedElements.length > 1">
 
           <button *ngIf="!markersIsCollapsed" (click)="reset()" class="btn btn-md">
-              <i class="fa fa-refresh"></i>
+            <i class="fa fa-refresh"></i>
           </button>
 
           <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()" class="btn btn-md">
@@ -137,7 +137,7 @@
               <div class="col-md-5">
                 <label>Repeat:</label>
 
-                <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                <select class="form-control select-repeat-info" [disabled]="markedElement.fieldType === 'Numbers'"
                         [(ngModel)]="markedElement.repeatInfo.repeat">
 
                   <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
@@ -234,129 +234,199 @@
 
     </div>
 
-    <br />
+    <div *ngIf="markedElements.length > 1 && containers">
 
-    <div *ngIf="markedElements.length > 0">
+      <br />
 
       <div class="card">
+
         <div class="card-header">
-          <h4 class="text-center"><strong>General regular expression information</strong></h4>
+          <div class="row">
+            <div class="col-sm-11">
+              <h4 class="text-center"><strong>Alternation information</strong></h4>
+            </div>
+            <div class="col-sm-1">
+              <button type="button"
+                      class="btn btn-sm btn-primary float-right"
+                      data-toggle="tooltip" data-placement="top"
+                      title="Drag markers to show alternating groups of markers!">
+                <i class="fa fa-info" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
         </div>
+
         <div class="card-body">
-          <div class="row pad-down">
 
-            <div class="col-sm-4">
+          <div class="row">
 
-              <div class="form-group">
-                <label for="begin-regex-at">Start regex match at:</label>
-                <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
-                  <option>Anywhere</option>
-                  <option>Start of text</option>
-                  <option>Start of line</option>
-                  <option>Start of word</option>
-                  <option>Start of attempt</option>
-                </select>
+            <div class="col-sm-12 text-center">
+
+              <div dnd-sortable-container [sortableData]="containers" [dropZones]="['container-dropZone']">
+
+                <ul class="list-group-horizontal">
+
+                  <li class="list-group-item"
+                      *ngFor="let container of containers; let i = index"
+                      dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+
+                    <div dnd-sortable-container [sortableData]="container.markers" [dropZones]="['marker-dropZone']">
+
+                      <p *ngIf="containers[i].markers.length === 0"
+                         type="button"
+                         class="btn dummy-marker">
+                        1
+                      </p>
+
+                      <p *ngFor="let marker of container.markers; let x = index"
+                         [ngStyle]="setButtonColour(marker)"
+                         class="marker"
+                         dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="marker">
+                        {{ marker.id }}
+                      </p>
+
+
+                    </div>
+
+                  </li>
+
+                </ul>
+
               </div>
+
             </div>
 
-            <div class="col-sm-4">
-
-              <div class="form-group">
-                <label for="end-regex-at">End regex match at:</label>
-                <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
-                  <option>Anywhere</option>
-                  <option>End of text</option>
-                  <option>End of line</option>
-                  <option>End of word</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-sm-4">
-
-              <div class="form-group">
-                <label for="what-standard">Target language:</label>
-                <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
-                  <option>Java</option>
-                  <option>Perl</option>
-                  <option>POSIX</option>
-                </select>
-              </div>
-            </div>
 
           </div>
+
         </div>
-      </div>
 
-    </div>
-
-    <div *ngIf="markedElements.length > 0">
-      <br />
-
-      <div class="row">
-        <div class="col-sm-12">
-          <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div *ngIf="isLoading">
-      <br />
-
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
-        </div>
       </div>
 
       <br />
-    </div>
 
-    <div *ngIf="markedElements.length > 0">
-      <br />
-      <br />
-    </div>
+      <div *ngIf="markedElements.length > 0">
 
-    <div *ngIf="generatedRegex !== undefined">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center"><strong>General regular expression information</strong></h4>
+          </div>
+          <div class="card-body">
+            <div class="row pad-down">
 
-      <div class="row">
-        <div class="col">
-          <label for="regex"><strong>Your {{ generalRegexInfo.regexTarget }} regular expression</strong></label>
+              <div class="col-sm-4">
+
+                <div class="form-group">
+                  <label for="begin-regex-at">Start regex match at:</label>
+                  <select id="begin-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.startRegexMatchAt">
+                    <option>Anywhere</option>
+                    <option>Start of text</option>
+                    <option>Start of line</option>
+                    <option>Start of word</option>
+                    <option>Start of attempt</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+
+                <div class="form-group">
+                  <label for="end-regex-at">End regex match at:</label>
+                  <select id="end-regex-at" class="form-control" [(ngModel)]="generalRegexInfo.endRegexMatchAt">
+                    <option>Anywhere</option>
+                    <option>End of text</option>
+                    <option>End of line</option>
+                    <option>End of word</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+
+                <div class="form-group">
+                  <label for="what-standard">Target language:</label>
+                  <select id="what-standard" class="form-control" [(ngModel)]="generalRegexInfo.regexTarget">
+                    <option>Java</option>
+                    <option>Perl</option>
+                    <option>POSIX</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </div>
 
-      <div class="row">
+      <div *ngIf="markedElements.length > 0">
+        <br />
 
-        <div class="col">
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="btn btn-block btn-primary" (click)="generateRegex()">Generate Regex</button>
+          </div>
+        </div>
 
-          <div class="input-group">
-            <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex.compiledRegex">
-            <span class="input-group-btn">
+      </div>
+
+      <div *ngIf="isLoading">
+        <br />
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+          </div>
+        </div>
+
+        <br />
+      </div>
+
+      <div *ngIf="markedElements.length > 0">
+        <br />
+        <br />
+      </div>
+
+      <div *ngIf="generatedRegex !== undefined">
+
+        <div class="row">
+          <div class="col">
+            <label for="regex"><strong>Your {{ generalRegexInfo.regexTarget }} regular expression</strong></label>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col">
+
+            <div class="input-group">
+              <input type="text" class="form-control" id="regex" [(ngModel)]="generatedRegex.compiledRegex">
+              <span class="input-group-btn">
         <button class="btn btn-default" ngxClipboard [cbContent]="generatedRegex.compiledRegex" (click)="clickCopyToClipboard()"
                 data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
                 type="button"><i class="fa fa-clipboard"></i>
         </button>
         </span>
+            </div>
+
           </div>
 
         </div>
 
+
       </div>
 
+      <div *ngIf="generatedRegex" class="pad-down">
+
+        <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
+          <app-java-code-samples [generatedRegex]="generatedRegex"></app-java-code-samples>
+        </div>
+        <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
+          <app-perl-code-samples [generatedRegex]="generatedRegex"></app-perl-code-samples>
+        </div>
+
+      </div>
 
     </div>
-
-    <div *ngIf="generatedRegex" class="pad-down">
-
-      <div *ngIf="generalRegexInfo.regexTarget === 'Java'">
-        <app-java-code-samples [generatedRegex]="generatedRegex"></app-java-code-samples>
-      </div>
-      <div *ngIf="generalRegexInfo.regexTarget === 'Perl'">
-        <app-perl-code-samples [generatedRegex]="generatedRegex"></app-perl-code-samples>
-      </div>
-
-    </div>
-
   </div>
-</div>
