@@ -19,7 +19,7 @@ class MapLiteralText:
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         extra_info = self._info.extra_info

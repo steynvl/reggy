@@ -1,8 +1,4 @@
-import BaseCtrl from './base';
-
-export default class ContactCtrl extends BaseCtrl {
-
-  model = null;
+export default class ContactCtrl {
 
   sendEmail = (req, res) => {
     const info = req.body.params;

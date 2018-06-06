@@ -33,23 +33,31 @@ class SamplesAndSemantics:
         target_lang = parsed_samples.target
 
         regex = deque()
-        for parsed_sample in parsed_samples.parsed_samples:
-            if isinstance(parsed_sample, LiteralTextInfo):
-                regex.extend(mapper.MapLiteralText(parsed_sample, target_lang, case_state).get_re())
-            elif isinstance(parsed_sample, DigitsInfo):
-                regex.extend(mapper.MapDigits(parsed_sample, target_lang).get_re())
-            elif isinstance(parsed_sample, BasicCharactersInfo):
-                regex.extend(mapper.MapBasicCharacters(parsed_sample, target_lang, case_state).get_re())
-            elif isinstance(parsed_sample, ControlCharactersInfo):
-                regex.extend(mapper.MapControlCharacters(parsed_sample, target_lang).get_re())
-            elif isinstance(parsed_sample, UnicodeCharactersInfo):
-                regex.extend(mapper.MapUnicodeCharacters(parsed_sample, target_lang).get_re())
-            elif isinstance(parsed_sample, MatchAnythingInfo):
-                regex.extend(mapper.MapMatchAnything(parsed_sample, target_lang, case_state).get_re())
-            elif isinstance(parsed_sample, ListOfLiteralTextInfo):
-                regex.extend(mapper.MapListOfLiteralText(parsed_sample, target_lang, case_state).get_re())
-            elif isinstance(parsed_sample, NumbersInfo):
-                regex.extend(mapper.MapNumbers(parsed_sample, target_lang).get_re())
+        for group in parsed_samples.parsed_samples:
+            alternating_group = []
+
+            for sample in group:
+                if isinstance(sample, LiteralTextInfo):
+                    alternating_group.append(mapper.MapLiteralText(sample, target_lang, case_state).get_re())
+                elif isinstance(sample, DigitsInfo):
+                    alternating_group.append(mapper.MapDigits(sample, target_lang).get_re())
+                elif isinstance(sample, BasicCharactersInfo):
+                    alternating_group.append(mapper.MapBasicCharacters(sample, target_lang, case_state).get_re())
+                elif isinstance(sample, ControlCharactersInfo):
+                    alternating_group.append(mapper.MapControlCharacters(sample, target_lang).get_re())
+                elif isinstance(sample, UnicodeCharactersInfo):
+                    alternating_group.append(mapper.MapUnicodeCharacters(sample, target_lang).get_re())
+                elif isinstance(sample, MatchAnythingInfo):
+                    alternating_group.append(mapper.MapMatchAnything(sample, target_lang, case_state).get_re())
+                elif isinstance(sample, ListOfLiteralTextInfo):
+                    alternating_group.append(mapper.MapListOfLiteralText(sample, target_lang, case_state).get_re())
+                elif isinstance(sample, NumbersInfo):
+                    alternating_group.append(mapper.MapNumbers(sample, target_lang).get_re())
+
+            if len(alternating_group) == 1:
+                regex.append(''.join(alternating_group))
+            else:
+                regex.append('(?:{})'.format('|'.join(alternating_group)))
 
         self._add_general_info(parsed_samples, regex)
 

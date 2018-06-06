@@ -18,7 +18,7 @@ class MapListOfLiteralText:
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         match_anything_except = self._info.match_anything_except_specified

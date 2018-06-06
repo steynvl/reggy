@@ -62,7 +62,6 @@
   background-color: white;
 }
 
-
 .select-repeat-info {
   font-family: 'FontAwesome', Arial;
 }
@@ -93,7 +92,7 @@
   display:block;
   line-height:30px;
   text-align:center;
-  padding:0 13px;
+  padding:0 12px;
   border-radius:3px;
 }
 

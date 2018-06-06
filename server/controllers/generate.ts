@@ -1,12 +1,9 @@
-import BaseCtrl from './base';
 import * as child_process from 'child_process';
 import * as path from 'path';
 
-export default class GenerateCtrl extends BaseCtrl {
+export default class GenerateCtrl {
 
-  model = null;
-
-  generate = (req, res) => {
+  generateRegex = (req, res) => {
     const samples = req.body.params;
     console.log('---------');
     console.log(samples);

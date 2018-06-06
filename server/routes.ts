@@ -9,10 +9,10 @@ export default function setRoutes(app) {
   const generateCtrl = new GenerateCtrl();
   const contactCtrl = new ContactCtrl();
 
-  router.route('/generate').post(generateCtrl.generate);
+  router.route('/generate').post(generateCtrl.generateRegex);
   router.route('/contact').post(contactCtrl.sendEmail);
 
-  // Apply the routes to our application with the prefix /api
+  /* apply the routes to our application with the prefix /api */
   app.use('/api', router);
 
 }

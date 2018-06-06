@@ -24,7 +24,7 @@ import { ListOfLiteralTextErr } from '../../models/samples/list-of-literal-text-
 import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 import { NumbersErr } from '../../models/samples/numbers-err';
-import {Container} from '../../models/alternation-container/container';
+import { Container } from '../../models/alternation-container/container';
 
 declare var jQuery: any;
 
@@ -112,21 +112,25 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   private constructPayload(): PayloadSamples {
-    const sampleStringsInfo: Array<SampleStringsInfo> = [];
+    const samples: Array<Array<SampleStringsInfo>> = [];
 
-    this.markedElements.forEach(markedElement => {
+    this.containers.forEach(container => {
+      const group = [];
 
-      sampleStringsInfo.push({
-        markerType: markedElement.fieldType,
-        markedStrings: markedElement.markedTextInfo.map(u => u.text),
-        markerInfo: markedElement.markerInfo,
-        repeatInfo: markedElement.repeatInfo
-      });
+      container.markers.forEach(marker => group.push({
+        markerType: this.markedElements[marker.id].fieldType,
+        markedStrings: this.markedElements[marker.id].markedTextInfo.map(u => u.text),
+        markerInfo: this.markedElements[marker.id].markerInfo,
+        repeatInfo: this.markedElements[marker.id].repeatInfo
+      }));
 
+      if (group.length > 0) {
+        samples.push(group);
+      }
     });
 
     return {
-      sampleStringsInfo: sampleStringsInfo,
+      sampleStringsInfo: samples,
       generalRegexInfo : this.generalRegexInfo,
       generateMethod   : 'samplesAndSemantics'
     };
@@ -597,7 +601,7 @@ export class GenerateSamplesComponent implements OnInit {
       this.containers.push({
         id: i,
         markers: [{
-          id: marker.id,
+          id: i,
           colour: marker.colour
         }]
       });

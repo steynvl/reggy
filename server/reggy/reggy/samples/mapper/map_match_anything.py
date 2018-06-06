@@ -18,7 +18,7 @@ class MapMatchAnything:
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         enclose_in_brackets = True

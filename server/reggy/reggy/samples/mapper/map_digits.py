@@ -13,7 +13,7 @@ class MapDigits:
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         marker_info = self._info.digits

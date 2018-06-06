@@ -1,8 +1,8 @@
 {
-  "name": "Regy",
+  "name": "Reggy",
   "version": "1.0.0",
   "author": "Steyn van Litsenborgh",
-  "description": "A MEAN stack application, with the purpose of generating regular expressions",
+  "description": "A regular expression generator.",
   "angular-cli": {},
   "engines": {
     "node": "8.9.4",

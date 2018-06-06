@@ -18,7 +18,7 @@ class MapNumbers:
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         numbers = self._info
