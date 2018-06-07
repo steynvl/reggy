@@ -97,6 +97,13 @@ select, option {
 }
 
 #label-category {font-weight: 700;
-  color: #ced4da;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;color: white;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.move-up {
+  padding-bottom: 50px;
+}
+
+.white-text {
+  color: white;
 }

@@ -1,3 +1,3 @@
 export interface ContactResponse {
-  code: number;
+  msg: string;
 }
