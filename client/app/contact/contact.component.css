@@ -42,7 +42,8 @@ img::-moz-selection {
 }
 
 section#contact {
-  background: #212529 url(../../assets/map-image.png) no-repeat center;
+   background: #212529 url(../../assets/map-image.png) no-repeat center;
+  /* background: #81B4E1 no-repeat center; */
 }
 
 section#contact .section-heading {

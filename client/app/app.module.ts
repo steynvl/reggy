@@ -10,11 +10,12 @@ import { ContactComponent } from './contact/contact.component';
 
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
-import { GenerateInductionComponent } from './generate/induction/generate.induction.component';
+import { GenerateInferenceComponent } from './generate/inference/generate.inference.component';
 
 import { GenerateService } from './services/generate.service';
 import { VerificationService } from './services/verification.service';
 import { ContactService } from './services/contact.service';
+import { InferrerService } from './services/inferrer.service';
 
 import { LiteralTextInfoComponent } from './samples-components/literal-text-info/literal-text-info.component';
 import { BasicCharacterInfoComponent } from './samples-components/basic-characters-info/basic-characters-info.component';
@@ -60,7 +61,7 @@ export function tokenGetter() {
     ContactComponent,
     GenerateSamplesComponent,
     GenerateCommonComponent,
-    GenerateInductionComponent,
+    GenerateInferenceComponent,
     LiteralTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
@@ -102,7 +103,8 @@ export function tokenGetter() {
   ],
   providers: [GenerateService,
               VerificationService,
-              ContactService
+              ContactService,
+              InferrerService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

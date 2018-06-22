@@ -5,13 +5,10 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-generate-induction',
-  templateUrl: './generate.induction.component.html',
-  styleUrls: ['./generate.induction.component.css']
+  templateUrl: './generate.inference.component.html',
+  styleUrls: ['./generate.inference.component.css']
 })
-export class GenerateInductionComponent implements OnInit {
-
-  // generatedRegex: string;
-  // generalRegexInfo: GeneralRegexInfo;
+export class GenerateInferenceComponent implements OnInit {
 
   constructor(private generateService: GenerateService,
               public toast: ToastComponent,
@@ -20,7 +17,7 @@ export class GenerateInductionComponent implements OnInit {
 
 
   ngOnInit() {
-    this.titleService.setTitle('Induction | Reggy');
+    this.titleService.setTitle('Inference | Reggy');
   }
 
   // generateRegex() {

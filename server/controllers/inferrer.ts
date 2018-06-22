@@ -1,13 +1,9 @@
-import * as child_process from 'child_process';
-import * as path from 'path';
+import { spawnChildProcess } from './generate';
 
-export default class GenerateCtrl {
+export default class InferrerCtrl {
 
-  generateRegex = (req, res) => {
+  inferGrammar = (req, res) => {
     const samples = req.body.params;
-    console.log('---------');
-    console.log(samples);
-    console.log('---------');
 
     const py = spawnChildProcess(samples);
     let output = '';
@@ -26,7 +22,6 @@ export default class GenerateCtrl {
 
       const serverResponse: ServerResponse = {
         regex        : deserialized.regex,
-        compiledRegex: deserialized.compiledRegex,
         code         : code
       };
 
@@ -37,13 +32,7 @@ export default class GenerateCtrl {
 
 }
 
-export function spawnChildProcess(samples) {
-  const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'main.py');
-  return child_process.spawn('python3', [pathToRegex].concat(samples));
-}
-
 interface ServerResponse {
-  regex        : string;
-  compiledRegex: string;
-  code         : number;
+  code: number;
+  regex: string;
 }
