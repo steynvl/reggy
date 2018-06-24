@@ -25,6 +25,7 @@ import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 import { NumbersErr } from '../../models/samples/numbers-err';
 import { Container } from '../../models/alternation-container/container';
+import { Backreference } from '../../models/samples/backreference';
 
 declare var jQuery: any;
 
@@ -51,6 +52,7 @@ export class GenerateSamplesComponent implements OnInit {
   matchAnything: MatchAnything;
   listOfLiteralText: ListOfLiteralText;
   numbers: Numbers;
+  backreference: Backreference;
 
   containers: Array<Container>;
 
@@ -201,6 +203,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
         this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
         this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+        this.backreference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Backreference;
       }
 
     } else {
@@ -380,6 +383,13 @@ export class GenerateSamplesComponent implements OnInit {
           thousandSeparator : undefined,
           currencySignOrCode: undefined
         };
+        break;
+
+      case 'Backreference match of preceding marker':
+        this.backreference = {
+          marker: this.markedElements[0]
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.backreference;
         break;
 
       default:
@@ -614,5 +624,8 @@ export class GenerateSamplesComponent implements OnInit {
     };
   }
 
+  getBackreferenceOptions(currMarkerId: number): Array<Marker> {
+    return this.markedElements.slice(0, currMarkerId);
+  }
 
 }

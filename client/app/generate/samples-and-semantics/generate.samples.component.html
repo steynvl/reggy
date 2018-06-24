@@ -131,6 +131,7 @@
                   <option>Match anything</option>
                   <option>Numbers</option>
                   <option>Unicode characters</option>
+                  <option *ngIf="idx >= 1">Backreference match of preceding marker</option>
                 </select>
               </div>
 
@@ -224,6 +225,12 @@
                 [numbers]="numbers"
                 [err]="markedElement.error">
               </app-numbers-info>
+
+              <app-backreference-info
+                *ngIf="markedElement.fieldType === 'Backreference match of preceding marker'"
+                [backreference]="backreference"
+                [options]="getBackreferenceOptions(idx)">
+              </app-backreference-info>
 
             </div>
 

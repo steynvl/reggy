@@ -37,6 +37,7 @@ import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-i
 import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
 import { Ipv4AddressInfoComponent } from './common-use-case-components/ipv4-address-info/ipv4-address-info.component';
 import { CurrencyInfoComponent } from './common-use-case-components/currency-info/currency-info.component';
+import { BackreferenceInfoComponent } from './samples-components/backreference-info/backreference-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -81,6 +82,7 @@ export function tokenGetter() {
     NationalIdInfoComponent,
     Ipv4AddressInfoComponent,
     CurrencyInfoComponent,
+    BackreferenceInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent

@@ -15,6 +15,7 @@ import { ListOfLiteralTextErr } from './samples/list-of-literal-text-err';
 import { MatchAnythingErr } from './samples/match-anything-err';
 import { NumbersErr } from './samples/numbers-err';
 import { UnicodeCharactersErr } from './samples/unicode-characters-err';
+import { Backreference } from './samples/backreference';
 
 export class Marker {
 
@@ -24,7 +25,7 @@ export class Marker {
   markedTextInfo: Array<MarkedTextInfo>;
 
   markerInfo: BasicCharacters | LiteralText | Digits | ControlCharacters | UnicodeCharacters
-    | MatchAnything | ListOfLiteralText | Numbers;
+    | MatchAnything | ListOfLiteralText | Numbers | Backreference;
   repeatInfo: RepeatInfo;
 
   error: BasicCharactersErr | ControlCharactersErr | DigitsErr | ListOfLiteralTextErr

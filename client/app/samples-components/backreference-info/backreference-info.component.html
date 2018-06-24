@@ -1,0 +1,23 @@
+<div class="row">
+
+  <div class="col-sm-2">
+    <button type="button" class="btn pull-right" [ngStyle]="setButtonColour()">
+      {{ backreference.marker.id }}
+    </button>
+  </div>
+
+  <div class="col-sm-9">
+
+    <label for="options">Please select which marker's match you would like to backreference:</label>
+    <select id="options" class="form-control" [(ngModel)]="backreference.marker">
+
+      <option *ngFor="let option of options"
+              [ngValue]="option">
+        Marker {{ option.id }}: {{ option.fieldType }}
+      </option>
+
+    </select>
+
+  </div>
+
+</div>
