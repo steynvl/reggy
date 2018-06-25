@@ -1,7 +1,6 @@
 from collections import deque
 import re
 
-from reggy.samples.mapper.repeat_helper import repeat_info_to_regex
 from reggy.samples.models.numbers_info import NumbersInfo
 from reggy.samples.constants.numbers import const_to_re
 from reggy.samples.utils.numeric_range import NumericRange
@@ -71,9 +70,6 @@ class MapNumbers:
                 self._re.append(' *{}'.format(curr_str))
             else:
                 self._re.append(' *{}?'.format(curr_str))
-
-        repeat_info = repeat_info_to_regex(self._info)
-        self._re.append(repeat_info)
 
     def _build_limited_integer_part(self, start, end):
         self._re.append(NumericRange(start, end).get_re())

@@ -6,6 +6,7 @@ from reggy.samples.models.literal_text_info import LiteralTextInfo
 from reggy.samples.models.match_anything_info import MatchAnythingInfo
 from reggy.samples.models.numbers_info import NumbersInfo
 from reggy.samples.models.unicode_characters_info import UnicodeCharactersInfo
+from reggy.samples.models.back_reference_info import BackReferenceInfo
 from reggy.samples.parser.samples import Samples
 from reggy.samples.constants.control_characters import control_char_to_token, control_chars
 from reggy.samples.constants.match_anything import basic_char_to_tok
@@ -21,6 +22,7 @@ class Parser:
 
     def __init__(self, regex_info):
         self._samples = Samples()
+        self.nr_of_markers = 0
         self._parse_samples(regex_info)
 
     def get_parsed_samples(self):
@@ -33,6 +35,7 @@ class Parser:
             self._alternating_group = []
 
             for sample in group:
+                self.nr_of_markers += 1
                 marker_type = sample['markerType']
 
                 if marker_type == 'Literal text':
@@ -51,6 +54,8 @@ class Parser:
                     self._parse_list_of_literal_text(sample)
                 elif marker_type == 'Numbers':
                     self._parse_numbers(sample)
+                elif marker_type == 'Backreference match of preceding marker':
+                    self._parse_backreference(sample)
 
                 self._insert_repeat_info(sample)
 
@@ -58,7 +63,8 @@ class Parser:
 
     def _parse_basic_characters(self, sample):
         marker_info = sample['markerInfo']
-        self._alternating_group.append(BasicCharactersInfo(marker_info))
+        self._alternating_group.append(BasicCharactersInfo(self.nr_of_markers,
+                                                           marker_info))
 
     def _parse_literal_text(self, sample):
         marker_info = sample['markerInfo']
@@ -68,16 +74,18 @@ class Parser:
             extra_info.append(LiteralTextTok.CASE_INSENSITIVE)
         else:
             extra_info.append(LiteralTextTok.CASE_SENSITIVE)
-        
+
         if marker_info['matchAllExceptSpecified']:
             extra_info.append(LiteralTextTok.MATCH_ALL_EXCEPT_SPECIFIED)
 
-        self._alternating_group.append(LiteralTextInfo(sample['markedStrings'], extra_info))
+        self._alternating_group.append(LiteralTextInfo(self.nr_of_markers,
+                                                       sample['markedStrings'],
+                                                       extra_info))
 
     def _parse_digits(self, sample):
         marker_info = sample['markerInfo']
 
-        digits_info = DigitsInfo()
+        digits_info = DigitsInfo(self.nr_of_markers)
         for i in marker_info:
             if i != 'minus' and marker_info[i]:
                 digits_info.digits.append(digit_to_enum[i])
@@ -100,7 +108,8 @@ class Parser:
             elif match_all_except_spec and not marker_info[control_char]:
                 wanted_control_chars.append(control_char_to_token[control_char])
 
-        self._alternating_group.append(ControlCharactersInfo(wanted_control_chars))
+        self._alternating_group.append(ControlCharactersInfo(self.nr_of_markers,
+                                                             wanted_control_chars))
 
     def _parse_unicode_characters(self, sample):
         marker_info = sample['markerInfo']
@@ -113,14 +122,15 @@ class Parser:
             elif match_all_except_spec and not marker_info[unicode_char]:
                 wanted_unicode_chars.append(unicode_char_to_token[unicode_char])
 
-        unicode_info = UnicodeCharactersInfo(wanted_unicode_chars,
-                                              marker_info['individualCharacters'].split())
+        unicode_info = UnicodeCharactersInfo(self.nr_of_markers,
+                                             wanted_unicode_chars,
+                                             marker_info['individualCharacters'].split())
 
         self._alternating_group.append(unicode_info)
 
     def _parse_match_anything(self, sample):
         marker_info = sample['markerInfo']
-        match_anything_info = MatchAnythingInfo()
+        match_anything_info = MatchAnythingInfo(self.nr_of_markers)
 
         match_anything_except = marker_info['matchAnythingExcept']
         if match_anything_except == 'Specific characters':
@@ -140,13 +150,18 @@ class Parser:
 
     def _parse_list_of_literal_text(self, sample):
         marker_info = sample['markerInfo']
-        self._alternating_group.append(ListOfLiteralTextInfo(marker_info['matchAnythingExceptSpecified'],
-                                                                  marker_info['literalText'],
-                                                                  marker_info['caseInsensitive']))
+        self._alternating_group.append(ListOfLiteralTextInfo(self.nr_of_markers,
+                                                             marker_info['matchAnythingExceptSpecified'],
+                                                             marker_info['literalText'],
+                                                             marker_info['caseInsensitive']))
 
     def _parse_numbers(self, sample):
         marker_info = sample['markerInfo']
-        self._alternating_group.append(NumbersInfo(marker_info))
+        self._alternating_group.append(NumbersInfo(self.nr_of_markers, marker_info))
+
+    def _parse_backreference(self, sample):
+        marker_info = sample['markerInfo']
+        self._alternating_group.append(BackReferenceInfo(self.nr_of_markers, marker_info))
 
     def _parse_general_regex_info(self, regex_info):
         gen_re_info = regex_info['generalRegexInfo']

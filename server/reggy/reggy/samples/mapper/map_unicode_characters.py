@@ -6,9 +6,10 @@ from reggy.samples.constants.unicode_characters import unicode_char_to_re
 
 class MapUnicodeCharacters:
 
-    def __init__(self, info: UnicodeCharactersInfo, target_lang):
+    def __init__(self, info: UnicodeCharactersInfo, target_lang, state_info):
         self._info = info
         self._target_lang = target_lang
+        self._state_info = state_info
         self._re = deque()
         self._map_info()
 
@@ -32,3 +33,10 @@ class MapUnicodeCharacters:
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
+
+        if self._state_info['isBackReferenced']:
+            self._re.appendleft('(')
+            self._re.append(')')
+
+            self._state_info['currBackReferenceNum'] += 1
+            self._state_info['markerToReference'][self._info.marker_id] = self._state_info['currBackReferenceNum']

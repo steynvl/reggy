@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Backreference } from '../../models/samples/backreference';
+import { BackReference } from '../../models/samples/back-reference';
 import { Marker } from '../../models/marker';
 
 @Component({
@@ -9,7 +9,7 @@ import { Marker } from '../../models/marker';
 })
 export class BackreferenceInfoComponent {
 
-  @Input() backreference: Backreference;
+  @Input() backreference: BackReference;
   @Input() options: Array<Marker>;
 
   setButtonColour(): any {

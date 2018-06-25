@@ -7,9 +7,10 @@ from reggy.samples.models.control_characters_info import ControlCharactersInfo
 
 class MapControlCharacters:
 
-    def __init__(self, info: ControlCharactersInfo, target_lang):
+    def __init__(self, info: ControlCharactersInfo, target_lang, state_info):
         self._info = info
         self._target_lang = target_lang
+        self._state_info = state_info
         self._re = deque()
         self._map_info()
 
@@ -53,3 +54,10 @@ class MapControlCharacters:
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
+
+        if self._state_info['isBackReferenced']:
+            self._re.appendleft('(')
+            self._re.append(')')
+
+            self._state_info['currBackReferenceNum'] += 1
+            self._state_info['markerToReference'][self._info.marker_id] = self._state_info['currBackReferenceNum']
