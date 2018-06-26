@@ -1,5 +1,6 @@
 from collections import deque
 from reggy.samples.models.back_reference_info import BackReferenceInfo
+from reggy.samples.tokens import Target
 
 
 class MapBackReference:
@@ -15,7 +16,12 @@ class MapBackReference:
         return ''.join(self._re)
 
     def _map_info(self):
-        self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
+        if self._target_lang == Target.JAVA:
+            self._re.append('\\\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
+        elif self._target_lang == Target.PERL:
+            self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
+        elif self._target_lang == Target.POSIX:
+            self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
 
         if self._state_info['isBackReferenced']:
             self._re.appendleft('(')

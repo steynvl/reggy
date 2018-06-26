@@ -21,7 +21,7 @@ export class PerlComponent implements OnInit {
 
   changed() {
     const example = this.examples[this.selectedExample];
-    
+
     if (example.includes('__compile__')) {
       this.examples[this.selectedExample] = this.examples[this.selectedExample].replace('__compile__', this.generatedRegex.compiledRegex);
     } else {
