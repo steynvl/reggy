@@ -3,8 +3,11 @@ import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Title } from '@angular/platform-browser';
 
+import Viz from 'viz.js';
+import { Module, render } from 'viz.js/full.render.js';
+
 @Component({
-  selector: 'app-generate-induction',
+  selector: 'app-generate-inference',
   templateUrl: './generate.inference.component.html',
   styleUrls: ['./generate.inference.component.css']
 })
@@ -15,9 +18,22 @@ export class GenerateInferenceComponent implements OnInit {
               private titleService: Title) {
   }
 
-
   ngOnInit() {
     this.titleService.setTitle('Inference | Reggy');
+
+    let viz = new Viz({ Module, render });
+
+    viz.renderSVGElement('digraph { a -> b }')
+      .then(function(element) {
+        document.getElementById('dfa').appendChild(element);
+      })
+      .catch(error => {
+        /* create a new Viz instance (@see Caveats page for more info) */
+        viz = new Viz();
+
+        /* possibly display the error */
+        console.error(error);
+      });
   }
 
   // generateRegex() {
@@ -32,8 +48,8 @@ export class GenerateInferenceComponent implements OnInit {
   // }
 
 
-  // clickCopyToClipboard() {
-  //   this.toast.setMessage('Regex copied to clipboard! ', 'success');
-  // }
+  clickCopyToClipboard() {
+    this.toast.setMessage('Regex copied to clipboard! ', 'success');
+  }
 
 }

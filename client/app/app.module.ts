@@ -1,5 +1,4 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { JwtModule } from '@auth0/angular-jwt';
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -37,7 +36,7 @@ import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-i
 import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
 import { Ipv4AddressInfoComponent } from './common-use-case-components/ipv4-address-info/ipv4-address-info.component';
 import { CurrencyInfoComponent } from './common-use-case-components/currency-info/currency-info.component';
-import { BackreferenceInfoComponent } from './samples-components/backreference-info/backreference-info.component';
+import { BackReferenceInfoComponent } from './samples-components/back-reference-info/back-reference-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -49,10 +48,6 @@ import { JavaComponent } from './language-examples/java/java.component';
 import { PerlComponent } from './language-examples/perl/perl.component';
 
 import { DndModule } from 'ng2-dnd';
-
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
 
 @NgModule({
   declarations: [
@@ -82,7 +77,7 @@ export function tokenGetter() {
     NationalIdInfoComponent,
     Ipv4AddressInfoComponent,
     CurrencyInfoComponent,
-    BackreferenceInfoComponent,
+    BackReferenceInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent
@@ -94,12 +89,6 @@ export function tokenGetter() {
     DataTableModule,
     HighlightModule.forRoot({
       path: 'assets/lib/highlight'
-    }),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        // whitelistedDomains: ['localhost:3000', 'localhost:4200']
-      }
     }),
     DndModule.forRoot()
   ],

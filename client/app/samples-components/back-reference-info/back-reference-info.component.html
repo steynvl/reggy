@@ -2,14 +2,14 @@
 
   <div class="col-sm-2">
     <button type="button" class="btn pull-right" [ngStyle]="setButtonColour()">
-      {{ backreference.marker.id }}
+      {{ backReference.marker.id }}
     </button>
   </div>
 
   <div class="col-sm-9">
 
     <label for="options">Please select which marker's match you would like to backreference:</label>
-    <select id="options" class="form-control" [(ngModel)]="backreference.marker">
+    <select id="options" class="form-control" [(ngModel)]="backReference.marker">
 
       <option *ngFor="let option of options"
               [ngValue]="option">

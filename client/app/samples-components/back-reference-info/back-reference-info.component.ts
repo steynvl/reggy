@@ -1,20 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BackReference } from '../../models/samples/back-reference';
 import { Marker } from '../../models/marker';
 
 @Component({
-  selector: 'app-backreference-info',
-  templateUrl: './backreference-info.component.html',
-  styleUrls: ['./backreference-info.component.css']
+  selector: 'app-back-reference-info',
+  templateUrl: './back-reference-info.component.html',
+  styleUrls: ['./back-reference-info.component.css']
 })
-export class BackreferenceInfoComponent {
+export class BackReferenceInfoComponent implements OnInit {
 
-  @Input() backreference: BackReference;
+  @Input() backReference: BackReference;
   @Input() options: Array<Marker>;
+
+  ngOnInit() {
+    this.backReference.marker = this.options[0];
+  }
 
   setButtonColour(): any {
     return {
-      'background-color': this.backreference.marker.colour
+      'background-color': this.backReference.marker.colour
     };
   }
 

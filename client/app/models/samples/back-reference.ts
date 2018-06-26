@@ -1,5 +1,5 @@
 import { Marker } from '../marker';
 
-export interface Backreference {
+export interface BackReference {
   marker: Marker;
 }

@@ -25,7 +25,7 @@ import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 import { NumbersErr } from '../../models/samples/numbers-err';
 import { Container } from '../../models/alternation-container/container';
-import { Backreference } from '../../models/samples/backreference';
+import { BackReference } from '../../models/samples/back-reference';
 
 declare var jQuery: any;
 
@@ -52,7 +52,7 @@ export class GenerateSamplesComponent implements OnInit {
   matchAnything: MatchAnything;
   listOfLiteralText: ListOfLiteralText;
   numbers: Numbers;
-  backreference: Backreference;
+  backreference: BackReference;
 
   containers: Array<Container>;
 
@@ -203,7 +203,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
         this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
         this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
-        this.backreference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Backreference;
+        this.backreference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BackReference;
       }
 
     } else {
@@ -387,7 +387,7 @@ export class GenerateSamplesComponent implements OnInit {
 
       case 'Backreference match of preceding marker':
         this.backreference = {
-          marker: this.markedElements[0]
+          marker: undefined
         };
         this.markedElements[this.selectedMarkerIdx].markerInfo = this.backreference;
         break;
@@ -624,8 +624,93 @@ export class GenerateSamplesComponent implements OnInit {
     };
   }
 
-  getBackreferenceOptions(currMarkerId: number): Array<Marker> {
-    return this.markedElements.slice(0, currMarkerId);
+  canBackReference(idx: number): boolean {
+    for (let i = 0; i < idx; i++) {
+      switch (this.markedElements[i].fieldType) {
+
+        case 'Basic characters':
+          if (!(this.markedElements[i].markerInfo as BasicCharacters).matchAllExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Control characters':
+          if (!(this.markedElements[i].markerInfo as ControlCharacters).matchAllExceptSelectedOnes) {
+            return true;
+          }
+          continue;
+        case 'Digits':
+          return true;
+        case 'List of literal text':
+          if (!(this.markedElements[i].markerInfo as ListOfLiteralText).matchAnythingExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Literal text':
+          if (!(this.markedElements[i].markerInfo as LiteralText).matchAllExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Match anything':
+          continue;
+        case 'Numbers':
+          continue;
+        case 'Unicode characters':
+          if (!(this.markedElements[i].markerInfo as UnicodeCharacters).matchAllExceptSelectedOnes) {
+            return true;
+          }
+          continue;
+        default:
+          break;
+
+      }
+    }
+    return false;
+  }
+
+  getBackReferenceOptions(currMarkerId: number): Array<Marker> {
+    const options: Array<Marker> = [];
+
+    for (let i = 0; i < currMarkerId; i++) {
+      switch (this.markedElements[i].fieldType) {
+
+        case 'Basic characters':
+          if (!(this.markedElements[i].markerInfo as BasicCharacters).matchAllExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Control characters':
+          if (!(this.markedElements[i].markerInfo as ControlCharacters).matchAllExceptSelectedOnes) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Digits':
+          options.push(this.markedElements[i]);
+          continue;
+        case 'List of literal text':
+          if (!(this.markedElements[i].markerInfo as ListOfLiteralText).matchAnythingExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Literal text':
+          if (!(this.markedElements[i].markerInfo as LiteralText).matchAllExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Match anything':
+          continue;
+        case 'Numbers':
+          continue;
+        case 'Unicode characters':
+          if (!(this.markedElements[i].markerInfo as UnicodeCharacters).matchAllExceptSelectedOnes) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        default:
+          break;
+
+      }
+    }
+    return options;
   }
 
 }
