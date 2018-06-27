@@ -16,7 +16,7 @@ export class InferrerService {
     const httpHeaders = new HttpHeaders()
       .set('Content-Type', 'application/json');
 
-    return this.http.post<InferrerResponse>('/api/inference', {
+    return this.http.post<InferrerResponse>('/api/inferrer', {
         headers: httpHeaders,
         params : serializedPayload
     });

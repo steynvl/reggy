@@ -37,7 +37,7 @@ export default class GenerateCtrl {
 
 }
 
-export function spawnChildProcess(samples) {
+function spawnChildProcess(samples) {
   const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'main.py');
   return child_process.spawn('python3', [pathToRegex].concat(samples));
 }

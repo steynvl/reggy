@@ -76,7 +76,7 @@
 
           <label class="btn btn-outline-primary" for="my-file-selector">
             <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
-            Upload file
+            <i class="fa fa-upload"></i> Upload file
           </label>
 
         </div>
@@ -228,7 +228,7 @@
 
               <app-back-reference-info
                 *ngIf="markedElement.fieldType === 'Backreference match of preceding marker'"
-                [backReference]="backreference"
+                [backReference]="backReference"
                 [options]="getBackReferenceOptions(idx)">
               </app-back-reference-info>
 

@@ -52,7 +52,7 @@ export class GenerateSamplesComponent implements OnInit {
   matchAnything: MatchAnything;
   listOfLiteralText: ListOfLiteralText;
   numbers: Numbers;
-  backreference: BackReference;
+  backReference: BackReference;
 
   containers: Array<Container>;
 
@@ -203,7 +203,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
         this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
         this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
-        this.backreference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BackReference;
+        this.backReference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BackReference;
       }
 
     } else {
@@ -386,10 +386,10 @@ export class GenerateSamplesComponent implements OnInit {
         break;
 
       case 'Backreference match of preceding marker':
-        this.backreference = {
+        this.backReference = {
           marker: undefined
         };
-        this.markedElements[this.selectedMarkerIdx].markerInfo = this.backreference;
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.backReference;
         break;
 
       default:
