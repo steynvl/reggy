@@ -1,0 +1,69 @@
+<br />
+
+<div *ngIf="!hasStarted">
+  <div class="row">
+    <div class="col-sm-12">
+      <p class="text">You will play the role as the <i>Oracle</i> (Minimally Adequate Teacher).
+        You know of a regular language <ng-katex [equation]="'\\mathcal{L}'"></ng-katex> and
+        will assist the learner L*, whom is trying to learn <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>.
+        L* will ask you two types of queries:
+      </p>
+
+    </div>
+  </div>
+
+  <dl class="row list">
+    <dt class="col-sm-3">Membership queries (MQs)</dt>
+    <dd class="col-sm-9">
+      L* will ask you whether a given string <ng-katex [equation]="'w \\in \\Sigma^*'"></ng-katex>
+      is in the target language <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>.
+    </dd>
+
+    <dt class="col-sm-3">Equivalence queries (EQ)</dt>
+    <dd class="col-sm-9">
+      <p>
+        L* will propose to to you some hypothesis, i.e. a DFA <ng-katex [equation]="'\\mathcal{A}'"></ng-katex>
+        describing some language.
+      </p>
+      <p>
+        If <ng-katex [equation]="'L(\\mathcal{A}) = \\mathcal{L}'"></ng-katex>, i.e. the
+        DFA <ng-katex [equation]="'\\mathcal{A}'"></ng-katex> proposed by L* correctly describes
+        <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>, then the algorithm converges.
+        If <ng-katex [equation]="'L(\\mathcal{A}) \\neq \\mathcal{L}'"></ng-katex>, then you
+        have to submit a counter-example <ng-katex [equation]="'w \\in \\Sigma^*'"></ng-katex>,
+        where <ng-katex [equation]="'w'"></ng-katex> is a string that does not belong in the
+        target language <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>, but is currently
+        accepted by the hypothesis <ng-katex [equation]="'\\mathcal{A}'"></ng-katex>.
+      </p>
+
+    </dd>
+  </dl>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p class="text">When you click <small>START</small>, the interactive learning process will begin.
+        Before L* starts making queries you will first have to specify what the alphabet
+        <ng-katex [equation]="'\\Sigma'"></ng-katex> of the target language
+        <ng-katex [equation]="'\\mathcal{L}'"></ng-katex> is. You can also provide optional positive
+        example strings, i.e. strings that belong in the target language, this will speed up the learning
+        process, since L* will have less membership queries to make.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button type="button" class="btn btn-lg btn-primary">
+        START
+      </button>
+      <br />
+      <br />
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!hasStarted">
+
+</div>

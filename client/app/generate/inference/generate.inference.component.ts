@@ -17,7 +17,7 @@ export class GenerateInferenceComponent implements OnInit {
   isLoading = false;
 
   payload: PayloadInferrer;
-  algorithm: string;
+  algorithm: string = 'Interactive Angluin Learning (L*)';
   positiveExamples = '';
   negativeExamples = '';
   dfaIsDisplayed = false;

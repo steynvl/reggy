@@ -50,6 +50,7 @@
     "jquery": "^3.3.1",
     "jquery-highlighttextarea": "^3.2.1",
     "morgan": "^1.9.0",
+    "ng-katex": "^1.0.3",
     "ng2-dnd": "^5.0.2",
     "ngx-clipboard": "^10.0.0",
     "ngx-highlightjs": "^1.4.1",

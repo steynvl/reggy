@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
 import { GenerateInferenceComponent } from './generate/inference/generate.inference.component';
+import { InteractiveLstarComponent } from './generate/inference/interactive-lstar/interactive-lstar.component';
 
 import { GenerateService } from './services/generate.service';
 import { VerificationService } from './services/verification.service';
@@ -49,6 +50,8 @@ import { PerlComponent } from './language-examples/perl/perl.component';
 
 import { DndModule } from 'ng2-dnd';
 
+import { KatexModule } from 'ng-katex';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +61,7 @@ import { DndModule } from 'ng2-dnd';
     GenerateSamplesComponent,
     GenerateCommonComponent,
     GenerateInferenceComponent,
+    InteractiveLstarComponent,
     LiteralTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
@@ -90,7 +94,8 @@ import { DndModule } from 'ng2-dnd';
     HighlightModule.forRoot({
       path: 'assets/lib/highlight'
     }),
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    KatexModule
   ],
   providers: [GenerateService,
               VerificationService,
