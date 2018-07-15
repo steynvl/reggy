@@ -1,6 +1,6 @@
 <br />
 
-<div *ngIf="!hasStarted">
+<div *ngIf="isReading">
   <div class="row">
     <div class="col-sm-12">
       <p class="text">You will play the role as the <i>Oracle</i> (Minimally Adequate Teacher).
@@ -54,7 +54,7 @@
 
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button type="button" class="btn btn-lg btn-primary">
+      <button type="button" class="btn btn-lg btn-primary" (click)="finishedInfoRead()">
         START
       </button>
       <br />
@@ -64,6 +64,80 @@
 
 </div>
 
-<div *ngIf="!hasStarted">
+<div *ngIf="providingInfo">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p class="text">
+        Please provide us with the alphabet <ng-katex [equation]="'\\Sigma'"></ng-katex>
+        of the regular language <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="alphabet"><ng-katex [equation]="'\\Sigma'"></ng-katex> =</label>
+      <input type="text" class="form-control" [(ngModel)]="alphabet"
+             placeholder="Characters in the alphabet (e.g. 'abc')" id="alphabet">
+
+      <small class="text-danger" *ngIf="provideInfoErr">
+        The alphabet has to contain atleast one symbol!
+      </small>
+
+    </div>
+  </div>
+
+  <div class="row move-down-3">
+    <div class="col-sm-12">
+      <p class="text">
+        Optionally you can also provide us with some positive example strings, i.e. strings
+        that belong in the target language <ng-katex [equation]="'\\mathcal{L}'"></ng-katex>.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <textarea [(ngModel)]="positiveExamples" class="form-control"
+                rows="8" placeholder="Positive example strings separated by newlines...">
+              </textarea>
+      <div class="move-down">
+        <label class="btn btn-outline-primary" for="positive-examples">
+          <input id="positive-examples" type="file"
+                 (change)="fileChange($event, true)"
+                 style="display:none;" accept=".txt">
+          <i class="fa fa-upload"></i> Upload file
+        </label>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row move-down">
+    <div class="col-sm-12 text-center">
+      <button type="button" class="btn btn-lg btn-primary" (click)="startLearning()">
+        START LEARNING
+      </button>
+      <br />
+      <br />
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isInferring">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p class="text">
+        :)
+      </p>
+    </div>
+  </div>
+
 
 </div>

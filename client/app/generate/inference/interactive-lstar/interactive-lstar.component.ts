@@ -14,7 +14,13 @@ import { Module, render } from 'viz.js/full.render.js';
 export class InteractiveLstarComponent implements OnInit {
 
   isLoading = false;
-  hasStarted = false;
+
+  isReading = true;
+  providingInfo = false;
+  provideInfoErr = false;
+  isInferring = false;
+
+  alphabet = '';
 
   payload: PayloadInferrer;
   positiveExamples = '';
@@ -22,12 +28,16 @@ export class InteractiveLstarComponent implements OnInit {
   regex: string;
 
   constructor(private inferrerService: InferrerService,
-              public toast: ToastComponent) {
-  }
+              public toast: ToastComponent) { }
 
   ngOnInit() {
     this.isLoading = false;
-    this.hasStarted = false;
+
+    this.isReading = true;
+    this.providingInfo = false;
+    this.provideInfoErr = false;
+    this.isInferring = false;
+
     this.payload = {
       positiveExamples : undefined,
       negativeExamples : undefined,
@@ -58,6 +68,22 @@ export class InteractiveLstarComponent implements OnInit {
     //   });
   }
 
+  finishedInfoRead() {
+    this.isReading = false;
+    this.providingInfo = true;
+  }
+
+  startLearning() {
+    if (this.alphabet === '') {
+      this.provideInfoErr = true;
+    } else {
+      this.payload.positiveExamples = this.positiveExamples.split('\n');
+      this.provideInfoErr = false;
+      this.providingInfo = false;
+      this.isInferring = true;
+    }
+  }
+
   fileChange(event, positiveExamples: boolean) {
     const fileList: FileList = event.target.files;
 
@@ -66,9 +92,14 @@ export class InteractiveLstarComponent implements OnInit {
       reader.readAsText(fileList[0]);
 
       reader.onload = () => {
-        console.log(reader.result);
+        this.positiveExamples = reader.result;
       };
     }
+
+  }
+
+  finishedReading() {
+    this.isReading = false;
 
   }
 
