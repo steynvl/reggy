@@ -84,7 +84,7 @@ export class InteractiveLstarComponent implements OnInit {
     }
   }
 
-  fileChange(event, positiveExamples: boolean) {
+  fileChange(event) {
     const fileList: FileList = event.target.files;
 
     if (fileList.length === 1) {

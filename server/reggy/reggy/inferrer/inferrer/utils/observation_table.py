@@ -1,4 +1,5 @@
 import collections
+import copy
 from typing import Set, Tuple, Generator
 
 
@@ -239,3 +240,14 @@ class ObservationTable:
             for e, val in col.items():
                 if val is None:
                     yield u, e
+
+    def copy(self):
+        ot = ObservationTable(self._blue.copy(),
+                              self._red.copy(),
+                              self._alphabet.copy())
+
+        ot.ot = copy.deepcopy(self.ot)
+        ot.exp = self.exp.copy()
+        ot.sta = self.sta.copy()
+
+        return ot
