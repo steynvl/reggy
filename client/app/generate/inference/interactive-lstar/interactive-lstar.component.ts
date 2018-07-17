@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InferrerService } from '../../../services/inferrer.service';
 import { ToastComponent } from '../../../shared/toast/toast.component';
-import { PayloadInferrer } from '../../../models/payload/payload-inferrer';
+import { PayloadInteractiveLstar } from '../../../models/payload/payload-interactive-lstar';
+import { InteractiveResponse } from '../../../models/server-response/interactive-response';
 
 import Viz from 'viz.js';
 import { Module, render } from 'viz.js/full.render.js';
@@ -21,9 +22,17 @@ export class InteractiveLstarComponent implements OnInit {
   isInferring = false;
 
   alphabet = '';
-
-  payload: PayloadInferrer;
   positiveExamples = '';
+
+  payload: PayloadInteractiveLstar;
+  response: InteractiveResponse;
+
+  getEquivalenceQuery = false;
+  counterExample: string;
+
+  state: string;
+  membershipQueries: Array<string>;
+  membershipAnswers: object;
 
   regex: string;
 
@@ -37,35 +46,6 @@ export class InteractiveLstarComponent implements OnInit {
     this.providingInfo = false;
     this.provideInfoErr = false;
     this.isInferring = false;
-
-    this.payload = {
-      positiveExamples : undefined,
-      negativeExamples : undefined,
-      algorithm        : undefined,
-      satisfied        : undefined,
-      equivalenceQuery : undefined,
-      membershipQueries: undefined
-    };
-
-  }
-
-  constructPayload() {
-
-  }
-
-  inferGrammar() {
-
-  }
-
-  showDfa(dot: string) {
-    // const viz = new Viz({ Module, render });
-    //
-    // viz.renderSVGElement(dot)
-    //   .then(element => {
-    //     this.dfaIsDisplayed = true;
-    //     document.getElementById('dfa').innerHTML = '';
-    //     document.getElementById('dfa').appendChild(element);
-    //   });
   }
 
   finishedInfoRead() {
@@ -77,11 +57,124 @@ export class InteractiveLstarComponent implements OnInit {
     if (this.alphabet === '') {
       this.provideInfoErr = true;
     } else {
-      this.payload.positiveExamples = this.positiveExamples.split('\n');
       this.provideInfoErr = false;
       this.providingInfo = false;
       this.isInferring = true;
+
+      this.membershipAnswers = {};
+      this.state = 'start';
+
+      this.membershipQueries = this.alphabet.split('');
+      this.membershipQueries.push('');
+      this.membershipQueries = this.removeDuplicates(this.membershipQueries);
+      this.membershipQueries.forEach(mq => this.membershipAnswers[mq] = false);
     }
+  }
+
+  submitMembershipQueries() {
+    this.payload = {
+      algorithm: 'interactive lstar',
+      positiveExamples: [],
+      alphabet: this.removeDuplicates(this.alphabet.split('')),
+      stage: undefined,
+      blue: undefined,
+      red: undefined,
+      observationTable: undefined,
+      exp: undefined,
+      sta: undefined,
+      queryAnswers: this.membershipAnswers,
+      counterExample: this.counterExample,
+      closedMembershipQueries: false,
+      consistentMembershipQueries: false
+    };
+
+    if (this.state === 'start') {
+      this.payload.stage = 'start';
+    } else {
+      if (this.state === 'equivalenceQueries') {
+        this.payload.stage = 'equivalenceQueries';
+      } else {
+        this.payload.stage = 'membershipQueries';
+      }
+
+      if (this.response.stage === 'closedMembershipQueries') {
+        this.payload.closedMembershipQueries = true;
+      } else if (this.response.stage === 'consistentMembershipQueries') {
+        this.payload.consistentMembershipQueries = true;
+      }
+      this.payload.blue = this.response.blue;
+      this.payload.red = this.response.red;
+      this.payload.observationTable = this.response.observationTable;
+      this.payload.exp = this.response.exp;
+      this.payload.sta = this.response.sta;
+    }
+
+    this.isLoading = true;
+    this.inferrerService.interactiveLstar(this.payload).subscribe(
+      data => {
+        this.response = data;
+
+        if (data.stage === 'eq') {
+          this.showHypothesis();
+        } else {
+          this.state = 'mq';
+          this.membershipQueries = data.mq;
+          this.membershipQueries.forEach(mq => this.membershipAnswers[mq] = false);
+        }
+        this.isLoading = false;
+      },
+      _ => {
+        // TODO
+        this.toast.setMessage('An unexpected error occurred on the server!', 'danger');
+        this.isLoading = false;
+      }
+    );
+  }
+
+  showHypothesis() {
+    this.getEquivalenceQuery = false;
+    this.state = 'eq';
+
+    const viz = new Viz({ Module, render });
+    viz.renderSVGElement(this.response.dot)
+      .then(element => {
+        document.getElementById('dfa').innerHTML = '';
+        document.getElementById('dfa').appendChild(element);
+      });
+  }
+
+  submitEquivalenceQuery() {
+    this.payload = {
+      algorithm: 'interactive lstar',
+      positiveExamples: [],
+      alphabet: this.removeDuplicates(this.alphabet.split('')),
+      stage: 'counterExample',
+      blue: this.response.blue,
+      red: this.response.red,
+      observationTable: this.response.observationTable,
+      exp: this.response.exp,
+      sta: this.response.sta,
+      queryAnswers: this.membershipAnswers,
+      counterExample: this.counterExample,
+      closedMembershipQueries: false,
+      consistentMembershipQueries: false
+    };
+
+    this.isLoading = true;
+    this.inferrerService.interactiveLstar(this.payload).subscribe(
+      data => {
+        this.state = 'equivalenceQueries';
+        this.response = data;
+        this.membershipQueries = data.mq;
+        this.membershipQueries.forEach(mq => this.membershipAnswers[mq] = false);
+        this.isLoading = false;
+      },
+      _ => {
+        // TODO
+        this.toast.setMessage('An unexpected error occurred on the server!', 'danger');
+        this.isLoading = false;
+      }
+    );
   }
 
   fileChange(event) {
@@ -98,9 +191,8 @@ export class InteractiveLstarComponent implements OnInit {
 
   }
 
-  finishedReading() {
-    this.isReading = false;
-
+  removeDuplicates(values: Array<string>): Array<string> {
+    return values.filter((e, i) => values.indexOf(e) === i);
   }
 
   clickCopyToClipboard() {

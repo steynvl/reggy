@@ -131,12 +131,134 @@
 
 <div *ngIf="isInferring">
 
-  <div class="row">
-    <div class="col-sm-12">
-      <p class="text">
-        :)
-      </p>
+  <div *ngIf="state === 'start' || state === 'mq' || state === 'equivalenceQueries'">
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="text">
+          Please answer the following Membership queries (MQs). If the string
+          <ng-katex [equation]="'w \\in \\mathcal{L}'"></ng-katex>, then tick the
+          checkbox, if <ng-katex [equation]="'w \\notin \\mathcal{L}'"></ng-katex>,
+          then leave the checkbox unticked.
+        </p>
+      </div>
     </div>
+
+    <div *ngFor="let _ of membershipQueries; let i = index">
+
+      <div *ngIf="i % 3 === 0" class="row">
+
+        <div class="col-sm-4">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value=""
+                     [checked]="membershipAnswers[membershipQueries[i]]"
+                     (change)="membershipAnswers[membershipQueries[i]] = !membershipAnswers[membershipQueries[i]]">
+              <div *ngIf="membershipQueries[i] === ''"><ng-katex [equation]="'\\varepsilon'"></ng-katex></div>
+              <div *ngIf="membershipQueries[i] !== ''">{{ membershipQueries[i] }}</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div *ngIf="i + 1 < membershipQueries.length" class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value=""
+                     [checked]="membershipAnswers[membershipQueries[i + 1]]"
+                     (change)="membershipAnswers[membershipQueries[i + 1]] = !membershipAnswers[membershipQueries[i + 1]]">
+              <div *ngIf="membershipQueries[i + 1] === ''"><ng-katex [equation]="'\\varepsilon'"></ng-katex></div>
+              <div *ngIf="membershipQueries[i + 1] !== ''">{{ membershipQueries[i + 1] }}</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div *ngIf="i + 2 < membershipQueries.length" class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value=""
+                     [checked]="membershipAnswers[membershipQueries[i + 2]]"
+                     (change)="membershipAnswers[membershipQueries[i + 2]] = !membershipAnswers[membershipQueries[i + 2]]">
+              <div *ngIf="membershipQueries[i + 2] === ''"><ng-katex [equation]="'\\varepsilon'"></ng-katex></div>
+              <div *ngIf="membershipQueries[i + 2] !== ''">{{ membershipQueries[i + 2] }}</div>
+            </label>
+          </div>
+        </div>
+
+        <br />
+
+      </div>
+
+    </div>
+
+    <div class="row move-down-2">
+      <div class="col-sm-12 text-center">
+        <button type="button" class="btn btn-lg btn-primary" (click)="submitMembershipQueries()">
+          SUBMIT MQs
+        </button>
+        <br />
+        <br />
+      </div>
+    </div>
+
+  </div>
+
+  <div [ngClass]="{'hide': state !== 'eq'}">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center"><strong>Hypothesis proposed by L*</strong></h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <div id="dfa"></div>
+              </div>
+            </div>
+
+            <br />
+
+            <div *ngIf="!getEquivalenceQuery">
+              <div class="row">
+                <div class="col-sm-6 text-center">
+                  <button type="button" class="btn btn-lg btn-primary">
+                    CORRECT
+                  </button>
+                </div>
+                <div class="col-sm-6 text-center">
+                  <button type="button" class="btn btn-lg btn-primary" (click)="getEquivalenceQuery = true">
+                    INCORRECT
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="getEquivalenceQuery">
+              <div class="row">
+                <div class="col-sm-3"></div>
+
+                <div class="col-sm-6">
+                  <label for="counter-example">Equivalence query:</label>
+                  <div class="input-group">
+                    <input id="counter-example" type="text" class="form-control"
+                           placeholder="Counterexample" [(ngModel)]="counterExample">
+                    <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="submitEquivalenceQuery()">SUBMIT</button>
+                  </span>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-3"></div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

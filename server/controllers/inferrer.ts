@@ -18,19 +18,29 @@ export default class InferrerCtrl {
 
     py.on('close', (code) => {
       res.setHeader('Content-Type', 'application/json');
+      const samplesObj = JSON.parse(samples);
 
       let deserialized;
       if (code === 0) {
         deserialized = JSON.parse(output);
+
+        if (samplesObj.algorithm === 'interactive lstar') {
+          deserialized.code = 0;
+          res.send(JSON.stringify(deserialized));
+        } else {
+          const serverResponse: ServerResponse = {
+            regex        : deserialized.regex,
+            dot          : deserialized.dot,
+            code         : code
+          };
+
+          res.send(JSON.stringify(serverResponse));
+        }
+      } else {
+        console.log('kanker');
+        // TODO
       }
 
-      const serverResponse: ServerResponse = {
-        regex        : deserialized.regex,
-        dot          : deserialized.dot,
-        code         : code
-      };
-
-      res.send(JSON.stringify(serverResponse));
     });
 
   }
@@ -38,13 +48,12 @@ export default class InferrerCtrl {
 }
 
 function spawnChildProcess(info) {
-  const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'reggy', 'inferrer',  'main.py');
-  return child_process.spawn('python3', [pathToRegex].concat(info));
+  const pathToMain = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'reggy', 'inference',  'main.py');
+  return child_process.spawn('python3', [pathToMain].concat(info));
 }
 
 interface ServerResponse {
   code: number;
   regex: string;
   dot: string;
-
 }
