@@ -106,6 +106,8 @@ class CommonUseCases:
             compiled_re = regex[:]
         elif target == Target.PYTHON:
             compiled_re = 'regex = re.compile(r\'{}\')'.format(regex)
+        elif target == Target.JAVASCRIPT:
+            compiled_re = 'const regex = /{}/;'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

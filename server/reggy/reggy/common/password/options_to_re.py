@@ -54,6 +54,19 @@ opt_to_re = {
         'Letter or digit': '[A-Za-z0-9]'
     },
 
+    Target.JAVASCRIPT: {
+        'Anything': '',
+        'Digit': '\\d',
+        'Lowercase letter': '[a-z]',
+        'Minus': '-',
+        'Whitespace': '\\s',
+        'Special character': '[!"#$%&\'()*+,-.:;<=>?@\\[\\]^_`{|}~]',
+        'Letter': '[A-Za-z]',
+        'Underline': '_',
+        'Uppercase letter': '[A-Z]',
+        'Letter or digit': '[A-Za-z0-9]'
+    }
+
 }
 
 

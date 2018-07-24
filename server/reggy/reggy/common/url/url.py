@@ -84,7 +84,7 @@ class Url:
                 max_depth = int(self._info.max_folder_depth)
                 self._re.append(self._get_folder_depth_range(min_depth, max_depth))
 
-        if self._target == Target.PERL:
+        if self._target == Target.PERL or self._target == Target.JAVASCRIPT:
             self._re.append('\/?')
         else:
             self._re.append('/?')

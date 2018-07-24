@@ -22,6 +22,11 @@ braces_to_re = {
         'Optional'   : '%s|\\{%s}'
     },
 
+    Target.JAVASCRIPT: {
+        'Required': '\\{%s}',
+        'Optional': '%s|\\{%s}'
+    }
+
 }
 
 case_to_re = {
@@ -49,5 +54,11 @@ case_to_re = {
         'Uppercase': '[\\dA-F]',
         'Lowercase': '[\\da-f]'
     },
+
+    Target.JAVASCRIPT: {
+        'Case insensitive': '[\\dA-Fa-f]',
+        'Uppercase': '[\\dA-F]',
+        'Lowercase': '[\\da-f]'
+    }
 
 }

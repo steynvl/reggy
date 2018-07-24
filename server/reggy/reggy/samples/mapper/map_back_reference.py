@@ -18,11 +18,7 @@ class MapBackReference:
     def _map_info(self):
         if self._target_lang == Target.JAVA:
             self._re.append('\\\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
-        elif self._target_lang == Target.PERL:
-            self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
-        elif self._target_lang == Target.POSIX:
-            self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
-        elif self._target_lang == Target.PYTHON:
+        else:
             self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
 
         if self._state_info['isBackReferenced']:

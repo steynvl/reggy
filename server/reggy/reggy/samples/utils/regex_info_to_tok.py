@@ -7,6 +7,7 @@ regex_info_to_tok = {
     'Perl'         : Target.PERL,
     'POSIX'        : Target.POSIX,
     'Python'       : Target.PYTHON,
+    'JavaScript'   : Target.JAVASCRIPT,
 
     'Anywhere'     : RegexExtraInfo.ANYWHERE,
     'Start of text': RegexExtraInfo.START_OF_TEXT,
