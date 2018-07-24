@@ -21,9 +21,7 @@ class MapDigits:
         if len(marker_info) == 10:
             if self._target_lang == Target.JAVA:
                 self._re.append('\\\\d')
-            elif self._target_lang == Target.PERL:
-                self._re.append('\\d')
-            elif self._target_lang == Target.POSIX:
+            else:
                 self._re.append('\\d')
         else:
             self._re.append(self._calculate_character_class(marker_info))

@@ -104,6 +104,8 @@ class CommonUseCases:
             compiled_re = ' my $regex = /{}/;'.format(regex)
         elif target == Target.POSIX:
             compiled_re = regex[:]
+        elif target == Target.PYTHON:
+            compiled_re = 'regex = re.compile(r\'{}\')'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

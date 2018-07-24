@@ -102,6 +102,13 @@ class SamplesAndSemantics:
         elif target == Target.POSIX:
             pass
 
+        elif target == Target.PYTHON:
+            if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
+                compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
+                compiled_re = 'regex = re.compile(r\'{}\', re.IGNORECASE)'.format(compiled_re)
+            else:
+                compiled_re = 'regex = re.compile(r\'{}\')'.format(compiled_re)
+
         self._re['compiledRegex'] = compiled_re
 
     @staticmethod

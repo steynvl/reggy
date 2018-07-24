@@ -22,6 +22,8 @@ class MapBackReference:
             self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
         elif self._target_lang == Target.POSIX:
             self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
+        elif self._target_lang == Target.PYTHON:
+            self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
 
         if self._state_info['isBackReferenced']:
             self._re.appendleft('(')

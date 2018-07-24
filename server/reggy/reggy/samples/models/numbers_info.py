@@ -3,7 +3,7 @@ from reggy.samples.parser.repetition_info import RepetitionInfo
 
 class NumbersInfo:
 
-    def __init__(self, info, marker_id):
+    def __init__(self, marker_id, info):
         self.marker_id = marker_id
         self.min_val_of_int_part              = info['minValOfIntPart']
         self.max_val_of_int_part              = info['maxValOfIntPart']

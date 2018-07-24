@@ -15,7 +15,12 @@ braces_to_re = {
     Target.POSIX: {
         'Required'   : '\\{%s}',
         'Optional'   : '%s|\\{%s}'
-    }
+    },
+
+    Target.PYTHON: {
+        'Required'   : '\\{%s}',
+        'Optional'   : '%s|\\{%s}'
+    },
 
 }
 
@@ -37,6 +42,12 @@ case_to_re = {
         'Case insensitive': '[\\dA-Fa-f]',
         'Uppercase'       : '[\\dA-F]',
         'Lowercase'       : '[\\da-f]'
-    }
+    },
+
+    Target.PYTHON: {
+        'Case insensitive': '[\\dA-Fa-f]',
+        'Uppercase': '[\\dA-F]',
+        'Lowercase': '[\\da-f]'
+    },
 
 }
