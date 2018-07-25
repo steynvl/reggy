@@ -110,6 +110,8 @@ class CommonUseCases:
             compiled_re = 'const regex = /{}/;'.format(regex)
         elif target == Target.PHP:
             compiled_re = '$regex = \'/{}/\';'.format(regex)
+        elif target == Target.GOLANG:
+            compiled_re = 'regex, _ := regexp.Compile("{}")'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

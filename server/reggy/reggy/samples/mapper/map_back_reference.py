@@ -16,7 +16,7 @@ class MapBackReference:
         return ''.join(self._re)
 
     def _map_info(self):
-        if self._target_lang == Target.JAVA:
+        if self._target_lang == Target.JAVA or self._target_lang == Target.GOLANG:
             self._re.append('\\\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))
         else:
             self._re.append('\\{}'.format(self._state_info['markerToReference'][self._info.marker['id']]))

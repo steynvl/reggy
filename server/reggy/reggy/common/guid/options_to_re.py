@@ -30,6 +30,11 @@ braces_to_re = {
     Target.PHP: {
       'Required': '\\{%s}',
       'Optional': '%s|\\{%s}'
+    },
+
+    Target.GOLANG: {
+        'Required': '\\\\{%s}',
+        'Optional': '%s|\\\\{%s}'
     }
 
 }
@@ -70,6 +75,12 @@ case_to_re = {
       'Case insensitive': '[\\dA-Fa-f]',
       'Uppercase': '[\\dA-F]',
       'Lowercase': '[\\da-f]'
+    },
+
+    Target.GOLANG: {
+        'Case insensitive': '[\\\\dA-Fa-f]',
+        'Uppercase': '[\\\\dA-F]',
+        'Lowercase': '[\\\\da-f]'
     }
 
 }

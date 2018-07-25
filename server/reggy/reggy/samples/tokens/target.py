@@ -8,3 +8,4 @@ class Target(Enum):
     PYTHON     = 4
     JAVASCRIPT = 5
     PHP        = 6
+    GOLANG     = 7

@@ -9,6 +9,7 @@ regex_info_to_tok = {
     'Python'       : Target.PYTHON,
     'JavaScript'   : Target.JAVASCRIPT,
     'PHP'          : Target.PHP,
+    'Golang'       : Target.GOLANG,
 
     'Anywhere'     : RegexExtraInfo.ANYWHERE,
     'Start of text': RegexExtraInfo.START_OF_TEXT,

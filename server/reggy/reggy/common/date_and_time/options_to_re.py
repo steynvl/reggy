@@ -155,6 +155,26 @@ options_to_re = {
         'PM': 'PM',
         'AM/PM': '(?:AM|PM)'
       }
+    },
+
+    Target.GOLANG: {
+        'dateSeparators': {
+            'Forward slash': '/',
+            'Hyphen': '-',
+            'Dot': '\\\\.',
+            'Slash, hyphen or dot': '[-/.]'
+        },
+        'timeSeparators': {
+            'Colon': ':',
+            'Dot': '\\\\.',
+            'Colon or dot': '[:.]'
+
+        },
+        'amPmIndicators': {
+            'AM': 'AM',
+            'PM': 'PM',
+            'AM/PM': '(?:AM|PM)'
+        }
     }
 
 }
