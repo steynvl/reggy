@@ -52,4 +52,14 @@ opt_to_re = {
         'Number': '\\d'
     },
 
+    Target.PHP: {
+      'Anything': '',
+      'Letter': '[A-Za-z]',
+      'Uppercase letter': '[A-Z]',
+      'Lowercase letter': '[a-z]',
+      'Letter or number': '[A-Za-z0-9]',
+      'Special character': '[!"#$%&\'()*+,-.:;<=>?@\[\]^_`{|}~]',
+      'Number': '\\d'
+    }
+
 }

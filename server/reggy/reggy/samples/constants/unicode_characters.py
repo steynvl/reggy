@@ -221,4 +221,38 @@ unicode_char_to_re = {
         UnicodeCharactersTok.UNASSIGNED_CHARACTERS: '\\p{Cn}'
     },
 
+    Target.PHP: {
+      UnicodeCharactersTok.LOWERCASE_LETTERS: '\\p{Ll}',
+      UnicodeCharactersTok.UPPERCASE_LETTERS: '\\p{Lu}',
+      UnicodeCharactersTok.TITLE_CASE_LETTERS: '\\p{Lt}',
+      UnicodeCharactersTok.CASED_LETTERS: '\\p{L}',
+      UnicodeCharactersTok.MODIFIER_LETTERS: '\\p{Lm}',
+      UnicodeCharactersTok.OTHER_LETTERS: '\\p{Lo}',
+      UnicodeCharactersTok.NON_SPACING_MARKS: '\\p{Mn}',
+      UnicodeCharactersTok.SPACING_COMBINING_MARKS: '\\p{Mc}',
+      UnicodeCharactersTok.ENCLOSING_MARKS: '\\p{Me}',
+      UnicodeCharactersTok.SPACE_SEPARATORS: '\\p{Zs}',
+      UnicodeCharactersTok.LINE_SEPARATORS: '\\p{Zl}',
+      UnicodeCharactersTok.PARAGRAPH_SEPARATORS: '\\p{Zp}',
+      UnicodeCharactersTok.MATH_SYMBOLS: '\\p{Sm}',
+      UnicodeCharactersTok.CURRENCY_SYMBOLS: '\\p{Sc}',
+      UnicodeCharactersTok.MODIFIER_SYMBOLS: '\\p{Sk}',
+      UnicodeCharactersTok.OTHER_SYMBOLS: '\\p{So}',
+      UnicodeCharactersTok.DECIMAL_DIGIT_NUMBERS: '\\p{Nd}',
+      UnicodeCharactersTok.LETTER_NUMBERS: '\\p{Nl}',
+      UnicodeCharactersTok.OTHER_NUMBERS: '\\p{No}',
+      UnicodeCharactersTok.DASH_PUNCTUATION: '\\p{Pd}',
+      UnicodeCharactersTok.OPEN_PUNCTUATION: '\\p{Ps}',
+      UnicodeCharactersTok.CLOSE_PUNCTUATION: '\\p{Pe}',
+      UnicodeCharactersTok.INITIAL_PUNCTUATION: '\\p{Pi}',
+      UnicodeCharactersTok.FINAL_PUNCTUATION: '\\p{Pf}',
+      UnicodeCharactersTok.CONNECTOR_PUNCTUATION: '\\p{Pc}',
+      UnicodeCharactersTok.OTHER_PUNCTUATION: '\\p{Po}',
+      UnicodeCharactersTok.CONTROL_CHARACTERS: '\\p{Cc}',
+      UnicodeCharactersTok.FORMAT_CHARACTERS: '\\p{Cf}',
+      UnicodeCharactersTok.PRIVATE_USE_CHARACTERS: '\\p{Co}',
+      UnicodeCharactersTok.SURROGATE_CHARACTERS: '\\p{Cs}',
+      UnicodeCharactersTok.UNASSIGNED_CHARACTERS: '\\p{Cn}'
+    }
+
 }

@@ -53,4 +53,14 @@ basic_characters_to_re = {
         BasicCharactersTok.LINE_BREAKS: '\\r\\n',
     },
 
+    Target.PHP: {
+      BasicCharactersTok.LOWER_CASE_LETTERS: 'a-z',
+      BasicCharactersTok.UPPER_CASE_LETTERS: 'A-Z',
+      BasicCharactersTok.DIGITS: '\\d',
+      BasicCharactersTok.PUNCTUATION_AND_SYMBOLS: '\\p{P}',
+      BasicCharactersTok.MATCH_ALL_EXCEPT_SPECIFIED: '^',
+      BasicCharactersTok.WHITE_SPACE: '\\s',
+      BasicCharactersTok.LINE_BREAKS: '\\r\\n',
+    }
+
 }

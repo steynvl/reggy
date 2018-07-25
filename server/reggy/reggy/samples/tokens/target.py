@@ -7,3 +7,4 @@ class Target(Enum):
     POSIX      = 3
     PYTHON     = 4
     JAVASCRIPT = 5
+    PHP        = 6

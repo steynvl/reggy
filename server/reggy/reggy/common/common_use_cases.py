@@ -108,6 +108,8 @@ class CommonUseCases:
             compiled_re = 'regex = re.compile(r\'{}\')'.format(regex)
         elif target == Target.JAVASCRIPT:
             compiled_re = 'const regex = /{}/;'.format(regex)
+        elif target == Target.PHP:
+            compiled_re = '$regex = \'/{}/\';'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

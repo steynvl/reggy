@@ -116,6 +116,13 @@ class SamplesAndSemantics:
             else:
                 compiled_re = 'const regex = /{}/;'.format(compiled_re)
 
+        elif target == Target.PHP:
+          if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
+              compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
+              compiled_re = '$regex = \'/{}/i\';'.format(compiled_re)
+          else:
+              compiled_re = '$regex = \'/{}/\';'.format(compiled_re)
+
         self._re['compiledRegex'] = compiled_re
 
     @staticmethod
