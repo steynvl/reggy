@@ -11,3 +11,5 @@ class Target(Enum):
     GOLANG     = 7
     RUST       = 8
     CSHARP     = 9
+    SCALA      = 10
+    KOTLIN     = 11

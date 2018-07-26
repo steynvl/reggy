@@ -103,6 +103,18 @@ case_to_re = {
         'Case insensitive': '[\\dA-Fa-f]',
         'Uppercase': '[\\dA-F]',
         'Lowercase': '[\\da-f]'
+    },
+
+    Target.SCALA: {
+        'Case insensitive': '[\\\\dA-Fa-f]',
+        'Uppercase': '[\\\\dA-F]',
+        'Lowercase': '[\\\\da-f]'
+    },
+
+    Target.KOTLIN: {
+        'Case insensitive': '[\\\\dA-Fa-f]',
+        'Uppercase': '[\\\\dA-F]',
+        'Lowercase': '[\\\\da-f]'
     }
 
 }

@@ -19,7 +19,8 @@ class MapDigits:
     def _map_info(self):
         marker_info = self._info.digits
         if len(marker_info) == 10:
-            if self._target_lang == Target.JAVA or self._target_lang == Target.GOLANG:
+            if self._target_lang == Target.JAVA or self._target_lang == Target.GOLANG \
+                    or self._target_lang == Target.SCALA or self._target_lang == Target.KOTLIN:
                 self._re.append('\\\\d')
             else:
                 self._re.append('\\d')

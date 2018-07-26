@@ -116,6 +116,10 @@ class CommonUseCases:
             compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(regex)
         elif target == Target.CSHARP:
             compiled_re = 'var re = new Regex(@"{}");'.format(regex)
+        elif target == Target.SCALA:
+            compiled_re = 'val re = "{}".r'.format(regex)
+        elif target == Target.KOTLIN:
+            compiled_re = 'val regex = Regex("{}")'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

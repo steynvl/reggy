@@ -12,6 +12,8 @@ regex_info_to_tok = {
     'Golang'       : Target.GOLANG,
     'Rust'         : Target.RUST,
     'C#'           : Target.CSHARP,
+    'Scala'        : Target.SCALA,
+    'Kotlin'       : Target.KOTLIN,
 
     'Anywhere'     : RegexExtraInfo.ANYWHERE,
     'Start of text': RegexExtraInfo.START_OF_TEXT,
