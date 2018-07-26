@@ -112,6 +112,8 @@ class CommonUseCases:
             compiled_re = '$regex = \'/{}/\';'.format(regex)
         elif target == Target.GOLANG:
             compiled_re = 'regex, _ := regexp.Compile("{}")'.format(regex)
+        elif target == Target.RUST:
+            compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

@@ -202,6 +202,33 @@ const_to_re = {
       'number': '\\\\d',
       'plusSign': '\\\\+'
 
+    },
+
+    Target.RUST: {
+        'thousandSeparator': {
+            'Any': '[,\' ]',
+            'Comma': ',',
+            'Quote': '\'',
+            'Space': ' '
+        },
+
+        'decimalSeparator': {
+            'Any': '[,.]',
+            'Period': '\\.',
+            'Comma': ','
+        },
+
+        'currencySign': {
+            'Any': '[$€¥£]',
+            'Dollar': '\\$',
+            'Euro': '€',
+            'Yen': '¥',
+            'Pound': '£'
+        },
+
+        'allowExponent': '(?:[eE][+-]?[0-9]++)',
+        'number': '\\d',
+        'plusSign': '\\+'
     }
 
 }

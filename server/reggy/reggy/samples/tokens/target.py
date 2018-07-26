@@ -9,3 +9,4 @@ class Target(Enum):
     JAVASCRIPT = 5
     PHP        = 6
     GOLANG     = 7
+    RUST       = 8

@@ -123,6 +123,9 @@ class SamplesAndSemantics:
         elif target == Target.GOLANG:
             compiled_re = 'regex, _ := regexp.Compile("{}")'.format(compiled_re)
 
+        elif target == Target.RUST:
+            compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(compiled_re)
+
         self._re['compiledRegex'] = compiled_re
 
     @staticmethod
