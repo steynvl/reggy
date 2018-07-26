@@ -56,5 +56,12 @@ end_info_to_target = {
         RegexExtraInfo.END_OF_TEXT: '\\z',
         RegexExtraInfo.END_OF_LINE: '$',
         RegexExtraInfo.END_OF_WORD: '\\b'
+    },
+
+    Target.CSHARP: {
+        RegexExtraInfo.ANYWHERE: '',
+        RegexExtraInfo.END_OF_TEXT: '\\z',
+        RegexExtraInfo.END_OF_LINE: '$',
+        RegexExtraInfo.END_OF_WORD: '\\b'
     }
 }

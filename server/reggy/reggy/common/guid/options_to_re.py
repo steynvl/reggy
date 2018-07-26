@@ -40,6 +40,11 @@ braces_to_re = {
     Target.RUST: {
         'Required': '\\{%s}',
         'Optional': '%s|\\{%s}'
+    },
+
+    Target.CSHARP: {
+        'Required': '\\{%s}',
+        'Optional': '%s|\\{%s}'
     }
 
 }
@@ -89,6 +94,12 @@ case_to_re = {
     },
 
     Target.RUST: {
+        'Case insensitive': '[\\dA-Fa-f]',
+        'Uppercase': '[\\dA-F]',
+        'Lowercase': '[\\da-f]'
+    },
+
+    Target.CSHARP: {
         'Case insensitive': '[\\dA-Fa-f]',
         'Uppercase': '[\\dA-F]',
         'Lowercase': '[\\da-f]'

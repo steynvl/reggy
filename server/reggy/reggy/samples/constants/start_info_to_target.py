@@ -64,6 +64,14 @@ start_info_to_target = {
         RegexExtraInfo.START_OF_LINE: '^',
         RegexExtraInfo.START_OF_WORD: '\\b',
         RegexExtraInfo.START_OF_ATTEMPT: '\\G'
+    },
+
+    Target.CSHARP: {
+        RegexExtraInfo.ANYWHERE: '',
+        RegexExtraInfo.START_OF_TEXT: '\\b',
+        RegexExtraInfo.START_OF_LINE: '^',
+        RegexExtraInfo.START_OF_WORD: '\\b',
+        RegexExtraInfo.START_OF_ATTEMPT: '\\G'
     }
 
 }

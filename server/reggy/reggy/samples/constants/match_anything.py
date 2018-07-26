@@ -82,6 +82,15 @@ basic_char_to_re = {
         MatchAnythingTok.PUNCTUATION_AND_SYMBOLS: '\\p{P}',
         MatchAnythingTok.WHITESPACE: '\\s',
         MatchAnythingTok.LINE_BREAKS: '\\r\\n'
+    },
+
+    Target.CSHARP: {
+        MatchAnythingTok.LOWER_CASE_LETTERS: 'a-z',
+        MatchAnythingTok.UPPER_CASE_LETTERS: 'A-Z',
+        MatchAnythingTok.DIGITS: '\\d',
+        MatchAnythingTok.PUNCTUATION_AND_SYMBOLS: '\\p{P}',
+        MatchAnythingTok.WHITESPACE: '\\s',
+        MatchAnythingTok.LINE_BREAKS: '\\r\\n'
     }
 
 }

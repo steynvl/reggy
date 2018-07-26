@@ -11,6 +11,7 @@ regex_info_to_tok = {
     'PHP'          : Target.PHP,
     'Golang'       : Target.GOLANG,
     'Rust'         : Target.RUST,
+    'C#'           : Target.CSHARP,
 
     'Anywhere'     : RegexExtraInfo.ANYWHERE,
     'Start of text': RegexExtraInfo.START_OF_TEXT,

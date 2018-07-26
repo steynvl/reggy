@@ -10,3 +10,4 @@ class Target(Enum):
     PHP        = 6
     GOLANG     = 7
     RUST       = 8
+    CSHARP     = 9

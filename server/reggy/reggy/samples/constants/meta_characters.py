@@ -127,7 +127,7 @@ meta_characters = {
       '"': '\\"'
     },
 
-    Target.RUST: {
+    Target.CSHARP: {
         '{': '\\{',
         '}': '\\}',
         '[': '\\[',

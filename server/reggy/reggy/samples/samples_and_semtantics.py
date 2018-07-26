@@ -126,6 +126,13 @@ class SamplesAndSemantics:
         elif target == Target.RUST:
             compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(compiled_re)
 
+        elif target == Target.CSHARP:
+            if case_state['canUseCaseInsensitiveFlag'] and case_state['hasChanged']:
+                compiled_re = compiled_re.replace('(?i)', '').replace('(?-i)', '')
+                compiled_re = 'var re = new Regex(@"{}", RegexOptions.IgnoreCase);'.format(compiled_re)
+            else:
+                compiled_re = 'var re = new Regex(@"{}");'.format(compiled_re)
+
         self._re['compiledRegex'] = compiled_re
 
     @staticmethod

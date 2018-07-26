@@ -114,6 +114,8 @@ class CommonUseCases:
             compiled_re = 'regex, _ := regexp.Compile("{}")'.format(regex)
         elif target == Target.RUST:
             compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(regex)
+        elif target == Target.CSHARP:
+            compiled_re = 'var re = new Regex(@"{}");'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 
