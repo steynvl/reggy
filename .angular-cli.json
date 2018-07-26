@@ -8,8 +8,8 @@
       "root": "client",
       "outDir": "dist/public",
       "assets": [
-        "assets",
-        "assets/favicon.ico"
+        "favicon.ico",
+        "assets"
       ],
       "index": "index.html",
       "main": "main.ts",
