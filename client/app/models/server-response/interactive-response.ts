@@ -1,6 +1,7 @@
 export interface InteractiveResponse {
   stage: string;
   dot: string;
+  regex: string;
   mq: Array<string>;
 
   blue: Array<string>;

@@ -29,6 +29,7 @@ export class InteractiveLstarComponent implements OnInit {
 
   getEquivalenceQuery = false;
   counterExample: string;
+  counterExampleErr = false;
 
   state: string;
   membershipQueries: Array<string>;
@@ -74,7 +75,7 @@ export class InteractiveLstarComponent implements OnInit {
   submitMembershipQueries() {
     this.payload = {
       algorithm: 'interactive lstar',
-      positiveExamples: [],
+      positiveExamples: this.positiveExamples.split('\n'),
       alphabet: this.removeDuplicates(this.alphabet.split('')),
       stage: undefined,
       blue: undefined,
@@ -115,7 +116,8 @@ export class InteractiveLstarComponent implements OnInit {
         this.response = data;
 
         if (data.stage === 'eq') {
-          this.showHypothesis();
+          this.state = 'eq';
+          this.showHypothesis('dfa1');
         } else {
           this.state = 'mq';
           this.membershipQueries = data.mq;
@@ -124,29 +126,35 @@ export class InteractiveLstarComponent implements OnInit {
         this.isLoading = false;
       },
       _ => {
-        // TODO
         this.toast.setMessage('An unexpected error occurred on the server!', 'danger');
         this.isLoading = false;
       }
     );
   }
 
-  showHypothesis() {
+  showHypothesis(id: string) {
     this.getEquivalenceQuery = false;
-    this.state = 'eq';
 
     const viz = new Viz({ Module, render });
     viz.renderSVGElement(this.response.dot)
       .then(element => {
-        document.getElementById('dfa').innerHTML = '';
-        document.getElementById('dfa').appendChild(element);
+        document.getElementById(id).innerHTML = '';
+        document.getElementById(id).appendChild(element);
       });
   }
 
   submitEquivalenceQuery() {
+    if (!this.counterExample) {
+      this.counterExampleErr = true;
+      return;
+    } else {
+      this.counterExampleErr = false;
+    }
+
+
     this.payload = {
       algorithm: 'interactive lstar',
-      positiveExamples: [],
+      positiveExamples: this.positiveExamples.split('\n'),
       alphabet: this.removeDuplicates(this.alphabet.split('')),
       stage: 'counterExample',
       blue: this.response.blue,
@@ -170,7 +178,6 @@ export class InteractiveLstarComponent implements OnInit {
         this.isLoading = false;
       },
       _ => {
-        // TODO
         this.toast.setMessage('An unexpected error occurred on the server!', 'danger');
         this.isLoading = false;
       }
@@ -197,6 +204,21 @@ export class InteractiveLstarComponent implements OnInit {
 
   clickCopyToClipboard() {
     this.toast.setMessage('Regex copied to clipboard! ', 'success');
+  }
+
+  correct() {
+    this.regex = this.response.regex;
+    this.state = 'done';
+    this.showHypothesis('dfa2');
+  }
+
+  restart() {
+    this.isLoading = false;
+
+    this.isReading = true;
+    this.providingInfo = false;
+    this.provideInfoErr = false;
+    this.isInferring = false;
   }
 
 }

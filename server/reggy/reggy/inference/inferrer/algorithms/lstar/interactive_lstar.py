@@ -8,6 +8,7 @@ class InteractiveLstar:
     def __init__(self, user_info):
         self._user_info = user_info
         self._alphabet = set(user_info['alphabet'])
+        self._pos_examples = set(user_info['positiveExamples'])
         stage = user_info['stage']
 
         if stage == 'start':
@@ -59,9 +60,11 @@ class InteractiveLstar:
 
         is_closed, is_consistent = self._ot.is_closed_and_consistent()
         if is_closed and is_consistent:
+            dfa = self._build_dfa(self._ot)
             self._answer = {
                 'stage': 'eq',
-                'dot': self._get_dot_code(self._ot)
+                'dot': dfa.create_graphviz_object().source,
+                'regex': dfa.to_regex()
             }
         elif not is_closed:
             queries = self._get_closed_membership_queries()
@@ -112,9 +115,11 @@ class InteractiveLstar:
         self._answer['sta'] = list(self._ot.sta)
 
     def _make_equivalence_query(self):
+        dfa = self._build_dfa(self._ot)
         self._answer = {
             'stage': 'eq',
-            'dot': self._get_dot_code(self._ot)
+            'dot': dfa.create_graphviz_object().source,
+            'regex': dfa.to_regex()
         }
 
     def _close_table(self):
@@ -137,7 +142,11 @@ class InteractiveLstar:
                     self._ot.add_row(sa)
 
             for u, e in sorted(self._ot.find_holes()):
-                self._ot.put(u, e, query_answers[u + e])
+                ue = u + e
+                if ue in self._pos_examples:
+                    self._ot.put(u, e, True)
+                else:
+                    self._ot.put(u, e, query_answers[u + e])
 
     def _make_table_consistent(self):
         """
@@ -152,7 +161,11 @@ class InteractiveLstar:
         self._ot.add_column_to_table(ae)
 
         for u, e in sorted(self._ot.find_holes()):
-            self._ot.put(u, e, query_answers[u + e])
+            ue = u + e
+            if ue in self._pos_examples:
+                self._ot.put(u, e, True)
+            else:
+                self._ot.put(u, e, query_answers[u + e])
 
     def _use_eq(self):
         """
@@ -184,7 +197,11 @@ class InteractiveLstar:
                         self._red.discard(pa)
 
         for u, e in sorted(self._ot.find_holes()):
-            self._ot.put(u, e, query_answers[u + e])
+            ue = u + e
+            if ue in self._pos_examples:
+                self._ot.put(u, e, True)
+            else:
+                self._ot.put(u, e, query_answers[u + e])
 
     def _find_inconsistent(self, ot: utils.ObservationTable) -> Tuple[str, str, str, str]:
         """
@@ -212,7 +229,7 @@ class InteractiveLstar:
                             return s1, s2, a, e
         return '', '', '', ''
 
-    def _get_dot_code(self, ot: utils.ObservationTable) -> str:
+    def _build_dfa(self, ot: utils.ObservationTable) -> automaton.Automaton:
         """
         Builds an automaton from the observation table.
 
@@ -243,7 +260,7 @@ class InteractiveLstar:
                     if ot.get_row(u.name + a) == ot.get_row(w.name):
                         dfa.add_transition(u, w, a)
 
-        return dfa.minimize().create_graphviz_object().source
+        return dfa.minimize()
 
     def _get_eq_membership_queries(self):
         ot = self._ot.copy()
@@ -269,7 +286,11 @@ class InteractiveLstar:
                         blue.add(pa)
                         red.discard(pa)
 
-        queries = [u + e for u, e in sorted(ot.find_holes())]
+        queries = []
+        for u, e in sorted(ot.find_holes()):
+            ue = u + e
+            if ue not in self._pos_examples:
+                queries.append(ue)
 
         self._answer = {
             'stage': 'equivalenceMembershipQueries',
@@ -302,7 +323,9 @@ class InteractiveLstar:
                     ot.add_row(sa)
 
             for u, e in sorted(ot.find_holes()):
-                queries.append(u + e)
+                ue = u + e
+                if ue not in self._pos_examples:
+                    queries.append(ue)
 
         return queries
 
@@ -314,4 +337,9 @@ class InteractiveLstar:
         ot.exp.add(ae)
         ot.add_column_to_table(ae)
 
-        return [u + e for u, e in sorted(ot.find_holes())]
+        queries = []
+        for u, e in sorted(ot.find_holes()):
+            ue = u + e
+            if ue not in self._pos_examples:
+                queries.append(ue)
+        return queries

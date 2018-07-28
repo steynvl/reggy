@@ -17,7 +17,7 @@ export class GenerateInferenceComponent implements OnInit {
   isLoading = false;
 
   payload: PayloadInferrer;
-  algorithm: string = 'Interactive Angluin Learning (L*)';
+  algorithm = 'Regular Positive and Negative Inference (RPNI) algorithm';
   positiveExamples = '';
   negativeExamples = '';
   dfaIsDisplayed = false;

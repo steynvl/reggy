@@ -27,9 +27,13 @@
 }
 
 .text {
-  font-size: 22px;
+  font-size: 20px;
+}
+
+.membership-text {
+  font-size: 18px;
 }
 
 .list {
-  font-size: 18px;
+  font-size: 16px;
 }
