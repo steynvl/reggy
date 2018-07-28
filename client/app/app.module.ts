@@ -1,5 +1,4 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { JwtModule } from '@auth0/angular-jwt';
 
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -10,13 +9,13 @@ import { ContactComponent } from './contact/contact.component';
 
 import { GenerateSamplesComponent } from './generate/samples-and-semantics/generate.samples.component';
 import { GenerateCommonComponent } from './generate/common-use-cases/generate.common.component';
-import { GenerateInductionComponent } from './generate/induction/generate.induction.component';
+import { GenerateInferenceComponent } from './generate/inference/generate.inference.component';
+import { InteractiveLstarComponent } from './generate/inference/interactive-lstar/interactive-lstar.component';
 
-import { GenerateSamplesService } from './services/generate.samples.service';
-import { GenerateCommonService } from './services/generate.common.service';
-import { GenerateInductionService } from './services/generate.induction.service';
+import { GenerateService } from './services/generate.service';
 import { VerificationService } from './services/verification.service';
 import { ContactService } from './services/contact.service';
+import { InferrerService } from './services/inferrer.service';
 
 import { LiteralTextInfoComponent } from './samples-components/literal-text-info/literal-text-info.component';
 import { BasicCharacterInfoComponent } from './samples-components/basic-characters-info/basic-characters-info.component';
@@ -38,6 +37,7 @@ import { GuidInfoComponent } from './common-use-case-components/guid-info/guid-i
 import { NationalIdInfoComponent } from './common-use-case-components/national-id-info/national-id-info.component';
 import { Ipv4AddressInfoComponent } from './common-use-case-components/ipv4-address-info/ipv4-address-info.component';
 import { CurrencyInfoComponent } from './common-use-case-components/currency-info/currency-info.component';
+import { BackReferenceInfoComponent } from './samples-components/back-reference-info/back-reference-info.component';
 
 import { MarkedTextToView } from './pipes/marked-text-to-view';
 
@@ -50,9 +50,7 @@ import { PerlComponent } from './language-examples/perl/perl.component';
 
 import { DndModule } from 'ng2-dnd';
 
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
+import { KatexModule } from 'ng-katex';
 
 @NgModule({
   declarations: [
@@ -62,7 +60,8 @@ export function tokenGetter() {
     ContactComponent,
     GenerateSamplesComponent,
     GenerateCommonComponent,
-    GenerateInductionComponent,
+    GenerateInferenceComponent,
+    InteractiveLstarComponent,
     LiteralTextInfoComponent,
     BasicCharacterInfoComponent,
     DigitsInfoComponent,
@@ -82,6 +81,7 @@ export function tokenGetter() {
     NationalIdInfoComponent,
     Ipv4AddressInfoComponent,
     CurrencyInfoComponent,
+    BackReferenceInfoComponent,
     MarkedTextToView,
     JavaComponent,
     PerlComponent
@@ -94,19 +94,13 @@ export function tokenGetter() {
     HighlightModule.forRoot({
       path: 'assets/lib/highlight'
     }),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        // whitelistedDomains: ['localhost:3000', 'localhost:4200']
-      }
-    }),
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    KatexModule
   ],
-  providers: [GenerateSamplesService,
-              GenerateCommonService,
-              GenerateInductionService,
+  providers: [GenerateService,
               VerificationService,
-              ContactService
+              ContactService,
+              InferrerService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

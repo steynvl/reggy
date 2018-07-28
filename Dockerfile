@@ -16,6 +16,11 @@ RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
 RUN apt-get install -y git-core
 
+# install graphviz
+RUN apt-get install -y graphviz
+RUN apt-get install -y python3-pip
+RUN pip3 install graphviz
+
 COPY . usr/src/app
 WORKDIR /usr/src/app
 

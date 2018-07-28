@@ -6,9 +6,9 @@ const examples = {
 
   'if/else branch whether the regex matches (part of) a string':
   'if ($subject =~ m/__regex__/) {\n' +
-  '    # Successful match\n' +
+  '    # successful match\n' +
   '} else {\n' +
-  '    # Match attempt failed\n' +
+  '    # successful match\n' +
   '}\n',
   'if/else branch whether the regex matches a string entirely':
   'if ($subject =~ m/\\A__regex__\\z/) {\n' +

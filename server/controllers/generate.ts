@@ -1,19 +1,15 @@
-import BaseCtrl from './base';
 import * as child_process from 'child_process';
 import * as path from 'path';
 
-export default class GenerateCtrl extends BaseCtrl {
+export default class GenerateCtrl {
 
-  model = null;
-
-  generate = (req, res) => {
+  generateRegex = (req, res) => {
     const samples = req.body.params;
     console.log('---------');
     console.log(samples);
     console.log('---------');
 
-    const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'main.py');
-    const py = child_process.spawn('python3', [pathToRegex].concat(samples));
+    const py = spawnChildProcess(samples);
     let output = '';
 
     py.stdout.on('data', (data) => {
@@ -41,7 +37,12 @@ export default class GenerateCtrl extends BaseCtrl {
 
 }
 
-export interface ServerResponse {
+function spawnChildProcess(samples) {
+  const pathToRegex = path.join(__dirname, '..', '..', '..', 'server', 'reggy', 'main.py');
+  return child_process.spawn('python3', [pathToRegex].concat(samples));
+}
+
+interface ServerResponse {
   regex        : string;
   compiledRegex: string;
   code         : number;

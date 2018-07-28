@@ -7,6 +7,7 @@ import { UnicodeCharacters } from './samples/unicode-characters';
 import { MatchAnything } from './samples/match-anything';
 import { ListOfLiteralText } from './samples/list-of-literal-text';
 import { Numbers } from './samples/numbers';
+import { BackReference } from './samples/back-reference';
 
 export class SampleStringsInfo {
 
@@ -18,7 +19,7 @@ export class SampleStringsInfo {
 
   /* semantical information home the marker  */
   markerInfo: LiteralText | BasicCharacters | Digits | ControlCharacters | UnicodeCharacters
-    | MatchAnything | ListOfLiteralText | Numbers;
+    | MatchAnything | ListOfLiteralText | Numbers | BackReference;
 
   /* tells us how many times the marker needs to be repeated */
   repeatInfo: RepeatInfo;

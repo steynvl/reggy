@@ -34,13 +34,13 @@
       <div class="col-sm-11">
 
         <button *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
-            <i class="fa fa-refresh"></i>
+          <i class="fa fa-refresh"></i>
         </button>
 
         <div *ngIf="markedElements.length > 1">
 
           <button *ngIf="!markersIsCollapsed" (click)="reset()" class="btn btn-md">
-              <i class="fa fa-refresh"></i>
+            <i class="fa fa-refresh"></i>
           </button>
 
           <button *ngIf="!markersIsCollapsed" (click)="collapseMarkers()" class="btn btn-md">
@@ -76,7 +76,7 @@
 
           <label class="btn btn-outline-primary" for="my-file-selector">
             <input id="my-file-selector" type="file" style="display:none;" (change)="fileChange($event)" accept=".txt">
-            Upload file
+            <i class="fa fa-upload"></i> Upload file
           </label>
 
         </div>
@@ -131,13 +131,14 @@
                   <option>Match anything</option>
                   <option>Numbers</option>
                   <option>Unicode characters</option>
+                  <option *ngIf="canBackReference(idx)">Backreference match of preceding marker</option>
                 </select>
               </div>
 
               <div class="col-md-5">
                 <label>Repeat:</label>
 
-                <select class="form-control" style="font-family: 'FontAwesome', Arial;"
+                <select class="form-control select-repeat-info" [disabled]="markedElement.fieldType === 'Numbers'"
                         [(ngModel)]="markedElement.repeatInfo.repeat">
 
                   <option *ngFor="let repeat of markedElement.repeatInfoView" [ngValue]="repeat">{{repeat}}</option>
@@ -225,9 +226,87 @@
                 [err]="markedElement.error">
               </app-numbers-info>
 
+              <app-back-reference-info
+                *ngIf="markedElement.fieldType === 'Backreference match of preceding marker'"
+                [backReference]="backReference"
+                [options]="getBackReferenceOptions(idx)">
+              </app-back-reference-info>
+
             </div>
 
           </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="markedElements.length > 1 && containers">
+
+      <br />
+
+      <div class="card">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-11">
+              <h4 class="text-center"><strong>Alternation information</strong></h4>
+            </div>
+            <div class="col-sm-1">
+              <button type="button"
+                      class="btn btn-sm btn-primary float-right"
+                      data-toggle="tooltip" data-placement="top"
+                      title="Drag markers to show alternating groups of markers!">
+                <i class="fa fa-info" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-sm-12 text-center">
+
+              <div dnd-sortable-container [sortableData]="containers" [dropZones]="['container-dropZone']">
+
+                <ul class="list-group-horizontal">
+
+                  <li class="list-group-item"
+                      *ngFor="let container of containers; let i = index"
+                      dnd-sortable [sortableIndex]="i" [dragEnabled]="false">
+
+                    <div dnd-sortable-container [sortableData]="container.markers" [dropZones]="['marker-dropZone']">
+
+                      <p *ngIf="containers[i].markers.length === 0"
+                         type="button"
+                         class="btn dummy-marker">
+                        1
+                      </p>
+
+                      <p *ngFor="let marker of container.markers; let x = index"
+                         [ngStyle]="setButtonColour(marker)"
+                         class="marker"
+                         dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="marker">
+                        {{ marker.id + 1 }}
+                      </p>
+
+
+                    </div>
+
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
         </div>
 
       </div>
@@ -280,6 +359,14 @@
                   <option>Java</option>
                   <option>Perl</option>
                   <option>POSIX</option>
+                  <option>Python</option>
+                  <option>JavaScript</option>
+                  <option>PHP</option>
+                  <option>Golang</option>
+                  <option>Rust</option>
+                  <option>C#</option>
+                  <option>Scala</option>
+                  <option>Kotlin</option>
                 </select>
               </div>
             </div>
@@ -359,4 +446,3 @@
     </div>
 
   </div>
-</div>

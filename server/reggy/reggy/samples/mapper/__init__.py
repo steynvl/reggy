@@ -6,3 +6,4 @@ from reggy.samples.mapper.map_unicode_characters import MapUnicodeCharacters
 from reggy.samples.mapper.map_match_anything import MapMatchAnything
 from reggy.samples.mapper.map_list_of_literal_text import MapListOfLiteralText
 from reggy.samples.mapper.map_numbers import MapNumbers
+from reggy.samples.mapper.map_back_reference import MapBackReference

@@ -1,0 +1,23 @@
+.content {
+  padding-top: 12px;
+}
+
+.text-area {
+  padding-top: 18px;
+}
+
+.move-down {
+  padding-top: 5px;
+}
+
+.move-down-2 {
+  padding-top: 10px;
+}
+
+.hide-dfa {
+  display: none;
+}
+
+.background-col {
+  background-color: white;
+}

@@ -3,7 +3,9 @@ from reggy.samples.parser.repetition_info import RepetitionInfo
 
 class MatchAnythingInfo:
 
-    def __init__(self):
+    def __init__(self, marker_id):
+        self.marker_id = marker_id
+
         self.specific_characters   = None
         self.specific_character    = None
         self.nothing               = None

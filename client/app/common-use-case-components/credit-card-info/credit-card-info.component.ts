@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';;
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
-import { GenerateCommonService } from '../../services/generate.common.service';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { CreditCardNumber } from '../../models/common-use-cases/credit-card-number';
 import { GeneratedRegex } from '../../models/generated-regex';
@@ -21,7 +21,7 @@ export class CreditCardInfoComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private generateCommonService: GenerateCommonService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class CreditCardInfoComponent implements OnInit {
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();
-    this.generateCommonService.generateRegex(payload).subscribe(
+    this.generateService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {

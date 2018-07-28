@@ -1,0 +1,39 @@
+.content {
+  padding-top: 12px;
+}
+
+.text-area {
+  padding-top: 18px;
+}
+
+.move-down {
+  padding-top: 5px;
+}
+
+.move-down-2 {
+  padding-top: 10px;
+}
+
+.move-down-3 {
+  padding-top: 15px;
+}
+
+.hide {
+  display: none;
+}
+
+.background-col {
+  background-color: white;
+}
+
+.text {
+  font-size: 20px;
+}
+
+.membership-text {
+  font-size: 18px;
+}
+
+.list {
+  font-size: 16px;
+}

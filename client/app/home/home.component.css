@@ -27,3 +27,8 @@ body {
   margin-left: -33.33%;
   margin-right: -33.33%;
 }
+
+.text-link {
+  color: #000000 !important;
+  text-decoration: underline;
+}

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Username } from '../../models/common-use-cases/username';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
-import { GenerateCommonService } from '../../services/generate.common.service';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { GeneratedRegex } from '../../models/generated-regex';
 
@@ -41,7 +41,7 @@ export class UsernameInfoComponent implements OnInit {
   maxLengthIsValid         = true;
   minRangeIsLess           = true;
 
-  constructor(private generateCommonService: GenerateCommonService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent) {
 
   }
@@ -175,7 +175,7 @@ export class UsernameInfoComponent implements OnInit {
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();
-    this.generateCommonService.generateRegex(payload).subscribe(
+    this.generateService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {

@@ -1,0 +1,157 @@
+<div class="container content background-col">
+
+  <app-toast [message]="toast.message"></app-toast>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="learners"><strong>Please select which learning algorithm you would like to use:</strong></label>
+      <select id="learners" class="form-control" [(ngModel)]="algorithm">
+
+        <option>Regular Positive and Negative Inference (RPNI) algorithm</option>
+        <option>Angluin Learning (L*)</option>
+        <option>E. Mark GOLD's algorithm</option>
+        <option disabled="disabled" style="border-bottom: 1px dotted #000000;">
+          ----------------------------------------------------------------------
+        </option>
+        <option>Interactive Angluin Learning (L*)</option>
+
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="algorithm && algorithm !== 'Interactive Angluin Learning (L*)'">
+    <div class="row" style="padding-top: 10px">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center"><strong>Example strings</strong></h4>
+          </div>
+
+          <div class="card-body">
+
+            <div class="row">
+
+              <div class="col-md-6">
+
+                <h6>Positive example strings</h6>
+                <textarea [(ngModel)]="positiveExamples" class="form-control"
+                          rows="8" placeholder="Strings that belong in the target language separated by newlines...">
+              </textarea>
+                <div class="move-down">
+                  <label class="btn btn-outline-primary" for="positive-examples">
+                    <input id="positive-examples" type="file"
+                           (change)="fileChange($event, true)"
+                           style="display:none;" accept=".txt">
+                    <i class="fa fa-upload"></i> Upload file
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <h6>Negative example strings</h6>
+                <textarea [(ngModel)]="negativeExamples" class="form-control"
+                          rows="8" placeholder="Strings that do not belong in the target language separated by newlines...">
+              </textarea>
+                <div class="move-down">
+                  <label class="btn btn-outline-primary" for="negative-examples">
+                    <input id="negative-examples" type="file"
+                           (change)="fileChange($event, false)"
+                           style="display:none;" accept=".txt">
+                    <i class="fa fa-upload"></i> Upload file
+                  </label>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" *ngIf="canInfer()">
+      <div class="col-sm-12">
+        <br />
+        <button class="btn btn-block btn-primary" (click)="inferGrammar()">
+          Infer grammar via {{ inferMethod() }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading">
+      <br />
+      <br />
+
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+        </div>
+      </div>
+
+      <br />
+    </div>
+
+    <div class="row" [ngClass]="{'hide-dfa': !dfaIsDisplayed}">
+
+      <div class="col-sm-12">
+
+        <br />
+
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center"><strong>DFA inferred by {{ inferMethod() }}</strong></h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <div id="dfa2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="regex">
+      <div class="row move-down-2">
+        <div class="col">
+          <label for="regex"><strong>The equivalent regular expression</strong></label>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-12">
+
+          <div class="input-group">
+            <input type="text" class="form-control" id="regex" [(ngModel)]="regex">
+            <span class="input-group-btn">
+            <button class="btn btn-default" ngxClipboard [cbContent]="regex" (click)="clickCopyToClipboard()"
+                    data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard"
+                    type="button"><i class="fa fa-clipboard"></i>
+            </button>
+          </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+  </div>
+
+  <div *ngIf="algorithm && algorithm === 'Interactive Angluin Learning (L*)'">
+    <app-interactive-lstar></app-interactive-lstar>
+  </div>
+
+</div>

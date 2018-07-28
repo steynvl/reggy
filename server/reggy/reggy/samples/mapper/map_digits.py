@@ -6,23 +6,23 @@ from reggy.samples.tokens import Target
 
 class MapDigits:
 
-    def __init__(self, info: DigitsInfo, target_lang):
+    def __init__(self, info: DigitsInfo, target_lang, state_info):
         self._info = info
         self._target_lang = target_lang
+        self._state_info = state_info
         self._re = deque()
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         marker_info = self._info.digits
         if len(marker_info) == 10:
-            if self._target_lang == Target.JAVA:
+            if self._target_lang == Target.JAVA or self._target_lang == Target.GOLANG \
+                    or self._target_lang == Target.SCALA or self._target_lang == Target.KOTLIN:
                 self._re.append('\\\\d')
-            elif self._target_lang == Target.PERL:
-                self._re.append('\\d')
-            elif self._target_lang == Target.POSIX:
+            else:
                 self._re.append('\\d')
         else:
             self._re.append(self._calculate_character_class(marker_info))
@@ -34,6 +34,13 @@ class MapDigits:
 
         repeat_info = repeat_info_to_regex(self._info)
         self._re.append(repeat_info)
+
+        if self._state_info['isBackReferenced']:
+            self._re.appendleft('(')
+            self._re.append(')')
+
+            self._state_info['currBackReferenceNum'] += 1
+            self._state_info['markerToReference'][self._info.marker_id] = self._state_info['currBackReferenceNum']
 
     @staticmethod
     def _calculate_character_class(marker_info):
@@ -59,4 +66,7 @@ class MapDigits:
             else:
                 char_class.append('{}-{}'.format(str(i[0]), str(i[1])))
 
-        return '[{}]'.format(''.join(char_class))
+        if len(char_class) == 1 and len(char_class[0]) == 1:
+            return ''.join(char_class)
+        else:
+            return '[{}]'.format(''.join(char_class))

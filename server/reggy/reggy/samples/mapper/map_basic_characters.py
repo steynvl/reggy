@@ -11,10 +11,10 @@ from reggy.samples.tokens.case_state import CaseSensitive
 
 class MapBasicCharacters:
 
-    def __init__(self, info: BasicCharactersInfo, target_lang, case_state):
+    def __init__(self, info: BasicCharactersInfo, target_lang, state_info):
         self._info = info
         self._target_lang = target_lang
-        self._case_state = case_state
+        self._state_info = state_info
         self._re = deque()
         self._map_info()
 
@@ -54,7 +54,7 @@ class MapBasicCharacters:
         if self._info.match_all_except_specified:
             self._re.appendleft(basic_char_to_re[BasicCharactersTok.MATCH_ALL_EXCEPT_SPECIFIED])
             enclose = True
-        elif found == 1 and (self._info.upper_case_letters
+        elif found == 1 and (self._info.upper_case_letters or self._info.line_breaks
                                 or self._info.lower_case_letters):
             enclose = True
         elif found > 1:
@@ -69,6 +69,13 @@ class MapBasicCharacters:
 
         self._add_case_state()
 
+        if self._state_info['isBackReferenced']:
+            self._re.appendleft('(')
+            self._re.append(')')
+
+            self._state_info['currBackReferenceNum'] += 1
+            self._state_info['markerToReference'][self._info.marker_id] = self._state_info['currBackReferenceNum']
+
     def _add_case_state(self):
         case_insensitive = self._info.case_insensitive
 
@@ -77,17 +84,17 @@ class MapBasicCharacters:
 
         if does_apply:
             if case_insensitive:
-                if not self._case_state['case'] == CaseSensitive.OFF:
+                if not self._state_info['case'] == CaseSensitive.OFF:
                     self._re.appendleft('(?i)')
-                    self._case_state['case'] = CaseSensitive.OFF
-                    self._case_state['hasChanged'] = True
+                    self._state_info['case'] = CaseSensitive.OFF
+                    self._state_info['hasChanged'] = True
             else:
-                if self._case_state['hasChanged']:
+                if self._state_info['hasChanged']:
                     self._re.appendleft('(?-i)')
-                    self._case_state['case'] = CaseSensitive.ON
+                    self._state_info['case'] = CaseSensitive.ON
 
         if does_apply and not case_insensitive:
-            self._case_state['canUseCaseInsensitiveFlag'] = False
+            self._state_info['canUseCaseInsensitiveFlag'] = False
 
     def _escape_special_characters(self, individual_chars):
         meta_chars = meta_characters[self._target_lang]

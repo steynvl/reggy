@@ -10,19 +10,20 @@ from reggy.samples.utils.factorizer import Factorizer
 
 class MapListOfLiteralText:
 
-    def __init__(self, info: ListOfLiteralTextInfo, target_lang, case_state):
+    def __init__(self, info: ListOfLiteralTextInfo, target_lang, state_info):
         self._info = info
         self._target_lang = target_lang
-        self._case_state = case_state
+        self._state_info = state_info
         self._re = deque()
         self._map_info()
 
     def get_re(self):
-        return self._re
+        return ''.join(self._re)
 
     def _map_info(self):
         match_anything_except = self._info.match_anything_except_specified
         escaped_literals = self._escape_special_characters(self._info.literal_text)
+        grouped = False
 
         self._re.append(Factorizer(escaped_literals).get_re())
 
@@ -35,7 +36,10 @@ class MapListOfLiteralText:
                 
             if len(llt) == 1 and repeat_info != Repetition.ONE:
                 if not (len(llt) == 1 and len(llt[0]) == 1):
-                    self._re.appendleft('(?:')
+                    grouped = True
+                    self._re.appendleft('(')
+                    if not self._state_info['isBackReferenced']:
+                        self._re.append('?:')
                     self._re.append(')')
 
         repeat_info = repeat_info_to_regex(self._info)
@@ -43,21 +47,28 @@ class MapListOfLiteralText:
 
         self._add_case_state(escaped_literals)
 
+        if self._state_info['isBackReferenced']:
+            if not grouped:
+                self._re.appendleft('(')
+                self._re.append(')')
+            self._state_info['currBackReferenceNum'] += 1
+            self._state_info['markerToReference'][self._info.marker_id] = self._state_info['currBackReferenceNum']
+
     def _add_case_state(self, escaped_literals):
         case_insensitive = self._info.case_insensitive
 
         if case_insensitive:
-            if not self._case_state['case'] == CaseSensitive.OFF:
+            if not self._state_info['case'] == CaseSensitive.OFF:
                 self._re.appendleft('(?i)')
-                self._case_state['case'] = CaseSensitive.OFF
-                self._case_state['hasChanged'] = True
+                self._state_info['case'] = CaseSensitive.OFF
+                self._state_info['hasChanged'] = True
         else:
-            if self._case_state['hasChanged']:
+            if self._state_info['hasChanged']:
                 self._re.appendleft('(?-i)')
-                self._case_state['case'] = CaseSensitive.ON
+                self._state_info['case'] = CaseSensitive.ON
 
             if self._does_contain_letters(escaped_literals):
-                self._case_state['canUseCaseInsensitiveFlag'] = False
+                self._state_info['canUseCaseInsensitiveFlag'] = False
 
     def _escape_special_characters(self, marked_strings):
         meta_chars = meta_characters[self._target_lang]

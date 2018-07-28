@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GeneralRegexInfo } from '../../models/general-regex-info';
 import { PayloadCommon } from '../../models/payload/payload-common';
-import { GenerateCommonService } from '../../services/generate.common.service';
+import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { Ipv4Address } from '../../models/common-use-cases/ipv4-address';
 import { GeneratedRegex } from '../../models/generated-regex';
@@ -20,7 +20,7 @@ export class Ipv4AddressInfoComponent implements OnInit {
   generatedRegex: GeneratedRegex;
   isLoading = false;
 
-  constructor(private generateCommonService: GenerateCommonService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent) { }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class Ipv4AddressInfoComponent implements OnInit {
 
     this.generatedRegex = undefined;
     const payload = this.constructPayload();
-    this.generateCommonService.generateRegex(payload).subscribe(
+    this.generateService.generateRegex(payload).subscribe(
       data => {
         const response = data;
         if (response.code !== 0) {

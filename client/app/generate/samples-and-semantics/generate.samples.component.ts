@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Marker } from '../../models/marker';
 import { colours } from '../../colours/colours';
-import { GenerateSamplesService } from '../../services/generate.samples.service';
+import { GenerateService } from '../../services/generate.service';
 import { LiteralText } from '../../models/samples/literal-text';
 import { BasicCharacters } from '../../models/samples/basic-characters';
 import { ToastComponent } from '../../shared/toast/toast.component';
@@ -24,6 +24,8 @@ import { ListOfLiteralTextErr } from '../../models/samples/list-of-literal-text-
 import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-err';
 import { NumbersErr } from '../../models/samples/numbers-err';
+import { Container } from '../../models/alternation-container/container';
+import { BackReference } from '../../models/samples/back-reference';
 
 declare var jQuery: any;
 
@@ -50,6 +52,9 @@ export class GenerateSamplesComponent implements OnInit {
   matchAnything: MatchAnything;
   listOfLiteralText: ListOfLiteralText;
   numbers: Numbers;
+  backReference: BackReference;
+
+  containers: Array<Container>;
 
   userHighlightStart: string;
   userHighlightEnd: string;
@@ -59,7 +64,7 @@ export class GenerateSamplesComponent implements OnInit {
   markersIsCollapsed = false;
   markerTabIndex = 0;
 
-  constructor(private generateService: GenerateSamplesService,
+  constructor(private generateService: GenerateService,
               public toast: ToastComponent,
               private titleService: Title,
               private verificationService: VerificationService) { }
@@ -109,21 +114,25 @@ export class GenerateSamplesComponent implements OnInit {
   }
 
   private constructPayload(): PayloadSamples {
-    const sampleStringsInfo: Array<SampleStringsInfo> = [];
+    const samples: Array<Array<SampleStringsInfo>> = [];
 
-    this.markedElements.forEach(markedElement => {
+    this.containers.forEach(container => {
+      const group = [];
 
-      sampleStringsInfo.push({
-        markerType: markedElement.fieldType,
-        markedStrings: markedElement.markedTextInfo.map(u => u.text),
-        markerInfo: markedElement.markerInfo,
-        repeatInfo: markedElement.repeatInfo
-      });
+      container.markers.forEach(marker => group.push({
+        markerType: this.markedElements[marker.id].fieldType,
+        markedStrings: this.markedElements[marker.id].markedTextInfo.map(u => u.text),
+        markerInfo: this.markedElements[marker.id].markerInfo,
+        repeatInfo: this.markedElements[marker.id].repeatInfo
+      }));
 
+      if (group.length > 0) {
+        samples.push(group);
+      }
     });
 
     return {
-      sampleStringsInfo: sampleStringsInfo,
+      sampleStringsInfo: samples,
       generalRegexInfo : this.generalRegexInfo,
       generateMethod   : 'samplesAndSemantics'
     };
@@ -194,6 +203,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.matchAnything = (this.markedElements[this.selectedMarkerIdx].markerInfo) as MatchAnything;
         this.listOfLiteralText = (this.markedElements[this.selectedMarkerIdx].markerInfo) as ListOfLiteralText;
         this.numbers = (this.markedElements[this.selectedMarkerIdx].markerInfo) as Numbers;
+        this.backReference = (this.markedElements[this.selectedMarkerIdx].markerInfo) as BackReference;
       }
 
     } else {
@@ -237,6 +247,7 @@ export class GenerateSamplesComponent implements OnInit {
         this.toast.setMessage('No text selected!', 'warning');
       }
 
+      this.createAlternationContainers();
     }
   }
 
@@ -374,6 +385,13 @@ export class GenerateSamplesComponent implements OnInit {
         };
         break;
 
+      case 'Backreference match of preceding marker':
+        this.backReference = {
+          marker: undefined
+        };
+        this.markedElements[this.selectedMarkerIdx].markerInfo = this.backReference;
+        break;
+
       default:
         break;
     }
@@ -455,7 +473,9 @@ export class GenerateSamplesComponent implements OnInit {
         this.markerTabIndex = -1;
       }
     }
+
     this.highlightTextArea();
+    this.createAlternationContainers();
   }
 
   clickCopyToClipboard() {
@@ -582,6 +602,115 @@ export class GenerateSamplesComponent implements OnInit {
     }
 
     return isValid;
+  }
+
+  createAlternationContainers() {
+    this.containers = [];
+
+    this.markedElements.forEach((marker, i) => {
+      this.containers.push({
+        id: i,
+        markers: [{
+          id: i,
+          colour: marker.colour
+        }]
+      });
+    });
+  }
+
+  setButtonColour(marker): any {
+    return {
+      'background-color': marker.colour
+    };
+  }
+
+  canBackReference(idx: number): boolean {
+    for (let i = 0; i < idx; i++) {
+      switch (this.markedElements[i].fieldType) {
+
+        case 'Basic characters':
+          if (!(this.markedElements[i].markerInfo as BasicCharacters).matchAllExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Control characters':
+          if (!(this.markedElements[i].markerInfo as ControlCharacters).matchAllExceptSelectedOnes) {
+            return true;
+          }
+          continue;
+        case 'Digits':
+          return true;
+        case 'List of literal text':
+          if (!(this.markedElements[i].markerInfo as ListOfLiteralText).matchAnythingExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Literal text':
+          if (!(this.markedElements[i].markerInfo as LiteralText).matchAllExceptSpecified) {
+            return true;
+          }
+          continue;
+        case 'Match anything':
+          continue;
+        case 'Numbers':
+          continue;
+        case 'Unicode characters':
+          if (!(this.markedElements[i].markerInfo as UnicodeCharacters).matchAllExceptSelectedOnes) {
+            return true;
+          }
+          continue;
+        default:
+          break;
+
+      }
+    }
+    return false;
+  }
+
+  getBackReferenceOptions(currMarkerId: number): Array<Marker> {
+    const options: Array<Marker> = [];
+
+    for (let i = 0; i < currMarkerId; i++) {
+      switch (this.markedElements[i].fieldType) {
+
+        case 'Basic characters':
+          if (!(this.markedElements[i].markerInfo as BasicCharacters).matchAllExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Control characters':
+          if (!(this.markedElements[i].markerInfo as ControlCharacters).matchAllExceptSelectedOnes) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Digits':
+          options.push(this.markedElements[i]);
+          continue;
+        case 'List of literal text':
+          if (!(this.markedElements[i].markerInfo as ListOfLiteralText).matchAnythingExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Literal text':
+          if (!(this.markedElements[i].markerInfo as LiteralText).matchAllExceptSpecified) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        case 'Match anything':
+          continue;
+        case 'Numbers':
+          continue;
+        case 'Unicode characters':
+          if (!(this.markedElements[i].markerInfo as UnicodeCharacters).matchAllExceptSelectedOnes) {
+            options.push(this.markedElements[i]);
+          }
+          continue;
+        default:
+          break;
+
+      }
+    }
+    return options;
   }
 
 }

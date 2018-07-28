@@ -1,5 +1,4 @@
 from reggy.common import CommonUseCases
-from reggy.induction import Induction
 from reggy.samples import SamplesAndSemantics
 
 
@@ -20,5 +19,3 @@ class Reggy:
             self._re = SamplesAndSemantics(self._samples).get_re()
         elif gen_method == 'commonUseCases':
             self._re = CommonUseCases(self._samples).get_re()
-        elif gen_method == 'induction':
-            self._re = Induction(self._samples).get_re()

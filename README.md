@@ -1,10 +1,13 @@
-# Regy
+# Reggy
 
 ## Prerequisites
 
 * Install [Node.js](https://nodejs.org/en/) version 8.x
-* Install Angular CLI: `npm install -g @angular/cli`
+* Install Angular CLI: `sudo npm install -g @angular/cli`
 * Install all the dependencies from the project root directory: `npm install`
+* Install graphviz: `sudo apt-get install graphviz`
+* Install pip: `sudo apt-get install -y python3-pip`
+* Install python graphviz package: `sudo pip3 install graphviz` 
 
 ## Development
 
@@ -12,17 +15,34 @@
 
 A window will automatically be opened at [localhost:4200](http://localhost:4200). Angular and Express files are being watched. Any change will automatically create a new bundle, restart the Express server and reload your browser.
 
-## Production
+## Deploying to Heroku
 
-The web app is built and shipped using [Docker](https://www.docker.com/), thus docker ce needs to be installed on the system.
-
-#### Building the image
-Change the working directory to the root directory of the project which contains the Dockerfile and run the following:
+The web app is deployed using [Docker](https://www.docker.com/), thus docker ce needs to be installed on the system.
 ```bash
-sudo docker build -t regy:latest . --network=host
+sudo apt-get install docker-ce
 ```
 
-#### Running the container
+#### Testing Docker build locally
+Change the working directory to the root directory of the project which contains the Dockerfile and run the following:
 ```bash
-sudo docker run -p 49160:3000 -d regy:latest
+sudo docker build -t reggy:latest . --network=host
+```
+
+```bash
+sudo docker run -p 49160:3000 -d reggy:latest
+```
+
+#### Deploying
+Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) if it is not installed and then change the working directory to the root directory of the project.
+```bash
+heroku login
+```
+```bash
+sudo heroku container:login
+```
+```bash
+sudo heroku container:push web --app reggy
+```
+```bash
+heroku container:release web --app reggy
 ```

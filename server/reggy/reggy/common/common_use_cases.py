@@ -104,6 +104,22 @@ class CommonUseCases:
             compiled_re = ' my $regex = /{}/;'.format(regex)
         elif target == Target.POSIX:
             compiled_re = regex[:]
+        elif target == Target.PYTHON:
+            compiled_re = 'regex = re.compile(r\'{}\')'.format(regex)
+        elif target == Target.JAVASCRIPT:
+            compiled_re = 'const regex = /{}/;'.format(regex)
+        elif target == Target.PHP:
+            compiled_re = '$regex = \'/{}/\';'.format(regex)
+        elif target == Target.GOLANG:
+            compiled_re = 'regex, _ := regexp.Compile("{}")'.format(regex)
+        elif target == Target.RUST:
+            compiled_re = 'let re = Regex::new(r"{}").unwrap();'.format(regex)
+        elif target == Target.CSHARP:
+            compiled_re = 'var re = new Regex(@"{}");'.format(regex)
+        elif target == Target.SCALA:
+            compiled_re = 'val re = "{}".r'.format(regex)
+        elif target == Target.KOTLIN:
+            compiled_re = 'val regex = Regex("{}")'.format(regex)
 
         self._re['compiledRegex'] = compiled_re
 

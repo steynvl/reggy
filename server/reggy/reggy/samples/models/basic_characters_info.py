@@ -5,7 +5,8 @@ from reggy.samples.parser.repetition_info import RepetitionInfo
 
 class BasicCharactersInfo:
 
-    def __init__(self, info):
+    def __init__(self, marker_id, info):
+        self.marker_id = marker_id
         self.case_insensitive           = info['caseInsensitive']
         self.lower_case_letters         = info['lowerCaseLetters']
         self.upper_case_letters         = info['upperCaseLetters']
