@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[^\\r\\na]", Pattern.CASE_INSENSITIVE);
+(?i)[^\\r\\na]
+Perl
+my $regex = /[^\r\na]/i;
+(?i)[^\r\na]
+POSIX
+(?i)[^\r\na]
+(?i)[^\r\na]
+Python
+regex = re.compile(r'[^\r\na]', re.IGNORECASE)
+(?i)[^\r\na]
+JavaScript
+const regex = /[^\r\na]/i;
+(?i)[^\r\na]
+PHP
+$regex = '/[^\r\na]/i';
+(?i)[^\r\na]
+Golang
+regex, _ := regexp.Compile("(?i)[^\\r\\na]")
+(?i)[^\\r\\na]
+Rust
+let re = Regex::new(r"(?i)[^\r\na]").unwrap();
+(?i)[^\r\na]
+C#
+var re = new Regex(@"[^\\r\\na]", RegexOptions.IgnoreCase);
+(?i)[^\\r\\na]
+Scala
+val re = "(?i)[^\\r\\na]".r
+(?i)[^\\r\\na]
+Kotlin
+val regex = Regex("[^\\r\\na]", IGNORE_CASE)
+(?i)[^\\r\\na]

@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("-[0-35-9]");
+-[0-35-9]
+Perl
+my $regex = /-[0-35-9]/;
+-[0-35-9]
+POSIX
+-[0-35-9]
+-[0-35-9]
+Python
+regex = re.compile(r'-[0-35-9]')
+-[0-35-9]
+JavaScript
+const regex = /-[0-35-9]/;
+-[0-35-9]
+PHP
+$regex = '/-[0-35-9]/';
+-[0-35-9]
+Golang
+regex, _ := regexp.Compile("-[0-35-9]")
+-[0-35-9]
+Rust
+let re = Regex::new(r"-[0-35-9]").unwrap();
+-[0-35-9]
+C#
+var re = new Regex(@"-[0-35-9]");
+-[0-35-9]
+Scala
+val re = "-[0-35-9]".r
+-[0-35-9]
+Kotlin
+val regex = Regex("-[0-35-9]")
+-[0-35-9]

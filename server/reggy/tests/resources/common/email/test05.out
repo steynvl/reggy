@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za");
+[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za
+Perl
+my $regex = /[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za/;
+[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za
+POSIX
+[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za
+[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za
+Python
+regex = re.compile(r'[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za')
+[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za
+JavaScript
+const regex = /[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za/;
+[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za
+PHP
+$regex = '/[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za/';
+[\d_a-z-]++(?:\.[\d_a-z-]+)*@(?:[\da-z-]++\.)*co.za
+Golang
+regex, _ := regexp.Compile("[\\d_a-z-]+(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]+\\.)*co.za")
+[\\d_a-z-]+(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]+\\.)*co.za
+Rust
+let re = Regex::new(r"[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za").unwrap();
+[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za
+C#
+var re = new Regex(@"[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za");
+[\d_a-z-]+(?:\.[\d_a-z-]+)*@(?:[\da-z-]+\.)*co.za
+Scala
+val re = "[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za".r
+[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za
+Kotlin
+val regex = Regex("[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za")
+[\\d_a-z-]++(?:\\.[\\d_a-z-]+)*@(?:[\\da-z-]++\\.)*co.za

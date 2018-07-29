@@ -1,0 +1,14 @@
+{
+  "type": "GUID",
+  "information": {
+    "bracesAround": "Required",
+    "hyphensIn": "Required",
+    "guidCase": "Lowercase"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

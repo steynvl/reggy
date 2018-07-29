@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[A-Za-z\\d\\p{Punct}\\s\\r\\n]");
+[A-Za-z\\d\\p{Punct}\\s\\r\\n]
+Perl
+my $regex = /[A-Za-z\d\p{PosixPunct}\s\r\n]/;
+[A-Za-z\d\p{PosixPunct}\s\r\n]
+POSIX
+[A-Za-z\d\p{P}\s\r\n]
+[A-Za-z\d\p{P}\s\r\n]
+Python
+regex = re.compile(r'[A-Za-z\d\p{P}\s\r\n]')
+[A-Za-z\d\p{P}\s\r\n]
+JavaScript
+const regex = /[A-Za-z\d[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]\s\r\n]/;
+[A-Za-z\d[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]\s\r\n]
+PHP
+$regex = '/[A-Za-z\d\p{P}\s\r\n]/';
+[A-Za-z\d\p{P}\s\r\n]
+Golang
+regex, _ := regexp.Compile("[A-Za-z\\d\\p{P}\\s\\r\\n]")
+[A-Za-z\\d\\p{P}\\s\\r\\n]
+Rust
+let re = Regex::new(r"[A-Za-z\d\p{P}\s\r\n]").unwrap();
+[A-Za-z\d\p{P}\s\r\n]
+C#
+var re = new Regex(@"[A-Za-z\d\p{P}\s\r\n]");
+[A-Za-z\d\p{P}\s\r\n]
+Scala
+val re = "[A-Za-z\\d\\p{Punct}\\s\\r\\n]".r
+[A-Za-z\\d\\p{Punct}\\s\\r\\n]
+Kotlin
+val regex = Regex("[A-Za-z\\d\\p{Punct}\\s\\r\\n]")
+[A-Za-z\\d\\p{Punct}\\s\\r\\n]

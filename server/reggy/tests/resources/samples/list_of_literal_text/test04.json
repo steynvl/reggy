@@ -1,0 +1,29 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "List of literal text",
+        "markedStrings": [
+          "adsad"
+        ],
+        "markerInfo": {
+          "literalText": [
+            "abc",
+            "aerfg"
+          ],
+          "matchAnythingExceptSpecified": true,
+          "caseInsensitive": false
+        },
+        "repeatInfo": {
+          "repeat": "2"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

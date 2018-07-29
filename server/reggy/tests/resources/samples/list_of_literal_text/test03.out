@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("a(?:bc|erfg)*", Pattern.CASE_INSENSITIVE);
+(?i)a(?:bc|erfg)*
+Perl
+my $regex = /a(?:bc|erfg)*/i;
+(?i)a(?:bc|erfg)*
+POSIX
+(?i)a(?:bc|erfg)*
+(?i)a(?:bc|erfg)*
+Python
+regex = re.compile(r'a(?:bc|erfg)*', re.IGNORECASE)
+(?i)a(?:bc|erfg)*
+JavaScript
+const regex = /a(?:bc|erfg)*/i;
+(?i)a(?:bc|erfg)*
+PHP
+$regex = '/a(?:bc|erfg)*/i';
+(?i)a(?:bc|erfg)*
+Golang
+regex, _ := regexp.Compile("(?i)a(?:bc|erfg)*")
+(?i)a(?:bc|erfg)*
+Rust
+let re = Regex::new(r"(?i)a(?:bc|erfg)*").unwrap();
+(?i)a(?:bc|erfg)*
+C#
+var re = new Regex(@"a(?:bc|erfg)*", RegexOptions.IgnoreCase);
+(?i)a(?:bc|erfg)*
+Scala
+val re = "(?i)a(?:bc|erfg)*".r
+(?i)a(?:bc|erfg)*
+Kotlin
+val regex = Regex("a(?:bc|erfg)*", IGNORE_CASE)
+(?i)a(?:bc|erfg)*

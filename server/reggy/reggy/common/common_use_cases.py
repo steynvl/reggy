@@ -101,7 +101,7 @@ class CommonUseCases:
         if target == Target.JAVA:
             compiled_re = 'Pattern regex = Pattern.compile("{}");'.format(regex)
         elif target == Target.PERL:
-            compiled_re = ' my $regex = /{}/;'.format(regex)
+            compiled_re = 'my $regex = /{}/;'.format(regex)
         elif target == Target.POSIX:
             compiled_re = regex[:]
         elif target == Target.PYTHON:

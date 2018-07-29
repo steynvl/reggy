@@ -1,0 +1,25 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Literal text",
+        "markedStrings": [
+          "adsa"
+        ],
+        "markerInfo": {
+          "caseInsensitive": true,
+          "matchAllExceptSpecified": false
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

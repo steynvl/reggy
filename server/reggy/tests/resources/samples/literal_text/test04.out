@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("jannis(?:kannis){3,7}\"");
+jannis(?:kannis){3,7}\"
+Perl
+my $regex = /jannis(?:kannis){3,7}"/;
+jannis(?:kannis){3,7}"
+POSIX
+jannis(?:kannis){3,7}"
+jannis(?:kannis){3,7}"
+Python
+regex = re.compile(r'jannis(?:kannis){3,7}"')
+jannis(?:kannis){3,7}"
+JavaScript
+const regex = /jannis(?:kannis){3,7}"/;
+jannis(?:kannis){3,7}"
+PHP
+$regex = '/jannis(?:kannis){3,7}"/';
+jannis(?:kannis){3,7}"
+Golang
+regex, _ := regexp.Compile("jannis(?:kannis){3,7}\"")
+jannis(?:kannis){3,7}\"
+Rust
+let re = Regex::new(r"jannis(?:kannis){3,7}\"").unwrap();
+jannis(?:kannis){3,7}\"
+C#
+var re = new Regex(@"jannis(?:kannis){3,7}\"");
+jannis(?:kannis){3,7}\"
+Scala
+val re = "jannis(?:kannis){3,7}\"".r
+jannis(?:kannis){3,7}\"
+Kotlin
+val regex = Regex("jannis(?:kannis){3,7}\"")
+jannis(?:kannis){3,7}\"

@@ -1,0 +1,32 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Basic characters",
+        "markedStrings": [
+          "asas"
+        ],
+        "markerInfo": {
+          "caseInsensitive": false,
+          "lowerCaseLetters": true,
+          "upperCaseLetters": true,
+          "digits": true,
+          "punctuationAndSymbols": true,
+          "matchAllExceptSpecified": false,
+          "whiteSpace": true,
+          "lineBreaks": true,
+          "individualCharacters": "steyn"
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

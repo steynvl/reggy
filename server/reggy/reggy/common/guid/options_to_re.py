@@ -45,6 +45,16 @@ braces_to_re = {
     Target.CSHARP: {
         'Required': '\\{%s}',
         'Optional': '%s|\\{%s}'
+    },
+
+    Target.SCALA: {
+        'Required': '\\\\{%s}',
+        'Optional': '%s|\\\\{%s}'
+    },
+
+    Target.KOTLIN: {
+        'Required': '\\\\{%s}',
+        'Optional': '%s|\\\\{%s}'
     }
 
 }

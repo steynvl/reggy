@@ -1,0 +1,17 @@
+{
+  "type": "Currency",
+  "information": {
+    "currencies": [
+      "Afghan afghani",
+      "European euro",
+      "Algerian dinar",
+      "East Caribbean dollar"
+    ]
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Start of word",
+    "endRegexMatchAt": "End of word",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

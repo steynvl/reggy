@@ -1,0 +1,16 @@
+{
+  "type": "IPv4 address",
+  "information": {
+    "dotted": false,
+    "decimal": true,
+    "hexadecimal1": false,
+    "hexadecimal2": false,
+    "hexadecimal3": false
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Start of line",
+    "endRegexMatchAt": "End of line",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

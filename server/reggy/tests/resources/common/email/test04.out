@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com");
+mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+Perl
+my $regex = /mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com/;
+mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com
+POSIX
+mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+Python
+regex = re.compile(r'mailto:[\d!#$%&\'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&\'*+/=?_`a-z{|}~^-]+)*@gmail.com')
+mailto:[\d!#$%&\'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&\'*+/=?_`a-z{|}~^-]+)*@gmail.com
+JavaScript
+const regex = /mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com/;
+mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com
+PHP
+$regex = '/mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com/';
+mailto:[\d!#$%&'*+\/=?_`a-z{|}~^-]++(?:\.[\d!#$%&'*+\/=?_`a-z{|}~^-]+)*@gmail.com
+Golang
+regex, _ := regexp.Compile("mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com")
+mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+Rust
+let re = Regex::new(r"mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com").unwrap();
+mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+C#
+var re = new Regex(@"mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com");
+mailto:[\d!#$%&'*+/=?_`a-z{|}~^-]+(?:\.[\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+Scala
+val re = "mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com".r
+mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com
+Kotlin
+val regex = Regex("mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com")
+mailto:[\\d!#$%&'*+/=?_`a-z{|}~^-]++(?:\\.[\\d!#$%&'*+/=?_`a-z{|}~^-]+)*@gmail.com

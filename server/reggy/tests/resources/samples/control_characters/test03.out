@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\x0C\\x14\\x1C]");
+[\\x0C\\x14\\x1C]
+Perl
+my $regex = /[\x0C\x14\x1C]/;
+[\x0C\x14\x1C]
+POSIX
+[\x0C\x14\x1C]
+[\x0C\x14\x1C]
+Python
+regex = re.compile(r'[\x0C\x14\x1C]')
+[\x0C\x14\x1C]
+JavaScript
+const regex = /[\x0C\x14\x1C]/;
+[\x0C\x14\x1C]
+PHP
+$regex = '/[\x0C\x14\x1C]/';
+[\x0C\x14\x1C]
+Golang
+regex, _ := regexp.Compile("[\\x0C\\x14\\x1C]")
+[\\x0C\\x14\\x1C]
+Rust
+let re = Regex::new(r"[\x0C\x14\x1C]").unwrap();
+[\x0C\x14\x1C]
+C#
+var re = new Regex(@"[\x0C\x14\x1C]");
+[\x0C\x14\x1C]
+Scala
+val re = "[\\x0C\\x14\\x1C]".r
+[\\x0C\\x14\\x1C]
+Kotlin
+val regex = Regex("[\\x0C\\x14\\x1C]")
+[\\x0C\\x14\\x1C]

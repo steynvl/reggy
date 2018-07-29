@@ -1,0 +1,32 @@
+{
+  "type": "URL",
+  "information": {
+    "schemes": "http",
+    "portNumbers": "No port number",
+    "specOptionalPortNumbers": "",
+    "specRequiredPortNumbers": "",
+    "username": "No user names",
+    "specUserNames": "",
+    "password": "No password",
+    "domainName": "Allow any domain name",
+    "specDomainNames": "",
+    "specificTld": "",
+    "subdomainOnSpecDomain": "",
+    "folders": "No folders",
+    "minFolderDepth": "",
+    "maxFolderDepth": "",
+    "specFoldersOnly": "",
+    "fileNames": "No file names",
+    "specExtensions": "",
+    "specFileNames": "",
+    "optionalFileNames": false,
+    "parameters": "No parameters",
+    "specParameters": ""
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

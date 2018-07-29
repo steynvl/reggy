@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("adsa", Pattern.CASE_INSENSITIVE);
+(?i)adsa
+Perl
+my $regex = /adsa/i;
+(?i)adsa
+POSIX
+(?i)adsa
+(?i)adsa
+Python
+regex = re.compile(r'adsa', re.IGNORECASE)
+(?i)adsa
+JavaScript
+const regex = /adsa/i;
+(?i)adsa
+PHP
+$regex = '/adsa/i';
+(?i)adsa
+Golang
+regex, _ := regexp.Compile("(?i)adsa")
+(?i)adsa
+Rust
+let re = Regex::new(r"(?i)adsa").unwrap();
+(?i)adsa
+C#
+var re = new Regex(@"adsa", RegexOptions.IgnoreCase);
+(?i)adsa
+Scala
+val re = "(?i)adsa".r
+(?i)adsa
+Kotlin
+val regex = Regex("adsa", IGNORE_CASE)
+(?i)adsa

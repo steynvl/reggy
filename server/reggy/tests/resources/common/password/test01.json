@@ -1,0 +1,18 @@
+{
+  "type": "Password",
+  "information": {
+    "shouldStartWith": "Anything",
+    "shouldContain": [
+      "Digit",
+      "Special character"
+    ],
+    "minimumLength": "4",
+    "maximumLength": "9"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

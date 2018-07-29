@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("(?:jann|kall)si");
+(?:jann|kall)si
+Perl
+my $regex = /(?:jann|kall)si/;
+(?:jann|kall)si
+POSIX
+(?:jann|kall)si
+(?:jann|kall)si
+Python
+regex = re.compile(r'(?:jann|kall)si')
+(?:jann|kall)si
+JavaScript
+const regex = /(?:jann|kall)si/;
+(?:jann|kall)si
+PHP
+$regex = '/(?:jann|kall)si/';
+(?:jann|kall)si
+Golang
+regex, _ := regexp.Compile("(?:jann|kall)si")
+(?:jann|kall)si
+Rust
+let re = Regex::new(r"(?:jann|kall)si").unwrap();
+(?:jann|kall)si
+C#
+var re = new Regex(@"(?:jann|kall)si");
+(?:jann|kall)si
+Scala
+val re = "(?:jann|kall)si".r
+(?:jann|kall)si
+Kotlin
+val regex = Regex("(?:jann|kall)si")
+(?:jann|kall)si

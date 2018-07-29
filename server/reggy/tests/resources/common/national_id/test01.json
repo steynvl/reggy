@@ -1,0 +1,12 @@
+{
+  "type": "National ID",
+  "information": {
+    "kind": "Austrian social security number"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

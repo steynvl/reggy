@@ -1,0 +1,56 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Unicode characters",
+        "markedStrings": [
+          "das"
+        ],
+        "markerInfo": {
+          "lowercaseLetters": false,
+          "uppercaseLetters": true,
+          "titleCaseLetters": false,
+          "casedLetters": false,
+          "modifierLetters": false,
+          "otherLetters": false,
+          "nonSpacingMarks": false,
+          "spacingCombiningMarks": false,
+          "enclosingMarks": false,
+          "spaceSeparators": false,
+          "lineSeparators": true,
+          "paragraphSeparators": true,
+          "mathSymbols": false,
+          "currencySymbols": false,
+          "modifierSymbols": false,
+          "otherSymbols": false,
+          "decimalDigitNumbers": false,
+          "letterNumbers": false,
+          "otherNumbers": false,
+          "dashPunctuation": true,
+          "openPunctuation": true,
+          "closePunctuation": true,
+          "initialPunctuation": false,
+          "finalPunctuation": false,
+          "connectorPunctuation": false,
+          "otherPunctuation": false,
+          "controlCharacters": false,
+          "formatCharacters": false,
+          "privateUseCharacters": false,
+          "surrogateCharacters": false,
+          "unassignedCharacters": false,
+          "matchAllExceptSelectedOnes": false,
+          "individualCharacters": ""
+        },
+        "repeatInfo": {
+          "repeat": "6"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

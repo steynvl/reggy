@@ -1,0 +1,57 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Literal text",
+        "markedStrings": [
+          "jannis"
+        ],
+        "markerInfo": {
+          "caseInsensitive": false,
+          "matchAllExceptSpecified": false
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ],
+    [
+      {
+        "markerType": "Literal text",
+        "markedStrings": [
+          "kannis"
+        ],
+        "markerInfo": {
+          "caseInsensitive": false,
+          "matchAllExceptSpecified": false
+        },
+        "repeatInfo": {
+          "repeat": "Custom range",
+          "start": 3,
+          "end": 7
+        }
+      }
+    ],
+    [
+      {
+        "markerType": "Literal text",
+        "markedStrings": [
+          "\""
+        ],
+        "markerInfo": {
+          "caseInsensitive": false,
+          "matchAllExceptSpecified": false
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

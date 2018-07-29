@@ -1,0 +1,42 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Numbers",
+        "markedStrings": [
+          "adsads"
+        ],
+        "markerInfo": {
+          "minValOfIntPart": 0,
+          "maxValOfIntPart": 0,
+          "decimalSeparator": "Comma",
+          "minNrOfDecimals": 2,
+          "maxNrOfDecimals": 2,
+          "thousandSeparator": "None",
+          "codePosition": "Before only",
+          "currencySign": "Any",
+          "currencyCodes": "",
+          "limitIntegerPart": false,
+          "allowPlusSign": true,
+          "allowMinusSign": true,
+          "signIsRequired": false,
+          "whitespaceAllowedAfterSign": false,
+          "thousandSeparatorsAreRequired": false,
+          "allowLeadingZeros": false,
+          "requireIntegerPart": false,
+          "allowExponent": false,
+          "currencySignOrCodeRequired": false
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "Username",
+  "information": {
+    "shouldStartWith": "Anything",
+    "shouldContain": [
+      "Lowercase letter",
+      "Special character",
+      "Number",
+      "Uppercase letter"
+    ],
+    "minimumLength": "23",
+    "maximumLength": "No maximum length required"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

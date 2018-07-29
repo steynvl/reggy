@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("janniskannis\"");
+janniskannis\"
+Perl
+my $regex = /janniskannis"/;
+janniskannis"
+POSIX
+janniskannis"
+janniskannis"
+Python
+regex = re.compile(r'janniskannis"')
+janniskannis"
+JavaScript
+const regex = /janniskannis"/;
+janniskannis"
+PHP
+$regex = '/janniskannis"/';
+janniskannis"
+Golang
+regex, _ := regexp.Compile("janniskannis\"")
+janniskannis\"
+Rust
+let re = Regex::new(r"janniskannis\"").unwrap();
+janniskannis\"
+C#
+var re = new Regex(@"janniskannis\"");
+janniskannis\"
+Scala
+val re = "janniskannis\"".r
+janniskannis\"
+Kotlin
+val regex = Regex("janniskannis\"")
+janniskannis\"

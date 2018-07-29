@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[^\\r\\n\\p{Punct}a-zA-Z\\s\\d]", Pattern.CASE_INSENSITIVE);
+(?i)[^\\r\\n\\p{Punct}a-zA-Z\\s\\d]
+Perl
+my $regex = /[^\r\na-z\d\p{PosixPunct}\sA-Z]/i;
+(?i)[^\r\na-z\d\p{PosixPunct}\sA-Z]
+POSIX
+(?i)[^\d\s\p{PosixPunct}a-zA-Z\r\n]
+(?i)[^\d\s\p{PosixPunct}a-zA-Z\r\n]
+Python
+regex = re.compile(r'[^A-Z\da-z\p{P}\r\n\s]', re.IGNORECASE)
+(?i)[^A-Z\da-z\p{P}\r\n\s]
+JavaScript
+const regex = /[^\r\n[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]a-zA-Z\d\s]/i;
+(?i)[^\r\n[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]a-zA-Z\d\s]
+PHP
+$regex = '/[^\p{P}a-z\d\sA-Z\r\n]/i';
+(?i)[^\p{P}a-z\d\sA-Z\r\n]
+Golang
+regex, _ := regexp.Compile("(?i)[^\\s\\r\\n\\p{P}\\dA-Za-z]")
+(?i)[^\\s\\r\\n\\p{P}\\dA-Za-z]
+Rust
+let re = Regex::new(r"(?i)[^\r\nA-Z\p{P}\da-z\s]").unwrap();
+(?i)[^\r\nA-Z\p{P}\da-z\s]
+C#
+var re = new Regex(@"[^\p{P}\dA-Za-z\r\n\s]", RegexOptions.IgnoreCase);
+(?i)[^\p{P}\dA-Za-z\r\n\s]
+Scala
+val re = "(?i)[^\\r\\n\\da-zA-Z\\p{Punct}\\s]".r
+(?i)[^\\r\\n\\da-zA-Z\\p{Punct}\\s]
+Kotlin
+val regex = Regex("[^\\s\\r\\na-z\\p{Punct}\\dA-Z]", IGNORE_CASE)
+(?i)[^\\s\\r\\na-z\\p{Punct}\\dA-Z]

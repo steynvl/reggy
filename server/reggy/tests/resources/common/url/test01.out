@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?");
+http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?
+Perl
+my $regex = /http:\/\/(?:[\da-z-]++\.)+[a-z]{2,63}+\/?/;
+http:\/\/(?:[\da-z-]++\.)+[a-z]{2,63}+\/?
+POSIX
+http://(?:[\da-z-]++\.)+[a-z]{2,63}+/?
+http://(?:[\da-z-]++\.)+[a-z]{2,63}+/?
+Python
+regex = re.compile(r'http://(?:[\da-z-]+\.)+[a-z]{2,63}/?')
+http://(?:[\da-z-]+\.)+[a-z]{2,63}/?
+JavaScript
+const regex = /http:\/\/(?:[\da-z-]+\.)+[a-z]{2,63}\/?/;
+http:\/\/(?:[\da-z-]+\.)+[a-z]{2,63}\/?
+PHP
+$regex = '/http:\/\/(?:[\da-z-]++\.)+[a-z]{2,63}+\/?/';
+http:\/\/(?:[\da-z-]++\.)+[a-z]{2,63}+\/?
+Golang
+regex, _ := regexp.Compile("http://(?:[\\da-z-]+\\.)+[a-z]{2,63}/?")
+http://(?:[\\da-z-]+\\.)+[a-z]{2,63}/?
+Rust
+let re = Regex::new(r"http://(?:[\da-z-]+\.)+[a-z]{2,63}/?").unwrap();
+http://(?:[\da-z-]+\.)+[a-z]{2,63}/?
+C#
+var re = new Regex(@"http://(?:[\da-z-]+\.)+[a-z]{2,63}/?");
+http://(?:[\da-z-]+\.)+[a-z]{2,63}/?
+Scala
+val re = "http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?".r
+http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?
+Kotlin
+val regex = Regex("http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?")
+http://(?:[\\da-z-]++\\.)+[a-z]{2,63}+/?

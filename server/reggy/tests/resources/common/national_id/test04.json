@@ -1,0 +1,12 @@
+{
+  "type": "National ID",
+  "information": {
+    "kind": "Finnish Social Security Number"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

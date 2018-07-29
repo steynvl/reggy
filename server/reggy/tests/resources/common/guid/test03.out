@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\dA-F]{32}");
+[\\dA-F]{32}
+Perl
+my $regex = /[\dA-F]{32}/;
+[\dA-F]{32}
+POSIX
+[\dA-F]{32}
+[\dA-F]{32}
+Python
+regex = re.compile(r'[\dA-F]{32}')
+[\dA-F]{32}
+JavaScript
+const regex = /[\dA-F]{32}/;
+[\dA-F]{32}
+PHP
+$regex = '/[\dA-F]{32}/';
+[\dA-F]{32}
+Golang
+regex, _ := regexp.Compile("[\\dA-F]{32}")
+[\\dA-F]{32}
+Rust
+let re = Regex::new(r"[\dA-F]{32}").unwrap();
+[\dA-F]{32}
+C#
+var re = new Regex(@"[\dA-F]{32}");
+[\dA-F]{32}
+Scala
+val re = "[\\dA-F]{32}".r
+[\\dA-F]{32}
+Kotlin
+val regex = Regex("[\\dA-F]{32}")
+[\\dA-F]{32}
