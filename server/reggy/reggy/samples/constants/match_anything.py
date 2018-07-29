@@ -112,9 +112,17 @@ basic_char_to_re = {
     }
 
 }
-
 can_span_across_lines = {
     Target.JAVA : '\\\\r\\\\n',
     Target.PERL : '\\r\\n',
-    Target.POSIX: '\\r\\n'
+    Target.POSIX: '\\r\\n',
+    Target.PYTHON: '\\r\\n',
+    Target.JAVASCRIPT: '\\r\\n',
+    Target.PHP: '\\r\\n',
+    Target.GOLANG: '\\\\r\\\\n',
+    Target.RUST: '\\r\\n',
+    Target.CSHARP: '\\\\r\\\\n',
+    Target.SCALA: '\\\\r\\\\n',
+    Target.KOTLIN: '\\\\r\\\\n'
 }
+

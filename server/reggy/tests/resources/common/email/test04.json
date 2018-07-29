@@ -1,0 +1,18 @@
+{
+  "type": "Email address",
+  "information": {
+    "username": "Allow any user name",
+    "domainName": "Specific domains only",
+    "mailtoPrefix": "Require prefix",
+    "specificUserNamesOnly": "steyn;jake",
+    "domainOnSpecificTld": "com;org",
+    "anySubDomainOnSpecificDomain": "",
+    "specificDomainsOnly": "gmail.com"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\x07\\x0A\\x0D\\x14]{7,}");
+[\\x07\\x0A\\x0D\\x14]{7,}
+Perl
+my $regex = /[\x07\x0A\x0D\x14]{7,}/;
+[\x07\x0A\x0D\x14]{7,}
+POSIX
+[\x07\x0A\x0D\x14]{7,}
+[\x07\x0A\x0D\x14]{7,}
+Python
+regex = re.compile(r'[\x07\x0A\x0D\x14]{7,}')
+[\x07\x0A\x0D\x14]{7,}
+JavaScript
+const regex = /[\x07\x0A\x0D\x14]{7,}/;
+[\x07\x0A\x0D\x14]{7,}
+PHP
+$regex = '/[\x07\x0A\x0D\x14]{7,}/';
+[\x07\x0A\x0D\x14]{7,}
+Golang
+regex, _ := regexp.Compile("[\\x07\\x0A\\x0D\\x14]{7,}")
+[\\x07\\x0A\\x0D\\x14]{7,}
+Rust
+let re = Regex::new(r"[\x07\x0A\x0D\x14]{7,}").unwrap();
+[\x07\x0A\x0D\x14]{7,}
+C#
+var re = new Regex(@"[\x07\x0A\x0D\x14]{7,}");
+[\x07\x0A\x0D\x14]{7,}
+Scala
+val re = "[\\x07\\x0A\\x0D\\x14]{7,}".r
+[\\x07\\x0A\\x0D\\x14]{7,}
+Kotlin
+val regex = Regex("[\\x07\\x0A\\x0D\\x14]{7,}")
+[\\x07\\x0A\\x0D\\x14]{7,}

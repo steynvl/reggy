@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("\\b(?:AFN|EUR|DZD|XCD)\\b");
+\\b(?:AFN|EUR|DZD|XCD)\\b
+Perl
+my $regex = /\b(?:AFN|EUR|DZD|XCD)\b/;
+\b(?:AFN|EUR|DZD|XCD)\b
+POSIX
+\b(?:AFN|EUR|DZD|XCD)\b
+\b(?:AFN|EUR|DZD|XCD)\b
+Python
+regex = re.compile(r'\b(?:AFN|EUR|DZD|XCD)\b')
+\b(?:AFN|EUR|DZD|XCD)\b
+JavaScript
+const regex = /\b(?:AFN|EUR|DZD|XCD)\b/;
+\b(?:AFN|EUR|DZD|XCD)\b
+PHP
+$regex = '/\b(?:AFN|EUR|DZD|XCD)\b/';
+\b(?:AFN|EUR|DZD|XCD)\b
+Golang
+regex, _ := regexp.Compile("\\b(?:AFN|EUR|DZD|XCD)\\b")
+\\b(?:AFN|EUR|DZD|XCD)\\b
+Rust
+let re = Regex::new(r"\b(?:AFN|EUR|DZD|XCD)\b").unwrap();
+\b(?:AFN|EUR|DZD|XCD)\b
+C#
+var re = new Regex(@"\b(?:AFN|EUR|DZD|XCD)\b");
+\b(?:AFN|EUR|DZD|XCD)\b
+Scala
+val re = "\\b(?:AFN|EUR|DZD|XCD)\\b".r
+\\b(?:AFN|EUR|DZD|XCD)\\b
+Kotlin
+val regex = Regex("\\b(?:AFN|EUR|DZD|XCD)\\b")
+\\b(?:AFN|EUR|DZD|XCD)\\b

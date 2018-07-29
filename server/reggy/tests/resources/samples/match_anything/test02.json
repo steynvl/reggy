@@ -1,0 +1,36 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Match anything",
+        "markedStrings": [
+          "sa"
+        ],
+        "markerInfo": {
+          "matchAnythingExcept": "Basic characters",
+          "specificCharacters": "",
+          "specificCharacter": "",
+          "canSpanAcrossLines": true,
+          "caseInsensitive": true,
+          "basicCharacters": {
+            "lowerCaseLetters": true,
+            "upperCaseLetters": true,
+            "digits": true,
+            "punctuationAndSymbols": true,
+            "whiteSpace": true,
+            "lineBreaks": true
+          }
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

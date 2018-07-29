@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}");
+[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}
+Perl
+my $regex = /[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}/;
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+POSIX
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+Python
+regex = re.compile(r'[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}')
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+JavaScript
+const regex = /[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}/;
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+PHP
+$regex = '/[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}/';
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+Golang
+regex, _ := regexp.Compile("[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}")
+[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}
+Rust
+let re = Regex::new(r"[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}").unwrap();
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+C#
+var re = new Regex(@"[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}");
+[\p{Ll}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}U+0482]{6}
+Scala
+val re = "[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}".r
+[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}
+Kotlin
+val regex = Regex("[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}")
+[\\p{Ll}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}U+0482]{6}

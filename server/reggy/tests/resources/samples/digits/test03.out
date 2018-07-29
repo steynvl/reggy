@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("-?[0157-9]");
+-?[0157-9]
+Perl
+my $regex = /-?[0157-9]/;
+-?[0157-9]
+POSIX
+-?[0157-9]
+-?[0157-9]
+Python
+regex = re.compile(r'-?[0157-9]')
+-?[0157-9]
+JavaScript
+const regex = /-?[0157-9]/;
+-?[0157-9]
+PHP
+$regex = '/-?[0157-9]/';
+-?[0157-9]
+Golang
+regex, _ := regexp.Compile("-?[0157-9]")
+-?[0157-9]
+Rust
+let re = Regex::new(r"-?[0157-9]").unwrap();
+-?[0157-9]
+C#
+var re = new Regex(@"-?[0157-9]");
+-?[0157-9]
+Scala
+val re = "-?[0157-9]".r
+-?[0157-9]
+Kotlin
+val regex = Regex("-?[0157-9]")
+-?[0157-9]

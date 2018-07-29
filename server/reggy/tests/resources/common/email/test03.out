@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)");
+(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)
+Perl
+my $regex = /(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)/;
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)
+POSIX
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)
+Python
+regex = re.compile(r'(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)')
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)
+JavaScript
+const regex = /(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)/;
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)
+PHP
+$regex = '/(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)/';
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]++\.)+(?:com|org)
+Golang
+regex, _ := regexp.Compile("(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)")
+(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)
+Rust
+let re = Regex::new(r"(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)").unwrap();
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)
+C#
+var re = new Regex(@"(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)");
+(?:mailto:)?+(?:steyn|jake)@(?:[\da-z-]+\.)+(?:com|org)
+Scala
+val re = "(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)".r
+(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)
+Kotlin
+val regex = Regex("(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)")
+(?:mailto:)?+(?:steyn|jake)@(?:[\\da-z-]++\\.)+(?:com|org)

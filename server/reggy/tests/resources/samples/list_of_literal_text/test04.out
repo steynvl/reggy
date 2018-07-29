@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("(?!a(?:bc|erfg)).{2}");
+(?!a(?:bc|erfg)).{2}
+Perl
+my $regex = /(?!a(?:bc|erfg)).{2}/;
+(?!a(?:bc|erfg)).{2}
+POSIX
+(?!a(?:bc|erfg)).{2}
+(?!a(?:bc|erfg)).{2}
+Python
+regex = re.compile(r'(?!a(?:bc|erfg)).{2}')
+(?!a(?:bc|erfg)).{2}
+JavaScript
+const regex = /(?!a(?:bc|erfg)).{2}/;
+(?!a(?:bc|erfg)).{2}
+PHP
+$regex = '/(?!a(?:bc|erfg)).{2}/';
+(?!a(?:bc|erfg)).{2}
+Golang
+regex, _ := regexp.Compile("(?!a(?:bc|erfg)).{2}")
+(?!a(?:bc|erfg)).{2}
+Rust
+let re = Regex::new(r"(?!a(?:bc|erfg)).{2}").unwrap();
+(?!a(?:bc|erfg)).{2}
+C#
+var re = new Regex(@"(?!a(?:bc|erfg)).{2}");
+(?!a(?:bc|erfg)).{2}
+Scala
+val re = "(?!a(?:bc|erfg)).{2}".r
+(?!a(?:bc|erfg)).{2}
+Kotlin
+val regex = Regex("(?!a(?:bc|erfg)).{2}")
+(?!a(?:bc|erfg)).{2}

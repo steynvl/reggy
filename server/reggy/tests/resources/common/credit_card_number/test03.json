@@ -1,0 +1,18 @@
+{
+  "type": "Credit card number",
+  "information": {
+    "visa": false,
+    "dinersClub": false,
+    "masterCard": false,
+    "discover": true,
+    "americanExpress": false,
+    "jcb": true,
+    "spacesAndDashes": "Spaces and dashes anywhere"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Start of word",
+    "endRegexMatchAt": "End of word",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

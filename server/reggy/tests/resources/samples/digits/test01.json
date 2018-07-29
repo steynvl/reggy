@@ -1,0 +1,37 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Digits",
+        "markedStrings": [
+          "adsad"
+        ],
+        "markerInfo": {
+          "zero": true,
+          "one": true,
+          "two": true,
+          "three": true,
+          "four": true,
+          "five": true,
+          "six": true,
+          "seven": true,
+          "eight": true,
+          "nine": true,
+          "minus": {
+            "minus": false,
+            "optional": false
+          }
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

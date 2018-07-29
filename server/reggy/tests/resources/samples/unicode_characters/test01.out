@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]");
+[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]
+Perl
+my $regex = /[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]/;
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+POSIX
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+Python
+regex = re.compile(r'[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]')
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+JavaScript
+const regex = /[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]/;
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+PHP
+$regex = '/[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]/';
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+Golang
+regex, _ := regexp.Compile("[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]")
+[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]
+Rust
+let re = Regex::new(r"[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]").unwrap();
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+C#
+var re = new Regex(@"[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]");
+[\p{Ll}\p{Lu}\p{Lt}\p{L}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}\p{Zs}\p{Zl}\p{Zp}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Nd}\p{Nl}\p{No}\p{Pd}\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Pc}\p{Ps}\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]
+Scala
+val re = "[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]".r
+[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]
+Kotlin
+val regex = Regex("[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]")
+[\\p{Ll}\\p{Lu}\\p{Lt}\\p{L}\\p{Lm}\\p{Lo}\\p{Mn}\\p{Mc}\\p{Me}\\p{Zs}\\p{Zl}\\p{Zp}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\p{Nd}\\p{Nl}\\p{No}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\p{Pc}\\p{Ps}\\p{Cc}\\p{Cf}\\p{Co}\\p{Cs}\\p{Cn}]

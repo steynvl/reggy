@@ -1,0 +1,16 @@
+{
+  "type": "Date and time",
+  "information": {
+    "dateSeparator": "Hyphen",
+    "timeSeparator": "Colon or dot",
+    "amPmIndicator": "PM",
+    "leadingZeros": "Optional leading zeros",
+    "dateFormats": "h:H:n:s:a"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

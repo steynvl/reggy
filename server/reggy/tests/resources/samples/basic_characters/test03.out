@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}", Pattern.CASE_INSENSITIVE);
+(?i)[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}
+Perl
+my $regex = /[A-Za-z\d\p{PosixPunct}\s\r\nsteyn]{5}/i;
+(?i)[A-Za-z\d\p{PosixPunct}\s\r\nsteyn]{5}
+POSIX
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+Python
+regex = re.compile(r'[A-Za-z\d\p{P}\s\r\nsteyn]{5}', re.IGNORECASE)
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+JavaScript
+const regex = /[A-Za-z\d[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]\s\r\nsteyn]{5}/i;
+(?i)[A-Za-z\d[!"\#$%&'()*+,\-./:;<=>?@\[\\]^_`{|}~]\s\r\nsteyn]{5}
+PHP
+$regex = '/[A-Za-z\d\p{P}\s\r\nsteyn]{5}/i';
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+Golang
+regex, _ := regexp.Compile("(?i)[A-Za-z\\d\\p{P}\\s\\r\\nsteyn]{5}")
+(?i)[A-Za-z\\d\\p{P}\\s\\r\\nsteyn]{5}
+Rust
+let re = Regex::new(r"(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}").unwrap();
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+C#
+var re = new Regex(@"[A-Za-z\d\p{P}\s\r\nsteyn]{5}", RegexOptions.IgnoreCase);
+(?i)[A-Za-z\d\p{P}\s\r\nsteyn]{5}
+Scala
+val re = "(?i)[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}".r
+(?i)[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}
+Kotlin
+val regex = Regex("[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}", IGNORE_CASE)
+(?i)[A-Za-z\\d\\p{Punct}\\s\\r\\nsteyn]{5}

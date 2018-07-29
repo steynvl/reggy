@@ -1,0 +1,18 @@
+{
+  "type": "Email address",
+  "information": {
+    "username": "Allow any user name",
+    "domainName": "Allow any domain name",
+    "mailtoPrefix": "No prefix",
+    "specificUserNamesOnly": "",
+    "domainOnSpecificTld": "",
+    "anySubDomainOnSpecificDomain": "",
+    "specificDomainsOnly": ""
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Start of word",
+    "endRegexMatchAt": "End of word",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

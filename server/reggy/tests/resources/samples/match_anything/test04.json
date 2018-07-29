@@ -1,0 +1,36 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Match anything",
+        "markedStrings": [
+          "bc"
+        ],
+        "markerInfo": {
+          "matchAnythingExcept": "Specific character",
+          "specificCharacters": "abc",
+          "specificCharacter": "a",
+          "canSpanAcrossLines": true,
+          "caseInsensitive": true,
+          "basicCharacters": {
+            "lowerCaseLetters": false,
+            "upperCaseLetters": false,
+            "digits": false,
+            "punctuationAndSymbols": false,
+            "whiteSpace": false,
+            "lineBreaks": false
+          }
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

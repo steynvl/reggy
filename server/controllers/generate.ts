@@ -7,6 +7,7 @@ export default class GenerateCtrl {
     const samples = req.body.params;
     console.log('---------');
     console.log(samples);
+    console.log(JSON.stringify(JSON.parse(samples), null, 2));
     console.log('---------');
 
     const py = spawnChildProcess(samples);

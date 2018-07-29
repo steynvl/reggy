@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}");
+[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}
+Perl
+my $regex = /[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}/;
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+POSIX
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+Python
+regex = re.compile(r'[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}')
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+JavaScript
+const regex = /[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}/;
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+PHP
+$regex = '/[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}/';
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+Golang
+regex, _ := regexp.Compile("[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}")
+[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}
+Rust
+let re = Regex::new(r"[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}").unwrap();
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+C#
+var re = new Regex(@"[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}");
+[\p{Lu}\p{Zl}\p{Zp}\p{Nl}\p{Pd}\p{Ps}\p{Pe}\p{Cf}\p{Co}U+0041-U+005A]{6}
+Scala
+val re = "[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}".r
+[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}
+Kotlin
+val regex = Regex("[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}")
+[\\p{Lu}\\p{Zl}\\p{Zp}\\p{Nl}\\p{Pd}\\p{Ps}\\p{Pe}\\p{Cf}\\p{Co}U+0041-U+005A]{6}

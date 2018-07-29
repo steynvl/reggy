@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?");
+(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?
+Perl
+my $regex = /(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?\/?/;
+(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?\/?
+POSIX
+(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?/?
+(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?/?
+Python
+regex = re.compile(r'(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?')
+(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?
+JavaScript
+const regex = /(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?\/?/;
+(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?\/?
+PHP
+$regex = '/(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?\/?/';
+(?:(?:file|ftp|https?):\/\/|(?:ftp|www)\.)(?:[\da-z-]++\.)+[a-z]{2,63}+(?::\d{1,5}+)?\/?
+Golang
+regex, _ := regexp.Compile("(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]+\\.)+[a-z]{2,63}(?::\\d{1,5})?/?")
+(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]+\\.)+[a-z]{2,63}(?::\\d{1,5})?/?
+Rust
+let re = Regex::new(r"(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?").unwrap();
+(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?
+C#
+var re = new Regex(@"(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?");
+(?:(?:file|ftp|https?)://|(?:ftp|www)\.)(?:[\da-z-]+\.)+[a-z]{2,63}(?::\d{1,5})?/?
+Scala
+val re = "(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?".r
+(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?
+Kotlin
+val regex = Regex("(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?")
+(?:(?:file|ftp|https?)://|(?:ftp|www)\\.)(?:[\\da-z-]++\\.)+[a-z]{2,63}+(?::\\d{1,5}+)?/?

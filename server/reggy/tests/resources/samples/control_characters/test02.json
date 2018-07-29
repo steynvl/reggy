@@ -1,0 +1,56 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Control characters",
+        "markedStrings": [
+          "asas"
+        ],
+        "markerInfo": {
+          "nul": true,
+          "startOfHeading": true,
+          "startOfText": true,
+          "endOfText": true,
+          "endOfTransmission": true,
+          "enquiry": true,
+          "acknowledge": true,
+          "bell": true,
+          "backspace": true,
+          "horizontalTab": true,
+          "newLine": true,
+          "verticalTab": true,
+          "formFeed": false,
+          "carriageReturn": true,
+          "shiftOut": true,
+          "shiftIn": true,
+          "dataLinkEscape": true,
+          "deviceControlOne": true,
+          "deviceControlTwo": true,
+          "deviceControlThree": true,
+          "deviceControlFour": false,
+          "negativeAcknowledge": true,
+          "synchronousIdle": true,
+          "endOfTransBlock": true,
+          "cancel": true,
+          "endOfMedium": true,
+          "substitute": true,
+          "escape": true,
+          "fileSeparator": false,
+          "groupSeparator": true,
+          "recordSeparator": true,
+          "unitSeparator": true,
+          "matchAllExceptSelectedOnes": false
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

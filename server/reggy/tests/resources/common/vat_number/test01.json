@@ -1,0 +1,41 @@
+{
+  "type": "VAT number",
+  "information": {
+    "austria": true,
+    "belgium": true,
+    "bulgaria": true,
+    "cyprus": true,
+    "czechRepublic": true,
+    "germany": true,
+    "denmark": true,
+    "slovakia": true,
+    "estonia": true,
+    "greece": true,
+    "ireland": true,
+    "poland": true,
+    "spain": true,
+    "italy": true,
+    "portugal": true,
+    "finland": true,
+    "lithuania": true,
+    "romania": true,
+    "france": true,
+    "luxembourg": true,
+    "unitedKingdom": true,
+    "latvia": true,
+    "sweden": true,
+    "croatia": true,
+    "malta": true,
+    "slovenia": true,
+    "hungary": true,
+    "netherlands": true,
+    "countryCode": "No country code",
+    "groupingCharacters": "None"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

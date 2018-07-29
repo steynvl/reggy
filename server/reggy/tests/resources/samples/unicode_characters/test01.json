@@ -1,0 +1,56 @@
+{
+  "sampleStringsInfo": [
+    [
+      {
+        "markerType": "Unicode characters",
+        "markedStrings": [
+          "adsads"
+        ],
+        "markerInfo": {
+          "lowercaseLetters": true,
+          "uppercaseLetters": true,
+          "titleCaseLetters": true,
+          "casedLetters": true,
+          "modifierLetters": true,
+          "otherLetters": true,
+          "nonSpacingMarks": true,
+          "spacingCombiningMarks": true,
+          "enclosingMarks": true,
+          "spaceSeparators": true,
+          "lineSeparators": true,
+          "paragraphSeparators": true,
+          "mathSymbols": true,
+          "currencySymbols": true,
+          "modifierSymbols": true,
+          "otherSymbols": true,
+          "decimalDigitNumbers": true,
+          "letterNumbers": true,
+          "otherNumbers": true,
+          "dashPunctuation": true,
+          "openPunctuation": true,
+          "closePunctuation": true,
+          "initialPunctuation": true,
+          "finalPunctuation": true,
+          "connectorPunctuation": true,
+          "otherPunctuation": true,
+          "controlCharacters": true,
+          "formatCharacters": true,
+          "privateUseCharacters": true,
+          "surrogateCharacters": true,
+          "unassignedCharacters": true,
+          "matchAllExceptSelectedOnes": false,
+          "individualCharacters": ""
+        },
+        "repeatInfo": {
+          "repeat": "1"
+        }
+      }
+    ]
+  ],
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "samplesAndSemantics"
+}

@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[^\\r\\n]{2,5}");
+[^\\r\\n]{2,5}
+Perl
+my $regex = /[^\r\n]{2,5}/;
+[^\r\n]{2,5}
+POSIX
+[^\r\n]{2,5}
+[^\r\n]{2,5}
+Python
+regex = re.compile(r'[^\r\n]{2,5}')
+[^\r\n]{2,5}
+JavaScript
+const regex = /[^\r\n]{2,5}/;
+[^\r\n]{2,5}
+PHP
+$regex = '/[^\r\n]{2,5}/';
+[^\r\n]{2,5}
+Golang
+regex, _ := regexp.Compile("[^\\r\\n]{2,5}")
+[^\\r\\n]{2,5}
+Rust
+let re = Regex::new(r"[^\r\n]{2,5}").unwrap();
+[^\r\n]{2,5}
+C#
+var re = new Regex(@"[^\\r\\n]{2,5}");
+[^\\r\\n]{2,5}
+Scala
+val re = "[^\\r\\n]{2,5}".r
+[^\\r\\n]{2,5}
+Kotlin
+val regex = Regex("[^\\r\\n]{2,5}")
+[^\\r\\n]{2,5}

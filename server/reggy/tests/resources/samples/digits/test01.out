@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("\\d");
+\\d
+Perl
+my $regex = /\d/;
+\d
+POSIX
+\d
+\d
+Python
+regex = re.compile(r'\d')
+\d
+JavaScript
+const regex = /\d/;
+\d
+PHP
+$regex = '/\d/';
+\d
+Golang
+regex, _ := regexp.Compile("\\d")
+\\d
+Rust
+let re = Regex::new(r"\d").unwrap();
+\d
+C#
+var re = new Regex(@"\d");
+\d
+Scala
+val re = "\\d".r
+\\d
+Kotlin
+val regex = Regex("\\d")
+\\d

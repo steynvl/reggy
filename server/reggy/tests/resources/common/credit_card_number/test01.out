@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("^4\\d{12}(?:\\d{3})?$");
+^4\\d{12}(?:\\d{3})?$
+Perl
+my $regex = /^4\d{12}(?:\d{3})?$/;
+^4\d{12}(?:\d{3})?$
+POSIX
+^4\d{12}(?:\d{3})?$
+^4\d{12}(?:\d{3})?$
+Python
+regex = re.compile(r'^4\d{12}(?:\d{3})?$')
+^4\d{12}(?:\d{3})?$
+JavaScript
+const regex = /^4\d{12}(?:\d{3})?$/;
+^4\d{12}(?:\d{3})?$
+PHP
+$regex = '/^4\d{12}(?:\d{3})?$/';
+^4\d{12}(?:\d{3})?$
+Golang
+regex, _ := regexp.Compile("^4\\d{12}(?:\\d{3})?$")
+^4\\d{12}(?:\\d{3})?$
+Rust
+let re = Regex::new(r"^4\d{12}(?:\d{3})?$").unwrap();
+^4\d{12}(?:\d{3})?$
+C#
+var re = new Regex(@"^4\d{12}(?:\d{3})?$");
+^4\d{12}(?:\d{3})?$
+Scala
+val re = "^4\\d{12}(?:\\d{3})?$".r
+^4\\d{12}(?:\\d{3})?$
+Kotlin
+val regex = Regex("^4\\d{12}(?:\\d{3})?$")
+^4\\d{12}(?:\\d{3})?$

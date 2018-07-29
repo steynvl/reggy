@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("abc");
+abc
+Perl
+my $regex = /abc/;
+abc
+POSIX
+abc
+abc
+Python
+regex = re.compile(r'abc')
+abc
+JavaScript
+const regex = /abc/;
+abc
+PHP
+$regex = '/abc/';
+abc
+Golang
+regex, _ := regexp.Compile("abc")
+abc
+Rust
+let re = Regex::new(r"abc").unwrap();
+abc
+C#
+var re = new Regex(@"abc");
+abc
+Scala
+val re = "abc".r
+abc
+Kotlin
+val regex = Regex("abc")
+abc

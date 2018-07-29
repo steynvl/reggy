@@ -1,0 +1,18 @@
+{
+  "type": "Email address",
+  "information": {
+    "username": "Basic characters only [a-z0-9._-]",
+    "domainName": "Allow any subdomain on specific domain(s)",
+    "mailtoPrefix": "No prefix",
+    "specificUserNamesOnly": "steyn;jake",
+    "domainOnSpecificTld": "com;org",
+    "anySubDomainOnSpecificDomain": "co.za",
+    "specificDomainsOnly": "gmail.com"
+  },
+  "generalRegexInfo": {
+    "startRegexMatchAt": "Anywhere",
+    "endRegexMatchAt": "Anywhere",
+    "regexTarget": "Java"
+  },
+  "generateMethod": "commonUseCases"
+}

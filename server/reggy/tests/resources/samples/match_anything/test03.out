@@ -1,0 +1,33 @@
+Java
+Pattern regex = Pattern.compile("[^\\r\\nabc]", Pattern.CASE_INSENSITIVE);
+(?i)[^\\r\\nabc]
+Perl
+my $regex = /[^\r\nacb]/i;
+(?i)[^\r\nacb]
+POSIX
+(?i)[^\r\ncba]
+(?i)[^\r\ncba]
+Python
+regex = re.compile(r'[^\r\ncba]', re.IGNORECASE)
+(?i)[^\r\ncba]
+JavaScript
+const regex = /[^\r\ncab]/i;
+(?i)[^\r\ncab]
+PHP
+$regex = '/[^\r\nabc]/i';
+(?i)[^\r\nabc]
+Golang
+regex, _ := regexp.Compile("(?i)[^\\r\\nacb]")
+(?i)[^\\r\\nacb]
+Rust
+let re = Regex::new(r"(?i)[^\r\nbac]").unwrap();
+(?i)[^\r\nbac]
+C#
+var re = new Regex(@"[^\\r\\nbac]", RegexOptions.IgnoreCase);
+(?i)[^\\r\\nbac]
+Scala
+val re = "(?i)[^\\r\\ncba]".r
+(?i)[^\\r\\ncba]
+Kotlin
+val regex = Regex("[^\\r\\nbac]", IGNORE_CASE)
+(?i)[^\\r\\nbac]
