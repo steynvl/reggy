@@ -109,3 +109,7 @@ select, option {
 .white-text {
   color: white;
 }
+
+.category {
+  background-color: #ffffff;
+}
