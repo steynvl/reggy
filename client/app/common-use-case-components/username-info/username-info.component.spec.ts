@@ -1,33 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
-import { CreditCardInfoComponent } from './credit-card-info.component';
 import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { By } from '@angular/platform-browser';
+import { UsernameInfoComponent } from "./username-info.component";
 
 class MockClass { }
 
 @Component({
   selector: 'app-host-component',
-  template: `<app-credit-card-info [generalRegexInfo]="{
+  template: `<app-username-info [generalRegexInfo]="{
                 startRegexMatchAt: 'Anywhere',
                 endRegexMatchAt  : 'Anywhere',
                 regexTarget      : 'Java'
-            }"></app-credit-card-info>`
+            }"></app-username-info>`
 })
 class HostComponent {
-  @ViewChild(CreditCardInfoComponent)
-  public componentUnderTest: CreditCardInfoComponent;
+  @ViewChild(UsernameInfoComponent)
+  public componentUnderTest: UsernameInfoComponent;
 }
 
-describe('Component: Common -> Credit Card', () => {
+describe('Component: Common -> Username', () => {
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreditCardInfoComponent, HostComponent],
+      declarations: [UsernameInfoComponent, HostComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -50,22 +50,23 @@ describe('Component: Common -> Credit Card', () => {
     fixture.detectChanges();
   });
 
-  it('should create credit card info component', () => {
+  it('should create username info component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "Credit card numbers" as a header', () => {
+  it('should display "Username" as a header', () => {
     const el = fixture.debugElement.query(By.css('#page-header')).nativeElement;
-    expect(el.textContent).toEqual('Credit card numbers');
+    expect(el.textContent).toEqual('Username');
   });
 
-  it('Should contain 6 checkboxes and 3 radio buttons', () => {
+  it('Should contain 26 input fields', () => {
     const el = fixture.debugElement.queryAll(By.css('input'));
+    expect(el.length).toEqual(26);
+  });
 
-    expect(el.length).toEqual(9);
-
-    expect(el.filter(e => e.nativeElement.type === 'checkbox').length).toEqual(6);
-    expect(el.filter(e => e.nativeElement.type === 'radio').length).toEqual(3);
+  it('Should contain 3 select fields', () => {
+    const el = fixture.debugElement.queryAll(By.css('select'));
+    expect(el.length).toEqual(3);
   });
 
   it('should contain General regular expression information', () => {

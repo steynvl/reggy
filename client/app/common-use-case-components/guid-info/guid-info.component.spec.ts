@@ -1,33 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
-import { CreditCardInfoComponent } from './credit-card-info.component';
 import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { By } from '@angular/platform-browser';
+import { GuidInfoComponent } from "./guid-info.component";
 
 class MockClass { }
 
 @Component({
   selector: 'app-host-component',
-  template: `<app-credit-card-info [generalRegexInfo]="{
+  template: `<app-guid-info [generalRegexInfo]="{
                 startRegexMatchAt: 'Anywhere',
                 endRegexMatchAt  : 'Anywhere',
                 regexTarget      : 'Java'
-            }"></app-credit-card-info>`
+            }"></app-guid-info>`
 })
 class HostComponent {
-  @ViewChild(CreditCardInfoComponent)
-  public componentUnderTest: CreditCardInfoComponent;
+  @ViewChild(GuidInfoComponent)
+  public componentUnderTest: GuidInfoComponent;
 }
 
-describe('Component: Common -> Credit Card', () => {
+describe('Component: Common -> GUID', () => {
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreditCardInfoComponent, HostComponent],
+      declarations: [GuidInfoComponent, HostComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -50,22 +50,33 @@ describe('Component: Common -> Credit Card', () => {
     fixture.detectChanges();
   });
 
-  it('should create credit card info component', () => {
+  it('should create guid info component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "Credit card numbers" as a header', () => {
+  it('should display "GUID (Globally Unique Identifier)" as a header', () => {
     const el = fixture.debugElement.query(By.css('#page-header')).nativeElement;
-    expect(el.textContent).toEqual('Credit card numbers');
+    expect(el.textContent).toEqual('GUID (Globally Unique Identifier)');
   });
 
-  it('Should contain 6 checkboxes and 3 radio buttons', () => {
-    const el = fixture.debugElement.queryAll(By.css('input'));
+  it('Should contain 6 select fields', () => {
+    const el = fixture.debugElement.queryAll(By.css('select'));
+    expect(el.length).toEqual(6);
+  });
 
-    expect(el.length).toEqual(9);
+  it('"Braces around the GUID" drop down should contain 3 options', () => {
+    const el = fixture.debugElement.query(By.css('#braces-around')).nativeElement;
+    expect(el.options.length).toEqual(3);
+  });
 
-    expect(el.filter(e => e.nativeElement.type === 'checkbox').length).toEqual(6);
-    expect(el.filter(e => e.nativeElement.type === 'radio').length).toEqual(3);
+  it('"Hyphens in the GUID" drop down should contain 3 options', () => {
+    const el = fixture.debugElement.query(By.css('#hyphens-in')).nativeElement;
+    expect(el.options.length).toEqual(3);
+  });
+
+  it('"Case" drop down should contain 3 options', () => {
+    const el = fixture.debugElement.query(By.css('#case')).nativeElement;
+    expect(el.options.length).toEqual(3);
   });
 
   it('should contain General regular expression information', () => {

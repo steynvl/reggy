@@ -1,33 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
-import { CreditCardInfoComponent } from './credit-card-info.component';
 import { GenerateService } from '../../services/generate.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
 import { By } from '@angular/platform-browser';
+import { UrlInfoComponent } from "./url-info.component";
 
 class MockClass { }
 
 @Component({
   selector: 'app-host-component',
-  template: `<app-credit-card-info [generalRegexInfo]="{
+  template: `<app-url-info [generalRegexInfo]="{
                 startRegexMatchAt: 'Anywhere',
                 endRegexMatchAt  : 'Anywhere',
                 regexTarget      : 'Java'
-            }"></app-credit-card-info>`
+            }"></app-url-info>`
 })
 class HostComponent {
-  @ViewChild(CreditCardInfoComponent)
-  public componentUnderTest: CreditCardInfoComponent;
+  @ViewChild(UrlInfoComponent)
+  public componentUnderTest: UrlInfoComponent;
 }
 
-describe('Component: Common -> Credit Card', () => {
+describe('Component: Common -> URL', () => {
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreditCardInfoComponent, HostComponent],
+      declarations: [UrlInfoComponent, HostComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -50,22 +50,18 @@ describe('Component: Common -> Credit Card', () => {
     fixture.detectChanges();
   });
 
-  it('should create credit card info component', () => {
+  it('should create url info component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "Credit card numbers" as a header', () => {
+  it('should display "Uniform Resource Locator (URL)" as a header', () => {
     const el = fixture.debugElement.query(By.css('#page-header')).nativeElement;
-    expect(el.textContent).toEqual('Credit card numbers');
+    expect(el.textContent).toEqual('Uniform Resource Locator (URL)');
   });
 
-  it('Should contain 6 checkboxes and 3 radio buttons', () => {
-    const el = fixture.debugElement.queryAll(By.css('input'));
-
-    expect(el.length).toEqual(9);
-
-    expect(el.filter(e => e.nativeElement.type === 'checkbox').length).toEqual(6);
-    expect(el.filter(e => e.nativeElement.type === 'radio').length).toEqual(3);
+  it('Should contain 11 select fields', () => {
+    const el = fixture.debugElement.queryAll(By.css('select'));
+    expect(el.length).toEqual(11);
   });
 
   it('should contain General regular expression information', () => {
