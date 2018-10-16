@@ -11,7 +11,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-url-info',
   templateUrl: './url-info.component.html',
-  styleUrls: ['./url-info.component.css']
+  styleUrls: ['./url-info.component.scss']
 })
 export class UrlInfoComponent implements OnInit {
 

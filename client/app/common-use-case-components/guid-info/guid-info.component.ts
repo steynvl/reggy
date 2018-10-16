@@ -9,7 +9,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-guid-info',
   templateUrl: './guid-info.component.html',
-  styleUrls: ['./guid-info.component.css']
+  styleUrls: ['./guid-info.component.scss']
 })
 export class GuidInfoComponent implements OnInit {
 

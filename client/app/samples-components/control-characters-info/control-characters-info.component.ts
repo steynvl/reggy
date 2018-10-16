@@ -5,7 +5,7 @@ import { ControlCharactersErr } from '../../models/samples/control-characters-er
 @Component({
   selector: 'app-control-characters-info',
   templateUrl: './control-characters-info.component.html',
-  styleUrls: ['./control-characters-info.component.css']
+  styleUrls: ['./control-characters-info.component.scss']
 })
 export class ControlCharactersInfoComponent {
 

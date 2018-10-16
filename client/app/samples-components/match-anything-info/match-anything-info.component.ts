@@ -5,7 +5,7 @@ import { MatchAnythingErr } from '../../models/samples/match-anything-err';
 @Component({
   selector: 'app-match-anything-info',
   templateUrl: './match-anything-info.component.html',
-  styleUrls: ['./match-anything-info.component.css']
+  styleUrls: ['./match-anything-info.component.scss']
 })
 export class MatchAnythingInfoComponent {
 

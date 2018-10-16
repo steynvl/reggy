@@ -5,7 +5,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-java-code-samples',
   templateUrl: './java.component.html',
-  styleUrls: ['./java.component.css']
+  styleUrls: ['./java.component.scss']
 })
 export class JavaComponent implements OnInit {
 

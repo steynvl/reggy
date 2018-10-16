@@ -11,7 +11,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-currency-info',
   templateUrl: './currency-info.component.html',
-  styleUrls: ['./currency-info.component.css']
+  styleUrls: ['./currency-info.component.scss']
 })
 export class CurrencyInfoComponent implements OnInit {
 

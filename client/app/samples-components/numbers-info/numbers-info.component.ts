@@ -5,7 +5,7 @@ import { NumbersErr } from '../../models/samples/numbers-err';
 @Component({
   selector: 'app-numbers-info',
   templateUrl: './numbers-info.component.html',
-  styleUrls: ['./numbers-info.component.css']
+  styleUrls: ['./numbers-info.component.scss']
 })
 export class NumbersInfoComponent {
 

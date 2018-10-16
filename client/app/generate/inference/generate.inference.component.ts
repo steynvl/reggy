@@ -10,7 +10,7 @@ import { Module, render } from 'viz.js/full.render.js';
 @Component({
   selector: 'app-generate-inference',
   templateUrl: './generate.inference.component.html',
-  styleUrls: ['./generate.inference.component.css']
+  styleUrls: ['./generate.inference.component.scss']
 })
 export class GenerateInferenceComponent implements OnInit {
 

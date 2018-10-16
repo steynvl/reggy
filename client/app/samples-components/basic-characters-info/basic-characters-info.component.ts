@@ -5,7 +5,7 @@ import { BasicCharactersErr } from '../../models/samples/basic-characters-err';
 @Component({
   selector: 'app-basic-characters-info',
   templateUrl: './basic-characters-info.component.html',
-  styleUrls: ['./basic-characters-info.component.css']
+  styleUrls: ['./basic-characters-info.component.scss']
 })
 export class BasicCharacterInfoComponent {
 
