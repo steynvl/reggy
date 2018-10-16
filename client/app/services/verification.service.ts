@@ -25,26 +25,18 @@ export class VerificationService {
   }
 
   isValidControlCharactersInfo(info: ControlCharacters): boolean {
+    const matchExcept = info['matchAllExceptSelectedOnes'];
     return Object.keys(info).filter(cc => cc !== 'matchAllExceptSelectedOnes')
-      .some(cc => info[cc]);
+      .some(cc => matchExcept ? !info[cc] : info[cc]);
   }
 
   isValidDigitsInfo(info: Digits): boolean {
-    const props = [];
-    Object.values(info).forEach(prop => {
-      if (typeof prop === 'object') {
-        props.push(prop.minus);
-        props.push(prop.optional);
-      } else {
-        props.push(prop);
-      }
-    });
-
-    return props.some(d => d);
+    return Object.values(info).some(prop => typeof prop !== 'object' && prop);
   }
 
   isValidListOfLiteralTextInfo(info: ListOfLiteralText): boolean {
-    return info.literalText.every(llt => llt !== undefined && llt !== '');
+    return info.literalText.length !== 0 &&
+      info.literalText.every(llt => llt !== undefined && llt !== '');
   }
 
   isValidMatchAnythingInfo(info: MatchAnything, err: MatchAnythingErr): boolean {
@@ -134,12 +126,13 @@ export class VerificationService {
 
   isValidUnicodeCharactersInfo(info: UnicodeCharacters): boolean {
     const validUnicode = /^U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?(?: U\+[A-Z\d]{2,5}(?:-U\+[A-Z\d]{2,5})?)*$/;
+    const matchExcept = info['matchAllExceptSelectedOnes'];
 
     const validInput = info.individualCharacters === '' || validUnicode.test(info.individualCharacters);
 
     const checkboxes = Object.keys(info)
       .filter(cc => cc !== 'matchAllExceptSelectedOnes' && cc !== 'individualCharacters')
-      .some(cc => info[cc]);
+      .some(cc => matchExcept ? !info[cc] : info[cc]);
 
     if (validInput || checkboxes) {
       return !(!checkboxes && info.individualCharacters === '');
