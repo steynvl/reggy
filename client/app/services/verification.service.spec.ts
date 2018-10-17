@@ -216,7 +216,6 @@ describe('VerificationService', () => {
         minus: true,
         optional: true
       }
-
     };
 
     listOfLiteralText = {
