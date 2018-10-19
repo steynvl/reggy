@@ -51,6 +51,9 @@ export class GenerateInferenceComponent implements OnInit {
       case 'Angluin Learning (L*)':
         this.payload.algorithm = 'lstar';
         break;
+      case 'NL* algorithm':
+        this.payload.algorithm = 'nlstar';
+        break;
       case 'Interactive Angluin Learning (L*)':
         this.payload.algorithm = 'interactive lstar';
         break;
@@ -138,6 +141,8 @@ export class GenerateInferenceComponent implements OnInit {
         return 'RPNI';
       case 'Angluin Learning (L*)':
         return 'L*';
+      case 'NL* algorithm':
+        return 'NL*';
       case 'E. Mark GOLD\'s algorithm':
         return 'GOLD';
     }

@@ -10,15 +10,15 @@ describe('Reggy: Contact page', () => {
     page.navigateToContact();
   });
 
-  // it('Page title should be "Contact Us | Reggy"', () => {
-  //   page.isContactPage().then(val => expect(val).toBe(true));
-  // });
-  //
-  // it('Pressing submit button should stay on same page', () => {
-  //   const el = page.getSubmitButton();
-  //   el.click();
-  //   browser.waitForAngular();
-  //   page.isContactPage().then(val => expect(val).toBe(true));
-  // });
+  it('Page title should be "Contact Us | Reggy"', () => {
+    page.isContactPage().then(val => expect(val).toBe(true));
+  });
+
+  it('Pressing submit button should stay on same page', () => {
+    const el = page.getSubmitButton();
+    el.click();
+    browser.waitForAngular();
+    page.isContactPage().then(val => expect(val).toBe(true));
+  });
 
 });

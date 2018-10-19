@@ -21,9 +21,20 @@ def main():
     if algorithm == 'interactive lstar':
         output = inferrer.InteractiveLstar(payload).get_new_queries()
     else:
-        learner = inferrer.Learner(pos_examples=set(payload['positiveExamples']),
-                                   neg_examples=set(payload['negativeExamples']),
-                                   algorithm=algorithm)
+        pos_examples = set(payload['positiveExamples'])
+        neg_examples = set(payload['negativeExamples'])
+        alphabet = inferrer.utils.determine_alphabet(pos_examples.union(neg_examples))
+
+        if algorithm in ['rpni', 'gold']:
+            learner = inferrer.Learner(alphabet=alphabet,
+                                       pos_examples=pos_examples,
+                                       neg_examples=neg_examples,
+                                       algorithm=algorithm)
+        elif algorithm in ['lstar', 'nlstar']:
+            learner = inferrer.Learner(alphabet=alphabet,
+                                       oracle=inferrer.oracle.PassiveOracle(pos_examples,
+                                                                            neg_examples),
+                                       algorithm=algorithm)
         
         dfa = learner.learn_grammar()
         output = {

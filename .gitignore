@@ -40,3 +40,5 @@ Thumbs.db
 
 # python bytecode
 __pycache__/
+
+server/reggy/reggy/inference/logs/

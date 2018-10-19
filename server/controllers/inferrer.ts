@@ -37,8 +37,7 @@ export default class InferrerCtrl {
           res.send(JSON.stringify(serverResponse));
         }
       } else {
-        console.log('kanker');
-        // TODO
+        res.send(JSON.stringify({code: 1}));
       }
 
     });

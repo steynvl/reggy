@@ -229,7 +229,7 @@ class InteractiveLstar:
                             return s1, s2, a, e
         return '', '', '', ''
 
-    def _build_dfa(self, ot: utils.ObservationTable) -> automaton.Automaton:
+    def _build_dfa(self, ot: utils.ObservationTable) -> automaton.DFA:
         """
         Builds an automaton from the observation table.
 
@@ -238,7 +238,7 @@ class InteractiveLstar:
         :return: The dfa built from the observation table.
         :rtype: Automaton
         """
-        dfa = automaton.Automaton(self._alphabet)
+        dfa = automaton.DFA(self._alphabet)
 
         for u in self._red:
             for v in ot.ot.keys():
