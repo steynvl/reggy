@@ -5,10 +5,10 @@ export default class GenerateCtrl {
 
   generateRegex = (req, res) => {
     const samples = req.body.params;
-    console.log('---------');
-    console.log(samples);
-    console.log(JSON.stringify(JSON.parse(samples), null, 2));
-    console.log('---------');
+    // console.log('---------');
+    // console.log(samples);
+    // console.log(JSON.stringify(JSON.parse(samples), null, 2));
+    // console.log('---------');
 
     const py = spawnChildProcess(samples);
     let output = '';
