@@ -33,8 +33,8 @@ WORKDIR /usr/src/app
 # install app dependencies, compile server and build the angular client
 RUN npm install
 
-# run unit tests for Angular client
-RUN npm run test:ci
+# run reggy engine tests
+python3 -m unittest discover -s server/reggy/
 
 # run end-to-end tests for Angular client
 RUN npm run e2e
