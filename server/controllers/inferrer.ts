@@ -5,9 +5,9 @@ export default class InferrerCtrl {
 
   inferGrammar = (req, res) => {
     const samples = req.body.params;
-    console.log('---------');
-    console.log(samples);
-    console.log('---------');
+    // console.log('---------');
+    // console.log(samples);
+    // console.log('---------');
 
     const py = spawnChildProcess(samples);
     let output = '';

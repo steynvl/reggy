@@ -318,3 +318,221 @@ export const unicodeCharacters = {
   },
   'generateMethod': 'samplesAndSemantics'
 };
+
+export const literalTextFactorise = {
+  'sampleStringsInfo': [
+    [
+      {
+        'markerType': 'Literal text',
+        'markedStrings': [
+          'abcqqqklm',
+          'abcrrrklm'
+        ],
+        'markerInfo': {
+          'caseInsensitive': false,
+          'matchAllExceptSpecified': false
+        },
+        'repeatInfo': {
+          'repeat': '1'
+        }
+      }
+    ]
+  ],
+  'generalRegexInfo': {
+    'startRegexMatchAt': 'Anywhere',
+    'endRegexMatchAt': 'Anywhere',
+    'regexTarget': 'Python'
+  },
+  'generateMethod': 'samplesAndSemantics'
+};
+
+export const repetition = {
+  'sampleStringsInfo': [
+    [
+      {
+        'markerType': 'Digits',
+        'markedStrings': [
+          'asdsa'
+        ],
+        'markerInfo': {
+          'zero': true,
+          'one': true,
+          'two': true,
+          'three': true,
+          'four': true,
+          'five': false,
+          'six': true,
+          'seven': true,
+          'eight': true,
+          'nine': true,
+          'minus': {
+            'minus': false,
+            'optional': false
+          }
+        },
+        'repeatInfo': {
+          'repeat': 'Custom range',
+          'start': 1,
+          'end': 3
+        }
+      }
+    ]
+  ],
+  'generalRegexInfo': {
+    'startRegexMatchAt': 'Anywhere',
+    'endRegexMatchAt': 'Anywhere',
+    'regexTarget': 'Python'
+  },
+  'generateMethod': 'samplesAndSemantics'
+};
+
+export const alternation = {
+  'sampleStringsInfo': [
+    [
+      {
+        'markerType': 'Literal text',
+        'markedStrings': [
+          'dsa'
+        ],
+        'markerInfo': {
+          'caseInsensitive': false,
+          'matchAllExceptSpecified': false
+        },
+        'repeatInfo': {
+          'repeat': '1'
+        }
+      },
+      {
+        'markerType': 'Digits',
+        'markedStrings': [
+          'adas'
+        ],
+        'markerInfo': {
+          'zero': true,
+          'one': true,
+          'two': true,
+          'three': true,
+          'four': true,
+          'five': false,
+          'six': true,
+          'seven': true,
+          'eight': true,
+          'nine': true,
+          'minus': {
+            'minus': false,
+            'optional': false
+          }
+        },
+        'repeatInfo': {
+          'repeat': '1'
+        }
+      }
+    ]
+  ],
+  'generalRegexInfo': {
+    'startRegexMatchAt': 'Anywhere',
+    'endRegexMatchAt': 'Anywhere',
+    'regexTarget': 'Python'
+  },
+  'generateMethod': 'samplesAndSemantics'
+};
+
+export const backReference = {
+  'sampleStringsInfo': [
+    [
+      {
+        'markerType': 'Digits',
+        'markedStrings': [
+          'asa'
+        ],
+        'markerInfo': {
+          'zero': true,
+          'one': true,
+          'two': true,
+          'three': false,
+          'four': true,
+          'five': true,
+          'six': true,
+          'seven': true,
+          'eight': true,
+          'nine': true,
+          'minus': {
+            'minus': false,
+            'optional': false
+          }
+        },
+        'repeatInfo': {
+          'repeat': '1'
+        }
+      }
+    ],
+    [
+      {
+        'markerType': 'Backreference match of preceding marker',
+        'markedStrings': [
+          'asa'
+        ],
+        'markerInfo': {
+          'marker': {
+            'id': 1,
+            'colour': '#FFAEB9',
+            'fieldType': 'Digits',
+            'markerInfo': {
+              'zero': true,
+              'one': true,
+              'two': true,
+              'three': false,
+              'four': true,
+              'five': true,
+              'six': true,
+              'seven': true,
+              'eight': true,
+              'nine': true,
+              'minus': {
+                'minus': false,
+                'optional': false
+              }
+            },
+            'markedTextInfo': [
+              {
+                'start': 0,
+                'end': 3,
+                'text': 'asa'
+              }
+            ],
+            'repeatInfo': {
+              'repeat': '1'
+            },
+            'error': {},
+            'repeatInfoView': [
+              'Custom range',
+              'n or more times',
+              '0 or 1',
+              '0 or more',
+              '1 or more',
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10'
+            ]
+          }
+        },
+        'repeatInfo': {
+          'repeat': '1'
+        }
+      }
+    ]
+  ],
+  'generalRegexInfo': {
+    'startRegexMatchAt': 'Anywhere',
+    'endRegexMatchAt': 'Anywhere',
+    'regexTarget': 'Python'
+  },
+  'generateMethod': 'samplesAndSemantics'
+};
