@@ -34,7 +34,7 @@ WORKDIR /usr/src/app
 RUN npm install
 
 # run unit tests for Angular client
-RUN npm run headlessTest
+RUN npm run test:ci
 
 # run end-to-end tests for Angular client
 RUN npm run e2e
