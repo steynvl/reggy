@@ -25,7 +25,7 @@ sudo apt-get install docker-ce
 #### Testing Docker build locally
 Change the working directory to the root directory of the project which contains the Dockerfile and run the following:
 ```bash
-sudo docker build -t reggy:latest . --network=host
+sudo docker build -f Dockerfile.production -t reggy:latest . --network=host
 ```
 
 ```bash

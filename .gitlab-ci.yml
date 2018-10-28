@@ -1,0 +1,12 @@
+image: docker:stable
+
+services:
+- docker:dind
+
+stages:
+- test
+
+build:
+  stage: test
+  script:
+  - docker build -f Dockerfile.testing -t reggy .
