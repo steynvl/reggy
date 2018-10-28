@@ -6,7 +6,7 @@ services:
 stages:
 - test
 
-build:
+test:
   stage: test
   script:
   - docker build -f Dockerfile.testing -t reggy .
