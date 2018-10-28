@@ -33,8 +33,5 @@ WORKDIR /usr/src/app
 # install app dependencies, compile server and build the angular client
 RUN npm install
 
-# run end-to-end tests for Angular client
-RUN npm run e2e
-
-# run tests for backend RESTful API
+# run tests
 RUN npm run testbe
