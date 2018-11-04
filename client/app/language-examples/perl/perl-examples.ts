@@ -1,4 +1,4 @@
-
+/* perl code examples */
 const examples = {
 
   'Create an object to use the same regex for many operations':

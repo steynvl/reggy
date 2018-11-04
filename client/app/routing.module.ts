@@ -7,6 +7,7 @@ import { GenerateInferenceComponent } from './generate/inference/generate.infere
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { ContactComponent } from './contact/contact.component';
 
+/* routes in our web client */
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'generate/samples', component: GenerateSamplesComponent },

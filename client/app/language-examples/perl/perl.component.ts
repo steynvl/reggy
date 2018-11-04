@@ -5,7 +5,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-perl-code-samples',
   templateUrl: './perl.component.html',
-  styleUrls: ['./perl.component.css']
+  styleUrls: ['./perl.component.scss']
 })
 export class PerlComponent implements OnInit {
 

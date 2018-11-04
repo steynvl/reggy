@@ -9,7 +9,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-username-info',
   templateUrl: './username-info.component.html',
-  styleUrls: ['./username-info.component.css']
+  styleUrls: ['./username-info.component.scss']
 })
 export class UsernameInfoComponent implements OnInit {
 

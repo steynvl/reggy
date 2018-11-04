@@ -5,9 +5,9 @@ export default class InferrerCtrl {
 
   inferGrammar = (req, res) => {
     const samples = req.body.params;
-    console.log('---------');
-    console.log(samples);
-    console.log('---------');
+    // console.log('---------');
+    // console.log(samples);
+    // console.log('---------');
 
     const py = spawnChildProcess(samples);
     let output = '';
@@ -37,8 +37,7 @@ export default class InferrerCtrl {
           res.send(JSON.stringify(serverResponse));
         }
       } else {
-        console.log('kanker');
-        // TODO
+        res.send(JSON.stringify({code: 1}));
       }
 
     });

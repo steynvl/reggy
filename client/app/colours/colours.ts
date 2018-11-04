@@ -1,4 +1,7 @@
 
+/* colours that our marker buttons can
+   be on the sample-based generaton somponent.
+*/
 const colours = [
   '#FFAEB9',
   '#EE7AE9',

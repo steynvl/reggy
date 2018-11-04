@@ -5,7 +5,7 @@ import { DigitsErr } from '../../models/samples/digits-err';
 @Component({
   selector: 'app-digits-info',
   templateUrl: './digits-info.component.html',
-  styleUrls: ['./digits-info.component.css']
+  styleUrls: ['./digits-info.component.scss']
 })
 export class DigitsInfoComponent {
 

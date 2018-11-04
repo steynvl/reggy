@@ -242,6 +242,12 @@ class ObservationTable:
                     yield u, e
 
     def copy(self):
+        """
+        Performs a deep copy of the instance.
+
+        :return: A deep copy of the observation table.
+        :rtype: ObservationTable
+        """
         ot = ObservationTable(self._blue.copy(),
                               self._red.copy(),
                               self._alphabet.copy())

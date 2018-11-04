@@ -10,7 +10,7 @@ import { Module, render } from 'viz.js/full.render.js';
 @Component({
   selector: 'app-generate-inference',
   templateUrl: './generate.inference.component.html',
-  styleUrls: ['./generate.inference.component.css']
+  styleUrls: ['./generate.inference.component.scss']
 })
 export class GenerateInferenceComponent implements OnInit {
 
@@ -50,6 +50,9 @@ export class GenerateInferenceComponent implements OnInit {
         break;
       case 'Angluin Learning (L*)':
         this.payload.algorithm = 'lstar';
+        break;
+      case 'NL* algorithm':
+        this.payload.algorithm = 'nlstar';
         break;
       case 'Interactive Angluin Learning (L*)':
         this.payload.algorithm = 'interactive lstar';
@@ -138,6 +141,8 @@ export class GenerateInferenceComponent implements OnInit {
         return 'RPNI';
       case 'Angluin Learning (L*)':
         return 'L*';
+      case 'NL* algorithm':
+        return 'NL*';
       case 'E. Mark GOLD\'s algorithm':
         return 'GOLD';
     }

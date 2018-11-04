@@ -32,7 +32,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-generate-samples',
   templateUrl: './generate.samples.component.html',
-  styleUrls: ['./generate.samples.component.css']
+  styleUrls: ['./generate.samples.component.scss']
 })
 export class GenerateSamplesComponent implements OnInit {
 

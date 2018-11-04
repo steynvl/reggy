@@ -11,7 +11,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-date-and-time-info',
   templateUrl: './date-and-time-info.component.html',
-  styleUrls: ['./date-and-time-info.component.css']
+  styleUrls: ['./date-and-time-info.component.scss']
 })
 export class DateAndTimeInfoComponent implements OnInit {
 

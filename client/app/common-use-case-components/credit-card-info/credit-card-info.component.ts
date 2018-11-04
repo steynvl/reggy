@@ -9,7 +9,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-credit-card-info',
   templateUrl: './credit-card-info.component.html',
-  styleUrls: ['./credit-card-info.component.css']
+  styleUrls: ['./credit-card-info.component.scss']
 })
 export class CreditCardInfoComponent implements OnInit {
 

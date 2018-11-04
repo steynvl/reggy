@@ -5,7 +5,7 @@ import { Marker } from '../../models/marker';
 @Component({
   selector: 'app-back-reference-info',
   templateUrl: './back-reference-info.component.html',
-  styleUrls: ['./back-reference-info.component.css']
+  styleUrls: ['./back-reference-info.component.scss']
 })
 export class BackReferenceInfoComponent implements OnInit {
 

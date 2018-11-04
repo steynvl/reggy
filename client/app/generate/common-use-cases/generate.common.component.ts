@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-generate-common',
   templateUrl: './generate.common.component.html',
-  styleUrls: ['./generate.common.component.css']
+  styleUrls: ['./generate.common.component.scss']
 })
 export class GenerateCommonComponent implements OnInit {
 

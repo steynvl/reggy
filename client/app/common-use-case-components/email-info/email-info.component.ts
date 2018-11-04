@@ -11,7 +11,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-email-info',
   templateUrl: './email-info.component.html',
-  styleUrls: ['./email-info.component.css']
+  styleUrls: ['./email-info.component.scss']
 })
 export class EmailInfoComponent implements OnInit {
 

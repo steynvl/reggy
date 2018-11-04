@@ -10,7 +10,7 @@ import { Module, render } from 'viz.js/full.render.js';
 @Component({
   selector: 'app-interactive-lstar',
   templateUrl: './interactive-lstar.component.html',
-  styleUrls: ['./interactive-lstar.component.css']
+  styleUrls: ['./interactive-lstar.component.scss']
 })
 export class InteractiveLstarComponent implements OnInit {
 

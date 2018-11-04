@@ -5,7 +5,7 @@ import { ListOfLiteralTextErr } from '../../models/samples/list-of-literal-text-
 @Component({
   selector: 'app-list-of-literal-text-info',
   templateUrl: './list-of-literal-text-info.component.html',
-  styleUrls: ['./list-of-literal-text-info.component.css']
+  styleUrls: ['./list-of-literal-text-info.component.scss']
 })
 export class ListOfLiteralTextInfoComponent {
 

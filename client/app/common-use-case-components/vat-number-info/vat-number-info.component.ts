@@ -9,7 +9,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-vat-number-info',
   templateUrl: './vat-number-info.component.html',
-  styleUrls: ['./vat-number-info.component.css']
+  styleUrls: ['./vat-number-info.component.scss']
 })
 export class VatNumberInfoComponent implements OnInit {
 

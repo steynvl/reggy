@@ -5,7 +5,7 @@ import { UnicodeCharactersErr } from '../../models/samples/unicode-characters-er
 @Component({
   selector: 'app-unicode-characters-info',
   templateUrl: './unicode-characters-info.component.html',
-  styleUrls: ['./unicode-characters-info.component.css']
+  styleUrls: ['./unicode-characters-info.component.scss']
 })
 export class UnicodeCharactersInfoComponent {
 

@@ -5,10 +5,10 @@ export default class GenerateCtrl {
 
   generateRegex = (req, res) => {
     const samples = req.body.params;
-    console.log('---------');
-    console.log(samples);
-    console.log(JSON.stringify(JSON.parse(samples), null, 2));
-    console.log('---------');
+    // console.log('---------');
+    // console.log(samples);
+    // console.log(JSON.stringify(JSON.parse(samples), null, 2));
+    // console.log('---------');
 
     const py = spawnChildProcess(samples);
     let output = '';
@@ -20,18 +20,19 @@ export default class GenerateCtrl {
     py.on('close', (code) => {
       res.setHeader('Content-Type', 'application/json');
 
-      let deserialized;
       if (code === 0) {
-        deserialized = JSON.parse(output);
+        const deserialised = JSON.parse(output);
+
+        const serverResponse: ServerResponse = {
+          regex        : deserialised.regex,
+          compiledRegex: deserialised.compiledRegex,
+          code         : code
+        };
+
+        res.send(JSON.stringify(serverResponse));
+      } else {
+        res.send(JSON.stringify({code: 1}));
       }
-
-      const serverResponse: ServerResponse = {
-        regex        : deserialized.regex,
-        compiledRegex: deserialized.compiledRegex,
-        code         : code
-      };
-
-      res.send(JSON.stringify(serverResponse));
     });
 
   }

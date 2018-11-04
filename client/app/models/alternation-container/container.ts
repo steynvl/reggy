@@ -1,3 +1,7 @@
+/**
+ * A container class for the markers on the 
+ * sample-based generation component. 
+ */
 export class Container {
 
   constructor(public id: number,

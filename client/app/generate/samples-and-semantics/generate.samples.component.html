@@ -5,7 +5,7 @@
 
     <div class="btn-toolbar">
 
-      <button type="button" class="btn btn-primary" (click)="mark()">Mark</button>
+      <button id="mark-btn" type="button" class="btn btn-primary" (click)="mark()">Mark</button>
       <a class="fa-vertical-bar-medium:after"></a>
       <span *ngIf="markedElements.length > 0" class="btn-separator"></span>
 
@@ -33,7 +33,7 @@
 
       <div class="col-sm-11">
 
-        <button *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
+        <button id="reset-btn" *ngIf="!markersIsCollapsed && markedElements.length <= 1" (click)="reset()" class="btn btn-md">
           <i class="fa fa-refresh"></i>
         </button>
 

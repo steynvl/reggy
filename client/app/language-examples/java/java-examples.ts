@@ -1,4 +1,4 @@
-
+/* java code examples */
 const examples = {
 
   'Import regex library':

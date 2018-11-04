@@ -9,7 +9,7 @@ import { GeneratedRegex } from '../../models/generated-regex';
 @Component({
   selector: 'app-ipv4-address-info',
   templateUrl: './ipv4-address-info.component.html',
-  styleUrls: ['./ipv4-address-info.component.css']
+  styleUrls: ['./ipv4-address-info.component.scss']
 })
 export class Ipv4AddressInfoComponent implements OnInit {
 
