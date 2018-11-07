@@ -16,13 +16,13 @@
          Reggy generates regular expressions for a wide variety of programming languages and strives to generate regular
          expressions that are as efficient and concise as possible.
       </p>
-      <p>
+      <!-- <p>
         <a id="tutorial-btn" class="btn btn-primary btn-lg" routerLink="/tutorial" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">TUTORIAL</a>
-      </p>
+      </p> -->
     </div>
     <div class="col-sm-4">
       <h2 class="mt-4">Contact Us</h2>
-      <p>If you have any issues or enquiries with reggy, please feel free to contact us
+      <p>If you have any issues or enquiries with Reggy, please feel free to contact us
          by following <a id="contact-link" class="text-link" routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">this</a>
           link.
       </p>
@@ -34,11 +34,11 @@
       <div class="card">
         <img class="card-img-top" height="200" width="300" src="../../assets/samples.svg" alt="">
         <div class="card-body">
-          <h4 class="card-title">Samples and Semantics</h4>
+          <h5 class="card-title">Sample-based Generation</h5>
           <p class="card-text">
-            You provide this component with some samples of the text you want your regular expression to match.
-            You then break the samples into smaller &ldquo;markers&rdquo; for which you specfiy the type of that substring
-            and provide extra information such as repetition information, etc.
+            Generates regular expressions by letting you provide one or more sample strings. You then highlight different parts of the sample
+            strings and provides the system with extra information about every highlighted
+            pair, such as the type of the text, repetition information, and lookaround information.
           </p>
         </div>
         <div class="card-footer">
@@ -50,10 +50,10 @@
       <div class="card">
         <img class="card-img-top" height="200" width="300" src="../../assets/common.svg" alt="">
         <div class="card-body">
-          <h4 class="card-title">Common Use Cases</h4>
+          <h5 class="card-title">Common Use Cases</h5>
           <p class="card-text">
-            This component makes it easy to generate regular expressions for common use cases, such as email addresses, dates and time,
-            passwords, credit card numbers, and many more use cases.
+            Provides you with a generalised regular expression for common use cases, specifically, cases that frequently arise in practice. 
+            This includes email addresses, date and time, passwords, currencies, credit card numbers, etc.
           </p>
         </div>
         <div class="card-footer">
@@ -65,10 +65,10 @@
       <div class="card">
         <img class="card-img-top" height="200" width="300" src="../../assets/inference.svg" alt="">
         <div class="card-body">
-          <h4 class="card-title">Grammatical Inference</h4>
+          <h5 class="card-title">Regular Expression Learning</h5>
           <p class="card-text">
-            This component exposes a grammatical inference library, which learns a formal grammar from a set of positive
-            and negative example strings using induction.
+            This component extends Reggy to the induction of regular langages. We expose the automata learning library <a class="text-link" href="https://gitlab.com/steynvl/inferrer">Inferrer</a>, which provides algorithms for learning regular languages from example strings. 
+            We also provide an online interactive learning environment, by letting you act as a <i>minimally adequate Teacher</i> in the <a class="text-link" href="https://cs.uwaterloo.ca/~bbonakda/teaching/ECE725/papers/LA.pdf">L* learner-teacher setup</a>.
           </p>
         </div>
         <div class="card-footer">

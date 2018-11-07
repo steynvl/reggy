@@ -47,8 +47,8 @@ describe('Component: Home', () => {
       || e.nativeElement.textContent === 'Contact Us').toEqual(true));
   });
 
-  it('Should contain three h4 tags', () => {
-    const el = fixture.debugElement.queryAll(By.css('h4'));
+  it('Should contain two h5 tags', () => {
+    const el = fixture.debugElement.queryAll(By.css('h5'));
     expect(el.length).toEqual(3);
   });
 

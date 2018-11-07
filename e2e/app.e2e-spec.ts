@@ -28,15 +28,15 @@ describe('Reggy: App', () => {
     page.isHomePage().then(val => expect(val).toBe(true));
   });
 
-  it('Tutorial link on navbar should navigate to correct page', () => {
-    const el = element(by.id('to-tutorial'));
+  // it('Tutorial link on navbar should navigate to correct page', () => {
+  //   const el = element(by.id('to-tutorial'));
 
-    el.click();
-    browser.waitForAngular();
-    page.isTutorialPage().then(val => expect(val).toBe(true));
-  });
+  //   el.click();
+  //   browser.waitForAngular();
+  //   page.isTutorialPage().then(val => expect(val).toBe(true));
+  // });
 
-  it('Generate -> via samples and semantics link on navbar should navigate to correct page', () => {
+  it('Generate -> via sample-based generation link on navbar should navigate to correct page', () => {
     element(by.id('themes')).click();
     browser.waitForAngular();
     const el = element(by.id('to-samples'));
@@ -56,7 +56,7 @@ describe('Reggy: App', () => {
     page.isCommonUseCasesPage().then(val => expect(val).toBe(true));
   });
 
-  it('Generate -> via grammatical inference link on navbar should navigate to correct page', () => {
+  it('Generate -> via learning link on navbar should navigate to correct page', () => {
     element(by.id('themes')).click();
     browser.waitForAngular();
     const el = element(by.id('to-gram-inf'));

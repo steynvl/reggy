@@ -28,9 +28,9 @@ describe('Component: App', () => {
     const de = fixture.debugElement.queryAll(By.css('a'));
 
     const navItems = [
-      '', 'HOME', 'TUTORIAL', 'GENERATE REGEX',
-      'via samples and semantics', 'via common use cases',
-      'via grammatical inference', 'CONTACT US'
+      '', 'HOME', 'GENERATE REGEX',
+      'via sample-based generation', 'via common use cases',
+      'via learning', 'CONTACT US'
     ];
 
     expect(de.length).toBe(navItems.length);
