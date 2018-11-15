@@ -14,13 +14,13 @@ describe('Reggy: Home page', () => {
     page.isHomePage().then(val => expect(val).toBe(true));
   });
 
-  it('Should be a button that takes us to the tutorial page', () => {
-    const el = page.getTutorialButton();
+  // it('Should be a button that takes us to the tutorial page', () => {
+  //   const el = page.getTutorialButton();
 
-    el.click();
-    browser.waitForAngular();
-    page.isTutorialPage().then(val => expect(val).toBe(true));
-  });
+  //   el.click();
+  //   browser.waitForAngular();
+  //   page.isTutorialPage().then(val => expect(val).toBe(true));
+  // });
 
   it('Should be a text link that takes us to the contact us page', () => {
     const el = page.getLinkToContactPage();
