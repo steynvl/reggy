@@ -6,6 +6,7 @@ regex_info_to_tok = {
     'Java'         : Target.JAVA,
     'Perl'         : Target.PERL,
     'POSIX'        : Target.POSIX,
+    'egrep'        : Target.POSIX,
     'Python'       : Target.PYTHON,
     'JavaScript'   : Target.JAVASCRIPT,
     'PHP'          : Target.PHP,
