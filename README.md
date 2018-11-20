@@ -1,6 +1,6 @@
 # Reggy
 
-Reggy is a general-purpose regular expression generator that is exposed as a wen application. Reggy assists you with the construction of regular expressions. The generator consists of three components, each for a different use case. Reggy generates regular expressions for a wide variety of programming languages and strives to generate regular expressions that are as efficient and concise as possible.
+Reggy is a general-purpose regular expression generator that is exposed as a web application. Reggy assists you with the construction of regular expressions. The generator consists of three components, each for a different use case. Reggy generates regular expressions for a wide variety of programming languages and strives to generate regular expressions that are as efficient and concise as possible.
 
 ## Prerequisites
 
