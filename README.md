@@ -1,5 +1,7 @@
 # Reggy
 
+Reggy is a general-purpose regular expression generator that is exposed as a wen application. Reggy assists you with the construction of regular expressions. The generator consists of three components, each for a different use case. Reggy generates regular expressions for a wide variety of programming languages and strives to generate regular expressions that are as efficient and concise as possible.
+
 ## Prerequisites
 
 * Install [Node.js](https://nodejs.org/en/) version 8.x
@@ -7,7 +9,7 @@
 * Install all the dependencies from the project root directory: `npm install`
 * Install graphviz: `sudo apt-get install graphviz`
 * Install pip: `sudo apt-get install -y python3-pip`
-* Install python graphviz package: `sudo pip3 install graphviz` 
+* Install python graphviz package: `sudo pip3 install graphviz`
 
 ## Development
 
@@ -25,7 +27,7 @@ sudo apt-get install docker-ce
 #### Testing Docker build locally
 Change the working directory to the root directory of the project which contains the Dockerfile and run the following:
 ```bash
-sudo docker build -f Dockerfile.production -t reggy:latest . --network=host
+sudo docker build -f Dockerfile -t reggy:latest . --network=host
 ```
 
 ```bash
