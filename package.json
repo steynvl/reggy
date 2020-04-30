@@ -48,7 +48,7 @@
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jquery-highlighttextarea": "^3.2.1",
     "morgan": "^1.9.0",
     "ng-katex": "^1.0.3",
